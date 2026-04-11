@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowLeft, BookOpen, Trophy, Target, Clock, Lock } from "lucide-react";
-import { chapters } from "@/lib/chapters";
+import { chapters } from "../../lib/chapters";
 
 export default function DashboardPage() {
   const totalChapters = chapters.filter(c => c.part).length;
