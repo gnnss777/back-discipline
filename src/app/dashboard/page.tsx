@@ -103,7 +103,7 @@ export default function DashboardPage() {
               <div 
                 key={index}
                 className={`p-4 rounded-xl border ${
-                  earned 
+                  badge.earned 
                     ? "bg-[#FF3333]/10 border-[#FF3333]/30" 
                     : "bg-[#111] border-[#333] opacity-60"
                 }`}
