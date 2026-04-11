@@ -107,7 +107,7 @@ const exercises = [
     description: "Pullover com banda para trabalho na posição alongada."
   },
   {
-    id: "dumbbell-pulover",
+    id: "dumbbell-pullover",
     name: "Dumbbell Pullover",
     category: "Isolamento",
     muscles: ["Latíssimo"],
@@ -136,17 +136,19 @@ const categories = ["Todas", "Remadas", "Puxadas", "Levantamento", "Isolamento",
 
 export default function BibliotecaPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-zinc-950 to-black text-white">
+    <div className="min-h-screen bg-[#0a0a0a] text-white">
       {/* Header */}
-      <header className="border-b border-zinc-800 sticky top-0 bg-zinc-950/80 backdrop-blur-sm z-50">
+      <header className="border-b border-[#333] sticky top-0 bg-[#0a0a0a]/95 backdrop-blur-sm z-50">
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2 text-zinc-400 hover:text-white transition-colors">
+          <Link href="/" className="flex items-center gap-2 text-[#666] hover:text-white transition-colors font-medium tracking-wider text-sm">
             <ArrowLeft className="w-4 h-4" />
-            Voltar
+            VOLTAR
           </Link>
           <div className="flex items-center gap-2">
-            <Dumbbell className="w-5 h-5 text-amber-500" />
-            <span className="font-semibold">Biblioteca de Exercícios</span>
+            <div className="w-8 h-8 bg-[#FF3333] flex items-center justify-center rounded-sm">
+              <span className="text-sm font-bold">BD</span>
+            </div>
+            <span className="font-bold tracking-wider">BIBLIOTECA</span>
           </div>
           <div className="w-20" />
         </div>
@@ -154,25 +156,25 @@ export default function BibliotecaPage() {
 
       <main className="max-w-6xl mx-auto px-6 py-12">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold mb-4">Biblioteca <span className="text-amber-500">Técnica</span></h1>
-          <p className="text-zinc-400 text-lg">Guia completo de exercícios do programa com técnica e dicas de execução</p>
+          <h1 className="text-5xl font-bold mb-4 tracking-wider">BIBLIOTECA <span className="text-[#FF3333]">TÉCNICA</span></h1>
+          <p className="text-[#555] text-lg font-medium tracking-wide">GUIA COMPLETO DE EXERCÍCIOS COM TÉCNICA E DICAS</p>
         </div>
 
         {/* Search & Filter */}
         <div className="flex flex-col md:flex-row gap-4 mb-8">
           <div className="relative flex-1">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-500" />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#555]" />
             <input 
               type="text" 
-              placeholder="Buscar exercício..." 
-              className="w-full pl-12 pr-4 py-3 bg-zinc-900 border border-zinc-800 rounded-lg text-white placeholder:text-zinc-500 focus:outline-none focus:border-amber-500"
+              placeholder="BUSCAR EXERCÍCIO..." 
+              className="w-full pl-12 pr-4 py-3 bg-[#111] border border-[#333] rounded-sm text-white placeholder:text-[#555] focus:outline-none focus:border-[#FF3333] font-medium tracking-wider"
             />
           </div>
           <div className="flex items-center gap-2">
-            <Filter className="w-5 h-5 text-zinc-500" />
-            <select className="px-4 py-3 bg-zinc-900 border border-zinc-800 rounded-lg text-white focus:outline-none focus:border-amber-500">
+            <Filter className="w-5 h-5 text-[#555]" />
+            <select className="px-4 py-3 bg-[#111] border border-[#333] rounded-sm text-white focus:outline-none focus:border-[#FF3333] font-medium tracking-wider">
               {categories.map(cat => (
-                <option key={cat} value={cat}>{cat}</option>
+                <option key={cat} value={cat}>{cat.toUpperCase()}</option>
               ))}
             </select>
           </div>
@@ -183,32 +185,32 @@ export default function BibliotecaPage() {
           {exercises.map(exercise => (
             <div 
               key={exercise.id}
-              className="p-6 bg-zinc-900/50 rounded-xl border border-zinc-800 hover:border-amber-500/50 hover:bg-zinc-800/50 transition-all cursor-pointer group"
+              className="p-6 bg-[#111] border border-[#333] rounded-sm hover:border-[#FF3333] hover:bg-[#151515] transition-all cursor-pointer group"
             >
               <div className="flex items-start justify-between mb-4">
                 <div>
-                  <span className="px-2 py-1 bg-amber-500/20 text-amber-500 text-xs font-medium rounded">
-                    {exercise.category}
+                  <span className="px-2 py-1 bg-[#FF3333]/20 text-[#FF3333] text-xs font-bold tracking-wider rounded-sm">
+                    {exercise.category.toUpperCase()}
                   </span>
-                  <h3 className="text-lg font-semibold mt-2 group-hover:text-amber-500 transition-colors">
+                  <h3 className="text-lg font-bold mt-2 group-hover:text-[#FF3333] transition-colors tracking-wider">
                     {exercise.name}
                   </h3>
                 </div>
-                <span className={`px-2 py-1 text-xs font-medium rounded ${
-                  exercise.difficulty === 'Iniciante' ? 'bg-green-500/20 text-green-500' :
-                  exercise.difficulty === 'Intermediário' ? 'bg-yellow-500/20 text-yellow-500' :
-                  'bg-red-500/20 text-red-500'
+                <span className={`px-2 py-1 text-xs font-bold tracking-wider rounded-sm ${
+                  exercise.difficulty === 'Iniciante' ? 'bg-green-900/50 text-green-500' :
+                  exercise.difficulty === 'Intermediário' ? 'bg-yellow-900/50 text-yellow-500' :
+                  'bg-red-900/50 text-red-500'
                 }`}>
-                  {exercise.difficulty}
+                  {exercise.difficulty.toUpperCase()}
                 </span>
               </div>
               
-              <p className="text-sm text-zinc-400 mb-4">{exercise.description}</p>
+              <p className="text-sm text-[#555] mb-4">{exercise.description}</p>
               
               <div className="flex flex-wrap gap-2">
                 {exercise.muscles.map(muscle => (
-                  <span key={muscle} className="text-xs text-zinc-500 bg-zinc-800 px-2 py-1 rounded">
-                    {muscle}
+                  <span key={muscle} className="text-xs text-[#444] bg-[#222] px-2 py-1 rounded-sm tracking-wider">
+                    {muscle.toUpperCase()}
                   </span>
                 ))}
               </div>
@@ -217,9 +219,9 @@ export default function BibliotecaPage() {
         </div>
 
         {/* Coming Soon */}
-        <div className="mt-12 p-8 bg-zinc-900/30 rounded-xl border border-zinc-800 text-center">
-          <h3 className="text-xl font-semibold mb-2">Vídeos em Breve</h3>
-          <p className="text-zinc-400">Estamos preparando vídeos de demonstração para cada exercício. Em breve você terá acesso a demonstrações visuais completas.</p>
+        <div className="mt-12 p-8 bg-[#111] rounded-xl border border-[#333] text-center">
+          <h3 className="text-xl font-bold mb-2 tracking-wider">VÍDEOS EM BREVE</h3>
+          <p className="text-[#555]">Estamos preparando vídeos de demonstração para cada exercício.</p>
         </div>
       </main>
     </div>

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { BookOpen, ArrowLeft, ArrowRight, CheckCircle, Lock } from "lucide-react";
+import { ArrowLeft, ArrowRight, BookOpen, CheckCircle, Lock } from "lucide-react";
 import { chapters } from "@/lib/chapters";
 
 export default function LivroPage() {
@@ -7,64 +7,66 @@ export default function LivroPage() {
   const part2Chapters = chapters.filter(c => c.part === "II");
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-zinc-950 to-black text-white">
+    <div className="min-h-screen bg-[#0a0a0a] text-white">
       {/* Header */}
-      <header className="border-b border-zinc-800 sticky top-0 bg-zinc-950/80 backdrop-blur-sm z-50">
+      <header className="border-b border-[#333] sticky top-0 bg-[#0a0a0a]/95 backdrop-blur-sm z-50">
         <div className="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2 text-zinc-400 hover:text-white transition-colors">
+          <Link href="/" className="flex items-center gap-2 text-[#666] hover:text-white transition-colors font-medium tracking-wider">
             <ArrowLeft className="w-4 h-4" />
-            Voltar
+            VOLTAR
           </Link>
           <div className="flex items-center gap-2">
-            <BookOpen className="w-5 h-5 text-amber-500" />
-            <span className="font-semibold">Livro</span>
+            <div className="w-8 h-8 bg-[#FF3333] flex items-center justify-center rounded-sm">
+              <span className="text-sm font-bold">BD</span>
+            </div>
+            <span className="font-bold tracking-wider">LIVRO</span>
           </div>
-          <Link href="/dashboard" className="text-sm text-amber-500 hover:text-amber-400">
-            Meu Progresso
+          <Link href="/dashboard" className="text-sm text-[#FF3333] hover:text-[#CC2929] font-medium tracking-wider">
+            PROGRESSO
           </Link>
         </div>
       </header>
 
       <main className="max-w-4xl mx-auto px-6 py-12">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold mb-4">Back Training <span className="text-amber-500">O Método Mountain Dog</span></h1>
-          <p className="text-zinc-400 text-lg">Um guia prático de 6 semanas para construir costas épicas</p>
+          <h1 className="text-5xl font-bold mb-4 tracking-wider">BACK <span className="text-[#FF3333]">DISCIPLINE</span></h1>
+          <p className="text-[#666] text-lg font-medium tracking-wide">PROGRAMA DE 6 SEMANAS</p>
         </div>
 
         {/* Progress */}
-        <div className="mb-12 p-4 bg-zinc-900/50 rounded-lg border border-zinc-800">
+        <div className="mb-12 p-4 bg-[#111] rounded-sm border border-[#333]">
           <div className="flex items-center justify-between text-sm mb-2">
-            <span className="text-zinc-400">Seu progresso</span>
-            <span className="text-amber-500 font-medium">0 de 11 capítulos</span>
+            <span className="text-[#666] font-medium tracking-wider">SEU PROGRESSO</span>
+            <span className="text-[#FF3333] font-bold tracking-wider">0 / 11 CAPÍTULOS</span>
           </div>
-          <div className="h-2 bg-zinc-800 rounded-full overflow-hidden">
-            <div className="h-full bg-amber-500 rounded-full" style={{ width: "0%" }} />
+          <div className="h-1 bg-[#222] rounded-full overflow-hidden">
+            <div className="h-full bg-[#FF3333] rounded-full" style={{ width: "0%" }} />
           </div>
         </div>
 
         {/* Parte I */}
         <section className="mb-12">
           <div className="flex items-center gap-3 mb-6">
-            <span className="px-3 py-1 bg-amber-500/20 text-amber-500 text-sm font-medium rounded-full">Parte I</span>
-            <h2 className="text-2xl font-bold">O Sistema e a Prática Imediata</h2>
+            <span className="px-3 py-1 bg-[#FF3333]/20 text-[#FF3333] text-sm font-bold tracking-wider rounded-sm">PARTE I</span>
+            <h2 className="text-2xl font-bold tracking-wider">SISTEMA E PRÁTICA</h2>
           </div>
           
           <div className="space-y-3">
-            {part1Chapters.map((chapter, index) => (
+            {part1Chapters.map((chapter) => (
               <Link
                 key={chapter.slug}
                 href={`/livro/${chapter.slug}`}
-                className="block p-4 bg-zinc-900/50 rounded-lg border border-zinc-800 hover:border-amber-500/50 hover:bg-zinc-800/50 transition-all group"
+                className="block p-5 bg-[#111] border border-[#333] hover:border-[#FF3333] transition-all group rounded-sm"
               >
                 <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-lg bg-zinc-800 flex items-center justify-center text-zinc-500 group-hover:bg-amber-500/20 group-hover:text-amber-500 transition-colors">
+                  <div className="w-10 h-10 bg-[#222] flex items-center justify-center rounded-sm text-[#444] group-hover:bg-[#FF3333]/20 group-hover:text-[#FF3333] transition-colors">
                     <Lock className="w-5 h-5" />
                   </div>
                   <div className="flex-1">
-                    <h3 className="font-semibold group-hover:text-amber-500 transition-colors">{chapter.title}</h3>
-                    <p className="text-sm text-zinc-500">{chapter.description}</p>
+                    <h3 className="font-bold group-hover:text-[#FF3333] transition-colors tracking-wider">{chapter.title}</h3>
+                    <p className="text-sm text-[#555]">{chapter.description}</p>
                   </div>
-                  <ArrowRight className="w-5 h-5 text-zinc-600 group-hover:text-amber-500 transition-colors" />
+                  <ArrowRight className="w-5 h-5 text-[#444] group-hover:text-[#FF3333] transition-colors" />
                 </div>
               </Link>
             ))}
@@ -74,8 +76,8 @@ export default function LivroPage() {
         {/* Parte II */}
         <section>
           <div className="flex items-center gap-3 mb-6">
-            <span className="px-3 py-1 bg-blue-500/20 text-blue-500 text-sm font-medium rounded-full">Parte II</span>
-            <h2 className="text-2xl font-bold">Fundamentos Técnicos e Ciência</h2>
+            <span className="px-3 py-1 bg-[#FF3333]/20 text-[#FF3333] text-sm font-bold tracking-wider rounded-sm">PARTE II</span>
+            <h2 className="text-2xl font-bold tracking-wider">FUNDAMENTOS TÉCNICOS</h2>
           </div>
           
           <div className="space-y-3">
@@ -83,17 +85,17 @@ export default function LivroPage() {
               <Link
                 key={chapter.slug}
                 href={`/livro/${chapter.slug}`}
-                className="block p-4 bg-zinc-900/50 rounded-lg border border-zinc-800 hover:border-blue-500/50 hover:bg-zinc-800/50 transition-all group"
+                className="block p-5 bg-[#111] border border-[#333] hover:border-[#FF3333] transition-all group rounded-sm"
               >
                 <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-lg bg-zinc-800 flex items-center justify-center text-zinc-500 group-hover:bg-blue-500/20 group-hover:text-blue-500 transition-colors">
+                  <div className="w-10 h-10 bg-[#222] flex items-center justify-center rounded-sm text-[#444] group-hover:bg-[#FF3333]/20 group-hover:text-[#FF3333] transition-colors">
                     <Lock className="w-5 h-5" />
                   </div>
                   <div className="flex-1">
-                    <h3 className="font-semibold group-hover:text-blue-400 transition-colors">{chapter.title}</h3>
-                    <p className="text-sm text-zinc-500">{chapter.description}</p>
+                    <h3 className="font-bold group-hover:text-[#FF3333] transition-colors tracking-wider">{chapter.title}</h3>
+                    <p className="text-sm text-[#555]">{chapter.description}</p>
                   </div>
-                  <ArrowRight className="w-5 h-5 text-zinc-600 group-hover:text-blue-500 transition-colors" />
+                  <ArrowRight className="w-5 h-5 text-[#444] group-hover:text-[#FF3333] transition-colors" />
                 </div>
               </Link>
             ))}
@@ -101,10 +103,10 @@ export default function LivroPage() {
         </section>
 
         {/* CTA */}
-        <div className="mt-12 p-6 bg-zinc-900/30 rounded-xl border border-zinc-800 text-center">
-          <p className="text-zinc-400 mb-4">Faça login para acompanhar seu progresso e desbloquear todos os capítulos</p>
-          <Link href="/dashboard" className="inline-flex items-center gap-2 px-6 py-3 bg-amber-500 text-black font-semibold rounded-lg hover:bg-amber-400 transition-colors">
-            Entrar / Criar Conta
+        <div className="mt-12 p-6 bg-[#111] rounded-xl border border-[#333] text-center">
+          <p className="text-[#555] mb-4 font-medium tracking-wide">FAÇA LOGIN PARA ACOMPANHAR SEU PROGRESSO</p>
+          <Link href="/dashboard" className="inline-flex items-center gap-2 px-6 py-3 bg-[#FF3333] text-white font-bold tracking-wider rounded-sm hover:bg-[#CC2929] transition-colors">
+            ENTRAR / CRIAR CONTA
           </Link>
         </div>
       </main>

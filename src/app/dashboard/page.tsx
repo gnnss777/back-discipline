@@ -1,121 +1,123 @@
 import Link from "next/link";
-import { ArrowLeft, BookOpen, Trophy, Target, Clock, TrendingUp, Lock } from "lucide-react";
+import { ArrowLeft, BookOpen, Trophy, Target, Clock, Lock } from "lucide-react";
 import { chapters } from "@/lib/chapters";
 
 export default function DashboardPage() {
   const totalChapters = chapters.filter(c => c.part).length;
-  const completedChapters = 0; // Mock - would come from database
+  const completedChapters = 0;
   const progress = Math.round((completedChapters / totalChapters) * 100);
 
   const badges = [
-    { name: "Primeiro Passo", description: "Complete o primeiro capítulo", earned: false, icon: "🎯" },
-    { name: "Estudante", description: "Complete 3 capítulos", earned: false, icon: "📚" },
-    { name: "Meteor Dog", description: "Complete a Parte I", earned: false, icon: "🐕" },
-    { name: "Formado", description: "Complete todo o livro", earned: false, icon: "🎓" },
+    { name: "PRIMEIRO PASSO", description: "Complete o primeiro capítulo", earned: false, icon: "🎯" },
+    { name: "ESTUDANTE", description: "Complete 3 capítulos", earned: false, icon: "📚" },
+    { name: "MOUNTAIN DOG", description: "Complete a Parte I", earned: false, icon: "🐕" },
+    { name: "FORMADO", description: "Complete todo o livro", earned: false, icon: "🎓" },
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-zinc-950 to-black text-white">
+    <div className="min-h-screen bg-[#0a0a0a] text-white">
       {/* Header */}
-      <header className="border-b border-zinc-800 sticky top-0 bg-zinc-950/80 backdrop-blur-sm z-50">
+      <header className="border-b border-[#333] sticky top-0 bg-[#0a0a0a]/95 backdrop-blur-sm z-50">
         <div className="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2 text-zinc-400 hover:text-white transition-colors">
+          <Link href="/" className="flex items-center gap-2 text-[#666] hover:text-white transition-colors font-medium tracking-wider text-sm">
             <ArrowLeft className="w-4 h-4" />
-            Início
+            INÍCIO
           </Link>
           <div className="flex items-center gap-2">
-            <Trophy className="w-5 h-5 text-amber-500" />
-            <span className="font-semibold">Meu Progresso</span>
+            <div className="w-8 h-8 bg-[#FF3333] flex items-center justify-center rounded-sm">
+              <span className="text-sm font-bold">BD</span>
+            </div>
+            <span className="font-bold tracking-wider">PROGRESSO</span>
           </div>
-          <Link href="/perfil" className="text-sm text-zinc-400 hover:text-white">Perfil</Link>
+          <Link href="/perfil" className="text-sm text-[#666] hover:text-white font-medium tracking-wider">PERFIL</Link>
         </div>
       </header>
 
       <main className="max-w-4xl mx-auto px-6 py-12">
         {/* Welcome */}
         <div className="text-center mb-12">
-          <h1 className="text-3xl font-bold mb-2">Bem-vindo ao seu <span className="text-amber-500">Painel de Progresso</span></h1>
-          <p className="text-zinc-400">Acompanhe sua jornada de aprendizado</p>
+          <h1 className="text-3xl font-bold mb-2 tracking-wider">SEU <span className="text-[#FF3333]">PAINEL</span></h1>
+          <p className="text-[#555] tracking-wide font-medium">ACOMPANHE SUA JORNADA DE APRENDIZADO</p>
         </div>
 
         {/* Stats Cards */}
         <div className="grid md:grid-cols-4 gap-4 mb-8">
-          <div className="p-4 bg-zinc-900/50 rounded-xl border border-zinc-800">
+          <div className="p-4 bg-[#111] border border-[#333] rounded-sm">
             <div className="flex items-center gap-3 mb-2">
-              <BookOpen className="w-5 h-5 text-amber-500" />
-              <span className="text-zinc-400 text-sm">Capítulos</span>
+              <BookOpen className="w-5 h-5 text-[#FF3333]" />
+              <span className="text-[#555] text-sm tracking-wider">CAPÍTULOS</span>
             </div>
-            <div className="text-2xl font-bold">0 / {totalChapters}</div>
+            <div className="text-2xl font-bold tracking-wider">0 / {totalChapters}</div>
           </div>
           
-          <div className="p-4 bg-zinc-900/50 rounded-xl border border-zinc-800">
+          <div className="p-4 bg-[#111] border border-[#333] rounded-sm">
             <div className="flex items-center gap-3 mb-2">
               <Target className="w-5 h-5 text-green-500" />
-              <span className="text-zinc-400 text-sm">Progresso</span>
+              <span className="text-[#555] text-sm tracking-wider">PROGRESSO</span>
             </div>
-            <div className="text-2xl font-bold">{progress}%</div>
+            <div className="text-2xl font-bold tracking-wider">{progress}%</div>
           </div>
           
-          <div className="p-4 bg-zinc-900/50 rounded-xl border border-zinc-800">
+          <div className="p-4 bg-[#111] border border-[#333] rounded-sm">
             <div className="flex items-center gap-3 mb-2">
               <Trophy className="w-5 h-5 text-purple-500" />
-              <span className="text-zinc-400 text-sm">Badges</span>
+              <span className="text-[#555] text-sm tracking-wider">BADGES</span>
             </div>
-            <div className="text-2xl font-bold">0 / {badges.length}</div>
+            <div className="text-2xl font-bold tracking-wider">0 / {badges.length}</div>
           </div>
           
-          <div className="p-4 bg-zinc-900/50 rounded-xl border border-zinc-800">
+          <div className="p-4 bg-[#111] border border-[#333] rounded-sm">
             <div className="flex items-center gap-3 mb-2">
               <Clock className="w-5 h-5 text-blue-500" />
-              <span className="text-zinc-400 text-sm">Tempo</span>
+              <span className="text-[#555] text-sm tracking-wider">TEMPO</span>
             </div>
-            <div className="text-2xl font-bold">0h</div>
+            <div className="text-2xl font-bold tracking-wider">0h</div>
           </div>
         </div>
 
         {/* Progress Bar */}
-        <div className="mb-12 p-6 bg-zinc-900/50 rounded-xl border border-zinc-800">
+        <div className="mb-12 p-6 bg-[#111] rounded-xl border border-[#333]">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold">Sua Jornada no Livro</h2>
-            <span className="text-amber-500 font-medium">{progress}% completo</span>
+            <h2 className="text-lg font-bold tracking-wider">SUA JORNADA</h2>
+            <span className="text-[#FF3333] font-bold tracking-wider">{progress}% COMPLETO</span>
           </div>
-          <div className="h-4 bg-zinc-800 rounded-full overflow-hidden">
+          <div className="h-3 bg-[#222] rounded-full overflow-hidden">
             <div 
-              className="h-full bg-gradient-to-r from-amber-500 to-amber-400 rounded-full transition-all duration-500"
+              className="h-full bg-gradient-to-r from-[#FF3333] to-[#CC2929] rounded-full transition-all duration-500"
               style={{ width: `${progress}%` }}
             />
           </div>
-          <p className="text-sm text-zinc-500 mt-3">
+          <p className="text-sm text-[#444] mt-3 tracking-wide">
             Continue lendo para desbloquear novos capítulos e avançar na sua trilha de aprendizado.
           </p>
         </div>
 
         {/* Badges */}
         <div className="mb-12">
-          <h2 className="text-xl font-semibold mb-6 flex items-center gap-2">
-            <Trophy className="w-5 h-5 text-amber-500" />
-            Conquistas (Badges)
+          <h2 className="text-xl font-bold mb-6 flex items-center gap-2 tracking-wider">
+            <Trophy className="w-5 h-5 text-[#FF3333]" />
+            CONQUISTAS
           </h2>
           <div className="grid md:grid-cols-2 gap-4">
             {badges.map((badge, index) => (
               <div 
                 key={index}
                 className={`p-4 rounded-xl border ${
-                  badge.earned 
-                    ? "bg-amber-500/10 border-amber-500/30" 
-                    : "bg-zinc-900/50 border-zinc-800 opacity-60"
+                  earned 
+                    ? "bg-[#FF3333]/10 border-[#FF3333]/30" 
+                    : "bg-[#111] border-[#333] opacity-60"
                 }`}
               >
                 <div className="flex items-center gap-4">
                   <div className="text-3xl">{badge.icon}</div>
                   <div>
-                    <h3 className="font-semibold">{badge.name}</h3>
-                    <p className="text-sm text-zinc-500">{badge.description}</p>
+                    <h3 className="font-bold tracking-wider">{badge.name}</h3>
+                    <p className="text-sm text-[#555]">{badge.description}</p>
                   </div>
                 </div>
                 {badge.earned && (
-                  <div className="mt-3 text-xs text-green-500 flex items-center gap-1">
-                    ✓ Conquistado
+                  <div className="mt-3 text-xs text-green-500 flex items-center gap-1 tracking-wider">
+                    ✓ CONQUISTADO
                   </div>
                 )}
               </div>
@@ -125,28 +127,28 @@ export default function DashboardPage() {
 
         {/* Chapter Progress */}
         <div>
-          <h2 className="text-xl font-semibold mb-6 flex items-center gap-2">
-            <BookOpen className="w-5 h-5 text-amber-500" />
-            Ler Livros
+          <h2 className="text-xl font-bold mb-6 flex items-center gap-2 tracking-wider">
+            <BookOpen className="w-5 h-5 text-[#FF3333]" />
+            CAPÍTULOS
           </h2>
           <div className="space-y-3">
             {chapters.filter(c => c.part).map((chapter) => (
               <div 
                 key={chapter.slug}
-                className="p-4 bg-zinc-900/50 rounded-lg border border-zinc-800 flex items-center gap-4"
+                className="p-4 bg-[#111] border border-[#333] flex items-center gap-4 rounded-sm"
               >
-                <div className="w-10 h-10 rounded-lg bg-zinc-800 flex items-center justify-center">
-                  <Lock className="w-5 h-5 text-zinc-600" />
+                <div className="w-10 h-10 bg-[#222] flex items-center justify-center rounded-sm">
+                  <Lock className="w-5 h-5 text-[#444]" />
                 </div>
                 <div className="flex-1">
-                  <h3 className="font-medium">{chapter.title}</h3>
-                  <p className="text-sm text-zinc-500">{chapter.description}</p>
+                  <h3 className="font-bold tracking-wider text-sm">{chapter.title}</h3>
+                  <p className="text-xs text-[#444]">{chapter.description}</p>
                 </div>
                 <Link 
                   href={`/livro/${chapter.slug}`}
-                  className="px-4 py-2 text-sm bg-zinc-800 hover:bg-zinc-700 rounded-lg transition-colors"
+                  className="px-4 py-2 text-sm bg-[#222] hover:bg-[#FF3333] rounded-sm transition-colors font-medium tracking-wider"
                 >
-                  Ler
+                  LER
                 </Link>
               </div>
             ))}
@@ -154,15 +156,15 @@ export default function DashboardPage() {
         </div>
 
         {/* Login CTA */}
-        <div className="mt-12 p-6 bg-zinc-900/30 rounded-xl border border-zinc-800 text-center">
-          <h3 className="text-lg font-semibold mb-2">Faça login para salvar seu progresso</h3>
-          <p className="text-zinc-400 mb-4">Crie uma conta para acompanhar seu progresso, ganhar badges e acessar todos os recursos.</p>
+        <div className="mt-12 p-6 bg-[#111] rounded-xl border border-[#333] text-center">
+          <h3 className="text-lg font-bold mb-2 tracking-wider">FAÇA LOGIN PARA SALVAR SEU PROGRESSO</h3>
+          <p className="text-[#555] mb-4 tracking-wide">Crie uma conta para acompanhar seu progresso e ganhar badges.</p>
           <div className="flex gap-4 justify-center">
-            <button className="px-6 py-2 bg-amber-500 text-black font-medium rounded-lg hover:bg-amber-400 transition-colors">
-              Criar Conta
+            <button className="px-6 py-2 bg-[#FF3333] text-white font-bold tracking-wider rounded-sm hover:bg-[#CC2929] transition-colors">
+              CRIAR CONTA
             </button>
-            <button className="px-6 py-2 border border-zinc-700 text-zinc-300 rounded-lg hover:bg-zinc-800 transition-colors">
-              Entrar
+            <button className="px-6 py-2 border border-[#333] text-[#ccc] rounded-sm hover:border-[#FF3333] hover:text-[#FF3333] transition-colors font-bold tracking-wider">
+              ENTRAR
             </button>
           </div>
         </div>
