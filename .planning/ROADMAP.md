@@ -121,6 +121,10 @@
 - [ ] 5.4 - Update exercise cards with video
 - [ ] 5.5 - Search and filter enhancements
 
+**Plans:**
+- [ ] 05-01-PLAN.md — Video infrastructure (types, VideoPlayer, data)
+- [ ] 05-02-PLAN.md — Update biblioteca page with video modal and filtering
+
 **Deliverables:**
 - Exercise library with embedded videos
 
