@@ -4,95 +4,87 @@ export const chapters = [
     title: "Introdução",
     slug: "introducao",
     order: 0,
-    description: "Boas-vindas e visão geral do programa",
+    description: "Mentalidade, anatomia básica e RPE 101",
     isChapter: false
   },
   {
     id: "01-mentalidade",
-    title: "Capítulo 1: Mentalidade Back Discipline",
+    title: "PARTE I: PRÁTICA",
     slug: "mentalidade-back-discipline",
     order: 1,
-    description: "A filosofia de investimento em cada repetição, o objetivo de construir espessura e largura",
-    part: "I"
-  },
-  {
-    id: "02-sistema-rpe",
-    title: "Capítulo 2: Sistema de Intensidade — RPE 6 a 13",
-    slug: "sistema-intensidade-rpe",
-    order: 2,
-    description: "Escala de RPE detalhada, quando deixar reps no tanque e quando ir além da falha",
+    description: "6 semanas de treinamento progressivo",
     part: "I"
   },
   {
     id: "03-semana-1",
-    title: "Capítulo 3: Semana 1 — Ativação e Base de Força",
+    title: "Semana 1 — Ativação e Base de Força",
     slug: "semana-1-ativacao",
-    order: 3,
-    description: "Foco em remadas pesadas para espessura, levantamento terra com correntes, treino de largura",
+    order: 2,
+    description: "Remadas pesadas, levantamento terra, puxadas",
     part: "I"
   },
   {
     id: "04-semana-2",
-    title: "Capítulo 4: Semana 2 — Progressão de Volume",
+    title: "Semana 2 — Progressão de Volume",
     slug: "semana-2-progressao",
-    order: 4,
-    description: "Aumento gradual do volume, feeder sets, introdução ao Rack Pull",
+    order: 3,
+    description: "Aumento de volume, feeder sets, rack pull",
     part: "I"
   },
   {
     id: "05-semana-3",
-    title: "Capítulo 5: Semana 3 — Pico de Contração e Drop Sets",
+    title: "Semana 3 — Pico de Contração",
     slug: "semana-3-pico",
-    order: 5,
-    description: "Meadows Rows, Deadstop Row, hiperextensões com bandas",
+    order: 4,
+    description: "Meadows rows, deadstop row, drop sets",
     part: "I"
   },
   {
     id: "06-semana-4",
-    title: "Capítulo 6: Semana 4 — Desafio de Resistência",
+    title: "Semana 4 — Desafio de Resistência",
     slug: "semana-4-desafio",
-    order: 6,
-    description: "Challenge Set, Farmer's Walks, super-séries para pump",
+    order: 5,
+    description: "Challenge sets, farmer walks, super-séries",
     part: "I"
   },
   {
     id: "07-semana-5",
-    title: "Capítulo 7: Semana 5 — Sobrecarga Máxima",
+    title: "Semana 5 — Sobrecarga Máxima",
     slug: "semana-5-sobrecarga",
-    order: 7,
-    description: "Pirâmides de alta repetição, Levantamento terra em déficit, Chin up Death",
+    order: 6,
+    description: "Pirâmides, déficit deadlift, chin up death",
     part: "I"
   },
   {
     id: "08-semana-6",
-    title: "Capítulo 8: Semana 6 — Finalização",
+    title: "Semana 6 — Finalização",
     slug: "semana-6-finalizacao",
-    order: 8,
-    description: "Quad drop sets, superséries combinadas, ISO holds + Smith deadlift",
+    order: 7,
+    description: "Quad drop sets, iso holds, smith deadlift",
     part: "I"
   },
   {
     id: "09-anatomia-funcional",
-    title: "Capítulo 9: Anatomia Funcional Aplicada",
+    title: "PARTE II: AVANÇADO",
     slug: "anatomia-funcional",
-    order: 9,
-    description: "Trapézio (superior, médio, inferior), Romboides, Latíssimo, Eretores da espinha",
+    order: 8,
+    description: "Anatomia funcional detalhada",
     part: "II"
   },
   {
     id: "10-analise-tecnica",
-    title: "Capítulo 10: Análise Técnica dos Grandes Levantamentos",
+    title: "Análise Biomecânica",
     slug: "analise-tecnica",
-    order: 10,
-    description: "Fases do Levantamento Terra, Biomecânica das Remadas, Puxadas e Barras",
+    order: 9,
+    description: "Técnica dos grandes levantamentos",
     part: "II"
   },
   {
     id: "11-saude-ombro",
-    title: "Capítulo 11: Saúde do Ombro e Manguito Rotador",
+    title: "Saúde do Ombro e Manguito Rotador",
     slug: "saude-ombro",
-    order: 11,
-    description: "Infraspinatus, Teres Minor, SITS - os 4 músculos do manguito rotador",
+    order: 10,
+    description: "Prevenção de lesões e reabilitação",
     part: "II"
   }
 ];

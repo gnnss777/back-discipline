@@ -9,46 +9,165 @@ export const chapterContents: Record<string, string> = {
 
 Obrigado por adquirir o Back Discipline! Este programa foi desenvolvido para transformar suas costas de verdade — com método, não com motivação vazia.
 
-**O que você encontrará:**
+---
+
+## O Que Você Encontrará
+
 - Um programa estruturado de 6 semanas
 - Sistema de intensidade RPE (6-13)
 - Técnicas de contração máxima e progressão de volume
 - Fundamentos técnicos e anatomia aplicada
 
-Este não é um app genérico de treino. É o conhecimento acumulado de JJ Monteiro — Educador Físico e Nutricionista — traduzido em um programa que você pode executar.
+---
+
+## Mentalidade Back Discipline
+
+Antes de levantar uma barra, você precisa entender a filosofia deste programa.
+
+**O tempo na academia é um investimento, não tempo passado.**
+
+Cada repetição deve ser feita com intenção. Você não está "treinando" — você está depositando em uma conta que vai render resultados. Quando você faz 10 repetições sem pensar, está desperdiçando 10 investimentos.
+
+**Técnica + Intensidade = Resultados**
+
+Trabalho pesado sem técnica gera lesões. Técnica leve sem intensidade gera estagnação. O Back Discipline equilibra os dois.
+
+**Espessura + Largura = Costas Ímpias**
+
+Suas costas precisam de dois elementos:
+- **Espessura**: Músculos próximos à coluna (romboides, trapézio médio, eretores)
+- **Largura**: O latíssimo, o músculo em leque que cria a silhueta em V
 
 ---
 
-**Sobre JJ Monteiro**
+## Anatomia das Costas — O Básico que Você Precisa Saber
+
+Antes de executar qualquer exercício, entenda o que você está trabalhando.
+
+**O Latíssimo (Lat)**
+O maior músculo das costas. Puxa o braço para baixo e para trás. Responsável pela largura.
+
+**Os Romboides**
+Entre a escápula e a coluna. Fazem retração escapular. Responsáveis pela espessura do meio das costas.
+
+**O Trapézio**
+Três porções:
+- **Superior**: Eleva os ombros (shrugs)
+- **Médio**: Retrai as escápulas (remoções)
+- **Inferior**: Deixa os ombros para baixo e para trás
+
+**Os Eretores da Espinha**
+Músculos longos ao lado da coluna. Extensão e estabilidade vertebral.
+
+---
+
+## RPE 101 — Entendendo a Escala de Intensidade
+
+RPE (Rate of Perceived Exertion) é uma escala de esforço percebido de 6 a 13.
+
+| RPE | O que significa |
+|-----|------------------|
+| **6** | Aquecimento. Quase trivial. |
+| **7** | Fácil. Você poderia fazer mais 5 reps facilmente. |
+| **8** | Moderado. Você poderia fazer mais 3-4 reps. |
+| **9** | Desafiante. Você poderia fazer mais 2 reps. |
+| **10** | Falha técnica. Forma perfeita, não consegue mais reps. |
+| **11-13** | Além da falha. Apenas para finalizadores. |
+
+**Regra prática:**
+- Para volume: Pare em RPE 8-9
+- Para exercícios principais: RPE 9-10
+- Para finalizadores: RPE 11-13 (com moderação)
+
+---
+
+## Estrutura do Programa
+
+**PARTE I — PRÁTICA (6 Semanas)**
+Um programa progressivo onde você aplica tudo que aprendeu aqui.
+
+**PARTE II — AVANÇADO**
+Aprofundamento em anatomia funcional, biomecânica e saúde articular.
+
+---
+
+## Sobre JJ Monteiro
 
 JJ Monteiro é Educador Físico e Nutricionista. Com formação acadêmica sólida e anos de aplicação prática no treinamento de costas, ele desenvolveu o Back Discipline como a síntese do que aprendeu estudando, errando e acertando — traduzido em um programa rigoroso, direto e construído para quem leva o treino a sério.
 `,
   "mentalidade-back-discipline": `
-# Capítulo 1: Mentalidade Back Discipline
+# PARTE I: PRÁTICA
 
-## A Filosofia do Investimento em Cada Repetição
+## Mentalidade Back Discipline
 
 Se você está lendo este livro, está pronto para transformar suas costas de verdade. O Back Discipline nasceu da fusão entre conhecimento científico sólido e experiência de academia, criando um sistema que prioriza a intensidade em cada repetição, série e sessão.
 
-O treinamento de costas é frequentemente negligenciado. Uma costas bem desenvolvida cria aquela silhueta em V que distingue um físico amador de um physique competitivo.
+---
 
-## O Tempo na Academia é um Investimento
+### 🧠 Anatomia Ativada
+
+**O Latíssimo (Lat)**
+O maior músculo das costas. Puxa o úmero para baixo e para trás. É responsável pela largura visual das costas.
+
+**Os Romboides**
+Entre a escápula e a coluna. Fazem a retração escapular. São responsáveis pela espessura do meio das costas.
+
+**O Trapézio**
+Três porções que trabalham juntas:
+- **Superior**: Eleva os ombros
+- **Médio**: Retrai as escápulas  
+- **Inferior**: Deixa os ombros para baixo
+
+**Os Eretores da Espinha**
+Músculos longos ao lado da coluna vertebral. Responsáveis pela extensão e estabilidade.
+
+---
+
+### O Tempo na Academia é um Investimento
 
 Investir em cada repetição significa estar completamente presente durante o movimento. Significa sentir cada contração, cada alongamento, cada fibra muscular trabalhando.
 
 O tempo gasto na academia deve ser um investimento real, não apenas tempo passado esperando algo acontecer.
 
-## O Objetivo: Espessura e Largura
+---
+
+### ⚠️ Saúde Primeiro
+
+**Sinais de Alerta Durante o Treino:**
+
+- Dor aguda no ombro = Pare imediatamente
+- Formigamento nos braços = Ajuste a pegada
+- Desconforto na lombar = Reduza a carga
+
+**Prevenção:**
+- Sempre aqueça o manguito rotador antes de puxadas pesadas
+- Mantenha os ombros "para baixo e para trás" durante remadas
+- Não force além da falha técnica em exercícios compostos
+
+---
+
+### O Objetivo: Espessura e Largura
 
 Para alcançar costas verdadeiramente impressionantes, você precisa desenvolver:
 - **Espessura**: Dos músculos próximos à coluna (romboides, trapézio médio, eretores)
-- **Largura**: Do latítimo, aquele músculo em forma de leque que cobre a maior parte das costas
+- **Largura**: Do latíssimo, o músculo em leque que cria a silhueta em V
 
-## Técnica Inteligente e Esforço Intenso
+---
+
+### Técnica + Intensidade = Resultados
 
 Não é apenas sobre trabalhar pesado, mas sobre trabalhar pesado da forma certa. A técnica inteligente é o que transforma esforço em resultados.
 
 A combinação de técnica e intensidade cria uma sinergia maior que a soma das partes.
+
+### 💪 Dica Prática
+
+**Para cada exercício:**
+1. Pense no músculo que você quer ativar
+2. Sinta a contração no ponto máximo
+3. Controle a fase excêntrica (descida)
+
+Isso transforma séries comuns em investimentos reais.
 `,
   "sistema-intensidade-rpe": `
 # Capítulo 2: Sistema de Intensidade — RPE 6 a 13
@@ -87,11 +206,27 @@ Cuidado: uso frequente leva a overtraining.
 Com o RPE dominado, você está pronto para começar a aplicar este conhecimento. A Semana 1 estabelece a fundação — ativação e base de força.
 `,
   "semana-1-ativacao": `
-# Capítulo 3: Semana 1 — Ativação e Base de Força
+# SEMANA 1 — Ativação e Base de Força
 
 ## Visão Geral
 
 A primeira semana estabelece a fundação. O objetivo é ativar os músculos das costas, criar o estímulo inicial de crescimento e preparar para as cargas progressivamente mais altas.
+
+---
+
+### 🧠 Anatomia Ativada: Remadas
+
+**O que você está trabalhando:**
+
+Nas remadas, você está ativando principalmente:
+- **Romboides** para retrair a escápula
+- **Trapézio médio** para estabilizar
+- **Latíssimo** para puxar o cotovelo para trás
+- **Bíceps** como flexor do cotovelo
+
+A pegada e o ângulo do movimento determinam qual músculo recebe mais estímulo.
+
+---
 
 ## Estrutura da Semana
 
@@ -101,42 +236,170 @@ A primeira semana estabelece a fundação. O objetivo é ativar os músculos das
 | Quinta | Puxadas + Pulldowns |
 | Sábado | Giant Sets (Volume) |
 
+---
+
 ## Segunda-feira: Remadas + Levantamento Terra
 
-### Exercício 1: Remada Unilateral com Barra
-- 3 séries x 10 reps cada braço
-- RPE 9
-- Foco: Ativação inicial
+### 💪 Exercício 1: Remada Unilateral com Barra
 
-### Exercício 2: Smith Machine Row
-- 3 séries (12, 10, 8 reps)
-- RPE 9-10
-- Cada rep sai do zero (deadstop)
+| Parâmetro | Valor |
+|-----------|-------|
+| Séries | 3 |
+| Reps | 10 cada braço |
+| RPE | 9 |
+| Foco | Ativação inicial |
 
-### Exercício 3: Remada com Halteres
-- 3 séries x 8 reps
-- RPE 9-10
+**Execução:**
+1. Fique em pé com uma barra
+2. Flexione levemente os joelhos
+3. Incline o tronco para frente (~45°)
+4. Puxe a barra em direção ao quadril
+5. Aperte os ombros para trás no topo
 
-### Exercício 4: Levantamento Terra com Correntes
-- Pyramide até 8 reps difíceis (RPE 9)
-- Final: redução + correntes até failure (~15-20 reps)
-- RPE 13
+---
+
+### ⚠️ Saúde Primeiro
+
+**Remada Unilateral — Pontos de Atenção:**
+
+- Se sentir dor no ombro, divida a carga ou reduza
+- Mantenha a coluna neutra durante toda a execução
+- Não use impulso para levantar — controle o movimento
+
+---
+
+### 💪 Exercício 2: Smith Machine Row
+
+| Parâmetro | Valor |
+|-----------|-------|
+| Séries | 3 |
+| Reps | 12, 10, 8 (progressivo) |
+| RPE | 9-10 |
+| Foco | Contração máxima |
+
+**Execução:**
+- Cada repetição sai do zero (deadstop)
+- Isso elimina o impulso elástico
+- Foco total na contração muscular
+
+---
+
+### 🧠 Anatomia Ativada: Levantamento Terra
+
+**O Levantamento Terra trabalha:**
+
+- **Eretores da espinha** para extensão vertebral
+- **Glúteos e isquiotibiais** para extensão do quadril
+- **Latíssimo** para estabilidade do tronco
+- **Trapézio e romboides** para retração escapular
+- **Antebraços** para pegada
+
+---
+
+### 💪 Exercício 3: Levantamento Terra com Correntes
+
+| Parâmetro | Valor |
+|-----------|-------|
+| Séries | Pyramide até 8 reps |
+| RPE | 9 (subindo) → 13 (final) |
+| Técnica | Redução + correntes no final |
+
+**Sequência:**
+1. Pyramid com carga crescente (RPE 9)
+2. Reduza 20% da carga
+3. Adicione correntes
+4. Vá até failure (~15-20 reps)
+
+---
+
+### ⚠️ Saúde Primeiro
+
+**Levantamento Terra — Alertas Críticos:**
+
+- **Dor na lombar aguda = Pare imediatamente**
+- Mantenha a coluna neutra
+- Não arredonde as costas ao levantar
+- Se não consegue manter a forma, reduza a carga
+
+---
 
 ## Quinta-feira: Puxadas e Alongamento
 
-1. Pulldown Supinado Unilateral — 3x10
-2. Pulldown com Alongamento Forçado — 3x10
-3. Hammer Strength High Row — 3x12/10/8
-4. Pull-over com Banda — 3x10
+### 💪 1. Pulldown Supinado Unilateral
+
+| Parâmetro | Valor |
+|-----------|-------|
+| Séries | 3 |
+| Reps | 10 cada lado |
+| Pegada | Supinada (palmas para cima) |
+
+**Foco:** Isolar o latíssimo e romboides de cada lado.
+
+### 💪 2. Pulldown com Alongamento Forçado
+
+Na última rep de cada série, **segure o alongamento por 3 segundos**.
+
+**Benefício:** Ativa fibras que não seriam estimuladas de outra forma.
+
+### 💪 3. Hammer Strength High Row
+
+| Parâmetro | Valor |
+|-----------|-------|
+| Séries | 3 |
+| Reps | 12 / 10 / 8 |
+| Foco | Trapézio médio + romboides |
+
+### 💪 4. Pull-over com Banda
+
+**Foco:** Alongamento do latíssimo no fundo do movimento.
+
+---
 
 ## Sábado: Giant Sets
 
-4 rodadas:
-1. Rope Straight Arm Pulldown — 12 reps
-2. Chin-ups — 8 reps
-3. Low Cable Row — 8 reps
-4. Kettlebell Row — 8 reps
-RPE: 10-12
+### Estrutura
+
+4 rodadas sem descanso entre exercícios:
+
+| Exercício | Reps |
+|-----------|------|
+| Rope Straight Arm Pulldown | 12 |
+| Chin-ups | 8 |
+| Low Cable Row | 8 |
+| Kettlebell Row | 8 |
+
+**RPE:** 10-12
+
+---
+
+### ⚠️ Saúde Primeiro
+
+**Giant Sets — Precauções:**
+
+- Não faça giant sets se estiver com fadiga acumulada
+- Chin-ups podem ser feitos com banda de assistência
+- Se sentir dor no ombro, substitua por Pulldown
+
+---
+
+### 🧠 Anatomia Ativada: Chin-ups
+
+O chin-up (palmas para você) permite:
+- Mais ativação do bíceps
+- Maior amplitude de movimento
+- Foco no latíssimo inferior
+
+Se não conseguir fazer 8 reps limpos, use banda elástica.
+
+---
+
+## Resumo da Semana 1
+
+**Segunda:** Remadas pesadas + Levantamento Terra
+**Quinta:** Puxadas variadas
+**Sábado:** Giant sets para volume
+
+**Foque:** Técnica perfeita, ativação dos músculos certos, construção da base.
 `,
   "semana-2-progressao": `
 # Capítulo 4: Semana 2 — Progressão de Volume

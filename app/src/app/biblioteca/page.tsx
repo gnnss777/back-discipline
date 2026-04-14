@@ -1,143 +1,31 @@
-import Link from "next/link";
-import { ArrowLeft, Search, Dumbbell, Filter } from "lucide-react";
+'use client';
 
-const exercises = [
-  {
-    id: "meadows-row",
-    name: "Meadows Row",
-    category: "Remadas",
-    muscles: ["Latíssimo", "Rombóides", "Trapézio Médio"],
-    difficulty: "Avançado",
-    description: "Remada unilateral com landmine para desenvolvimento de espessura e ângulos variados."
-  },
-  {
-    id: "one-arm-barbell-row",
-    name: "Remada Unilateral com Barra",
-    category: "Remadas",
-    muscles: ["Latíssimo", "Rombóides", "Deltoide Posterior"],
-    difficulty: "Intermediário",
-    description: "Remada unilateral para focar cada lado individualmente e corrigir desequilíbrios."
-  },
-  {
-    id: "smith-machine-row",
-    name: "Smith Machine Row",
-    category: "Remadas",
-    muscles: ["Latíssimo", "Rombóides", "Eretores"],
-    difficulty: "Iniciante",
-    description: "Remada na Smith Machine com movimento controlado e descanso no fundo."
-  },
-  {
-    id: "deadstop-dumbbell-row",
-    name: "Deadstop Dumbbell Row",
-    category: "Remadas",
-    muscles: ["Latíssimo", "Rombóides"],
-    difficulty: "Intermediário",
-    description: "Remada com haltere onde cada repetição começa do zero para eliminar momentum."
-  },
-  {
-    id: "t-bar-row",
-    name: "T-Bar Row",
-    category: "Remadas",
-    muscles: ["Latíssimo", "Trapézio Médio", "Rombóides"],
-    difficulty: "Intermediário",
-    description: "Remada estilo old school para criar espessura nas costas."
-  },
-  {
-    id: "rack-pull",
-    name: "Rack Pull",
-    category: "Levantamento",
-    muscles: ["Eretores", "Latíssimo", "Trapézio"],
-    difficulty: "Avançado",
-    description: "Variação do deadlift com a barra iniciando na altura dos joelhos."
-  },
-  {
-    id: "deficit-deadlift",
-    name: "Deficit Deadlift",
-    category: "Levantamento",
-    muscles: ["Eretores", "Latíssimo", "Cadeia Posterior"],
-    difficulty: "Avançado",
-    description: "Deadlift com os pés elevados para aumentar a amplitude de movimento."
-  },
-  {
-    id: "chin-up",
-    name: "Chin-Up (Puxada na Barra)",
-    category: "Puxadas",
-    muscles: ["Latíssimo", "Rombóides", "Bíceps"],
-    difficulty: "Intermediário",
-    description: "Puxada com pegada supinada para desenvolvimento do lat."
-  },
-  {
-    id: "lat-pulldown",
-    name: "Lat Pulldown",
-    category: "Puxadas",
-    muscles: ["Latíssimo"],
-    difficulty: "Iniciante",
-    description: "Puxada na máquina para trabalhar o lat com foco na conexão mente-músculo."
-  },
-  {
-    id: "underhand-pulldown",
-    name: "Underhand Pulldown",
-    category: "Puxadas",
-    muscles: ["Latíssimo", "Bíceps"],
-    difficulty: "Iniciante",
-    description: "Pulldown com pegada supinada para ênfase no lat inferior."
-  },
-  {
-    id: "trx-horizontal-chin",
-    name: "TRX Horizontal Chin",
-    category: "Puxadas",
-    muscles: ["Latíssimo", "Rombóides"],
-    difficulty: "Iniciante",
-    description: "Puxada horizontal no TRX para trabalho profundo do lat."
-  },
-  {
-    id: "face-pull",
-    name: "Face Pull",
-    category: "Isolamento",
-    muscles: ["Trapézio Médio", "Rombóides", "Deltoide Posterior"],
-    difficulty: "Iniciante",
-    description: "Exercício para saúde do ombro e desenvolvimento do trapézio médio."
-  },
-  {
-    id: "banded-pullover",
-    name: "Banded Pullover",
-    category: "Isolamento",
-    muscles: ["Latíssimo"],
-    difficulty: "Iniciante",
-    description: "Pullover com banda para trabalho na posição alongada."
-  },
-  {
-    id: "dumbbell-pullover",
-    name: "Dumbbell Pullover",
-    category: "Isolamento",
-    muscles: ["Latíssimo"],
-    difficulty: "Iniciante",
-    description: "Pullover com haltere para trabalho de alongamento do lat."
-  },
-  {
-    id: "hyperextension-bands",
-    name: "Hiperextensão com Bandas",
-    category: "Isolamento",
-    muscles: ["Eretores", "Glúteos"],
-    difficulty: "Iniciante",
-    description: "Hiperextensão com resistência progressiva de bandas."
-  },
-  {
-    id: "farmers-walk",
-    name: "Farmer's Walk",
-    category: "Funcional",
-    muscles: ["Trapézio Superior", "Eretores", "Core"],
-    difficulty: "Intermediário",
-    description: "Carregamento de peso para desenvolvimento de força de preensão e estabilidade."
-  }
-];
-
-const categories = ["Todas", "Remadas", "Puxadas", "Levantamento", "Isolamento", "Funcional"];
+import { useState, useMemo } from 'react';
+import Link from 'next/link';
+import { ArrowLeft, Search, Filter, Play, X } from 'lucide-react';
+import { exercises, categories } from '../../data/exercises';
+import type { Exercise } from '../../types/exercise';
+import { VideoModal } from '../../components/VideoModal';
 
 export default function BibliotecaPage() {
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState<string>('Todas');
+  const [selectedExercise, setSelectedExercise] = useState<Exercise | null>(null);
+
+  const filteredExercises = useMemo(() => {
+    return exercises.filter(ex => {
+      const matchesSearch = searchQuery === '' || 
+        ex.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        ex.muscles.some(m => m.toLowerCase().includes(searchQuery.toLowerCase()));
+      
+      const matchesCategory = selectedCategory === 'Todas' || ex.category === selectedCategory;
+      
+      return matchesSearch && matchesCategory;
+    });
+  }, [searchQuery, selectedCategory]);
+
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white">
-      {/* Header */}
       <header className="border-b border-[#333] sticky top-0 bg-[#0a0a0a]/95 backdrop-blur-sm z-50">
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2 text-[#666] hover:text-white transition-colors font-medium tracking-wider text-sm">
@@ -160,19 +48,24 @@ export default function BibliotecaPage() {
           <p className="text-[#555] text-lg font-medium tracking-wide">GUIA COMPLETO DE EXERCÍCIOS COM TÉCNICA E DICAS</p>
         </div>
 
-        {/* Search & Filter */}
         <div className="flex flex-col md:flex-row gap-4 mb-8">
           <div className="relative flex-1">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#555]" />
             <input 
               type="text" 
               placeholder="BUSCAR EXERCÍCIO..." 
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full pl-12 pr-4 py-3 bg-[#111] border border-[#333] rounded-sm text-white placeholder:text-[#555] focus:outline-none focus:border-[#B8956A] font-medium tracking-wider"
             />
           </div>
           <div className="flex items-center gap-2">
             <Filter className="w-5 h-5 text-[#555]" />
-            <select className="px-4 py-3 bg-[#111] border border-[#333] rounded-sm text-white focus:outline-none focus:border-[#B8956A] font-medium tracking-wider">
+            <select 
+              value={selectedCategory}
+              onChange={(e) => setSelectedCategory(e.target.value)}
+              className="px-4 py-3 bg-[#111] border border-[#333] rounded-sm text-white focus:outline-none focus:border-[#B8956A] font-medium tracking-wider"
+            >
               {categories.map(cat => (
                 <option key={cat} value={cat}>{cat.toUpperCase()}</option>
               ))}
@@ -180,13 +73,25 @@ export default function BibliotecaPage() {
           </div>
         </div>
 
-        {/* Exercises Grid */}
+        <div className="mb-4 text-sm text-[#555]">
+          {filteredExercises.length} exercício{filteredExercises.length !== 1 ? 's' : ''} encontrado{filteredExercises.length !== 1 ? 's' : ''}
+        </div>
+
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {exercises.map(exercise => (
+          {filteredExercises.map(exercise => (
             <div 
               key={exercise.id}
-              className="p-6 bg-[#111] border border-[#333] rounded-sm hover:border-[#B8956A] hover:bg-[#151515] transition-all cursor-pointer group"
+              className="p-6 bg-[#111] border border-[#333] rounded-sm hover:border-[#B8956A] hover:bg-[#151515] transition-all group relative"
             >
+              {exercise.videoUrl && (
+                <button
+                  onClick={() => setSelectedExercise(exercise)}
+                  className="absolute top-4 right-4 w-10 h-10 bg-[#B8956A]/80 hover:bg-[#B8956A] rounded-full flex items-center justify-center transition-colors z-10"
+                >
+                  <Play className="w-5 h-5 text-[#0A0A0A] fill-[#0A0A0A]" />
+                </button>
+              )}
+
               <div className="flex items-start justify-between mb-4">
                 <div>
                   <span className="px-2 py-1 bg-[#B8956A]/20 text-[#B8956A] text-xs font-bold tracking-wider rounded-sm">
@@ -214,16 +119,40 @@ export default function BibliotecaPage() {
                   </span>
                 ))}
               </div>
+
+              {exercise.tips && exercise.tips.length > 0 && (
+                <div className="mt-4 pt-4 border-t border-[#2A2A2A]">
+                  <div className="text-xs text-[#666] mb-2">DICAS:</div>
+                  <ul className="text-xs text-[#555] space-y-1">
+                    {exercise.tips.slice(0, 2).map((tip, i) => (
+                      <li key={i}>• {tip}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
           ))}
         </div>
 
-        {/* Coming Soon */}
-        <div className="mt-12 p-8 bg-[#111] rounded-xl border border-[#333] text-center">
-          <h3 className="text-xl font-bold mb-2 tracking-wider">VÍDEOS EM BREVE</h3>
-          <p className="text-[#555]">Estamos preparando vídeos de demonstração para cada exercício.</p>
-        </div>
+        {filteredExercises.length === 0 && (
+          <div className="text-center py-12">
+            <p className="text-[#555]">Nenhum exercício encontrado.</p>
+            <button
+              onClick={() => { setSearchQuery(''); setSelectedCategory('Todas'); }}
+              className="mt-4 text-[#B8956A] hover:underline"
+            >
+              Limpar filtros
+            </button>
+          </div>
+        )}
       </main>
+
+      <VideoModal
+        isOpen={selectedExercise !== null}
+        onClose={() => setSelectedExercise(null)}
+        videoUrl={selectedExercise?.videoUrl || ''}
+        title={selectedExercise?.name || ''}
+      />
     </div>
   );
 }

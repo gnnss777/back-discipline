@@ -31,6 +31,23 @@ export default function LivroPage() {
           <p className="text-[#555] font-light tracking-wide">DE TREINAMENTO DE COSTAS</p>
         </div>
 
+        {/* Introduction Card */}
+        <Link
+          href="/livro/introducao"
+          className="block p-6 bg-[#0F0F0F] border border-[#B8956A]/50 hover:border-[#B8956A] transition-all group rounded-sm mb-8"
+        >
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-12 bg-[#B8956A]/20 flex items-center justify-center rounded-sm text-[#B8956A]">
+              <BookOpen className="w-6 h-6" />
+            </div>
+            <div className="flex-1">
+              <h3 className="font-bold text-[#B8956A] tracking-wider text-sm">INTRODUÇÃO</h3>
+              <p className="text-xs text-[#555]">Mentalidade, Anatomia Básica e RPE 101</p>
+            </div>
+            <ArrowRight className="w-5 h-5 text-[#B8956A]" />
+          </div>
+        </Link>
+
         {/* Progress */}
         <div className="mb-12 p-4 bg-[#0F0F0F] rounded-sm border border-[#3A2E22]">
           <div className="flex items-center justify-between text-sm mb-2">
@@ -46,7 +63,7 @@ export default function LivroPage() {
         <section className="mb-12">
           <div className="flex items-center gap-3 mb-6">
             <span className="px-3 py-1 bg-[#B8956A]/20 text-[#B8956A] text-sm font-bold tracking-wider rounded-sm">PARTE I</span>
-            <h2 className="text-xl font-medium tracking-wider">SISTEMA E PRÁTICA</h2>
+            <h2 className="text-xl font-medium tracking-wider">PRÁTICA — 6 SEMANAS</h2>
           </div>
           
           <div className="space-y-3">
@@ -75,7 +92,7 @@ export default function LivroPage() {
         <section>
           <div className="flex items-center gap-3 mb-6">
             <span className="px-3 py-1 bg-[#B8956A]/20 text-[#B8956A] text-sm font-bold tracking-wider rounded-sm">PARTE II</span>
-            <h2 className="text-xl font-medium tracking-wider">FUNDAMENTOS TÉCNICOS</h2>
+            <h2 className="text-xl font-medium tracking-wider">AVANÇADO</h2>
           </div>
           
           <div className="space-y-3">

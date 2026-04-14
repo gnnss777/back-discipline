@@ -5,16 +5,19 @@
 
 ## Current Phase
 
-**Phase 3: Workout Logging** - Planning
+**Phase 5: Exercise Library Videos** - Complete
 
 ## Completed Phases
 
 - [x] Phase 1: Foundation
 - [x] Phase 2: Authentication & Stripe
+- [x] Phase 3: Workout Logging
+- [x] Phase 4: Progress Tracking & Dashboard
+- [x] Phase 5: Exercise Library Videos
 
 ## Current Plan
 
-Ready to execute Phase 3 (Workout Logging)
+Ready to execute Phase 6 (Rest Timer)
 
 ## Context
 
@@ -22,15 +25,15 @@ Ready to execute Phase 3 (Workout Logging)
 - Simple auth with email/password + Stripe ✓
 - Single user profile ✓
 - Offline-first with local storage ✓
-- Complete progress tracking
-- Embedded videos in exercise library
+- Workout logging ✓
+- Progress tracking & dashboard ✓
+- Embedded videos in exercise library ✓
 - Configurable rest timer
 - Complete MVP scope
 
 ### Latest Build
 - TypeScript compiles without errors ✓
-- Build succeeds ✓
-- All 7 routes render (/login, /register added) ✓
+- Build succeeds (22 routes) ✓
 
 ---
 
