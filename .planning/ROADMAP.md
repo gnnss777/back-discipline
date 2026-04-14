@@ -91,15 +91,19 @@
 **Objective:** Dashboard with progress visualization
 
 ### Tasks:
-- [ ] 4.1 - Create dashboard layout
-- [ ] 4.2 - Current week/day display
-- [ ] 4.3 - Program progress bar
-- [ ] 4.4 - Days trained counter
-- [ ] 4.5 - Weekly volume calculation
+- [x] 4.1 - Create dashboard layout (existing)
+- [x] 4.2 - Current week/day display (on dashboard)
+- [x] 4.3 - Program progress bar (existing)
+- [x] 4.4 - Days trained counter (Plan 02)
+- [x] 4.5 - Weekly volume calculation (Plan 01)
 - [ ] 4.6 - Volume chart component
 - [ ] 4.7 - Training frequency tracker
 - [ ] 4.8 - Exercise progression view
-- [ ] 4.9 - Chapter completion tracking
+- [x] 4.9 - Chapter completion tracking (Plan 01)
+
+**Plans:**
+- [x] 04-progress-tracking-01-PLAN.md — Progress tracking infrastructure
+- [ ] 04-progress-tracking-02-PLAN.md — Dashboard with real data
 
 **Deliverables:**
 - Complete dashboard with all progress metrics
