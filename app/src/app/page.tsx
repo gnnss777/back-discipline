@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { BookOpen, Dumbbell, Trophy, ArrowRight, Flame, GraduationCap } from "lucide-react";
+import { BottomNav } from "../components/Layout";
 
 export default function Home() {
   return (
@@ -153,6 +154,8 @@ export default function Home() {
           <p>JJ MONTEIRO · BACK DISCIPLINE · PROGRAMA DESENVOLVIDO COM BASE ACADÊMICA E EXPERIÊNCIA PRÁTICA</p>
         </div>
       </footer>
+
+      <BottomNav />
     </div>
   );
 }

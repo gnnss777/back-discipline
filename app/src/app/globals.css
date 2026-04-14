@@ -27,9 +27,16 @@ body {
   font-family: var(--font-oswald), sans-serif;
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  padding-bottom: env(safe-area-inset-bottom);
 }
 
 ::selection {
   background: var(--primary);
   color: white;
+}
+
+@media (max-width: 768px) {
+  body {
+    padding-bottom: 4rem;
+  }
 }
