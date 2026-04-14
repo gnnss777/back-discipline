@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, BookOpen, CheckCircle } from "lucide-react";
-import { getChapterBySlug, getNextChapter, getPrevChapter, chapters } from "../../../lib/chapters";
-import { getChapterContent } from "../../../lib/content";
+import { getChapterBySlug, getNextChapter, getPrevChapter, chapters } from "../../../../lib/chapters";
+import { getChapterContent } from "../../../../lib/content";
 
 interface PageProps {
   params: Promise<{ slug: string }>;

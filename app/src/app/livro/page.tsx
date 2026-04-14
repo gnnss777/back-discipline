@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, BookOpen, CheckCircle, Lock } from "lucide-react";
-import { chapters } from "../../lib/chapters";
+import { chapters } from "../../../lib/chapters";
 
 export default function LivroPage() {
   const part1Chapters = chapters.filter(c => c.part === "I");
