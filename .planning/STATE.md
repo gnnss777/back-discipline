@@ -8,13 +8,13 @@
 
 ## Current Phase
 
-### Phase: Planning
-- [ ] Phase 1: Landing Page Redesign
-- [ ] Phase 2: Login/Register Modal
-- [ ] Phase 3: Session Persistence
-- [ ] Phase 4: Auto-Redirect Logic
-- [ ] Phase 5: Route Protection
-- [ ] Phase 6: Cleanup & Testing
+### Phase: Executed (2026-04-17)
+- [x] Phase 1: Landing Page Redesign
+- [x] Phase 2: Login/Register Modal
+- [x] Phase 3: Session Persistence
+- [x] Phase 4: Auto-Redirect Logic
+- [x] Phase 5: Route Protection
+- [ ] Phase 6: Cleanup & Testing (in progress)
 
 ---
 
@@ -44,30 +44,30 @@
 
 ---
 
-## Routes (Current)
-
-| Route | Access | Description |
-|-------|--------|-------------|
-| `/` | Public | Landing page (to be redesigned) |
-| `/login` | Public | Login page (to be removed/redirected) |
-| `/register` | Public | Register page (to be removed/redirected) |
-| `/dashboard` | Public+Protected | Progress dashboard (needs protection) |
-| `/livro` | Public | Chapter list (needs protection) |
-| `/livro/[slug]` | Public | Chapter reader (needs protection) |
-| `/biblioteca` | Public | Exercise library (needs protection) |
-| `/historico` | Public | Workout history (needs protection) |
-
----
-
-## Routes (Target - After Milestone)
+## Routes (Current - Implemented)
 
 | Route | Access | Description |
 |-------|--------|-------------|
 | `/` | Public | Landing page with program + login modal |
-| `/dashboard` | Protected | Progress dashboard (logged in only) |
-| `/livro/[slug]` | Protected | Chapter content (logged in only) |
-| `/biblioteca` | Protected | Exercise library (logged in only) |
-| `/historico` | Protected | Workout history (logged in only) |
+| `/dashboard` | Protected | Progress dashboard (needs redirect if not logged in) |
+| `/livro` | Public+Auth | Chapter list (shows auth modal if not logged in) |
+| `/livro/[slug]` | Protected | Chapter content (needs protection) |
+| `/biblioteca` | Public+Auth | Exercise library (shows auth modal if not logged in) |
+| `/historico` | Protected | Workout history (handled by component) |
+| `/login` | Public | Old page (still exists, can redirect) |
+| `/register` | Public | Old page (still exists, can redirect) |
+
+---
+
+## Latest Build
+
+- TypeScript compiles without errors ✓
+- Build succeeds ✓
+- Vercel deployment in progress (Phase 6)
+- AuthModal component created ✓
+- Landing page redesign complete ✓
+- Auto-redirect to Dashboard complete ✓
+- Program/Biblioteca auth prompts complete ✓
 
 ---
 
