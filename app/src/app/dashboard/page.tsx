@@ -6,6 +6,7 @@ import { ArrowLeft, BookOpen, Trophy, Target, Clock, Lock, Dumbbell, Calendar } 
 import { useAuth } from '../../hooks/useAuth';
 import { useProgress } from '../../context/ProgressContext';
 import { chapters } from '../../../lib/chapters';
+import { exercises } from '../../data/exercises';
 import { DashboardStats } from '../../components/DashboardStats';
 
 export default function DashboardPage() {
@@ -127,16 +128,21 @@ export default function DashboardPage() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-4 mb-12">
+        <div className="grid md:grid-cols-3 gap-4 mb-12">
           <Link href="/historico" className="p-4 bg-[#111] border border-[#333] rounded-lg hover:border-[#B8956A] transition-colors">
             <Dumbbell className="w-5 h-5 text-[#B8956A] mb-2" />
             <div className="font-bold tracking-wider">REGISTRAR TREINO</div>
-            <div className="text-sm text-[#555]">Adicione seu treino de hoje</div>
+            <div className="text-sm text-[#555]">Adicione seu treino</div>
           </Link>
           <Link href="/livro" className="p-4 bg-[#111] border border-[#333] rounded-lg hover:border-[#B8956A] transition-colors">
             <BookOpen className="w-5 h-5 text-[#B8956A] mb-2" />
             <div className="font-bold tracking-wider">CONTINUAR LENDO</div>
-            <div className="text-sm text-[#555]">{totalChapters - completedChapters} capítulos restantes</div>
+            <div className="text-sm text-[#555]">{totalChapters - completedChapters} capítulos</div>
+          </Link>
+          <Link href="/biblioteca" className="p-4 bg-[#111] border border-[#333] rounded-lg hover:border-[#B8956A] transition-colors">
+            <Dumbbell className="w-5 h-5 text-[#B8956A] mb-2" />
+            <div className="font-bold tracking-wider">BIBLIOTECA</div>
+            <div className="text-sm text-[#555]">{exercises.length} exercícios</div>
           </Link>
         </div>
 
