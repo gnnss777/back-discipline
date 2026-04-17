@@ -14,7 +14,7 @@
 - [x] Phase 3: Session Persistence
 - [x] Phase 4: Auto-Redirect Logic
 - [x] Phase 5: Route Protection
-- [ ] Phase 6: Cleanup & Testing (in progress)
+- [x] Phase 6: Cleanup & Testing
 
 ---
 
@@ -44,18 +44,18 @@
 
 ---
 
-## Routes (Current - Implemented)
+## Routes (Complete)
 
 | Route | Access | Description |
 |-------|--------|-------------|
 | `/` | Public | Landing page with program + login modal |
-| `/dashboard` | Protected | Progress dashboard (needs redirect if not logged in) |
-| `/livro` | Public+Auth | Chapter list (shows auth modal if not logged in) |
-| `/livro/[slug]` | Protected | Chapter content (needs protection) |
-| `/biblioteca` | Public+Auth | Exercise library (shows auth modal if not logged in) |
-| `/historico` | Protected | Workout history (handled by component) |
-| `/login` | Public | Old page (still exists, can redirect) |
-| `/register` | Public | Old page (still exists, can redirect) |
+| `/dashboard` | Protected | Progress dashboard |
+| `/livro` | Public+Auth | Chapter list (shows auth modal) |
+| `/livro/[slug]` | Protected | Chapter content (auth guard) |
+| `/biblioteca` | Public+Auth | Exercise library (shows auth modal) |
+| `/historico` | Protected | Workout history |
+| `/login` | → / or /dashboard | Redirects |
+| `/register` | → / or /dashboard | Redirects |
 
 ---
 
