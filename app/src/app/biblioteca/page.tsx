@@ -2,15 +2,30 @@
 
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
-import { ArrowLeft, Search, Filter, Play, X } from 'lucide-react';
+import { ArrowLeft, Search, Filter, Play, Lock, Dumbbell } from 'lucide-react';
 import { exercises, categories } from '../../data/exercises';
 import type { Exercise } from '../../types/exercise';
 import { VideoModal } from '../../components/VideoModal';
+import { AuthModal } from '../../components/AuthModal';
+import { useAuth } from '../../hooks/useAuth';
 
 export default function BibliotecaPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('Todas');
   const [selectedExercise, setSelectedExercise] = useState<Exercise | null>(null);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [authModalMode, setAuthModalMode] = useState<'login' | 'register'>('login');
+  const { user, isLoading } = useAuth();
+
+  const openLogin = () => {
+    setAuthModalMode('login');
+    setIsAuthModalOpen(true);
+  };
+
+  const openRegister = () => {
+    setAuthModalMode('register');
+    setIsAuthModalOpen(true);
+  };
 
   const filteredExercises = useMemo(() => {
     return exercises.filter(ex => {
@@ -24,8 +39,22 @@ export default function BibliotecaPage() {
     });
   }, [searchQuery, selectedCategory]);
 
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-[#0A0A0A] flex items-center justify-center">
+        <div className="text-[#B8956A]">Carregando...</div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white">
+      <AuthModal 
+        isOpen={isAuthModalOpen} 
+        onClose={() => setIsAuthModalOpen(false)}
+        initialMode={authModalMode}
+      />
+
       <header className="border-b border-[#333] sticky top-0 bg-[#0a0a0a]/95 backdrop-blur-sm z-50">
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2 text-[#666] hover:text-white transition-colors font-medium tracking-wider text-sm">
@@ -38,7 +67,15 @@ export default function BibliotecaPage() {
             </div>
             <span className="font-bold tracking-wider">BIBLIOTECA</span>
           </div>
-          <div className="w-20" />
+          {user ? (
+            <Link href="/dashboard" className="text-sm text-[#666] hover:text-white font-medium tracking-wider">
+              PROGRESSO
+            </Link>
+          ) : (
+            <button onClick={openLogin} className="text-sm text-[#B8956A] hover:text-white font-medium tracking-wider">
+              ENTRAR
+            </button>
+          )}
         </div>
       </header>
 
@@ -47,6 +84,20 @@ export default function BibliotecaPage() {
           <h1 className="text-5xl font-bold mb-4 tracking-wider">BIBLIOTECA <span className="text-[#B8956A]">TÉCNICA</span></h1>
           <p className="text-[#555] text-lg font-medium tracking-wide">GUIA COMPLETO DE EXERCÍCIOS COM TÉCNICA E DICAS</p>
         </div>
+
+        {!user && (
+          <div className="mb-8 p-6 bg-[#111] border border-[#B8956A]/30 rounded-lg text-center">
+            <p className="text-[#B8956A] mb-4">Faça login para acessar a biblioteca completa de exercícios</p>
+            <div className="flex gap-4 justify-center">
+              <button onClick={openLogin} className="px-6 py-2 border border-[#B8956A] text-[#B8956A] rounded-sm hover:bg-[#B8956A] hover:text-[#0A0A0A] transition-colors font-medium tracking-wider">
+                ENTRAR
+              </button>
+              <button onClick={openRegister} className="px-6 py-2 bg-[#B8956A] text-[#0A0A0A] rounded-sm hover:bg-[#9A7A50] transition-colors font-medium tracking-wider">
+                CADASTRAR
+              </button>
+            </div>
+          </div>
+        )}
 
         <div className="flex flex-col md:flex-row gap-4 mb-8">
           <div className="relative flex-1">
@@ -83,13 +134,19 @@ export default function BibliotecaPage() {
               key={exercise.id}
               className="p-6 bg-[#111] border border-[#333] rounded-sm hover:border-[#B8956A] hover:bg-[#151515] transition-all group relative"
             >
-              {exercise.videoUrl && (
+              {exercise.videoUrl && user && (
                 <button
                   onClick={() => setSelectedExercise(exercise)}
                   className="absolute top-4 right-4 w-10 h-10 bg-[#B8956A]/80 hover:bg-[#B8956A] rounded-full flex items-center justify-center transition-colors z-10"
                 >
                   <Play className="w-5 h-5 text-[#0A0A0A] fill-[#0A0A0A]" />
                 </button>
+              )}
+
+              {!user && (
+                <div className="absolute top-4 right-4">
+                  <Lock className="w-4 h-4 text-[#333]" />
+                </div>
               )}
 
               <div className="flex items-start justify-between mb-4">
