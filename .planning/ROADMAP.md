@@ -1,174 +1,118 @@
-# Roadmap: Back Discipline MVP
+# Roadmap: Login Simplification
 
-**Created:** 2026-04-14
+**Milestone:** Login Simplification & Redirect Flow
+**Started:** 2026-04-17
 
-## Phase 1: Foundation
+---
 
-**Objective:** Set up authentication, project structure, and core infrastructure
+## Phase 1: Landing Page Redesign
+
+**Objective:** Transform home page to show program structure + login button
 
 ### Tasks:
-- [ ] 1.1 - Set up project structure (remove duplicate src/app/)
-- [ ] 1.2 - Consolidate lib/ folders and shared utilities
-- [ ] 1.3 - Create user types and interfaces
-- [ ] 1.4 - Create local storage utilities
-- [ ] 1.5 - Set up authentication context/hooks
-
-**Plans:**
-- [x] 01-foundation-01-PLAN.md — Consolidate duplicate folders
-- [x] 01-foundation-02-PLAN.md — Types, storage, and auth context
+- [ ] 1.1 - Update landing page to show program structure (chapters list)
+- [ ] 1.2 - Add "Entrar" button that opens login modal
+- [ ] 1.3 - Add "Cadastrar" button that opens register modal  
+- [ ] 1.4 - Make chapter items non-clickable or show login prompt
+- [ ] 1.5 - Ensure mobile responsive design
+- [ ] 1.6 - Test landing page displays correctly
 
 **Deliverables:**
-- Clean codebase structure
-- User types defined
-- Auth system ready
+- Landing page with program list + login buttons
 
 ---
 
-## Phase 2: Authentication & Stripe
+## Phase 2: Login/Register Modal
 
-**Objective:** User registration, login, and payment integration
-
-### Tasks:
-- [x] 2.1 - Create login page
-- [x] 2.2 - Create register page
-- [x] 2.3 - Implement auth logic (localStorage)
-- [x] 2.4 - Create protected route wrapper
-- [x] 2.5 - Integrate Stripe payment form
-- [x] 2.6 - Payment status tracking
-- [ ] 2.7 - User session management (part of AuthContext)
-
-**Plans:**
-- [x] 02-authentication-stripe-01-PLAN.md — Login/register pages and protected routes
-- [x] 02-authentication-stripe-02-PLAN.md — Stripe payment integration
-
----
-
-## Phase 3: Workout Logging
-
-**Objective:** Core workout logging functionality
+**Objective:** Create modal component for authentication
 
 ### Tasks:
-- [ ] 3.1 - Create workout log form component
-- [ ] 3.2 - Exercise selector with search
-- [ ] 3.3 - Set/rep/weight inputs
-- [ ] 3.4 - RPE selector (1-10)
-- [ ] 3.5 - Notes input
-- [ ] 3.6 - Save workout function
-- [ ] 3.7 - Workout history list
-
-**Plans:**
-- [ ] 03-workout-logging-01-PLAN.md — Workout log form components
-- [ ] 03-workout-logging-02-PLAN.md — Workout history view
+- [ ] 2.1 - Create LoginModal component
+- [ ] 2.2 - Create RegisterModal component
+- [ ] 2.3 - Add toggle between login/register in modal
+- [ ] 2.4 - Add close modal functionality
+- [ ] 2.5 - Add error handling and validation
+- [ ] 2.6 - Add loading states during auth
+- [ ] 2.7 - Integrate with existing auth context
 
 **Deliverables:**
-- Login/Register pages
-- Stripe payment integration
-- Protected routes
+- Working login/register modal on landing page
 
 ---
 
-## Phase 3: Workout Logging
+## Phase 3: Session Persistence
 
-**Objective:** Core workout logging functionality
+**Objective:** Persist login sessions in localStorage
 
 ### Tasks:
-- [ ] 3.1 - Create workout log form component
-- [ ] 3.2 - Exercise selector with search
-- [ ] 3.3 - Set/rep/weight inputs
-- [ ] 3.4 - RPE selector (1-10)
-- [ ] 3.5 - Notes input
-- [ ] 3.6 - Save workout function
-- [ ] 3.7 - Workout history list
+- [ ] 3.1 - Update useAuth hook to save session to localStorage
+- [ ] 3.2 - Update useAuth hook to load session from localStorage on init
+- [ ] 3.3 - Add clearSession method
+- [ ] 3.4 - Add session expiration (optional)
+- [ ] 3.5 - Test persistence across browser refresh
 
 **Deliverables:**
-- Working workout logger
-- Workout history view
+- Login sessions persist across browser sessions
 
 ---
 
-## Phase 4: Progress Tracking & Dashboard
+## Phase 4: Auto-Redirect Logic
 
-**Objective:** Dashboard with progress visualization
+**Objective:** Redirect logged-in users automatically to Dashboard
 
 ### Tasks:
-- [x] 4.1 - Create dashboard layout (existing)
-- [x] 4.2 - Current week/day display (on dashboard)
-- [x] 4.3 - Program progress bar (existing)
-- [x] 4.4 - Days trained counter (Plan 02)
-- [x] 4.5 - Weekly volume calculation (Plan 01)
-- [ ] 4.6 - Volume chart component
-- [ ] 4.7 - Training frequency tracker
-- [ ] 4.8 - Exercise progression view
-- [x] 4.9 - Chapter completion tracking (Plan 01)
-
-**Plans:**
-- [x] 04-progress-tracking-01-PLAN.md — Progress tracking infrastructure
-- [ ] 04-progress-tracking-02-PLAN.md — Dashboard with real data
+- [ ] 4.1 - Check auth status on landing page load
+- [ ] 4.2 - Redirect to /dashboard if already logged in
+- [ ] 4.3 - Handle edge cases (no infinite loops)
+- [ ] 4.4 - Test auto-redirect works correctly
 
 **Deliverables:**
-- Complete dashboard with all progress metrics
+- Logged-in users redirected to Dashboard automatically
 
 ---
 
-## Phase 5: Exercise Library Videos
+## Phase 5: Route Protection
 
-**Objective:** Add video embeds to exercise library
+**Objective:** Protect Dashboard and content routes
 
 ### Tasks:
-- [ ] 5.1 - Enhance exercise data structure
-- [ ] 5.2 - Add video field to exercises
-- [ ] 5.3 - Create video player component
-- [ ] 5.4 - Update exercise cards with video
-- [ ] 5.5 - Search and filter enhancements
-
-**Plans:**
-- [ ] 05-01-PLAN.md — Video infrastructure (types, VideoPlayer, data)
-- [ ] 05-02-PLAN.md — Update biblioteca page with video modal and filtering
+- [ ] 5.1 - Create AuthGuard component
+- [ ] 5.2 - Add auth check to Dashboard page
+- [ ] 5.3 - Add auth check to /livro/[slug] pages
+- [ ] 5.4 - Add auth check to /biblioteca
+- [ ] 5.5 - Add auth check to /historico
+- [ ] 5.6 - Show login prompt for protected routes
 
 **Deliverables:**
-- Exercise library with embedded videos
+- All non-landing routes protected
 
 ---
 
-## Phase 6: Rest Timer
+## Phase 6: Cleanup & Testing
 
-**Objective:** Configurable rest timer with audio
+**Objective:** Final cleanup and comprehensive testing
 
 ### Tasks:
-- [ ] 6.1 - Create timer component
-- [ ] 6.2 - Preset time buttons
-- [ ] 6.3 - Custom time input
-- [ ] 6.4 - Audio notification
-- [ ] 6.5 - Visual countdown
-- [ ] 6.6 - Background timer support
+- [ ] 6.1 - Remove standalone login page (or redirect to landing)
+- [ ] 6.2 - Remove standalone register page (or redirect to landing)
+- [ ] 6.3 - Test full user flow (register -> login -> dashboard)
+- [ ] 6.4 - Test logout flow
+- [ ] 6.5 - Test mobile responsiveness
+- [ ] 6.6 - Build and deploy to Vercel
 
 **Deliverables:**
-- Working rest timer
+- Clean 2-page flow working correctly
 
 ---
 
-## Phase 7: UI/UX Polish & Cleanup
+## Phase Dependencies
 
-**Objective:** Final polish and mobile optimization
-
-### Tasks:
-- [ ] 7.1 - Component library review
-- [ ] 7.2 - Mobile responsiveness fixes
-- [ ] 7.3 - Loading states
-- [ ] 7.4 - Error handling
-- [ ] 7.5 - Navigation improvements
-- [ ] 7.6 - Final testing
-
-**Deliverables:**
-- Production-ready MVP
+- Phase 1 → Phase 2 (modal needs landing page context)
+- Phase 2 → Phase 3 (modal needs auth context updates)
+- Phase 3 → Phase 4 (auto-redirect uses persisted session)
+- Phase 4 → Phase 5 (protection uses auth state)
+- Phase 5 → Phase 6 (cleanup after all features)
 
 ---
 
-**Phase Dependencies:**
-- Phase 1 → Phase 2 → Phase 3 → Phase 4 → Phase 5 → Phase 6 → Phase 7
-- Phase 5 can start after Phase 3 (exercise data ready)
-- Phase 6 is independent
-
----
-
-*Roadmap: 2026-04-14*
+*Roadmap created: 2026-04-17*

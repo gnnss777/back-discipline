@@ -1,10 +1,26 @@
-# State: Back Discipline MVP
+# State: Login Simplification
 
-**Milestone:** UI/UX Redesign MVP
-**Started:** 2026-04-14
-**Completed:** 2026-04-14
+**Milestone:** Login Simplification & Redirect Flow
+**Started:** 2026-04-17
+**Status:** Planning
 
-## ALL PHASES COMPLETE ✓
+---
+
+## Current Phase
+
+### Phase: Planning
+- [ ] Phase 1: Landing Page Redesign
+- [ ] Phase 2: Login/Register Modal
+- [ ] Phase 3: Session Persistence
+- [ ] Phase 4: Auto-Redirect Logic
+- [ ] Phase 5: Route Protection
+- [ ] Phase 6: Cleanup & Testing
+
+---
+
+## Previous Milestone (Completed: 2026-04-14)
+
+### ALL PHASES COMPLETE ✓
 
 - [x] Phase 1: Foundation
 - [x] Phase 2: Authentication & Stripe
@@ -14,7 +30,7 @@
 - [x] Phase 6: Rest Timer
 - [x] Phase 7: UI/UX Polish & Mobile
 
-## MVP Features - ALL COMPLETE
+### MVP Features - ALL COMPLETE
 
 - [x] Simple auth with email/password + Stripe
 - [x] Single user profile
@@ -26,22 +42,41 @@
 - [x] Mobile responsive UI
 - [x] Bottom navigation
 
-## Routes (22 total)
+---
 
-- `/` - Home page
-- `/login` - Login page
-- `/register` - Registration page
-- `/dashboard` - Progress dashboard
-- `/livro` - Chapter list
-- `/livro/[slug]` - Chapter reader (11 chapters)
-- `/biblioteca` - Exercise library
-- `/historico` - Workout logging + history + timer
+## Routes (Current)
+
+| Route | Access | Description |
+|-------|--------|-------------|
+| `/` | Public | Landing page (to be redesigned) |
+| `/login` | Public | Login page (to be removed/redirected) |
+| `/register` | Public | Register page (to be removed/redirected) |
+| `/dashboard` | Public+Protected | Progress dashboard (needs protection) |
+| `/livro` | Public | Chapter list (needs protection) |
+| `/livro/[slug]` | Public | Chapter reader (needs protection) |
+| `/biblioteca` | Public | Exercise library (needs protection) |
+| `/historico` | Public | Workout history (needs protection) |
+
+---
+
+## Routes (Target - After Milestone)
+
+| Route | Access | Description |
+|-------|--------|-------------|
+| `/` | Public | Landing page with program + login modal |
+| `/dashboard` | Protected | Progress dashboard (logged in only) |
+| `/livro/[slug]` | Protected | Chapter content (logged in only) |
+| `/biblioteca` | Protected | Exercise library (logged in only) |
+| `/historico` | Protected | Workout history (logged in only) |
+
+---
 
 ## Latest Build
 
 - TypeScript compiles without errors ✓
 - Build succeeds ✓
+- Vercel deployment working ✓
 
 ---
 
-*MVP Complete: 2026-04-14*
+*Milestone started: 2026-04-17*
