@@ -1,118 +1,110 @@
-# Roadmap: Login Simplification
+# Roadmap: User Profile & Book Improvements (v1.1)
 
-**Milestone:** Login Simplification & Redirect Flow
-**Started:** 2026-04-17
-
----
-
-## Phase 1: Landing Page Redesign
-
-**Objective:** Transform home page to show program structure + login button
-
-### Tasks:
-- [ ] 1.1 - Update landing page to show program structure (chapters list)
-- [ ] 1.2 - Add "Entrar" button that opens login modal
-- [ ] 1.3 - Add "Cadastrar" button that opens register modal  
-- [ ] 1.4 - Make chapter items non-clickable or show login prompt
-- [ ] 1.5 - Ensure mobile responsive design
-- [ ] 1.6 - Test landing page displays correctly
-
-**Deliverables:**
-- Landing page with program list + login buttons
+**Milestone:** User Profile & Book Improvements (v1.1)
+**Started:** 2026-05-04
 
 ---
 
-## Phase 2: Login/Register Modal
+## Phases
 
-**Objective:** Create modal component for authentication
-
-### Tasks:
-- [ ] 2.1 - Create LoginModal component
-- [ ] 2.2 - Create RegisterModal component
-- [ ] 2.3 - Add toggle between login/register in modal
-- [ ] 2.4 - Add close modal functionality
-- [ ] 2.5 - Add error handling and validation
-- [ ] 2.6 - Add loading states during auth
-- [ ] 2.7 - Integrate with existing auth context
-
-**Deliverables:**
-- Working login/register modal on landing page
+- [ ] **Phase 7: Cloud Authentication** - Register, login, and session persistence with cloud database
+- [ ] **Phase 8: Auth Migration** - Migrate existing localStorage users to cloud
+- [ ] **Phase 9: User Profile** - Avatar, profile page, display name edit, logout
+- [ ] **Phase 10: Book Progress** - Reading progress indicators, chapter navigation, mobile optimization
 
 ---
 
-## Phase 3: Session Persistence
+## Phase Details
 
-**Objective:** Persist login sessions in localStorage
+### Phase 7: Cloud Authentication
 
-### Tasks:
-- [ ] 3.1 - Update useAuth hook to save session to localStorage
-- [ ] 3.2 - Update useAuth hook to load session from localStorage on init
-- [ ] 3.3 - Add clearSession method
-- [ ] 3.4 - Add session expiration (optional)
-- [ ] 3.5 - Test persistence across browser refresh
+**Goal**: Users can register and login with cloud credentials that persist across all devices
 
-**Deliverables:**
-- Login sessions persist across browser sessions
+**Depends on**: Nothing (first phase of this milestone)
 
----
+**Requirements**: AUTH-01, AUTH-02, AUTH-03
 
-## Phase 4: Auto-Redirect Logic
+**Success Criteria** (what must be TRUE):
 
-**Objective:** Redirect logged-in users automatically to Dashboard
+1. User can register with email/password in cloud database — registration form creates account in Supabase
+2. User can login from any device with same credentials — login works on new device with stored credentials
+3. Session persists across browser sessions — httpOnly cookies maintain login across page refreshes
 
-### Tasks:
-- [ ] 4.1 - Check auth status on landing page load
-- [ ] 4.2 - Redirect to /dashboard if already logged in
-- [ ] 4.3 - Handle edge cases (no infinite loops)
-- [ ] 4.4 - Test auto-redirect works correctly
-
-**Deliverables:**
-- Logged-in users redirected to Dashboard automatically
+**Plans**: TBD
 
 ---
 
-## Phase 5: Route Protection
+### Phase 8: Auth Migration
 
-**Objective:** Protect Dashboard and content routes
+**Goal**: Existing localStorage users can migrate to cloud and auth flows continue working
 
-### Tasks:
-- [ ] 5.1 - Create AuthGuard component
-- [ ] 5.2 - Add auth check to Dashboard page
-- [ ] 5.3 - Add auth check to /livro/[slug] pages
-- [ ] 5.4 - Add auth check to /biblioteca
-- [ ] 5.5 - Add auth check to /historico
-- [ ] 5.6 - Show login prompt for protected routes
+**Depends on**: Phase 7 (cloud auth must exist before migration)
 
-**Deliverables:**
-- All non-landing routes protected
+**Requirements**: AUTH-04, AUTH-05
 
----
+**Success Criteria** (what must be TRUE):
 
-## Phase 6: Cleanup & Testing
+1. Existing localStorage users can migrate to cloud — migration tool/data transfer from old system
+2. Login/logout works correctly after migration — auth flows function with migrated accounts
 
-**Objective:** Final cleanup and comprehensive testing
-
-### Tasks:
-- [ ] 6.1 - Remove standalone login page (or redirect to landing)
-- [ ] 6.2 - Remove standalone register page (or redirect to landing)
-- [ ] 6.3 - Test full user flow (register -> login -> dashboard)
-- [ ] 6.4 - Test logout flow
-- [ ] 6.5 - Test mobile responsiveness
-- [ ] 6.6 - Build and deploy to Vercel
-
-**Deliverables:**
-- Clean 2-page flow working correctly
+**Plans**: TBD
 
 ---
 
-## Phase Dependencies
+### Phase 9: User Profile
 
-- Phase 1 → Phase 2 (modal needs landing page context)
-- Phase 2 → Phase 3 (modal needs auth context updates)
-- Phase 3 → Phase 4 (auto-redirect uses persisted session)
-- Phase 4 → Phase 5 (protection uses auth state)
-- Phase 5 → Phase 6 (cleanup after all features)
+**Goal**: Users can view and edit their profile, accessible from top bar avatar
+
+**Depends on**: Phase 7 (requires cloud auth for profile sync)
+
+**Requirements**: PROF-01, PROF-02, PROF-03, PROF-04, PROF-05
+
+**Success Criteria** (what must be TRUE):
+
+1. User can see avatar icon in top bar — user avatar displayed in application header
+2. User can tap avatar to open profile menu/page — navigation to profile page works
+3. User can edit display name on profile page — form allows name update and saves to cloud
+4. User can log out from profile page — logout button terminates session
+5. Profile data syncs across devices — name changes reflect on other devices after sync
+
+**Plans**: TBD
+
+**UI hint**: yes
 
 ---
 
-*Roadmap created: 2026-04-17*
+### Phase 10: Book Progress
+
+**Goal**: Users can track reading progress with mobile-optimized chapter navigation
+
+**Depends on**: Phase 7 (requires cloud auth for progress sync)
+
+**Requirements**: BOOK-01, BOOK-02, BOOK-03, BOOK-04, BOOK-05, BOOK-06
+
+**Success Criteria** (what must be TRUE):
+
+1. User can see reading progress indicator per chapter — visual indicator shows chapter completion
+2. User can resume at last read chapter — application opens to last position automatically
+3. User can navigate between chapters easily — next/previous controls function properly
+4. Progress saves and syncs to cloud — reading position persists across sessions and devices
+5. Mobile-optimized reading layout works correctly — touch-friendly controls, adequate text size on mobile
+6. Total book progress visible — summary shows completed chapters (e.g., "5 of 12")
+
+**Plans**: TBD
+
+**UI hint**: yes
+
+---
+
+## Progress Table
+
+| Phase | Plans Complete | Status | Completed |
+|-------|---------------|--------|-----------|
+| 7. Cloud Authentication | 0/1 | Not started | - |
+| 8. Auth Migration | 0/1 | Not started | - |
+| 9. User Profile | 0/1 | Not started | - |
+| 10. Book Progress | 0/1 | Not started | - |
+
+---
+
+*Roadmap created: 2026-05-04*

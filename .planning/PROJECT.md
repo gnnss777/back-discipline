@@ -5,6 +5,24 @@
 
 ---
 
+## Current Milestone: v1.1 User Profile & Book Improvements
+
+**Goal:** Add user profile management, fix cross-device login, optimize book for mobile with reading progress
+
+### Target Features
+
+1. **User Profile Top Bar** — Add user icon in top bar with profile adjustment + logout
+2. **Cross-Device Login Fix** — Implement proper user database with cloud sync (currently local only)
+3. **Book Mobile Optimization** — Improve book chapter reading on mobile + track reading progress
+
+### Key Context
+
+- Current auth uses localStorage only (no cloud sync)
+- Users cannot login from different devices with same credentials
+- Book content needs mobile-optimized layout and reading progress tracking
+
+---
+
 ## Milestone: Login Simplification & Redirect Flow
 
 **Started:** 2026-04-17
@@ -61,17 +79,24 @@ Comprehensive UI/UX redesign and feature expansion for the Back Discipline train
 | Payments | Stripe |
 | Storage | LocalStorage |
 
-## Success Criteria
+## Evolution
 
-- [ ] Landing page shows program structure + login button
-- [ ] Login modal on landing page works
-- [ ] Program content shows login wall for unauthenticated users
-- [ ] Dashboard only accessible for logged-in users
-- [ ] Login sessions persist across browser sessions
-- [ ] Auto-redirect logged-in users from Landing to Dashboard
-- [ ] Clean 2-page flow works correctly
+This document evolves at phase transitions and milestone boundaries.
+
+**After each phase transition** (via `/gsd:transition`):
+1. Requirements invalidated? → Move to Out of Scope with reason
+2. Requirements validated? → Move to Validated with phase reference
+3. New requirements emerged? → Add to Active
+4. Decisions to log? → Add to Key Decisions
+5. "What This Is" still accurate? → Update if drifted
+
+**After each milestone** (via `/gsd:complete-milestone`):
+1. Full review of all sections
+2. Core Value check — still the right priority?
+3. Audit Out of Scope — reasons still valid?
+4. Update Context with current state
 
 ---
 
 *Planning initiated: 2026-04-14*
-*Milestone updated: 2026-04-17*
+*Milestone updated: 2026-05-04*

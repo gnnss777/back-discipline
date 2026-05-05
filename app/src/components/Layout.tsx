@@ -2,13 +2,14 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Home, BookOpen, Dumbbell, BarChart3 } from 'lucide-react';
+import { Home, BookOpen, Dumbbell, BarChart3, ClipboardList } from 'lucide-react';
 
 const navItems = [
   { href: '/', icon: Home, label: 'Início' },
   { href: '/livro', icon: BookOpen, label: 'Programa' },
+  { href: '/planilha', icon: ClipboardList, label: 'Planilha' },
   { href: '/historico', icon: Dumbbell, label: 'Treino' },
-  { href: '/biblioteca', icon: Dumbbell, label: 'Biblioteca' },
+  { href: '/biblioteca', icon: BarChart3, label: 'Biblioteca' },
 ];
 
 export function BottomNav() {

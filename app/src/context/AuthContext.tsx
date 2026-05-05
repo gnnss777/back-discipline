@@ -1,8 +1,9 @@
 'use client';
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { createSupabaseClient } from '@/app/supabase/client';
+import type { User, Session } from '@supabase/supabase-js';
 import type { UserSession } from '../types';
-import { getSession, setSession, clearSession, findUserByEmail, saveUser } from '../lib/storage';
 
 interface AuthContextType {
   user: UserSession | null;
@@ -19,59 +20,83 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const session = getSession();
-    setUser(session);
-    setIsLoading(false);
+    async function checkSession() {
+      const supabase = createSupabaseClient();
+      const { data: { session } } = await supabase.auth.getSession();
+      
+      if (session) {
+        const { data: { user } } = await supabase.auth.getUser();
+        if (user) {
+          setUser({
+            userId: user.id,
+            email: user.email || '',
+            name: user.user_metadata?.display_name as string || '',
+            paymentStatus: 'free',
+            loggedInAt: new Date().toISOString(),
+          });
+        }
+      }
+      setIsLoading(false);
+    }
+    
+    checkSession();
+
+    const supabase = createSupabaseClient();
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event: string, session: Session | null) => {
+      if (session) {
+          supabase.auth.getUser().then(({ data: { user } }: { data: { user: User | null } }) => {
+          if (user) {
+            setUser({
+              userId: user.id,
+              email: user.email || '',
+              name: user.user_metadata?.display_name as string || '',
+              paymentStatus: 'free',
+              loggedInAt: new Date().toISOString(),
+            });
+          }
+        });
+      } else {
+        setUser(null);
+      }
+      setIsLoading(false);
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
   }, []);
 
   const login = async (email: string, password: string) => {
-    const existingUser = findUserByEmail(email);
-    if (!existingUser) {
-      return { success: false, error: 'Usuário não encontrado' };
+    const supabase = createSupabaseClient();
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    
+    if (error) {
+      return { success: false, error: error.message };
     }
-    if (existingUser.passwordHash !== password) {
-      return { success: false, error: 'Senha incorreta' };
-    }
-    const session: UserSession = {
-      userId: existingUser.id,
-      email: existingUser.email,
-      name: existingUser.name,
-      paymentStatus: existingUser.paymentStatus,
-      loggedInAt: new Date().toISOString(),
-    };
-    setSession(session);
-    setUser(session);
     return { success: true };
   };
 
   const register = async (email: string, password: string, name?: string) => {
-    const existingUser = findUserByEmail(email);
-    if (existingUser) {
-      return { success: false, error: 'Email já cadastrado' };
-    }
-    const newUser = {
-      id: crypto.randomUUID(),
+    const supabase = createSupabaseClient();
+    const { error } = await supabase.auth.signUp({
       email,
-      passwordHash: password,
-      name,
-      createdAt: new Date().toISOString(),
-      paymentStatus: 'free' as const,
-    };
-    saveUser(newUser);
-    const session: UserSession = {
-      userId: newUser.id,
-      email: newUser.email,
-      name: newUser.name,
-      paymentStatus: newUser.paymentStatus,
-      loggedInAt: new Date().toISOString(),
-    };
-    setSession(session);
-    setUser(session);
+      password,
+      options: {
+        data: {
+          display_name: name || '',
+        },
+      },
+    });
+    
+    if (error) {
+      return { success: false, error: error.message };
+    }
     return { success: true };
   };
 
-  const logout = () => {
-    clearSession();
+  const logout = async () => {
+    const supabase = createSupabaseClient();
+    await supabase.auth.signOut();
     setUser(null);
   };
 

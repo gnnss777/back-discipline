@@ -1,154 +1,106 @@
-# Requirements: Login Simplification
+# Requirements: User Profile & Book Improvements (v1.1)
 
-**Milestone:** Login Simplification & Redirect Flow
-**Started:** 2026-04-17
-
----
-
-## Feature 1: Landing Page
-
-### Description
-Replace the current Landing Page (home) to show program structure + login button. This is the only public page for unauthenticated users.
-
-### Requirements
-
-| ID | Requirement | Acceptance Criteria |
-|----|------------|------------------|
-| LP-1 | Display program structure (6 weeks, 11 chapters) | User can see chapter list with titles and week groupings |
-| LP-2 | Show "Entrar" button | Button opens login modal |
-| LP-3 | Show "Cadastrar" button | Button opens register modal in same modal container |
-| LP-4 | Display program previews (locked) | Chapter items show titles but are non-clickable or show login prompt |
-| LP-5 | Responsive mobile design | Works on mobile devices |
-| LP-6 | Bottom navigation visible | Shows navigation tabs but restricted functionality |
+**Milestone:** v1.1 User Profile & Book Improvements
+**Created:** 2026-05-04
 
 ---
 
-## Feature 2: Login/Register Modal
+## 1. User Profile (PROF)
 
-### Description
-Modal component on Landing Page for authentication. Replaces standalone login/register pages.
+### Active Requirements
 
-### Requirements
+- [ ] **PROF-01**: User can see avatar icon in top bar
+- [ ] **PROF-02**: User can tap avatar to open profile menu/page
+- [ ] **PROF-03**: User can edit display name on profile page
+- [ ] **PROF-04**: User can log out from profile page
+- [ ] **PROF-05**: Profile data syncs across devices (cloud)
 
-| ID | Requirement | Acceptance Criteria |
-|----|------------|------------------|
-| LR-1 | Login form in modal | Email + password fields + "Entrar" button |
-| LR-2 | Register form in modal | Name + email + password + confirm password + "Cadastrar" button |
-| LR-3 | Switch between login/register | Toggle link to switch forms without closing modal |
-| LR-4 | Close modal | X button or click outside to close |
-| LR-5 | Error handling | Show validation errors for invalid email/password |
-| LR-6 | Loading state | Show loading indicator during authentication |
+### Future Requirements
 
----
+- Avatar upload/crop functionality
+- Workout stats summary on profile
+- Achievement badges
+- Privacy controls
 
-## Feature 3: Session Persistence
+### Out of Scope
 
-### Description
-Persist login sessions across browser sessions using localStorage.
-
-### Requirements
-
-| ID | Requirement | Acceptance Criteria |
-|----|------------|------------------|
-| SP-1 | Store user session in localStorage | User data persisted with key like "bd_user" |
-| SP-2 | Check session on page load | Check localStorage on app initialization |
-| SP-3 | Session expiration option | Optional: expire after 30 days |
-| SP-4 | Logout clears session | Clear localStorage on logout |
+- Social features (followers, sharing)
+- Public profile pages
+- Social login (Google, Apple)
 
 ---
 
-## Feature 4: Auto-Redirect Logic
+## 2. Cross-Device Authentication (AUTH)
 
-### Description
-Automatically redirect logged-in users away from Landing Page to Dashboard.
+### Active Requirements
 
-### Requirements
+- [ ] **AUTH-01**: Users can register with email/password in cloud database
+- [ ] **AUTH-02**: Users can login from any device with same credentials
+- [ ] **AUTH-03**: Session persists across browser sessions (httpOnly cookies)
+- [ ] **AUTH-04**: Existing localStorage users can migrate to cloud
+- [ ] **AUTH-05**: Login/logout works correctly after cloud migration
 
-| ID | Requirement | Acceptance Criteria |
-|----|------------|------------------|
-| AR-1 | Check auth status on Landing Page load | If logged in, redirect to /dashboard |
-| AR-2 | Redirect to originally requested page | After login, go to Dashboard (not originally requested) |
-| AR-3 | No infinite redirect loops | Handle edge cases correctly |
+### Future Requirements
 
----
+- Remember device functionality
+- Session management UI (view/revoke sessions)
+- Password reset flow
 
-## Feature 5: Dashboard Protection
+### Out of Scope
 
-### Description
-Protect Dashboard route from unauthenticated access.
-
-### Requirements
-
-| ID | Requirement | Acceptance Criteria |
-|----|------------|------------------|
-| DP-1 | Check auth on Dashboard load | If not logged in, redirect to / |
-| DP-2 | Show loading while checking auth | Prevent flash of content |
-| DP-3 | Preserve return URL | Optional: redirect back after login |
+- Social login (Google, Apple)
+- Passkeys
+- Complex MFA
 
 ---
 
-## Feature 6: Program Content Protection
+## 3. Book Reading (BOOK)
 
-### Description
-Protect chapter content from unauthenticated access.
+### Active Requirements
 
-### Requirements
+- [ ] **BOOK-01**: User can see reading progress indicator per chapter
+- [ ] **BOOK-02**: User can resume at last read chapter (auto-resume)
+- [ ] **BOOK-03**: User can navigate between chapters easily
+- [ ] **BOOK-04**: Progress saves and syncs to cloud
+- [ ] **BOOK-05**: Mobile-optimized reading layout (touch-friendly, adequate text size)
+- [ ] **BOOK-06**: Total book progress visible (e.g., "5 of 12 chapters completed")
 
-| ID | Requirement | Acceptance Criteria |
-|----|------------|------------------|
-| PC-1 | Check auth on chapter page load | If not logged in, show login prompt/message |
-| PC-2 | Show login prompt UI | "Faça login para acessar este conteúdo" message |
-| PC-3 | Link to login | Button to open login modal |
+### Future Requirements
 
----
+- Reading timer/streaks
+- Progress percentage per chapter
+- Estimated finish time
 
-## Feature 7: Auth Context Updates
+### Out of Scope
 
-### Description
-Update AuthContext to support session persistence and checking.
-
-### Requirements
-
-| ID | Requirement | Acceptance Criteria |
-|----|------------|------------------|
-| AC-1 | persistSession method | Save session to localStorage |
-| AC-2 | loadSession method | Load session from localStorage |
-| AC-3 | clearSession method | Clear session from localStorage |
-| AC-4 | isAuthenticated computed | Boolean based on current session |
-| AC-5 | Wrap app in AuthProvider | Ensure auth state available app-wide |
+- Social sharing
+- Book catalog/ISBN search
+- Quote highlighting
 
 ---
 
-## Technical Notes
+## 4. Traceability
 
-### localStorage Keys
-- `bd_user`: User object (id, email, name, createdAt)
-- `bd_session`: Session timestamp
-
-### Routes After Changes
-| Route | Access | Description |
-|-------|--------|-------------|
-| `/` | Public | Landing page with program + login modal |
-| `/dashboard` | Protected | Progress dashboard (logged in only) |
-| `/livro/[slug]` | Protected | Chapter content (logged in only) |
-| `/biblioteca` | Protected | Exercise library (logged in only) |
-| `/historico` | Protected | Workout history (logged in only) |
-
-### Components to Create/Modify
-- `LoginModal` component (new)
-- `RegisterModal` component (new) 
-- `AuthGuard` wrapper (new)
-- `useAuth` hook updates (modify)
-- Landing page updates (modify)
-- Dashboard protection (modify)
+| REQ-ID | Phase | Requirement |
+|-------|-------|--------------|
+| AUTH-01 | Phase 7 | Cloud user registration |
+| AUTH-02 | Phase 7 | Cross-device login |
+| AUTH-03 | Phase 7 | Cookie session persistence |
+| AUTH-04 | Phase 8 | localStorage migration |
+| AUTH-05 | Phase 8 | Auth flow validation |
+| PROF-01 | Phase 9 | Avatar in top bar |
+| PROF-02 | Phase 9 | Profile menu access |
+| PROF-03 | Phase 9 | Display name edit |
+| PROF-04 | Phase 9 | Logout functionality |
+| PROF-05 | Phase 9 | Cloud profile sync |
+| BOOK-01 | Phase 10 | Chapter progress indicator |
+| BOOK-02 | Phase 10 | Auto-resume |
+| BOOK-03 | Phase 10 | Chapter navigation |
+| BOOK-04 | Phase 10 | Progress sync |
+| BOOK-05 | Phase 10 | Mobile optimization |
+| BOOK-06 | Phase 10 | Total progress display |
 
 ---
 
-## Out of Scope
-- Stripe payment integration (keep existing UI but behind auth)
-- Workout logging feature expansion
-- Video embedding in exercise library
-
----
-
-*Requirements created: 2026-04-17*
+*Requirements defined: 2026-05-04*
+*16 Active Requirements | 8 Future | 3 Out of Scope*

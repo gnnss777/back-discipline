@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { ArrowLeft, BookOpen, Trophy, Target, Clock, Lock, Dumbbell, Calendar } from 'lucide-react';
+import { ArrowLeft, BookOpen, Trophy, Target, Clock, Lock, Dumbbell, Calendar, ClipboardList } from 'lucide-react';
 import { useAuth } from '../../hooks/useAuth';
 import { useProgress } from '../../context/ProgressContext';
 import { chapters } from '../../../lib/chapters';
@@ -131,10 +131,15 @@ export default function DashboardPage() {
         <div className="grid md:grid-cols-3 gap-4 mb-12">
           <Link href="/historico" className="p-4 bg-[#111] border border-[#333] rounded-lg hover:border-[#B8956A] transition-colors">
             <Dumbbell className="w-5 h-5 text-[#B8956A] mb-2" />
-            <div className="font-bold tracking-wider">REGISTRAR TREINO</div>
-            <div className="text-sm text-[#555]">Adicione seu treino</div>
-          </Link>
-          <Link href="/livro" className="p-4 bg-[#111] border border-[#333] rounded-lg hover:border-[#B8956A] transition-colors">
+              <div className="font-bold tracking-wider">REGISTRAR TREINO</div>
+              <div className="text-sm text-[#555]">Adicione seu treino</div>
+            </Link>
+            <Link href="/planilha" className="p-4 bg-[#111] border border-[#333] rounded-lg hover:border-[#B8956A] transition-colors">
+              <ClipboardList className="w-5 h-5 text-[#B8956A] mb-2" />
+              <div className="font-bold tracking-wider">PLANILHA</div>
+              <div className="text-sm text-[#555]">Progresso 6 semanas</div>
+            </Link>
+            <Link href="/livro" className="p-4 bg-[#111] border border-[#333] rounded-lg hover:border-[#B8956A] transition-colors">
             <BookOpen className="w-5 h-5 text-[#B8956A] mb-2" />
             <div className="font-bold tracking-wider">CONTINUAR LENDO</div>
             <div className="text-sm text-[#555]">{totalChapters - completedChapters} capítulos</div>

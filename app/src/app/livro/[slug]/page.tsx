@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, BookOpen, CheckCircle, Lock } from "lucide-react";
+import { ArrowLeft, ArrowRight, BookOpen, CheckCircle, Lock, Dumbbell } from "lucide-react";
 import { getChapterBySlug, getNextChapter, getPrevChapter, chapters } from "../../../../lib/chapters";
 import { getChapterContent } from "../../../../lib/content";
 import { ChapterAuthGuard } from "./ChapterAuthGuard";
@@ -123,6 +123,18 @@ export default async function ChapterPage({ params }: PageProps) {
               </div>
             )}
           </article>
+
+          {/* Ver Planilha */}
+          <div className="mt-8 p-4 bg-[#0F0F0F] rounded-sm border border-[#3A2E22]">
+            <Link href="/planilha" className="flex items-center gap-3 text-[#B8956A] hover:text-[#9A7A50] transition-colors">
+              <Dumbbell className="w-5 h-5" />
+              <div>
+                <span className="font-bold tracking-wider text-sm block">VER PLANILHA</span>
+                <span className="text-xs text-[#555]">Acompanhe os exercícios desta semana</span>
+              </div>
+              <ArrowRight className="w-4 h-4 ml-auto" />
+            </Link>
+          </div>
 
           {/* Navigation */}
           <div className="flex items-center justify-between mt-12 pt-8 border-t border-[#3A2E22]">

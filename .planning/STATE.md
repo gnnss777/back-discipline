@@ -1,14 +1,24 @@
-# State: Login Simplification
+# State: User Profile & Book Improvements (v1.1)
 
-**Milestone:** Login Simplification & Redirect Flow
-**Started:** 2026-04-17
+**Milestone:** User Profile & Book Improvements (v1.1)
+**Started:** 2026-05-04
 **Status:** Planning
 
 ---
 
-## Current Phase
+## Current Position
 
-### Phase: Executed (2026-04-17)
+Phase: Planning (creating roadmap)
+Plan: Defining phases and success criteria
+Status: Defining roadmap
+Last activity: 2026-05-04 — Created roadmap for v1.1
+
+---
+
+## Previous Milestone (Completed: 2026-04-17)
+
+### ALL PHASES COMPLETE ✓
+
 - [x] Phase 1: Landing Page Redesign
 - [x] Phase 2: Login/Register Modal
 - [x] Phase 3: Session Persistence
@@ -18,29 +28,42 @@
 
 ---
 
-## Previous Milestone (Completed: 2026-04-14)
+## Current Milestone (v1.1)
 
-### ALL PHASES COMPLETE ✓
+### Phase Status
 
-- [x] Phase 1: Foundation
-- [x] Phase 2: Authentication & Stripe
-- [x] Phase 3: Workout Logging
-- [x] Phase 4: Progress Tracking & Dashboard
-- [x] Phase 5: Exercise Library Videos
-- [x] Phase 6: Rest Timer
-- [x] Phase 7: UI/UX Polish & Mobile
+| Phase | Goal | Status |
+|-------|------|--------|
+| 7. Cloud Authentication | Users can register/login with cloud | Not started |
+| 8. Auth Migration | Migrate localStorage users to cloud | Not started |
+| 9. User Profile | Avatar, profile page, display name edit | Not started |
+| 10. Book Progress | Reading progress + mobile optimization | Not started |
 
-### MVP Features - ALL COMPLETE
+---
 
-- [x] Simple auth with email/password + Stripe
-- [x] Single user profile
-- [x] Offline-first with local storage
-- [x] Workout logging (sets, reps, weight, RPE, notes)
-- [x] Progress tracking & dashboard
-- [x] Embedded videos in exercise library
-- [x] Configurable rest timer
-- [x] Mobile responsive UI
-- [x] Bottom navigation
+## Key Decisions
+
+- Using Supabase for cloud auth (replacing localStorage)
+- httpOnly cookies for session persistence
+- Profile data syncs across devices
+- Reading progress stored in cloud (new table)
+
+---
+
+## Accumulated Context
+
+### Technical Notes
+
+- AuthContext.tsx will be refactored to use Supabase
+- New files: app/supabase/server.ts, app/supabase/client.ts
+- New tables: profiles, reading_progress
+- Existing localStorage data will be migrated
+
+### Research Insights
+
+- Phase 2 (Auth Integration): Watch for localStorage migration edge cases
+- Phase 4 (Book Progress): Watch for file hash mismatch issues
+- Monitor CVE-2025-29927 for Next.js middleware vulnerabilities
 
 ---
 
@@ -59,24 +82,4 @@
 
 ---
 
-## Latest Build
-
-- TypeScript compiles without errors ✓
-- Build succeeds ✓
-- Vercel deployment in progress (Phase 6)
-- AuthModal component created ✓
-- Landing page redesign complete ✓
-- Auto-redirect to Dashboard complete ✓
-- Program/Biblioteca auth prompts complete ✓
-
----
-
-## Latest Build
-
-- TypeScript compiles without errors ✓
-- Build succeeds ✓
-- Vercel deployment working ✓
-
----
-
-*Milestone started: 2026-04-17*
+*Milestone v1.1: 2026-05-04*
