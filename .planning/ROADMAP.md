@@ -10,7 +10,7 @@
 - [x] **Phase 7: Cloud Authentication** - Register, login, and session persistence with cloud database
 - [x] **Phase 8: Auth Migration** - Migrate existing localStorage users to cloud (trivially complete — no existing users)
 - [x] **Phase 9: User Profile** - Avatar, profile page, display name edit, logout
-- [ ] **Phase 10: Book Progress** - Reading progress indicators, chapter navigation, mobile optimization
+- [x] **Phase 10: Book Progress** - Reading progress indicators, chapter navigation, mobile optimization (completed 2026-05-06)
 
 ---
 
@@ -92,8 +92,8 @@
 
 **Plans**: 2 plans
 
-- [ ] 10-01-PLAN.md — Data layer: Supabase migration, reading-storage module, server actions
-- [ ] 10-02-PLAN.md — UI layer: ChapterHeader toggle, mobile CSS, dynamic book index
+- [x] 10-01-PLAN.md — Data layer: Supabase migration, reading-storage module, server actions
+- [x] 10-02-PLAN.md — UI layer: ChapterHeader toggle, mobile CSS, dynamic book index
 
 **UI hint**: yes
 
@@ -106,7 +106,7 @@
 | 7. Cloud Authentication | 1/1 | Code complete | - |
 | 8. Auth Migration | 1/1 | Complete (trivial) | 2026-05-04 |
 | 9. User Profile | 1/1 | Code complete | 2026-05-04 |
-| 10. Book Progress | 0/2 | Planning complete | - |
+| 10. Book Progress | 2/2 | Complete    | 2026-05-06 |
 
 ---
 
