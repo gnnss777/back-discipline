@@ -1,8 +1,9 @@
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, BookOpen, CheckCircle, Lock, Dumbbell } from "lucide-react";
+import { ArrowLeft, ArrowRight, CheckCircle, Dumbbell } from "lucide-react";
 import { getChapterBySlug, getNextChapter, getPrevChapter, chapters } from "../../../../lib/chapters";
 import { getChapterContent } from "../../../../lib/content";
 import { ChapterAuthGuard } from "./ChapterAuthGuard";
+import { ChapterHeader } from './ChapterHeader';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -49,10 +50,7 @@ export default async function ChapterPage({ params }: PageProps) {
               <span className="text-sm font-medium tracking-[0.2em] text-[#666]">JJ MONTEIRO</span>
               <span className="text-sm font-bold tracking-[0.15em] text-[#B8956A]">BD</span>
             </div>
-            <button className="flex items-center gap-2 text-sm text-[#B8956A] hover:text-[#9A7A50] font-medium tracking-wider">
-              <CheckCircle className="w-4 h-4" />
-              CONCLUIR
-            </button>
+<ChapterHeader slug={slug} />
           </div>
         </header>
 
@@ -71,7 +69,7 @@ export default async function ChapterPage({ params }: PageProps) {
           {/* Content */}
           <article className="max-w-none">
             {content ? (
-              <div className="space-y-6 text-[#bbb] leading-relaxed font-light">
+              <div className="space-y-6 text-[#bbb] text-lg leading-[2.0] font-light">
                 {content.split('\n\n').map((paragraph, i) => {
                   if (paragraph.startsWith('# ')) 
                     return <h1 key={i} className="text-3xl font-medium text-[#E8E0D0] mt-8 mb-4 tracking-wider">{paragraph.replace('# ', '')}</h1>;
@@ -141,7 +139,7 @@ export default async function ChapterPage({ params }: PageProps) {
             {prevChapter ? (
               <Link 
                 href={`/livro/${prevChapter.slug}`}
-                className="flex items-center gap-2 text-[#555] hover:text-[#B8956A] transition-colors font-medium tracking-wider text-sm"
+className="flex items-center gap-2 text-[#555] hover:text-[#B8956A] transition-colors font-medium tracking-wider text-sm min-h-[44px] px-2"
               >
                 <ArrowLeft className="w-4 h-4" />
                 <span>{prevChapter.title.replace('Capítulo ', '')}</span>
@@ -153,17 +151,17 @@ export default async function ChapterPage({ params }: PageProps) {
             {nextChapter ? (
               <Link 
                 href={`/livro/${nextChapter.slug}`}
-                className="flex items-center gap-2 px-4 py-2 bg-[#B8956A] text-[#0A0A0A] font-bold tracking-wider rounded-sm hover:bg-[#9A7A50] transition-colors text-sm"
-              >
-                <span>PRÓXIMO</span>
+className="flex items-center gap-2 px-4 py-3 min-h-[44px] bg-[#B8956A] text-[#0A0A0A] font-bold tracking-wider rounded-sm hover:bg-[#9A7A50] transition-colors text-sm"
+          >
+            <span>PRÓXIMO</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
             ) : (
               <Link 
                 href="/livro"
-                className="flex items-center gap-2 px-4 py-2 bg-[#B8956A] text-[#0A0A0A] font-bold tracking-wider rounded-sm hover:bg-[#9A7A50] transition-colors text-sm"
-              >
-                <span>CONCLUIR</span>
+className="flex items-center gap-2 px-4 py-3 min-h-[44px] bg-[#B8956A] text-[#0A0A0A] font-bold tracking-wider rounded-sm hover:bg-[#9A7A50] transition-colors text-sm"
+          >
+            <span>CONCLUIR</span>
                 <CheckCircle className="w-4 h-4" />
               </Link>
             )}
