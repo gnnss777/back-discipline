@@ -25,6 +25,7 @@ export interface ChapterProgress {
   slug: string;
   completed: boolean;
   completedAt?: string;
+  lastReadAt?: string;
 }
 
 export interface UserProgress {
