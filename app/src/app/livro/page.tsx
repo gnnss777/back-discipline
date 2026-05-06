@@ -3,15 +3,18 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { ArrowLeft, ArrowRight, BookOpen, Lock } from 'lucide-react';
+import { ArrowLeft, ArrowRight, CheckCircle, Lock } from 'lucide-react';
 import { chapters } from '../../../lib/chapters';
 import { AuthModal } from '../../components/AuthModal';
 import { useAuth } from '../../hooks/useAuth';
+import { getAllProgress } from '../../lib/reading-storage';
+import type { ReadingProgressRecord } from '../../lib/reading-storage';
 
 export default function LivroPage() {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
-  const [authModalMode, setAuthModalMode] = useState<'login' | 'register'>('login');
-  const { user, isLoading } = useAuth();
+const [authModalMode, setAuthModalMode] = useState<'login' | 'register'>('login');
+const [progressData, setProgressData] = useState<ReadingProgressRecord[]>([]);
+const { user, isLoading } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
@@ -19,6 +22,15 @@ export default function LivroPage() {
       setIsAuthModalOpen(true);
     }
   }, [user, isLoading]);
+
+useEffect(() => {
+  if (!isLoading && user) {
+    const userId = user.userId;
+    getAllProgress(userId).then(data => {
+      setProgressData(data);
+    });
+  }
+}, [user, isLoading]);
 
   const openLogin = () => {
     setAuthModalMode('login');
@@ -30,8 +42,17 @@ export default function LivroPage() {
     setIsAuthModalOpen(true);
   };
 
-  const part1Chapters = chapters.filter(c => c.part === 'I');
-  const part2Chapters = chapters.filter(c => c.part === 'II');
+const part1Chapters = chapters.filter(c => c.part === 'I');
+const part2Chapters = chapters.filter(c => c.part === 'II');
+
+const totalChapters = chapters.filter(c => c.part).length; // 11 trackable chapters (excludes introduction)
+const completedCount = progressData.filter(p => p.completed).length;
+const progressPercent = totalChapters > 0 ? Math.round((completedCount / totalChapters) * 100) : 0;
+
+// Find last-read chapter (max last_read_at) for BOOK-02 auto-resume highlight
+const lastReadChapter = progressData
+  .filter(p => p.last_read_at)
+  .sort((a, b) => new Date(b.last_read_at).getTime() - new Date(a.last_read_at).getTime())[0]?.chapter_slug || null;
 
   if (isLoading) {
     return (
@@ -86,16 +107,18 @@ export default function LivroPage() {
           </div>
         )}
 
-        {/* Progress */}
-        <div className="mb-12 p-4 bg-[#0F0F0F] rounded-sm border border-[#3A2E22]">
-          <div className="flex items-center justify-between text-sm mb-2">
-            <span className="text-[#555] font-medium tracking-wider">SEU PROGRESSO</span>
-            <span className="text-[#B8956A] font-bold tracking-wider">0 / 11 CAPÍTULOS</span>
-          </div>
-          <div className="h-1 bg-[#1a1a1a] rounded-full overflow-hidden">
-            <div className="h-full bg-[#B8956A]" style={{ width: '0%' }} />
-          </div>
-        </div>
+{/* Progress */}
+{user && (
+<div className="mb-12 p-4 bg-[#0F0F0F] rounded-sm border border-[#3A2E22]">
+  <div className="flex items-center justify-between text-sm mb-2">
+    <span className="text-[#555] font-medium tracking-wider">SEU PROGRESSO</span>
+    <span className="text-[#B8956A] font-bold tracking-wider">{completedCount} / {totalChapters} CAPÍTULOS</span>
+  </div>
+  <div className="h-1 bg-[#1a1a1a] rounded-full overflow-hidden">
+    <div className="h-full bg-[#B8956A] transition-all duration-500" style={{ width: `${progressPercent}%` }} />
+  </div>
+</div>
+)}
 
         {/* Parte I */}
         <section className="mb-12">
@@ -105,33 +128,47 @@ export default function LivroPage() {
           </div>
           
           <div className="space-y-3">
-            {part1Chapters.map((chapter) => (
-              <Link
-                key={chapter.slug}
-                href={user ? `/livro/${chapter.slug}` : '#'}
-                onClick={(e) => { if (!user) { e.preventDefault(); openLogin(); } }}
-                className={`block p-5 border transition-all group rounded-sm ${
-                  user 
-                    ? 'bg-[#0F0F0F] border-[#3A2E22] hover:border-[#B8956A]' 
-                    : 'bg-[#0F0F0F] border-[#2A2A2A] cursor-pointer'
-                }`}
-              >
-                <div className="flex items-center gap-4">
-                  <div className={`w-10 h-10 flex items-center justify-center rounded-sm ${
-                    user 
-                      ? 'bg-[#1a1a1a] text-[#444] group-hover:bg-[#B8956A]/20 group-hover:text-[#B8956A] transition-colors' 
-                      : 'bg-[#1a1a1a] text-[#333]'
-                  }`}>
-                    {user ? <ArrowRight className="w-5 h-5" /> : <Lock className="w-5 h-5" />}
-                  </div>
-                  <div className="flex-1">
-                    <h3 className={`font-bold tracking-wider text-sm ${user ? 'group-hover:text-[#B8956A]' : ''} transition-colors`}>{chapter.title}</h3>
-                    <p className="text-xs text-[#444]">{chapter.description}</p>
-                  </div>
-                  {!user && <Lock className="w-4 h-4 text-[#333]" />}
-                </div>
-              </Link>
-            ))}
+{part1Chapters.map((chapter) => {
+const isCompleted = progressData.some(p => p.chapter_slug === chapter.slug && p.completed);
+const isLastRead = lastReadChapter === chapter.slug;
+
+return (
+<Link
+  key={chapter.slug}
+  href={user ? `/livro/${chapter.slug}` : '#'}
+  onClick={(e) => { if (!user) { e.preventDefault(); openLogin(); } }}
+  className={`block p-5 border transition-all group rounded-sm ${
+    isLastRead
+    ? 'bg-[#0F0F0F] border-l-2 border-l-[#B8956A] border-[#3A2E22]'
+    : isCompleted
+    ? 'bg-[#0F0F0F] border-[#B8956A]/30'
+    : user
+    ? 'bg-[#0F0F0F] border-[#3A2E22] hover:border-[#B8956A]'
+    : 'bg-[#0F0F0F] border-[#2A2A2A] cursor-pointer'
+  }`}
+>
+  <div className="flex items-center gap-4">
+    <div className={`w-10 h-10 flex items-center justify-center rounded-sm ${
+      isCompleted
+      ? 'bg-[#B8956A]/20 text-[#B8956A]'
+      : user
+      ? 'bg-[#1a1a1a] text-[#444] group-hover:bg-[#B8956A]/20 group-hover:text-[#B8956A] transition-colors'
+      : 'bg-[#1a1a1a] text-[#333]'
+    }`}>
+      {isCompleted ? <CheckCircle className="w-5 h-5" /> : user ? <ArrowRight className="w-5 h-5" /> : <Lock className="w-5 h-5" />}
+    </div>
+    <div className="flex-1">
+      <h3 className={`font-bold tracking-wider text-sm ${user ? 'group-hover:text-[#B8956A]' : ''} transition-colors`}>{chapter.title}</h3>
+      <p className="text-xs text-[#444]">{chapter.description}</p>
+      {isLastRead && (
+        <span className="text-xs text-[#B8956A] font-medium tracking-wider">CONTINUAR LEITURA</span>
+      )}
+    </div>
+    {!user && <Lock className="w-4 h-4 text-[#333]" />}
+  </div>
+</Link>
+);
+})}
           </div>
         </section>
 
@@ -143,33 +180,47 @@ export default function LivroPage() {
           </div>
           
           <div className="space-y-3">
-            {part2Chapters.map((chapter) => (
-              <Link
-                key={chapter.slug}
-                href={user ? `/livro/${chapter.slug}` : '#'}
-                onClick={(e) => { if (!user) { e.preventDefault(); openLogin(); } }}
-                className={`block p-5 border transition-all group rounded-sm ${
-                  user 
-                    ? 'bg-[#0F0F0F] border-[#3A2E22] hover:border-[#B8956A]' 
-                    : 'bg-[#0F0F0F] border-[#2A2A2A] cursor-pointer'
-                }`}
-              >
-                <div className="flex items-center gap-4">
-                  <div className={`w-10 h-10 flex items-center justify-center rounded-sm ${
-                    user 
-                      ? 'bg-[#1a1a1a] text-[#444] group-hover:bg-[#B8956A]/20 group-hover:text-[#B8956A] transition-colors' 
-                      : 'bg-[#1a1a1a] text-[#333]'
-                  }`}>
-                    {user ? <ArrowRight className="w-5 h-5" /> : <Lock className="w-5 h-5" />}
-                  </div>
-                  <div className="flex-1">
-                    <h3 className={`font-bold tracking-wider text-sm ${user ? 'group-hover:text-[#B8956A]' : ''} transition-colors`}>{chapter.title}</h3>
-                    <p className="text-xs text-[#444]">{chapter.description}</p>
-                  </div>
-                  {!user && <Lock className="w-4 h-4 text-[#333]" />}
-                </div>
-              </Link>
-            ))}
+{part2Chapters.map((chapter) => {
+const isCompleted = progressData.some(p => p.chapter_slug === chapter.slug && p.completed);
+const isLastRead = lastReadChapter === chapter.slug;
+
+return (
+<Link
+  key={chapter.slug}
+  href={user ? `/livro/${chapter.slug}` : '#'}
+  onClick={(e) => { if (!user) { e.preventDefault(); openLogin(); } }}
+  className={`block p-5 border transition-all group rounded-sm ${
+    isLastRead
+    ? 'bg-[#0F0F0F] border-l-2 border-l-[#B8956A] border-[#3A2E22]'
+    : isCompleted
+    ? 'bg-[#0F0F0F] border-[#B8956A]/30'
+    : user
+    ? 'bg-[#0F0F0F] border-[#3A2E22] hover:border-[#B8956A]'
+    : 'bg-[#0F0F0F] border-[#2A2A2A] cursor-pointer'
+  }`}
+>
+  <div className="flex items-center gap-4">
+    <div className={`w-10 h-10 flex items-center justify-center rounded-sm ${
+      isCompleted
+      ? 'bg-[#B8956A]/20 text-[#B8956A]'
+      : user
+      ? 'bg-[#1a1a1a] text-[#444] group-hover:bg-[#B8956A]/20 group-hover:text-[#B8956A] transition-colors'
+      : 'bg-[#1a1a1a] text-[#333]'
+    }`}>
+      {isCompleted ? <CheckCircle className="w-5 h-5" /> : user ? <ArrowRight className="w-5 h-5" /> : <Lock className="w-5 h-5" />}
+    </div>
+    <div className="flex-1">
+      <h3 className={`font-bold tracking-wider text-sm ${user ? 'group-hover:text-[#B8956A]' : ''} transition-colors`}>{chapter.title}</h3>
+      <p className="text-xs text-[#444]">{chapter.description}</p>
+      {isLastRead && (
+        <span className="text-xs text-[#B8956A] font-medium tracking-wider">CONTINUAR LEITURA</span>
+      )}
+    </div>
+    {!user && <Lock className="w-4 h-4 text-[#333]" />}
+  </div>
+</Link>
+);
+})}
           </div>
         </section>
 
