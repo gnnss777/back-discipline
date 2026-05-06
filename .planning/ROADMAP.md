@@ -7,9 +7,9 @@
 
 ## Phases
 
-- [ ] **Phase 7: Cloud Authentication** - Register, login, and session persistence with cloud database
-- [ ] **Phase 8: Auth Migration** - Migrate existing localStorage users to cloud
-- [ ] **Phase 9: User Profile** - Avatar, profile page, display name edit, logout
+- [x] **Phase 7: Cloud Authentication** - Register, login, and session persistence with cloud database
+- [x] **Phase 8: Auth Migration** - Migrate existing localStorage users to cloud (trivially complete — no existing users)
+- [x] **Phase 9: User Profile** - Avatar, profile page, display name edit, logout
 - [ ] **Phase 10: Book Progress** - Reading progress indicators, chapter navigation, mobile optimization
 
 ---
@@ -30,7 +30,7 @@
 2. User can login from any device with same credentials — login works on new device with stored credentials
 3. Session persists across browser sessions — httpOnly cookies maintain login across page refreshes
 
-**Plans**: TBD
+**Plans**: 07-01-PLAN.md
 
 ---
 
@@ -90,7 +90,10 @@
 5. Mobile-optimized reading layout works correctly — touch-friendly controls, adequate text size on mobile
 6. Total book progress visible — summary shows completed chapters (e.g., "5 of 12")
 
-**Plans**: TBD
+**Plans**: 2 plans
+
+- [ ] 10-01-PLAN.md — Data layer: Supabase migration, reading-storage module, server actions
+- [ ] 10-02-PLAN.md — UI layer: ChapterHeader toggle, mobile CSS, dynamic book index
 
 **UI hint**: yes
 
@@ -100,10 +103,10 @@
 
 | Phase | Plans Complete | Status | Completed |
 |-------|---------------|--------|-----------|
-| 7. Cloud Authentication | 0/1 | Not started | - |
-| 8. Auth Migration | 0/1 | Not started | - |
-| 9. User Profile | 0/1 | Not started | - |
-| 10. Book Progress | 0/1 | Not started | - |
+| 7. Cloud Authentication | 1/1 | Code complete | - |
+| 8. Auth Migration | 1/1 | Complete (trivial) | 2026-05-04 |
+| 9. User Profile | 1/1 | Code complete | 2026-05-04 |
+| 10. Book Progress | 0/2 | Planning complete | - |
 
 ---
 
