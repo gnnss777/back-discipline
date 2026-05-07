@@ -8,9 +8,10 @@ import { useProgress } from '../../context/ProgressContext';
 import { chapters } from '../../../lib/chapters';
 import { exercises } from '../../data/exercises';
 import { DashboardStats } from '../../components/DashboardStats';
+import { UserAvatar } from '../../components/UserAvatar';
 
 export default function DashboardPage() {
-  const { user, isLoading: authLoading, logout } = useAuth();
+  const { user, isLoading: authLoading } = useAuth();
   const { stats, isLoading: progressLoading, progress } = useProgress();
   const [isClient, setIsClient] = useState(false);
 
@@ -84,18 +85,13 @@ export default function DashboardPage() {
             <ArrowLeft className="w-4 h-4" />
             INÍCIO
           </Link>
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-[#B8956A] flex items-center justify-center rounded-sm">
-              <span className="text-[#0A0A0A] text-sm font-bold">JJ</span>
-            </div>
-            <span className="font-bold tracking-wider">PROGRESSO</span>
+        <div className="flex items-center gap-2">
+          <div className="w-8 h-8 bg-[#B8956A] flex items-center justify-center rounded-sm">
+            <span className="text-[#0A0A0A] text-sm font-bold">JJ</span>
           </div>
-          <button 
-            onClick={logout}
-            className="text-sm text-[#666] hover:text-white font-medium tracking-wider"
-          >
-            SAIR
-          </button>
+          <span className="font-bold tracking-wider">PROGRESSO</span>
+        </div>
+        <UserAvatar name={user.name} email={user.email} />
         </div>
       </header>
 

@@ -3,6 +3,8 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Home, BookOpen, Dumbbell, BarChart3, ClipboardList } from 'lucide-react';
+import { useAuth } from '../hooks/useAuth';
+import { UserAvatar } from './UserAvatar';
 
 const navItems = [
   { href: '/', icon: Home, label: 'Início' },
@@ -19,10 +21,10 @@ export function BottomNav() {
     <nav className="fixed bottom-0 left-0 right-0 bg-[#0A0A0A] border-t border-[#2A2A2A] md:hidden z-50">
       <div className="flex justify-around py-2">
         {navItems.map((item) => {
-          const isActive = pathname === item.href || 
+          const isActive = pathname === item.href ||
             (item.href !== '/' && pathname.startsWith(item.href));
           const Icon = item.icon;
-          
+
           return (
             <Link
               key={item.href}
@@ -42,6 +44,8 @@ export function BottomNav() {
 }
 
 export function Header({ title }: { title: string }) {
+  const { user } = useAuth();
+
   return (
     <header className="border-b border-[#2A2A2A] sticky top-0 bg-[#0A0A0A]/95 backdrop-blur-sm z-40">
       <div className="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
@@ -51,7 +55,11 @@ export function Header({ title }: { title: string }) {
           </div>
           <span className="font-bold tracking-wider text-sm">BACK DISCIPLINE</span>
         </Link>
-        <span className="text-gray-400 text-sm">{title}</span>
+        {user ? (
+          <UserAvatar name={user.name} email={user.email} />
+        ) : (
+          <span className="text-gray-400 text-sm">{title}</span>
+        )}
       </div>
     </header>
   );

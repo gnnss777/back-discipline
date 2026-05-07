@@ -4,13 +4,15 @@ import { createContext, useContext, useState, useEffect, ReactNode } from 'react
 import { createSupabaseClient } from '@/app/supabase/client';
 import type { User, Session } from '@supabase/supabase-js';
 import type { UserSession } from '../types';
+import { toast } from 'sonner';
 
 interface AuthContextType {
   user: UserSession | null;
   isLoading: boolean;
   login: (email: string, password: string) => Promise<{ success: boolean; error?: string }>;
   register: (email: string, password: string, name?: string) => Promise<{ success: boolean; error?: string }>;
-  logout: () => void;
+  logout: () => Promise<void>;
+  updateProfile: (data: { name: string }) => Promise<{ success: boolean; error?: string }>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -69,10 +71,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const login = async (email: string, password: string) => {
     const supabase = createSupabaseClient();
     const { error } = await supabase.auth.signInWithPassword({ email, password });
-    
+
     if (error) {
+      toast.error(error.message);
       return { success: false, error: error.message };
     }
+    toast.success('Login realizado com sucesso');
     return { success: true };
   };
 
@@ -87,10 +91,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         },
       },
     });
-    
+
     if (error) {
+      toast.error(error.message);
       return { success: false, error: error.message };
     }
+    toast.success('Conta criada com sucesso');
     return { success: true };
   };
 
@@ -98,10 +104,27 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const supabase = createSupabaseClient();
     await supabase.auth.signOut();
     setUser(null);
+    toast.info('Você saiu da sua conta');
+  };
+
+  const updateProfile = async ({ name }: { name: string }) => {
+    const supabase = createSupabaseClient();
+    const { error } = await supabase.auth.updateUser({
+      data: { display_name: name },
+    });
+
+    if (error) {
+      toast.error('Erro ao atualizar perfil');
+      return { success: false, error: error.message };
+    }
+
+    setUser(prev => prev ? { ...prev, name } : null);
+    toast.success('Perfil atualizado com sucesso');
+    return { success: true };
   };
 
   return (
-    <AuthContext.Provider value={{ user, isLoading, login, register, logout }}>
+    <AuthContext.Provider value={{ user, isLoading, login, register, logout, updateProfile }}>
       {children}
     </AuthContext.Provider>
   );
