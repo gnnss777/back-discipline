@@ -11,6 +11,7 @@
 - [x] **Phase 8: Auth Migration** - Migrate existing localStorage users to cloud (trivially complete — no existing users)
 - [x] **Phase 9: User Profile** - Avatar, profile page, display name edit, logout
 - [x] **Phase 10: Book Progress** - Reading progress indicators, chapter navigation, mobile optimization (completed 2026-05-06)
+- [ ] **Phase 11: Análise Inteligente de Treino** - Progressão automática, heatmap, volume trends, stats e detecção de platô
 
 ---
 
@@ -99,6 +100,82 @@
 
 ---
 
+## Phase Details
+
+### Phase 11: Análise Inteligente de Treino
+
+**Goal**: Adicionar funcionalidades de análise avançada de treino inspiradas em MyFit e LiftShift
+
+**Depends on**: Phase 10 (concluído)
+
+**Requirements**: ANAL-01, ANAL-02, ANAL-03, ANAL-04, ANAL-05
+
+**Success Criteria** (what must be TRUE):
+
+1. **Progressão Automática**: Sistema sugere peso automaticamente quando usuário abre exercício na planilha, baseado nos últimos 2-3 registros
+2. **Muscle Heatmap**: Dashboard mostra corpo diagramado com cores indicando músculos trabalhados na semana
+3. **Volume Trends**: Gráfico CSS/SVG mostra tendência de volume das últimas 4-8 semanas
+4. **Stats por Exercício**: Página mostra para cada exercício: maior peso já lifting (PR), volume total, melhor série
+5. **Detecção de Platô**: Sistema detecta quando média de peso não evoluiu por 3 semanas e mostra alerta com sugestão
+
+**UI hint**: yes — Manter padrão visual atual (#B8956A, #0A0A0A, tracking-wider, max-w-4xl)
+
+---
+
+### Phase 11a: Base de Dados e Funções Utilitárias
+
+**Goal**: Criar biblioteca de funções para cálculos de progressão, detecção de platô e stats
+
+**Depends on**: Phase 11
+
+**Requirements**: Funções utilitárias em lib/
+
+**Plans**: 11a-PLAN.md
+
+---
+
+### Phase 11b: Stats e PRs por Exercício
+
+**Goal**: Página de estatísticas com PRs, volume total e melhor série por exercício
+
+**Depends on**: Phase 11a
+
+**Requirements**: ANAL-04
+
+**Plans**: 11b-PLAN.md
+
+**UI hint**: yes
+
+---
+
+### Phase 11c: Muscle Heatmap e Volume Trends
+
+**Goal**: Visualizações de músculos trabalhados e evolução de volume
+
+**Depends on**: Phase 11b
+
+**Requirements**: ANAL-02, ANAL-03
+
+**Plans**: 11c-PLAN.md
+
+**UI hint**: yes
+
+---
+
+### Phase 11d: Progressão Automática e Detecção de Platô
+
+**Goal**: Sugestão automática de peso e alertas de platô
+
+**Depends on**: Phase 11c
+
+**Requirements**: ANAL-01, ANAL-05
+
+**Plans**: 11d-PLAN.md
+
+**UI hint**: yes
+
+---
+
 ## Progress Table
 
 | Phase | Plans Complete | Status | Completed |
@@ -107,7 +184,9 @@
 | 8. Auth Migration | 1/1 | Complete (trivial) | 2026-05-04 |
 | 9. User Profile | 1/1 | Code complete | 2026-05-04 |
 | 10. Book Progress | 2/2 | Complete    | 2026-05-06 |
+| 11. Análise Inteligente | 0/4 | In Progress  | - |
 
 ---
 
-*Roadmap created: 2026-05-04*
+*Milestone v1.2 started: 2026-05-07*
+*Roadmap updated: 2026-05-07*

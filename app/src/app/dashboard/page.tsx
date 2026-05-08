@@ -9,15 +9,24 @@ import { chapters } from '../../../lib/chapters';
 import { exercises } from '../../data/exercises';
 import { DashboardStats } from '../../components/DashboardStats';
 import { UserAvatar } from '../../components/UserAvatar';
+import { MuscleHeatmap } from '../../components/MuscleHeatmap';
+import { VolumeTrendsChart } from '../../components/VolumeTrendsChart';
+import { PlateauAlert } from '../../components/PlateauAlert';
+import { loadPlanilha } from '../../utils/planilhaStorage';
 
 export default function DashboardPage() {
   const { user, isLoading: authLoading } = useAuth();
   const { stats, isLoading: progressLoading, progress } = useProgress();
   const [isClient, setIsClient] = useState(false);
+  const [planilhaData, setPlanilhaData] = useState<any>(null);
 
   useEffect(() => {
     setIsClient(true);
-  }, []);
+    if (user) {
+      const planilha = loadPlanilha(user.userId);
+      if (planilha) setPlanilhaData(planilha);
+    }
+  }, [user]);
 
   if (!isClient || authLoading || progressLoading) {
     return (
@@ -122,6 +131,13 @@ export default function DashboardPage() {
           <p className="text-sm text-[#444] mt-3 tracking-wide">
             Volume semanal: {stats.weeklyVolume.toLocaleString()} kg
           </p>
+        </div>
+
+        <PlateauAlert planilha={planilhaData} />
+
+        <div className="grid md:grid-cols-2 gap-4 mb-12">
+          <MuscleHeatmap planilha={planilhaData} />
+          <VolumeTrendsChart planilha={planilhaData} />
         </div>
 
         <div className="grid md:grid-cols-3 gap-4 mb-12">

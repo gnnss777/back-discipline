@@ -6,28 +6,42 @@ export async function proxy(request: NextRequest) {
     request,
   })
 
-  const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
-      cookies: {
-        getAll() {
-          return request.cookies.getAll()
-        },
-        setAll(cookiesToSet, headers) {
-          cookiesToSet.forEach(({ name, value, options }) => {
-            request.cookies.set(name, value)
-            supabaseResponse.cookies.set(name, value, options)
-          })
-          Object.entries(headers).forEach(([key, value]) => {
-            supabaseResponse.headers.set(key, value)
-          })
-        },
-      },
-    }
-  )
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 
-  await supabase.auth.getUser()
+  // If Supabase env vars are not configured, skip auth refresh
+  // and pass through the request without error
+  if (!supabaseUrl || !supabaseAnonKey) {
+    return supabaseResponse
+  }
+
+  try {
+    const supabase = createServerClient(
+      supabaseUrl,
+      supabaseAnonKey,
+      {
+        cookies: {
+          getAll() {
+            return request.cookies.getAll()
+          },
+          setAll(cookiesToSet, headers) {
+            cookiesToSet.forEach(({ name, value, options }) => {
+              request.cookies.set(name, value)
+              supabaseResponse.cookies.set(name, value, options)
+            })
+            Object.entries(headers).forEach(([key, value]) => {
+              supabaseResponse.headers.set(key, value)
+            })
+          },
+        },
+      }
+    )
+
+    await supabase.auth.getUser()
+  } catch {
+    // If Supabase client fails (e.g. invalid URL, network error),
+    // still return the response so the site remains functional
+  }
 
   return supabaseResponse
 }

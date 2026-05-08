@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { ArrowRight, ChevronDown, ChevronUp, Dumbbell, BookOpen, X, Check } from 'lucide-react';
+import { ArrowRight, ChevronDown, ChevronUp, Dumbbell, BookOpen, X, Check, BarChart2, Sparkles } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
 import { loadPlanilha, savePlanilha, ensureSeed } from '@/utils/planilhaStorage';
 import type { PlanilhaData, ExerciseSaved, WeekSaved, DaySaved, PlannedSet, ActualSet } from '@/types/planilha';
@@ -71,6 +71,19 @@ export default function PlanilhaProgressoPage() {
     router.push(`/livro/${slug}`);
   };
 
+  const getSuggestionForExercise = (ex: ExerciseSaved): { weight: number; increment: number; completed: boolean } | null => {
+    if (!data || !ex.actual || ex.actual.length === 0) return null;
+    const lastSets = ex.actual.filter(s => s.weight !== undefined);
+    if (lastSets.length === 0) return null;
+    const lastWeight = lastSets[lastSets.length - 1].weight || 0;
+    const allCompleted = ex.actual.every(s => s.reps !== undefined && s.reps > 0);
+    const plannedWeight = ex.planned[0]?.weight || 0;
+    if (allCompleted) {
+      return { weight: Math.round((lastWeight + 2.5) * 10) / 10, increment: 2.5, completed: true };
+    }
+    return { weight: lastWeight, increment: 0, completed: false };
+  };
+
   if (isLoading) return null;
 
   return (
@@ -86,7 +99,9 @@ export default function PlanilhaProgressoPage() {
           </div>
           <div className="flex items-center gap-2">
             {saving && <span className="text-xs text-[#B8956A]">Salvo</span>}
-            <div className="w-6" />
+            <Link href="/estatisticas" className="flex items-center gap-1 text-gray-400 hover:text-[#B8956A] text-xs">
+              <BarChart2 className="w-4 h-4" />
+            </Link>
           </div>
         </div>
       </header>
@@ -246,6 +261,21 @@ export default function PlanilhaProgressoPage() {
                                               </div>
                                             );
                                           })}
+                                          <div className="mt-2 pt-2 border-t border-[#2A2A2A]">
+                                            {(() => {
+                                                const sugg = getSuggestionForExercise(ex);
+                                                if (!sugg) return null;
+                                                return (
+                                                  <div className={`text-[10px] p-1.5 rounded flex items-center justify-between ${sugg.completed ? 'bg-green-900/20 text-green-400' : 'bg-[#222] text-[#555]'}`}>
+                                                    <span className="flex items-center gap-1">
+                                                      <Sparkles className="w-3 h-3" />
+                                                      Próximo treino: <span className="font-bold">{sugg.weight}kg</span>
+                                                    </span>
+                                                    {sugg.completed && <span className="text-green-500">+{sugg.increment}kg</span>}
+                                                  </div>
+                                                );
+                                              })()}
+                                          </div>
                                         </div>
                                       )}
                                     </div>

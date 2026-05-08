@@ -1,57 +1,101 @@
 ---
 gsd_state_version: 1.0
-milestone: v1.1
-milestone_name: milestone
+milestone: v1.2
+milestone_name: Análise Inteligente de Treino
 status: completed
-last_updated: "2026-05-06T03:28:53.933Z"
-last_activity: 2026-05-06
+last_updated: "2026-05-07T14:00:00.000Z"
+last_activity: 2026-05-07
 progress:
-  total_phases: 5
-  completed_phases: 3
+  total_phases: 4
+  completed_phases: 4
   total_plans: 4
-  completed_plans: 6
+  completed_plans: 4
 ---
 
-# State: User Profile & Book Improvements (v1.1)
+# State: Análise Inteligente de Treino (v1.2)
 
-**Milestone:** User Profile & Book Improvements (v1.1)
-**Started:** 2026-05-04
-**Status:** Milestone complete
+**Milestone:** v1.2 Análise Inteligente de Treino
+**Started:** 2026-05-07
+**Status:** ✅ COMPLETE
 
 ---
 
 ## Current Position
 
-Phase: 10
-Plan: Not started
-Status: Phase 10 complete
-Last activity: 2026-05-06
+Phase: 11d
+Plan: Complete
+Status: Milestone complete
+Last activity: 2026-05-07
 
 ---
 
-## Previous Milestone (Completed: 2026-04-17)
+## Previous Milestone (v1.1 - Completed: 2026-05-06)
 
 ### ALL PHASES COMPLETE ✓
 
-- [x] Phase 1: Landing Page Redesign
-- [x] Phase 2: Login/Register Modal
-- [x] Phase 3: Session Persistence
-- [x] Phase 4: Auto-Redirect Logic
-- [x] Phase 5: Route Protection
-- [x] Phase 6: Cleanup & Testing
+- [x] Phase 7: Cloud Authentication
+- [x] Phase 8: Auth Migration
+- [x] Phase 9: User Profile
+- [x] Phase 10: Book Progress
 
 ---
 
-## Current Milestone (v1.1)
+## Current Milestone (v1.2)
 
 ### Phase Status
 
 | Phase | Goal | Status |
 |-------|------|--------|
-| 7. Cloud Authentication | Users can register/login with cloud | Code complete (blocked on Supabase credentials) |
-| 8. Auth Migration | Migrate localStorage users to cloud | Complete (trivial — no users) |
-| 9. User Profile | Avatar, profile page, display name edit | Code complete |
-| 10. Book Progress | Reading progress + mobile optimization | Not started |
+| 11a. Base de Dados | Criar libs de funções utilitárias | ✅ Complete |
+| 11b. Stats e PRs | Página de estatísticas com PRs | ✅ Complete |
+| 11c. Heatmap e Volume | Visualizações de músculos e volume | ✅ Complete |
+| 11d. Progressão e Platô | Sugestão automática e alertas | ✅ Complete |
+
+---
+
+## Novas Funcionalidades Implementadas
+
+### 11a - Base de Dados
+- `lib/progression.ts` - Funções de progressão
+- `lib/plateauDetection.ts` - Detecção de platô
+- `lib/exerciseStats.ts` - Stats e PRs
+- `lib/muscleMap.ts` - Mapeamento de músculos
+
+### 11b - Stats e PRs
+- Página `/estatisticas` com overview
+- Cards de stats por exercício
+- Badge de troféu para PRs
+
+### 11c - Heatmap e Volume
+- MuscleHeatmap no dashboard
+- VolumeTrendsChart (gráfico SVG puro)
+- Indicador de tendência
+
+### 11d - Progressão e Platô
+- Sugestão automática de peso na planilha
+- PlateauAlert no dashboard
+
+---
+
+## Key Decisions
+
+- Gráficos em CSS/SVG puro (sem dependências)
+- Dados locais (localStorage) - preparação para Supabase
+- UI alinhada com padrão existente (#B8956A, #0A0A0A)
+
+---
+
+## Rotas Atualizadas
+
+| Route | Access | Description |
+|-------|--------|-------------|
+| `/dashboard` | Protected | + Heatmap, Volume, Plateau Alert |
+| `/planilha` | Protected | + Sugestão de peso |
+| `/estatisticas` | Protected | NOVO - Stats e PRs |
+
+---
+
+*Milestone v1.2 complete: 2026-05-07*
 
 ---
 

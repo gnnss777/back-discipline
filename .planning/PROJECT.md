@@ -5,21 +5,24 @@
 
 ---
 
-## Current Milestone: v1.1 User Profile & Book Improvements
+## Current Milestone: v1.2 Análise Inteligente de Treino
 
-**Goal:** Add user profile management, fix cross-device login, optimize book for mobile with reading progress
+**Goal:** Adicionar funcionalidades de análise avançada de treino inspiradas em MyFit e LiftShift
 
 ### Target Features
 
-1. **User Profile Top Bar** — Add user icon in top bar with profile adjustment + logout
-2. **Cross-Device Login Fix** — Implement proper user database with cloud sync (currently local only)
-3. **Book Mobile Optimization** — Improve book chapter reading on mobile + track reading progress
+1. **Progressão Automática** — Sugere peso automaticamente baseado no histórico de treino
+2. **Muscle Heatmap** — Mapa visual de músculos trabalhados na semana
+3. **Volume Trends** — Gráfico de evolução de volume ao longo das semanas
+4. **Stats por Exercício** — PRs, volume total, melhor série por exercício
+5. **Detecção de Platô** — Alerta quando usuário está estagnado
 
 ### Key Context
 
-- Current auth uses localStorage only (no cloud sync)
-- Users cannot login from different devices with same credentials
-- Book content needs mobile-optimized layout and reading progress tracking
+- App já tem planilha com registro de reps, peso e RPE
+- Dados armazenados em localStorage (futuro: migrar para Supabase)
+- UI atual: tema escuro com accent dourado (#B8956A)
+- Preferência: gráficos em CSS/SVG puro (sem dependências externas)
 
 ---
 

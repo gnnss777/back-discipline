@@ -4,7 +4,13 @@ import { revalidatePath } from 'next/cache'
 import { createSupabaseServerClient } from '@/app/supabase/server'
 
 export async function upsertReadingProgress(formData: FormData) {
-  const supabase = await createSupabaseServerClient()
+  let supabase
+  try {
+    supabase = await createSupabaseServerClient()
+  } catch {
+    return { error: 'Supabase não configurado. Configure as variáveis de ambiente.' }
+  }
+
   const { data: { user } } = await supabase.auth.getUser()
 
   if (!user) {
@@ -36,7 +42,13 @@ export async function upsertReadingProgress(formData: FormData) {
 }
 
 export async function deleteReadingProgress(formData: FormData) {
-  const supabase = await createSupabaseServerClient()
+  let supabase
+  try {
+    supabase = await createSupabaseServerClient()
+  } catch {
+    return { error: 'Supabase não configurado. Configure as variáveis de ambiente.' }
+  }
+
   const { data: { user } } = await supabase.auth.getUser()
 
   if (!user) {

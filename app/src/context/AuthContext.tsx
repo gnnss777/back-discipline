@@ -22,10 +22,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    const supabase = createSupabaseClient();
+
+    // If Supabase is not configured, skip auth and mark as not loading
+    if (!supabase) {
+      setIsLoading(false);
+      return;
+    }
+
     async function checkSession() {
-      const supabase = createSupabaseClient();
       const { data: { session } } = await supabase.auth.getSession();
-      
+
       if (session) {
         const { data: { user } } = await supabase.auth.getUser();
         if (user) {
@@ -40,13 +47,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       }
       setIsLoading(false);
     }
-    
+
     checkSession();
 
-    const supabase = createSupabaseClient();
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event: string, session: Session | null) => {
       if (session) {
-          supabase.auth.getUser().then(({ data: { user } }: { data: { user: User | null } }) => {
+        supabase.auth.getUser().then(({ data: { user } }: { data: { user: User | null } }) => {
           if (user) {
             setUser({
               userId: user.id,
@@ -70,6 +76,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const login = async (email: string, password: string) => {
     const supabase = createSupabaseClient();
+    if (!supabase) {
+      toast.error('Supabase não configurado');
+      return { success: false, error: 'Supabase não configurado' };
+    }
     const { error } = await supabase.auth.signInWithPassword({ email, password });
 
     if (error) {
@@ -82,6 +92,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const register = async (email: string, password: string, name?: string) => {
     const supabase = createSupabaseClient();
+    if (!supabase) {
+      toast.error('Supabase não configurado');
+      return { success: false, error: 'Supabase não configurado' };
+    }
     const { error } = await supabase.auth.signUp({
       email,
       password,
@@ -102,6 +116,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const logout = async () => {
     const supabase = createSupabaseClient();
+    if (!supabase) {
+      setUser(null);
+      return;
+    }
     await supabase.auth.signOut();
     setUser(null);
     toast.info('Você saiu da sua conta');
@@ -109,6 +127,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const updateProfile = async ({ name }: { name: string }) => {
     const supabase = createSupabaseClient();
+    if (!supabase) {
+      toast.error('Supabase não configurado');
+      return { success: false, error: 'Supabase não configurado' };
+    }
     const { error } = await supabase.auth.updateUser({
       data: { display_name: name },
     });

@@ -9,7 +9,12 @@ export async function signUp(formData: FormData) {
   const password = formData.get('password') as string
   const name = (formData.get('name') as string) || ''
 
-  const supabase = await createSupabaseServerClient()
+  let supabase
+  try {
+    supabase = await createSupabaseServerClient()
+  } catch {
+    return { error: 'Supabase não configurado. Configure as variáveis de ambiente.' }
+  }
 
   const { error } = await supabase.auth.signUp({
     email,
@@ -33,7 +38,12 @@ export async function signIn(formData: FormData) {
   const email = formData.get('email') as string
   const password = formData.get('password') as string
 
-  const supabase = await createSupabaseServerClient()
+  let supabase
+  try {
+    supabase = await createSupabaseServerClient()
+  } catch {
+    return { error: 'Supabase não configurado. Configure as variáveis de ambiente.' }
+  }
 
   const { error } = await supabase.auth.signInWithPassword({
     email,
@@ -49,7 +59,12 @@ export async function signIn(formData: FormData) {
 }
 
 export async function signOut() {
-  const supabase = await createSupabaseServerClient()
+  let supabase
+  try {
+    supabase = await createSupabaseServerClient()
+  } catch {
+    redirect('/')
+  }
 
   await supabase.auth.signOut()
 
