@@ -63,7 +63,7 @@ const lastReadChapter = progressData
   }
 
   return (
-    <div className="min-h-screen bg-[#0A0A0A] text-[#E8E0D0]">
+    <div className="min-h-screen bg-[#0A0A0A] text-[#E8E0D0] pb-24">
       <AuthModal 
         isOpen={isAuthModalOpen} 
         onClose={() => setIsAuthModalOpen(false)}

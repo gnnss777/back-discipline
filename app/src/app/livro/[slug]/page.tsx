@@ -38,7 +38,7 @@ export default async function ChapterPage({ params }: PageProps) {
 
   return (
     <ChapterAuthGuard>
-      <div className="min-h-screen bg-[#0A0A0A] text-[#E8E0D0]">
+      <div className="min-h-screen bg-[#0A0A0A] text-[#E8E0D0] pb-24">
         {/* Header */}
         <header className="border-b border-[#3A2E22] sticky top-0 bg-[#0A0A0A]/95 backdrop-blur-sm z-50">
           <div className="max-w-3xl mx-auto px-6 py-4 flex items-center justify-between">
