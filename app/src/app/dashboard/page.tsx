@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { ArrowLeft, BookOpen, Trophy, Target, Clock, Lock, Dumbbell, Calendar, ClipboardList } from 'lucide-react';
 import { useAuth } from '../../hooks/useAuth';
 import { useProgress } from '../../context/ProgressContext';
-import { chapters } from '../../../lib/chapters';
+import { chapters } from '@/lib/chapters';
 import { exercises } from '../../data/exercises';
 import { DashboardStats } from '../../components/DashboardStats';
 import { UserAvatar } from '../../components/UserAvatar';

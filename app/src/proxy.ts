@@ -7,7 +7,8 @@ export async function proxy(request: NextRequest) {
   })
 
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
-  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  // Support both new publishable key and legacy anon key for backward compatibility
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 
   // If Supabase env vars are not configured, skip auth refresh
   // and pass through the request without error

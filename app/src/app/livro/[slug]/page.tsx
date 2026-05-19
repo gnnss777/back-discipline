@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, CheckCircle, Dumbbell } from "lucide-react";
-import { getChapterBySlug, getNextChapter, getPrevChapter, chapters } from "../../../../lib/chapters";
-import { getChapterContent } from "../../../../lib/content";
+import { getChapterBySlug, getNextChapter, getPrevChapter, chapters } from "@/lib/chapters";
+import { getChapterContent } from "@/lib/content";
 import { ChapterAuthGuard } from "./ChapterAuthGuard";
 import { ChapterHeader } from './ChapterHeader';
 

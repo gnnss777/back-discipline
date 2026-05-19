@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { ArrowLeft, ArrowRight, CheckCircle, Lock } from 'lucide-react';
-import { chapters } from '../../../lib/chapters';
+import { chapters } from '@/lib/chapters';
 import { AuthModal } from '../../components/AuthModal';
 import { useAuth } from '../../hooks/useAuth';
 import { getAllProgress } from '../../lib/reading-storage';
