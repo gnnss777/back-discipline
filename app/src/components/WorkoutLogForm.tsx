@@ -124,7 +124,7 @@ export function WorkoutLogForm({ onSave, onCancel }: WorkoutLogFormProps) {
 
             <ExerciseSelector
               selectedExercise={exercise.exerciseName}
-              onSelect={(name) => updateExercise(index, { exerciseName: name })}
+              onSelect={(id, name) => updateExercise(index, { exerciseId: id, exerciseName: name })}
             />
 
             <div className="mt-4 space-y-3">

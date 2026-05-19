@@ -1,39 +1,12 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useMemo } from 'react';
 import { Search, ChevronDown, Plus, X } from 'lucide-react';
-
-const EXERCISE_LIST = [
-  "Meadows Row",
-  "Remada Unilateral com Barra",
-  "Smith Machine Row",
-  "Deadstop Dumbbell Row",
-  "T-Bar Row",
-  "Rack Pull",
-  "One Arm Barbell Row",
-  "Seated Cable Row",
-  "Levantamento Terra",
-  "Deficit Deadlift",
-  "Chin-ups",
-  "Pulldown Supinado",
-  "Underhand Pulldown",
-  "Lat Pulldown",
-  "Hammer Strength High Row",
-  "TRX Horizontal Chin",
-  "Pull-over com Banda",
-  "Dumbbell Pullover",
-  "Face Pulls",
-  "Rope Straight Arm Pulldown",
-  "Low Cable Row",
-  "Kettlebell Row",
-  "E-Z Bar Cable Row",
-  "Farmer's Walk",
-  "Hiperextensão com Bandas",
-];
+import { exercises } from '../data/exercises';
 
 interface ExerciseSelectorProps {
   selectedExercise: string;
-  onSelect: (exercise: string) => void;
+  onSelect: (exerciseId: string, exerciseName: string) => void;
 }
 
 export function ExerciseSelector({ selectedExercise, onSelect }: ExerciseSelectorProps) {
@@ -43,8 +16,11 @@ export function ExerciseSelector({ selectedExercise, onSelect }: ExerciseSelecto
   const [newExercise, setNewExercise] = useState('');
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const filteredExercises = EXERCISE_LIST.filter(ex =>
-    ex.toLowerCase().includes(search.toLowerCase())
+  const filteredExercises = useMemo(() =>
+    exercises.filter(ex =>
+      ex.name.toLowerCase().includes(search.toLowerCase())
+    ),
+    [search]
   );
 
   useEffect(() => {
@@ -57,15 +33,15 @@ export function ExerciseSelector({ selectedExercise, onSelect }: ExerciseSelecto
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const handleSelect = (exercise: string) => {
-    onSelect(exercise);
+  const handleSelect = (id: string, name: string) => {
+    onSelect(id, name);
     setIsOpen(false);
     setSearch('');
   };
 
   const handleAddNew = () => {
     if (newExercise.trim()) {
-      onSelect(newExercise.trim());
+      onSelect(`custom_${Date.now()}`, newExercise.trim());
       setNewExercise('');
       setShowAddNew(false);
       setSearch('');
@@ -103,14 +79,14 @@ export function ExerciseSelector({ selectedExercise, onSelect }: ExerciseSelecto
           </div>
 
           <div className="max-h-48 overflow-y-auto">
-            {filteredExercises.map((exercise) => (
+            {filteredExercises.map((ex) => (
               <button
-                key={exercise}
+                key={ex.id}
                 type="button"
-                onClick={() => handleSelect(exercise)}
+                onClick={() => handleSelect(ex.id, ex.name)}
                 className="w-full px-4 py-2 text-left text-gray-300 hover:bg-[#2A2A2A] hover:text-[#B8956A] transition-colors text-sm"
               >
-                {exercise}
+                {ex.name}
               </button>
             ))}
             {filteredExercises.length === 0 && !showAddNew && (
