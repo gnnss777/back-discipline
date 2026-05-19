@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { BookOpen, Dumbbell, Trophy, ArrowRight, Flame, GraduationCap, Lock } from 'lucide-react';
-import { BottomNav } from '../components/Layout';
 import { AuthModal } from '../components/AuthModal';
 import { useAuth } from '../hooks/useAuth';
 import { chapters } from '../lib/chapters';
@@ -212,8 +211,6 @@ export default function Home() {
           <p>JJ MONTEIRO · BACK DISCIPLINE · PROGRAMA DESENVOLVIDO COM BASE ACADÊMICA E EXPERIÊNCIA PRÁTICA</p>
         </div>
       </footer>
-
-      <BottomNav />
     </div>
   );
 }

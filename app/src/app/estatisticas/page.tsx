@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { ArrowRight, Trophy, Activity, BarChart2 } from 'lucide-react';
+import { ArrowRight, Trophy, BarChart2, Activity } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
 import { loadPlanilha } from '@/utils/planilhaStorage';
 import { calculateAllStats, type AllExercisesStats } from '@/lib/exerciseStats';
@@ -116,24 +116,6 @@ export default function EstatisticasPage() {
         )}
       </main>
 
-      {user && (
-        <div className="fixed bottom-0 left-0 right-0 bg-[#0A0A0A] border-t border-[#2A2A2A] md:hidden z-50">
-          <div className="flex justify-around py-2">
-            <Link href="/dashboard" className="flex flex-col items-center py-1 px-4 text-gray-500 hover:text-[#B8956A]">
-              <ArrowRight className="w-4 h-4 rotate-180" />
-              <span className="text-[10px] mt-0.5">Painel</span>
-            </Link>
-            <Link href="/planilha" className="flex flex-col items-center py-1 px-4 text-gray-500 hover:text-[#B8956A]">
-              <BarChart2 className="w-4 h-4" />
-              <span className="text-[10px] mt-0.5">Planilha</span>
-            </Link>
-            <div className="flex flex-col items-center py-1 px-4 text-[#B8956A]">
-              <Trophy className="w-4 h-4" />
-              <span className="text-[10px] mt-0.5">Stats</span>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

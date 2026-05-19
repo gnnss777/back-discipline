@@ -2,20 +2,23 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Home, BookOpen, Dumbbell, BarChart3, ClipboardList } from 'lucide-react';
+import { LayoutDashboard, BookOpen, Dumbbell, Search, ClipboardList } from 'lucide-react';
 import { useAuth } from '../hooks/useAuth';
 import { UserAvatar } from './UserAvatar';
 
 const navItems = [
-  { href: '/', icon: Home, label: 'Início' },
+  { href: '/dashboard', icon: LayoutDashboard, label: 'Painel' },
   { href: '/livro', icon: BookOpen, label: 'Programa' },
   { href: '/planilha', icon: ClipboardList, label: 'Planilha' },
   { href: '/historico', icon: Dumbbell, label: 'Treino' },
-  { href: '/biblioteca', icon: BarChart3, label: 'Biblioteca' },
+  { href: '/biblioteca', icon: Search, label: 'Biblioteca' },
 ];
 
 export function BottomNav() {
   const pathname = usePathname();
+  const { user } = useAuth();
+
+  if (!user) return null;
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 bg-[#0A0A0A] border-t border-[#2A2A2A] md:hidden z-50">
