@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
-import { ArrowLeft, Search, Filter, Play, Lock, Dumbbell } from 'lucide-react';
+import { ArrowLeft, Search, Filter, Play, Lock, ClipboardList } from 'lucide-react';
 import { exercises, categories } from '../../data/exercises';
 import type { Exercise } from '../../types/exercise';
 import { VideoModal } from '../../components/VideoModal';
@@ -41,8 +41,8 @@ export default function BibliotecaPage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-[#0A0A0A] flex items-center justify-center">
-        <div className="text-[#B8956A]">Carregando...</div>
+      <div className="min-h-screen bg-[#0A0A0A] flex flex-col items-center justify-center">
+        <div className="w-12 h-12 border-4 border-[#B8956A] border-t-transparent rounded-full animate-spin mb-4" />
       </div>
     );
   }
@@ -55,9 +55,9 @@ export default function BibliotecaPage() {
         initialMode={authModalMode}
       />
 
-      <header className="border-b border-[#333] sticky top-0 bg-[#0a0a0a]/95 backdrop-blur-sm z-50">
-        <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2 text-[#666] hover:text-white transition-colors font-medium tracking-wider text-sm">
+      <header className="border-b border-[#2A2A2A] sticky top-0 bg-[#0A0A0A]/95 backdrop-blur-sm z-50">
+        <div className="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
+          <Link href={user ? '/dashboard' : '/'} className="flex items-center gap-2 text-gray-500 hover:text-white transition-colors font-medium tracking-wider text-sm">
             <ArrowLeft className="w-4 h-4" />
             VOLTAR
           </Link>
@@ -68,8 +68,8 @@ export default function BibliotecaPage() {
             <span className="font-bold tracking-wider">BIBLIOTECA</span>
           </div>
           {user ? (
-            <Link href="/dashboard" className="text-sm text-[#666] hover:text-white font-medium tracking-wider">
-              PROGRESSO
+            <Link href="/dashboard" className="text-sm text-gray-500 hover:text-white font-medium tracking-wider">
+              PAINEL
             </Link>
           ) : (
             <button onClick={openLogin} className="text-sm text-[#B8956A] hover:text-white font-medium tracking-wider">
@@ -79,20 +79,20 @@ export default function BibliotecaPage() {
         </div>
       </header>
 
-      <main className="max-w-6xl mx-auto px-6 py-12">
-        <div className="text-center mb-12">
-          <h1 className="text-5xl font-bold mb-4 tracking-wider">BIBLIOTECA <span className="text-[#B8956A]">TÉCNICA</span></h1>
-          <p className="text-[#555] text-lg font-medium tracking-wide">GUIA COMPLETO DE EXERCÍCIOS COM TÉCNICA E DICAS</p>
+      <main className="max-w-4xl mx-auto px-6 py-12">
+        <div className="text-center mb-10">
+          <h1 className="text-3xl font-bold mb-2 tracking-wider">BIBLIOTECA <span className="text-[#B8956A]">TÉCNICA</span></h1>
+          <p className="text-gray-500 tracking-wide font-medium">GUIA COMPLETO DE EXERCÍCIOS</p>
         </div>
 
         {!user && (
-          <div className="mb-8 p-6 bg-[#111] border border-[#B8956A]/30 rounded-lg text-center">
-            <p className="text-[#B8956A] mb-4">Faça login para acessar a biblioteca completa de exercícios</p>
+          <div className="mb-8 p-6 bg-[#111] border border-[#2A2A2A] rounded-lg text-center">
+            <p className="text-[#B8956A] mb-4">Faça login para acessar vídeos dos exercícios</p>
             <div className="flex gap-4 justify-center">
-              <button onClick={openLogin} className="px-6 py-2 border border-[#B8956A] text-[#B8956A] rounded-sm hover:bg-[#B8956A] hover:text-[#0A0A0A] transition-colors font-medium tracking-wider">
+              <button onClick={openLogin} className="px-6 py-2 border border-[#B8956A] text-[#B8956A] rounded-sm hover:bg-[#B8956A] hover:text-[#0A0A0A] transition-colors font-bold tracking-wider">
                 ENTRAR
               </button>
-              <button onClick={openRegister} className="px-6 py-2 bg-[#B8956A] text-[#0A0A0A] rounded-sm hover:bg-[#9A7A50] transition-colors font-medium tracking-wider">
+              <button onClick={openRegister} className="px-6 py-2 bg-[#B8956A] text-[#0A0A0A] rounded-sm hover:bg-[#9A7A50] transition-colors font-bold tracking-wider">
                 CADASTRAR
               </button>
             </div>
@@ -101,21 +101,21 @@ export default function BibliotecaPage() {
 
         <div className="flex flex-col md:flex-row gap-4 mb-8">
           <div className="relative flex-1">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#555]" />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
             <input 
               type="text" 
               placeholder="BUSCAR EXERCÍCIO..." 
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-12 pr-4 py-3 bg-[#111] border border-[#333] rounded-sm text-white placeholder:text-[#555] focus:outline-none focus:border-[#B8956A] font-medium tracking-wider"
+              className="w-full pl-12 pr-4 py-3 bg-[#111] border border-[#2A2A2A] rounded-sm text-white placeholder:text-gray-500 focus:outline-none focus:border-[#B8956A] font-medium tracking-wider"
             />
           </div>
           <div className="flex items-center gap-2">
-            <Filter className="w-5 h-5 text-[#555]" />
+            <Filter className="w-5 h-5 text-gray-500" />
             <select 
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
-              className="px-4 py-3 bg-[#111] border border-[#333] rounded-sm text-white focus:outline-none focus:border-[#B8956A] font-medium tracking-wider"
+              className="px-4 py-3 bg-[#111] border border-[#2A2A2A] rounded-sm text-white focus:outline-none focus:border-[#B8956A] font-medium tracking-wider"
             >
               {categories.map(cat => (
                 <option key={cat} value={cat}>{cat.toUpperCase()}</option>
@@ -124,7 +124,7 @@ export default function BibliotecaPage() {
           </div>
         </div>
 
-        <div className="mb-4 text-sm text-[#555]">
+        <div className="mb-4 text-sm text-gray-500">
           {filteredExercises.length} exercício{filteredExercises.length !== 1 ? 's' : ''} encontrado{filteredExercises.length !== 1 ? 's' : ''}
         </div>
 
@@ -132,7 +132,7 @@ export default function BibliotecaPage() {
           {filteredExercises.map(exercise => (
             <div 
               key={exercise.id}
-              className="p-6 bg-[#111] border border-[#333] rounded-sm hover:border-[#B8956A] hover:bg-[#151515] transition-all group relative"
+              className="p-6 bg-[#111] border border-[#2A2A2A] rounded-sm hover:border-[#B8956A] hover:bg-[#151515] transition-all group relative"
             >
               {exercise.videoUrl && user && (
                 <button
@@ -167,7 +167,7 @@ export default function BibliotecaPage() {
                 </span>
               </div>
               
-              <p className="text-sm text-[#555] mb-4">{exercise.description}</p>
+              <p className="text-sm text-gray-500 mb-4">{exercise.description}</p>
               
               <div className="flex flex-wrap gap-2">
                 {exercise.muscles.map(muscle => (
@@ -177,9 +177,19 @@ export default function BibliotecaPage() {
                 ))}
               </div>
 
+              {user && (
+                <Link
+                  href="/planilha"
+                  className="mt-4 pt-4 border-t border-[#2A2A2A] flex items-center gap-2 text-xs text-gray-500 hover:text-[#B8956A] transition-colors tracking-wider"
+                >
+                  <ClipboardList className="w-3.5 h-3.5" />
+                  VER NA PLANILHA
+                </Link>
+              )}
+
               {exercise.tips && exercise.tips.length > 0 && (
                 <div className="mt-4 pt-4 border-t border-[#2A2A2A]">
-                  <div className="text-xs text-[#666] mb-2">DICAS:</div>
+                  <div className="text-xs text-gray-500 mb-2">DICAS:</div>
                   <ul className="text-xs text-[#555] space-y-1">
                     {exercise.tips.slice(0, 2).map((tip, i) => (
                       <li key={i}>• {tip}</li>
@@ -193,7 +203,7 @@ export default function BibliotecaPage() {
 
         {filteredExercises.length === 0 && (
           <div className="text-center py-12">
-            <p className="text-[#555]">Nenhum exercício encontrado.</p>
+            <p className="text-gray-500">Nenhum exercício encontrado.</p>
             <button
               onClick={() => { setSearchQuery(''); setSelectedCategory('Todas'); }}
               className="mt-4 text-[#B8956A] hover:underline"
