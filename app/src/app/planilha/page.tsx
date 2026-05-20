@@ -104,13 +104,13 @@ export default function PlanilhaUnificadaPage() {
             </Link>
             <div className="flex items-center gap-2">
               <Dumbbell className="w-4 h-4 text-[#B8956A]" />
-              <span className="text-sm font-bold tracking-[0.15em] text-[#B8956A]">PLANILHA</span>
-            </div>
-            <div className="w-16" />
+            <span className="text-sm font-bold tracking-[0.15em] text-[#B8956A]">PLANO DE TREINO</span>
           </div>
-        </header>
-        <main className="max-w-4xl mx-auto px-4 py-6">
-          <div className="mb-6 p-5 rounded border border-[#3A2E22] bg-[#0F0F0F] text-center">
+          <div className="w-16" />
+        </div>
+      </header>
+      <main className="max-w-4xl mx-auto px-4 py-6">
+        <div className="mb-6 p-5 rounded border border-[#3A2E22] bg-[#0F0F0F] text-center">
             <p className="mb-3 text-[#999]">Faça login para registrar e acompanhar seu progresso.</p>
             <Link href="/login" className="inline-flex items-center gap-2 px-5 py-2 bg-[#B8956A] text-black rounded-sm font-bold tracking-wider text-sm">
               Entrar
@@ -164,7 +164,7 @@ export default function PlanilhaUnificadaPage() {
           </Link>
           <div className="flex items-center gap-2">
             <Dumbbell className="w-4 h-4 text-[#B8956A]" />
-            <span className="text-sm font-bold tracking-[0.15em] text-[#B8956A]">PLANILHA</span>
+            <span className="text-sm font-bold tracking-[0.15em] text-[#B8956A]">PLANO DE TREINO</span>
           </div>
           <div className="flex items-center gap-2">
             {saving && <span className="text-xs text-[#B8956A]">Salvo</span>}
