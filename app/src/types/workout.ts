@@ -35,6 +35,9 @@ export interface UserProgress {
   chapters: ChapterProgress[];
   workouts: Workout[];
   startedAt: string;
+  programStartedAt: string | null;
+  trainingDays: number[];
+  missedDays: string[];
   totalDaysTrained: number;
   weeklyVolume: number;
   monthlyVolume: number;

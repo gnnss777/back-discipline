@@ -2,15 +2,14 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { LayoutDashboard, BookOpen, Dumbbell, Search, ClipboardList } from 'lucide-react';
+import { LayoutDashboard, BookOpen, Dumbbell, Search } from 'lucide-react';
 import { useAuth } from '../hooks/useAuth';
 import { UserAvatar } from './UserAvatar';
 
 const navItems = [
   { href: '/dashboard', icon: LayoutDashboard, label: 'Painel' },
   { href: '/livro', icon: BookOpen, label: 'Programa' },
-  { href: '/planilha', icon: ClipboardList, label: 'Planilha' },
-  { href: '/historico', icon: Dumbbell, label: 'Treino' },
+  { href: '/planilha', icon: Dumbbell, label: 'Planilha' },
   { href: '/biblioteca', icon: Search, label: 'Biblioteca' },
 ];
 
