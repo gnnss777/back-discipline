@@ -104,22 +104,25 @@ export function getProgramInfo(userId: string): {
   // Check reading progress
   if (planilha && currentWeek <= planilha.length) {
     const week = planilha[currentWeek - 1];
-    const unreadChapters = week.days
-      .flatMap(d => d.exercises.map(e => e.chapterSlug))
-      .filter((slug, i, arr) => slug && arr.indexOf(slug) === i)
-      .filter(slug => !progress.chapters.find(c => c.slug === slug)?.completed);
+    if (week) {
+      const unreadChapters = (week.days || [])
+        .flatMap(d => (d.exercises || []).map(e => e.chapterSlug))
+        .filter((slug, i, arr) => slug && arr.indexOf(slug) === i)
+        .filter(slug => !progress.chapters.find(c => c.slug === slug)?.completed);
 
-    if (unreadChapters.length > 0) {
-      alerts.push({
-        type: 'missed_reading',
-        message: `${unreadChapters.length} capítulo${unreadChapters.length > 1 ? 's' : ''} não lido${unreadChapters.length > 1 ? 's' : ''} para esta semana.`,
-        severity: 'warning',
-      });
+      if (unreadChapters.length > 0) {
+        alerts.push({
+          type: 'missed_reading',
+          message: `${unreadChapters.length} capítulo${unreadChapters.length > 1 ? 's' : ''} não lido${unreadChapters.length > 1 ? 's' : ''} para esta semana.`,
+          severity: 'warning',
+        });
+      }
     }
   }
 
   // Check if current week is complete
   const currentWeekWorkouts = workouts.filter(w => {
+    if (!w.date) return false;
     const wDate = new Date(w.date);
     return wDate >= currentWeekStart && wDate < new Date(currentWeekStart.getTime() + 7 * msPerDay);
   });
@@ -128,7 +131,7 @@ export function getProgramInfo(userId: string): {
     const date = new Date(currentWeekStart);
     date.setDate(currentWeekStart.getDate() + (dayIdx === 0 ? 6 : dayIdx - 1));
     const dateStr = date.toISOString().split('T')[0];
-    return currentWeekWorkouts.some(w => w.date.startsWith(dateStr));
+    return currentWeekWorkouts.some(w => w.date?.startsWith(dateStr));
   }).length;
 
   if (currentWeekTrainingDaysCompleted >= trainingDays.length) {
@@ -155,22 +158,25 @@ export function getProgramInfo(userId: string): {
       const dayIdx = date.getDay();
       const isTrainingDay = trainingDays.includes(dayIdx);
 
-      const dayWorkouts = workouts.filter(w => w.date.startsWith(dateStr));
+      const dayWorkouts = workouts.filter(w => w.date?.startsWith(dateStr));
       const hasActualData = dayWorkouts.length > 0;
       const volume = dayWorkouts.reduce((sum, wo) =>
-        sum + wo.exercises.reduce((s, ex) =>
-          s + ex.sets.reduce((s2, set) => s2 + set.reps * set.weight, 0), 0), 0);
+        sum + (wo.exercises || []).reduce((s, ex) =>
+          s + (ex.sets || []).reduce((s2, set) => s2 + (set.reps || 0) * (set.weight || 0), 0), 0), 0);
 
       // Exercises for this training day from planilha
       let exercisesCompleted = 0;
       let totalExercises = 0;
       if (planilha && w <= planilha.length) {
         const planilhaWeek = planilha[w - 1];
-        const planilhaDayIdx = trainingDays.indexOf(dayIdx);
-        if (planilhaDayIdx >= 0 && planilhaDayIdx < planilhaWeek.days.length) {
-          totalExercises = planilhaWeek.days[planilhaDayIdx].exercises.length;
-          exercisesCompleted = planilhaWeek.days[planilhaDayIdx].exercises
-            .filter(ex => ex.actual?.some(a => a.reps !== undefined)).length;
+        if (planilhaWeek) {
+          const planilhaDayIdx = trainingDays.indexOf(dayIdx);
+          if (planilhaDayIdx >= 0 && planilhaDayIdx < (planilhaWeek.days || []).length) {
+            const day = planilhaWeek.days[planilhaDayIdx];
+            totalExercises = (day.exercises || []).length;
+            exercisesCompleted = (day.exercises || [])
+              .filter(ex => ex.actual?.some(a => a.reps !== undefined)).length;
+          }
         }
       }
 

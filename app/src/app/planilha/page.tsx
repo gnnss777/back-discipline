@@ -2,21 +2,19 @@
 
 import { useCallback, useEffect, useState } from 'react';
 import Link from 'next/link';
-import { ArrowRight, Dumbbell, BarChart2, History, Plus, Timer, Check, AlertTriangle } from 'lucide-react';
+import { ArrowRight, Dumbbell, BarChart2, History, Plus, Check, AlertTriangle } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
 import { loadPlanilha, savePlanilha, ensureSeed } from '@/utils/planilhaStorage';
 import { syncPlanilhaDay, syncAllPlanilhaDays } from '@/utils/planilhaSync';
-import { getProgramInfo, getDayName } from '@/utils/programTracker';
-import type { ProgramWeekInfo, ProgramAlert } from '@/utils/programTracker';
+import { getProgramInfo } from '@/utils/programTracker';
+import type { ProgramAlert } from '@/utils/programTracker';
 import { ProgramStarter } from '@/components/ProgramStarter';
 import { WeekSchedule } from '@/components/WeekSchedule';
 import { ExerciseLogger } from '@/components/ExerciseLogger';
 import { WorkoutLogForm } from '@/components/WorkoutLogForm';
 import { WorkoutHistory } from '@/components/WorkoutHistory';
-import type { PlanilhaData, WeekSaved, DaySaved, ExerciseSaved, ActualSet } from '@/types/planilha';
-import planilhaSeed from '../planilha-progresso/planilhaSeed';
+import type { PlanilhaData, ActualSet } from '@/types/planilha';
 
-const RPE_VALUES = [6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10];
 type Tab = 'semana' | 'log' | 'historico';
 
 export default function PlanilhaUnificadaPage() {
@@ -131,16 +129,22 @@ export default function PlanilhaUnificadaPage() {
         const days = progInfo?.weeks[displayWeekIdx]?.days.find(d => d.date === selectedDay);
         if (!days?.isTrainingDay) return null;
 
-        const prog = getUserProgressLocal(user.userId);
-        const trainingDays = prog?.trainingDays || [1, 4, 6];
-        const planilhaDayIdx = trainingDays.indexOf(dayOfWeek);
-        if (planilhaDayIdx < 0 || planilhaDayIdx >= (data[displayWeekIdx]?.days.length || 0)) return null;
+    const weekData = data[displayWeekIdx];
+    if (!weekData) return null;
 
-        return {
-          weekIdx: displayWeekIdx,
-          dayIdx: planilhaDayIdx,
-          day: data[displayWeekIdx].days[planilhaDayIdx],
-        };
+    const prog = getUserProgressLocal(user.userId);
+    const trainingDays = prog?.trainingDays || [1, 4, 6];
+    const planilhaDayIdx = trainingDays.indexOf(dayOfWeek);
+    if (planilhaDayIdx < 0 || planilhaDayIdx >= (weekData.days || []).length) return null;
+
+    const day = weekData.days[planilhaDayIdx];
+    if (!day) return null;
+
+    return {
+      weekIdx: displayWeekIdx,
+      dayIdx: planilhaDayIdx,
+      day,
+    };
       })()
     : null;
 
