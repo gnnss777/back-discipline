@@ -1,9 +1,10 @@
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, CheckCircle, Dumbbell } from "lucide-react";
-import { getChapterBySlug, getNextChapter, getPrevChapter, chapters } from "@/lib/chapters";
+import { ArrowLeft, ArrowRight, Dumbbell } from "lucide-react";
+import { getChapterBySlug, chapters } from "@/lib/chapters";
 import { getChapterContent } from "@/lib/content";
 import { ChapterAuthGuard } from "./ChapterAuthGuard";
 import { ChapterHeader } from './ChapterHeader';
+import { ConcluirButton } from './ConcluirButton';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -18,8 +19,6 @@ export async function generateStaticParams() {
 export default async function ChapterPage({ params }: PageProps) {
   const { slug } = await params;
   const chapter = getChapterBySlug(slug);
-  const nextChapter = getNextChapter(slug);
-  const prevChapter = getPrevChapter(slug);
   
   const content = chapter ? getChapterContent(chapter.slug) : null;
 
@@ -134,37 +133,9 @@ export default async function ChapterPage({ params }: PageProps) {
             </Link>
           </div>
 
-          {/* Navigation */}
-          <div className="flex items-center justify-between mt-12 pt-8 border-t border-[#3A2E22]">
-            {prevChapter ? (
-              <Link 
-                href={`/livro/${prevChapter.slug}`}
-className="flex items-center gap-2 text-[#555] hover:text-[#B8956A] transition-colors font-medium tracking-wider text-sm min-h-[44px] px-2"
-              >
-                <ArrowLeft className="w-4 h-4" />
-                <span>{prevChapter.title.replace('Capítulo ', '')}</span>
-              </Link>
-            ) : (
-              <div />
-            )}
-            
-            {nextChapter ? (
-              <Link 
-                href={`/livro/${nextChapter.slug}`}
-className="flex items-center gap-2 px-4 py-3 min-h-[44px] bg-[#B8956A] text-[#0A0A0A] font-bold tracking-wider rounded-sm hover:bg-[#9A7A50] transition-colors text-sm"
-          >
-            <span>PRÓXIMO</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-            ) : (
-              <Link 
-                href="/livro"
-className="flex items-center gap-2 px-4 py-3 min-h-[44px] bg-[#B8956A] text-[#0A0A0A] font-bold tracking-wider rounded-sm hover:bg-[#9A7A50] transition-colors text-sm"
-          >
-            <span>CONCLUIR</span>
-                <CheckCircle className="w-4 h-4" />
-              </Link>
-            )}
+          {/* Concluir */}
+          <div className="flex justify-center mt-12 pt-8 border-t border-[#3A2E22]">
+            <ConcluirButton slug={slug} />
           </div>
         </main>
       </div>

@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { ArrowLeft, ArrowRight, CheckCircle, Lock } from 'lucide-react';
-import { chapters } from '@/lib/chapters';
+import { chapters, chapterGroups, getGroupCompletedCount } from '@/lib/chapters';
 import { AuthModal } from '../../components/AuthModal';
 import { useAuth } from '../../hooks/useAuth';
 import { getAllProgress } from '../../lib/reading-storage';
@@ -42,14 +42,16 @@ useEffect(() => {
     setIsAuthModalOpen(true);
   };
 
-const part1Chapters = chapters.filter(c => c.part === 'I');
+const part1Groups = chapterGroups.filter(g => g.part === 'I').sort((a, b) => a.order - b.order);
 const part2Chapters = chapters.filter(c => c.part === 'II');
+const standaloneChapters = chapters.filter(c => c.part);
 
-const totalChapters = chapters.filter(c => c.part).length; // 11 trackable chapters (excludes introduction)
-const completedCount = progressData.filter(p => p.completed).length;
-const progressPercent = totalChapters > 0 ? Math.round((completedCount / totalChapters) * 100) : 0;
+const allTrackableSlugs = standaloneChapters.map(c => c.slug);
+const totalSlugs = allTrackableSlugs.length;
+const completedCount = progressData.filter(p => p.completed && allTrackableSlugs.includes(p.chapter_slug)).length;
+const progressPercent = totalSlugs > 0 ? Math.round((completedCount / totalSlugs) * 100) : 0;
 
-// Find last-read chapter (max last_read_at) for BOOK-02 auto-resume highlight
+// Last-read chapter for auto-resume
 const lastReadChapter = progressData
   .filter(p => p.last_read_at)
   .sort((a, b) => new Date(b.last_read_at).getTime() - new Date(a.last_read_at).getTime())[0]?.chapter_slug || null;
@@ -70,7 +72,6 @@ const lastReadChapter = progressData
         initialMode={authModalMode}
       />
 
-      {/* Header */}
       <header className="border-b border-[#3A2E22] sticky top-0 bg-[#0A0A0A]/95 backdrop-blur-sm z-50">
         <div className="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
           <Link href={user ? '/dashboard' : '/'} className="flex items-center gap-2 text-[#666] hover:text-[#B8956A] transition-colors font-medium tracking-wider text-sm">
@@ -109,18 +110,17 @@ const lastReadChapter = progressData
           </div>
         )}
 
-{/* Progress */}
-{user && (
-<div className="mb-12 p-4 bg-[#0F0F0F] rounded-sm border border-[#3A2E22]">
-  <div className="flex items-center justify-between text-sm mb-2">
-    <span className="text-[#555] font-medium tracking-wider">SEU PROGRESSO</span>
-    <span className="text-[#B8956A] font-bold tracking-wider">{completedCount} / {totalChapters} CAPÍTULOS</span>
-  </div>
-  <div className="h-1 bg-[#1a1a1a] rounded-full overflow-hidden">
-    <div className="h-full bg-[#B8956A] transition-all duration-500" style={{ width: `${progressPercent}%` }} />
-  </div>
-</div>
-)}
+        {user && (
+          <div className="mb-12 p-4 bg-[#0F0F0F] rounded-sm border border-[#3A2E22]">
+            <div className="flex items-center justify-between text-sm mb-2">
+              <span className="text-[#555] font-medium tracking-wider">SEU PROGRESSO</span>
+              <span className="text-[#B8956A] font-bold tracking-wider">{completedCount} / {totalSlugs} CAPÍTULOS</span>
+            </div>
+            <div className="h-1 bg-[#1a1a1a] rounded-full overflow-hidden">
+              <div className="h-full bg-[#B8956A] transition-all duration-500" style={{ width: `${progressPercent}%` }} />
+            </div>
+          </div>
+        )}
 
         {/* Parte I */}
         <section className="mb-12">
@@ -128,49 +128,88 @@ const lastReadChapter = progressData
             <span className="px-3 py-1 bg-[#B8956A]/20 text-[#B8956A] text-sm font-bold tracking-wider rounded-sm">PARTE I</span>
             <h2 className="text-xl font-medium tracking-wider">SISTEMA E PRÁTICA</h2>
           </div>
-          
-          <div className="space-y-3">
-{part1Chapters.map((chapter) => {
-const isCompleted = progressData.some(p => p.chapter_slug === chapter.slug && p.completed);
-const isLastRead = lastReadChapter === chapter.slug;
 
-return (
-<Link
-  key={chapter.slug}
-  href={user ? `/livro/${chapter.slug}` : '#'}
-  onClick={(e) => { if (!user) { e.preventDefault(); openLogin(); } }}
-  className={`block p-5 border transition-all group rounded-sm ${
-    isLastRead
-    ? 'bg-[#0F0F0F] border-l-2 border-l-[#B8956A] border-[#3A2E22]'
-    : isCompleted
-    ? 'bg-[#0F0F0F] border-[#B8956A]/30'
-    : user
-    ? 'bg-[#0F0F0F] border-[#3A2E22] hover:border-[#B8956A]'
-    : 'bg-[#0F0F0F] border-[#2A2A2A] cursor-pointer'
-  }`}
->
-  <div className="flex items-center gap-4">
-    <div className={`w-10 h-10 flex items-center justify-center rounded-sm ${
-      isCompleted
-      ? 'bg-[#B8956A]/20 text-[#B8956A]'
-      : user
-      ? 'bg-[#1a1a1a] text-[#444] group-hover:bg-[#B8956A]/20 group-hover:text-[#B8956A] transition-colors'
-      : 'bg-[#1a1a1a] text-[#333]'
-    }`}>
-      {isCompleted ? <CheckCircle className="w-5 h-5" /> : user ? <ArrowRight className="w-5 h-5" /> : <Lock className="w-5 h-5" />}
-    </div>
-    <div className="flex-1">
-      <h3 className={`font-bold tracking-wider text-sm ${user ? 'group-hover:text-[#B8956A]' : ''} transition-colors`}>{chapter.title}</h3>
-      <p className="text-xs text-[#444]">{chapter.description}</p>
-      {isLastRead && (
-        <span className="text-xs text-[#B8956A] font-medium tracking-wider">CONTINUAR LEITURA</span>
-      )}
-    </div>
-    {!user && <Lock className="w-4 h-4 text-[#333]" />}
-  </div>
-</Link>
-);
-})}
+          <div className="space-y-6">
+            {part1Groups.map((group) => {
+              const groupCompleted = getGroupCompletedCount(group, progressData);
+              const totalInGroup = group.children.length;
+              const isFullyComplete = groupCompleted === totalInGroup;
+              const lastReadSlug = lastReadChapter && group.children.includes(lastReadChapter) ? lastReadChapter : null;
+
+              return (
+                <div key={group.id} className="border border-[#3A2E22] rounded-sm overflow-hidden">
+                  {/* Group header */}
+                  <div className={`px-5 py-4 ${isFullyComplete ? 'bg-[#B8956A]/10' : 'bg-[#0F0F0F]'} border-b border-[#3A2E22]`}>
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <h3 className="font-bold tracking-wider text-sm">{group.title}</h3>
+                        <p className="text-xs text-[#555] mt-1">{group.description}</p>
+                      </div>
+                      {user && (
+                        <div className="text-right">
+                          <span className={`text-sm font-bold tracking-wider ${isFullyComplete ? 'text-[#B8956A]' : 'text-[#555]'}`}>
+                            {groupCompleted}/{totalInGroup}
+                          </span>
+                        </div>
+                      )}
+                    </div>
+                    {user && (
+                      <div className="mt-2 h-0.5 bg-[#1a1a1a] rounded-full overflow-hidden">
+                        <div className="h-full bg-[#B8956A] transition-all duration-500" style={{ width: `${Math.round((groupCompleted / totalInGroup) * 100)}%` }} />
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Children */}
+                  <div className="divide-y divide-[#3A2E22]/50">
+                    {group.children.map((childSlug) => {
+                      const child = chapters.find(c => c.slug === childSlug);
+                      if (!child) return null;
+                      const isCompleted = progressData.some(p => p.chapter_slug === childSlug && p.completed);
+                      const isLastRead = lastReadSlug === childSlug;
+
+                      return (
+                        <Link
+                          key={childSlug}
+                          href={user ? `/livro/${childSlug}` : '#'}
+                          onClick={(e) => { if (!user) { e.preventDefault(); openLogin(); } }}
+                          className={`block px-5 py-3 transition-all group ${
+                            isLastRead
+                            ? 'bg-[#0F0F0F] border-l-2 border-l-[#B8956A]'
+                            : isCompleted
+                            ? 'bg-[#0F0F0F]'
+                            : user
+                            ? 'bg-[#0A0A0A] hover:bg-[#0F0F0F]'
+                            : 'bg-[#0A0A0A] cursor-pointer'
+                          }`}
+                        >
+                          <div className="flex items-center gap-3">
+                            <div className={`w-8 h-8 flex items-center justify-center rounded-sm text-sm ${
+                              isCompleted
+                              ? 'bg-[#B8956A]/20 text-[#B8956A]'
+                              : user
+                              ? 'bg-[#1a1a1a] text-[#444] group-hover:bg-[#B8956A]/20 group-hover:text-[#B8956A] transition-colors'
+                              : 'bg-[#1a1a1a] text-[#333]'
+                            }`}>
+                              {isCompleted ? <CheckCircle className="w-4 h-4" /> : user ? <ArrowRight className="w-4 h-4" /> : <Lock className="w-4 h-4" />}
+                            </div>
+                            <div className="flex-1">
+                              <span className={`text-sm font-medium tracking-wider ${user ? 'group-hover:text-[#B8956A]' : ''} transition-colors`}>
+                                {child.title}
+                              </span>
+                              {isLastRead && (
+                                <span className="ml-2 text-xs text-[#B8956A] font-medium">CONTINUAR</span>
+                              )}
+                            </div>
+                            {!user && <Lock className="w-3 h-3 text-[#333]" />}
+                          </div>
+                        </Link>
+                      );
+                    })}
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </section>
 
@@ -180,49 +219,49 @@ return (
             <span className="px-3 py-1 bg-[#B8956A]/20 text-[#B8956A] text-sm font-bold tracking-wider rounded-sm">PARTE II</span>
             <h2 className="text-xl font-medium tracking-wider">FUNDAMENTOS TÉCNICOS</h2>
           </div>
-          
-          <div className="space-y-3">
-{part2Chapters.map((chapter) => {
-const isCompleted = progressData.some(p => p.chapter_slug === chapter.slug && p.completed);
-const isLastRead = lastReadChapter === chapter.slug;
 
-return (
-<Link
-  key={chapter.slug}
-  href={user ? `/livro/${chapter.slug}` : '#'}
-  onClick={(e) => { if (!user) { e.preventDefault(); openLogin(); } }}
-  className={`block p-5 border transition-all group rounded-sm ${
-    isLastRead
-    ? 'bg-[#0F0F0F] border-l-2 border-l-[#B8956A] border-[#3A2E22]'
-    : isCompleted
-    ? 'bg-[#0F0F0F] border-[#B8956A]/30'
-    : user
-    ? 'bg-[#0F0F0F] border-[#3A2E22] hover:border-[#B8956A]'
-    : 'bg-[#0F0F0F] border-[#2A2A2A] cursor-pointer'
-  }`}
->
-  <div className="flex items-center gap-4">
-    <div className={`w-10 h-10 flex items-center justify-center rounded-sm ${
-      isCompleted
-      ? 'bg-[#B8956A]/20 text-[#B8956A]'
-      : user
-      ? 'bg-[#1a1a1a] text-[#444] group-hover:bg-[#B8956A]/20 group-hover:text-[#B8956A] transition-colors'
-      : 'bg-[#1a1a1a] text-[#333]'
-    }`}>
-      {isCompleted ? <CheckCircle className="w-5 h-5" /> : user ? <ArrowRight className="w-5 h-5" /> : <Lock className="w-5 h-5" />}
-    </div>
-    <div className="flex-1">
-      <h3 className={`font-bold tracking-wider text-sm ${user ? 'group-hover:text-[#B8956A]' : ''} transition-colors`}>{chapter.title}</h3>
-      <p className="text-xs text-[#444]">{chapter.description}</p>
-      {isLastRead && (
-        <span className="text-xs text-[#B8956A] font-medium tracking-wider">CONTINUAR LEITURA</span>
-      )}
-    </div>
-    {!user && <Lock className="w-4 h-4 text-[#333]" />}
-  </div>
-</Link>
-);
-})}
+          <div className="space-y-3">
+            {part2Chapters.map((chapter) => {
+              const isCompleted = progressData.some(p => p.chapter_slug === chapter.slug && p.completed);
+              const isLastRead = lastReadChapter === chapter.slug;
+
+              return (
+                <Link
+                  key={chapter.slug}
+                  href={user ? `/livro/${chapter.slug}` : '#'}
+                  onClick={(e) => { if (!user) { e.preventDefault(); openLogin(); } }}
+                  className={`block p-5 border transition-all group rounded-sm ${
+                    isLastRead
+                    ? 'bg-[#0F0F0F] border-l-2 border-l-[#B8956A] border-[#3A2E22]'
+                    : isCompleted
+                    ? 'bg-[#0F0F0F] border-[#B8956A]/30'
+                    : user
+                    ? 'bg-[#0F0F0F] border-[#3A2E22] hover:border-[#B8956A]'
+                    : 'bg-[#0F0F0F] border-[#2A2A2A] cursor-pointer'
+                  }`}
+                >
+                  <div className="flex items-center gap-4">
+                    <div className={`w-10 h-10 flex items-center justify-center rounded-sm ${
+                      isCompleted
+                      ? 'bg-[#B8956A]/20 text-[#B8956A]'
+                      : user
+                      ? 'bg-[#1a1a1a] text-[#444] group-hover:bg-[#B8956A]/20 group-hover:text-[#B8956A] transition-colors'
+                      : 'bg-[#1a1a1a] text-[#333]'
+                    }`}>
+                      {isCompleted ? <CheckCircle className="w-5 h-5" /> : user ? <ArrowRight className="w-5 h-5" /> : <Lock className="w-5 h-5" />}
+                    </div>
+                    <div className="flex-1">
+                      <h3 className={`font-bold tracking-wider text-sm ${user ? 'group-hover:text-[#B8956A]' : ''} transition-colors`}>{chapter.title}</h3>
+                      <p className="text-xs text-[#444]">{chapter.description}</p>
+                      {isLastRead && (
+                        <span className="text-xs text-[#B8956A] font-medium tracking-wider">CONTINUAR LEITURA</span>
+                      )}
+                    </div>
+                    {!user && <Lock className="w-4 h-4 text-[#333]" />}
+                  </div>
+                </Link>
+              );
+            })}
           </div>
         </section>
 
