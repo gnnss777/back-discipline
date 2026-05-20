@@ -15,7 +15,7 @@ interface WeekScheduleProps {
 function DayCard({ day, isSelected, onSelect }: { day: ProgramDayInfo; isSelected: boolean; onSelect: () => void }) {
   if (!day.isTrainingDay) {
     return (
-      <div className="flex flex-col items-center gap-1 p-2 rounded-lg opacity-30">
+      <div className="flex flex-col items-center gap-1 p-2 rounded-lg opacity-30 min-w-[52px]">
         <span className="text-[10px] text-gray-600 font-medium">{day.dayName.substring(0, 3)}</span>
         <span className="text-[9px] text-gray-700">—</span>
       </div>
@@ -28,7 +28,7 @@ function DayCard({ day, isSelected, onSelect }: { day: ProgramDayInfo; isSelecte
     <button
       type="button"
       onClick={onSelect}
-      className={`flex flex-col items-center gap-1 p-2 rounded-lg transition-all ${
+      className={`flex flex-col items-center gap-1 p-2 rounded-lg transition-all min-w-[52px] ${
         isSelected
           ? 'bg-[#B8956A]/15 border border-[#B8956A]/40'
           : day.isCompleted
@@ -94,7 +94,7 @@ export function WeekSchedule({ week, selectedDay, onSelectDay, onPrevWeek, onNex
         </button>
       </div>
 
-      <div className="grid grid-cols-7 gap-1.5">
+      <div className="flex overflow-x-auto gap-1.5 pb-1 scrollbar-thin lg:grid lg:grid-cols-7">
         {week.days.map((day) => (
           <DayCard
             key={day.date}

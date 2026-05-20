@@ -107,7 +107,7 @@ export default function PerfilPage() {
               </div>
               <div className="flex justify-between">
                 <span className="text-[#555]">Status</span>
-                <span className="text-[#B8956A] uppercase">{user.paymentStatus}</span>
+                <span className="text-[#B8956A] uppercase">{user.paymentStatus || 'FREE'}</span>
               </div>
             </div>
           </div>

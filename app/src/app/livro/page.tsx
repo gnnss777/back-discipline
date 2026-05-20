@@ -73,7 +73,7 @@ const lastReadChapter = progressData
       {/* Header */}
       <header className="border-b border-[#3A2E22] sticky top-0 bg-[#0A0A0A]/95 backdrop-blur-sm z-50">
         <div className="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2 text-[#666] hover:text-[#B8956A] transition-colors font-medium tracking-wider text-sm">
+          <Link href={user ? '/dashboard' : '/'} className="flex items-center gap-2 text-[#666] hover:text-[#B8956A] transition-colors font-medium tracking-wider text-sm">
             <ArrowLeft className="w-4 h-4" />
             VOLTAR
           </Link>
@@ -81,9 +81,11 @@ const lastReadChapter = progressData
             <span className="text-sm font-medium tracking-[0.2em] text-[#666]">JJ MONTEIRO</span>
             <span className="text-sm font-bold tracking-[0.15em] text-[#B8956A]">BACK DISCIPLINE</span>
           </div>
-          <button onClick={openLogin} className="text-sm text-[#B8956A] hover:text-[#9A7A50] font-medium tracking-wider">
-            ENTRAR
-          </button>
+          {!user && (
+            <button onClick={openLogin} className="text-sm text-[#B8956A] hover:text-[#9A7A50] font-medium tracking-wider">
+              ENTRAR
+            </button>
+          )}
         </div>
       </header>
 

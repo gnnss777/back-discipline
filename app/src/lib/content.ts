@@ -23,35 +23,60 @@ Este não é um app genérico de treino. É o conhecimento acumulado de JJ Monte
 
 JJ Monteiro é Educador Físico e Nutricionista. Com formação acadêmica sólida e anos de aplicação prática no treinamento de costas, ele desenvolveu o Back Discipline como a síntese do que aprendeu estudando, errando e acertando — traduzido em um programa rigoroso, direto e construído para quem leva o treino a sério.
 `,
-  "mentalidade-back-discipline": `
+  "mentalidade-principios": `
 # Capítulo 1: Mentalidade Back Discipline
 
-## A Filosofia do Investimento em Cada Repetição
+## Costas se Constroem com a Cabeça, Não Só com a Força
 
-Se você está lendo este livro, está pronto para transformar suas costas de verdade. O Back Discipline nasceu da fusão entre conhecimento científico sólido e experiência de academia, criando um sistema que prioriza a intensidade em cada repetição, série e sessão.
+Se você está lendo este livro, está pronto para transformar suas costas de verdade. O Back Discipline nasceu da fusão entre conhecimento científico sólido, experiência de academia e os princípios de um dos maiores especialistas em treino de costas — John Meadows.
 
-O treinamento de costas é frequentemente negligenciado. Uma costas bem desenvolvida cria aquela silhueta em V que distingue um físico amador de um physique competitivo.
+Meadows dizia algo que define a essência deste programa: *"Costas se constroem com a cabeça, não só com a força."*
 
-## O Tempo na Academia é um Investimento
+Treinar costas não é como treinar peito ou bíceps. Você não vê o músculo trabalhando. Você não pode simplesmente fazer o movimento e esperar resultados. Precisa sentir, conectar, entender. É o músculo de quem pensa.
 
-Investir em cada repetição significa estar completamente presente durante o movimento. Significa sentir cada contração, cada alongamento, cada fibra muscular trabalhando.
+## Cada Repetição Tem que Ter um Propósito
+
+A filosofia do Back Discipline é simples: **investir em cada repetição**. Não é sobre completar séries e ir embora. É sobre estar completamente presente durante cada movimento — sentir contração, alongamento, cada fibra trabalhando.
+
+Meadows repetia: *"Cada repetição tem que ter um propósito."*
+
+Isso significa:
+- **Saber qual músculo está sendo trabalhado** em cada exercício
+- **Ajustar a técnica** se você não estiver sentindo o alvo certo
+- **Respeitar o processo** — resultados consistentes vêm de repetições consistentes, não de momentos heroicos isolados
 
 O tempo gasto na academia deve ser um investimento real, não apenas tempo passado esperando algo acontecer.
 
+## Não Basta Mover o Peso — Você Precisa Sentir Cada Fibra
+
+Um dos maiores erros que Meadows observava em seus alunos era a desconexão entre intenção e execução. Alguém faz uma remada curvada movendo a barra do ponto A ao ponto B, mas as costas não estão trabalhando — os braços e o trapézio estão.
+
+*"Não basta mover o peso — você precisa sentir cada fibra."*
+
+A diferença entre um físico amador e um físico competitivo está nos detalhes. São as repetições onde você está mentalmente presente, travando cada contração no pico e alongando cada fibra no fundo, que constroem costas que chamam atenção.
+`,
+  "mentalidade-objetivos": `
+# Capítulo 1.2: Objetivos e Técnica
+
 ## O Objetivo: Espessura e Largura
 
-Para alcançar costas verdadeiramente impressionantes, você precisa desenvolver:
-- **Espessura**: Dos músculos próximos à coluna (romboides, trapézio médio, eretores)
-- **Largura**: Do latítimo, aquele músculo em forma de leque que cobre a maior parte das costas
+Para alcançar costas verdadeiramente impressionantes, você precisa desenvolver duas qualidades:
+
+- **Espessura:** Dos músculos próximos à coluna — romboides, trapézio médio, eretores da espinha. São eles que dão profundidade e solidez às suas costas.
+- **Largura:** Do latíssimo, aquele músculo em forma de leque que cobre a maior parte das costas e cria a silhueta em V.
+
+Meadows enfatizava que nenhum dos dois deve ser negligenciado. Um bodybuilder com largura mas sem espessura parece plano. Um com espessura mas sem largura parece compacto demais. O equilíbrio é a chave.
 
 ## Técnica Inteligente e Esforço Intenso
 
 Não é apenas sobre trabalhar pesado, mas sobre trabalhar pesado da forma certa. A técnica inteligente é o que transforma esforço em resultados.
 
-A combinação de técnica e intensidade cria uma sinergia maior que a soma das partes.
+Meadows dizia: *"Qualidade sempre acima de quantidade. Uma série perfeita vale mais que três séries sujas."*
+
+A combinação de técnica e intensidade cria uma sinergia maior que a soma das partes. E, acima de tudo: *"Deixe o ego do lado de fora da academia."* Treinar pesado não significa abandonar a técnica. Treinar pesado significa controlar a carga em toda amplitude, com ativação muscular total, repetição após repetição.
 `,
-  "sistema-intensidade-rpe": `
-# Capítulo 2: Sistema de Intensidade — RPE 6 a 13
+  "rpe-basico": `
+# Capítulo 2.1: Escala RPE
 
 ## O Que é RPE?
 
@@ -81,12 +106,9 @@ Use RPE 11-13 apenas:
 3. Para quebrar plateaus
 
 **Cuidado:** uso frequente leva a overtraining e sobrecarga do sistema nervoso.
-
----
-
-## O Arsenal de Técnicas de Intensidade
-
-O RPE é a régua que mede a intensidade, mas as ferramentas que você vai usar para chegar lá são as técnicas a seguir. Cada uma tem um propósito específico e um momento certo para ser usada.
+`,
+  "rpe-drop-rest-pause": `
+# Capítulo 2.2: Drop Set, Rest-Pause e Cluster
 
 ## Série Descendente (Drop Set)
 
@@ -126,6 +148,9 @@ A série agrupada divide um conjunto de repetições em mini-séries com pausas 
 4. Faça as repetições finais até a falha
 
 **Benefício:** Mantém a potência e o recrutamento neuromuscular elevados durante toda a série.
+`,
+  "rpe-feeder-challenge": `
+# Capítulo 2.3: Feeder Set, Challenge Set e Giant Set
 
 ## Série Gigante (Giant Set)
 
@@ -168,6 +193,9 @@ O Challenge Set é um protocolo de alta intensidade onde você desafia a si mesm
 **Objetivo:** Manter o mesmo número de repetições em cada rodada. Se você fizer 12, depois 10, depois 7, o desafio foi perdido. Se fizer 12, 12, 10, você venceu.
 
 **Quando usar:** Finalizadores de dia de costas, semanas de desafio (Semana 4).
+`,
+  "rpe-iso-forced": `
+# Capítulo 2.4: ISO Hold e Repetições Forçadas
 
 ## Contração Estática (ISO Hold)
 
@@ -198,7 +226,8 @@ Com o RPE dominado e o arsenal de técnicas compreendido, você está pronto par
 
 > *"Qualidade sempre acima de quantidade."* — Não tente usar todas as técnicas na primeira semana. Domine uma de cada vez.
 `,
-  "semana-1-ativacao": `
+    "semana-1-visao-geral": `
+# 3.1 — Visão Geral e Preparação
 # Capítulo 3: Semana 1 — Ativação e Base de Força
 
 ## Visão Geral
@@ -218,7 +247,9 @@ A primeira semana estabelece a fundação de todo o programa. O objetivo não é
 | Segunda | Remadas pesadas + Levantamento Terra |
 | Quinta | Puxadas + Pulldowns |
 | Sábado | Giant Sets (Volume) |
-
+`,
+  "semana-1-segunda": `
+# 3.2 — Segunda: Remadas + Levantamento Terra
 ## Segunda-feira: Remadas + Levantamento Terra
 
 ### Exercício 1: Remada Unilateral com Barra
@@ -264,7 +295,9 @@ A remada com halteres oferece amplitude de movimento total. O alongamento comple
 O levantamento terra com correntes é um exercício único. As correntes criam resistência progressiva: quanto mais você levanta a barra, mais elos saem do chão, mais pesada fica a carga. Isso significa que o movimento fica mais pesado exatamente onde seu corpo tem mais vantagem mecânica.
 
 **Dica:** Tire os sapatos ou use tênis com sola fina. A estabilidade do pé descalço melhora a transmissão de força do chão para a barra.
-
+`,
+  "semana-1-quinta": `
+# 3.3 — Quinta: Puxadas e Alongamento
 ## Quinta-feira: Puxadas e Alongamento
 
 O foco muda de espessura (remadas) para largura (puxadores). O objetivo aqui é abrir o leque do dorsal e trabalhar a silhueta em V.
@@ -282,7 +315,9 @@ Remada alta em máquina. Carga pesada, foco no trapézio médio e romboides.
 
 ### 4. Pull-over com Banda — 3x10
 O pull-over com banda é um dos melhores exercícios para isolar o dorsal. A tensão constante da banda mantém o músculo sob trabalho durante toda a amplitude.
-
+`,
+  "semana-1-sabado": `
+# 3.4 — Sábado: Giant Sets
 ## Sábado: Giant Sets
 
 **4 rodadas:**
@@ -308,7 +343,8 @@ O sábado é dia de volume puro. Quatro exercícios consecutivos sem descanso en
 
 Se você sair da Semana 1 sentindo que aprendeu a sentir suas costas trabalharem, a semana foi um sucesso — independente da carga na barra.
 `,
-  "semana-2-progressao": `
+    "semana-2-visao-geral": `
+# 2.1 — Visão Geral e Preparação
 # Capítulo 4: Semana 2 — Progressão de Volume
 
 ## Visão Geral
@@ -320,7 +356,9 @@ A Semana 2 marca a transição para a progressão real. Você não está mais ap
 - D.Y. Row com repetições forçadas e alongamento
 - Rack Pull para trabalho isolado da cadeia posterior
 - Face Pulls para saúde do ombro
-
+`,
+  "semana-2-segunda": `
+# 2.2 — Segunda: Volume
 ## Segunda-feira: Volume + Rack Pull
 
 ### 1. Remada com Halteres — 4 séries de 8 reps (inclui séries de alimentação)
@@ -356,7 +394,9 @@ O Rack Pull é o levantamento terra feito a partir de pinos colocados alguns cen
 - No topo, aperte os glúteos e retraia as escápulas
 
 **Por que funciona:** O Rack Pull isola a fase de maior alavancagem do terra, permitindo sobrecarga máxima no trapézio e nos eretores sem o risco de arredondamento da coluna que aparece no terra completo sob fadiga.
-
+`,
+  "semana-2-quinta": `
+# 2.3 — Quinta: Puxadas
 ## Quinta-feira: Puxadas Variadas
 
 ### 1. Away Facing Pulldown — 3x10
@@ -370,7 +410,9 @@ Barra fixa alternando pegadas: uma série ampla, uma média, uma estreita. Cada 
 
 ### 4. Pull-over com Banda — 3x12
 Pull-over com banda elástica para alongamento e ativação do dorsal. Tensão constante durante toda a amplitude.
-
+`,
+  "semana-2-sabado": `
+# 2.4 — Sábado: Giant Sets
 ## Sábado: Giant Sets + Face Pulls
 
 **4 rodadas:**
@@ -401,7 +443,8 @@ O Face Pull é um dos exercícios mais importantes que você pode fazer para a s
 - Rack Pull com carga controlada — não sacrifique a forma pela carga
 - Face Pulls não são enfeite — são prevenção de lesão a longo prazo
 `,
-  "semana-3-pico": `
+    "semana-3-visao-geral": `
+# 3.1 — Visão Geral e Preparação
 # Capítulo 5: Semana 3 — Pico de Contração e Drop Sets
 
 ## Visão Geral
@@ -413,7 +456,9 @@ A Semana 3 é onde o programa começa a ficar sério. Você já ativou as conex�
 - Drop sets como ferramenta de finalização
 - Deadstop Row — cada repetição do zero
 - Contração estática (ISO Hold) nos puxadores
-
+`,
+  "semana-3-segunda": `
+# 3.2 — Segunda: Volume
 ## Segunda-feira: Meadows Rows + Contrações
 
 ### 1. Meadows Row — 4 séries com drop set na última
@@ -455,7 +500,9 @@ A remada unilateral com saída morta elimina o impulso elástico entre repetiç�
 A hiperextensão com bandas adiciona resistência progressiva ao movimento de extensão do tronco. Quanto mais você sobe, mais a banda estica, mais pesado fica.
 
 **Progressão:** Comece com banda leve. Se conseguir 15 repetições limpas, aumente a resistência da banda na próxima série.
-
+`,
+  "semana-3-quinta": `
+# 3.3 — Quinta: Puxadas
 ## Quinta-feira: Puxadas com Contração Estática
 
 ### 1. Puxador Supinado Unilateral — 3x12
@@ -479,7 +526,9 @@ Encolhimento de ombros com banda elástica. A tensão constante da banda mantém
 Remada horizontal com os pés no chão e o TRX como apoio. A dificuldade é ajustada pela distância dos pés do ponto de ancoragem: quanto mais vertical, mais fácil; quanto mais horizontal, mais difícil.
 
 **Meta:** Superar o número de repetições da semana anterior.
-
+`,
+  "semana-3-sabado": `
+# 3.4 — Sábado: Giant Sets
 ## Sábado: Giant Sets + Stretchers
 
 **4 rodadas:**
@@ -503,7 +552,8 @@ Remada horizontal com os pés no chão e o TRX como apoio. A dificuldade é ajus
 - **Controle o ego:** Meadows Row com muita carga sacrifica a amplitude. Use carga que permita sentir o dorsal trabalhando.
 - **Deadstop não é desculpa para trapacear:** A saída morta é mais difícil, mas não justifica usar o corpo para balançar a carga.
 `,
-  "semana-4-desafio": `
+    "semana-4-visao-geral": `
+# 4.1 — Visão Geral e Preparação
 # Capítulo 6: Semana 4 — Desafio de Resistência
 
 ## Visão Geral
@@ -515,7 +565,9 @@ A Semana 4 marca o pico de volume do programa — 18 séries de trabalho direto 
 - Rest-Pause no T-Bar — volume com carga máxima
 - Farmer's Walk — trabalho funcional para trapézio e pegada
 - Superséries combinadas para densidade
-
+`,
+  "semana-4-segunda": `
+# 4.2 — Segunda: Volume
 ## Segunda-feira: Desafio + Volume Máximo
 
 ### 1. Meadows Row com Challenge Set — 3 séries
@@ -571,7 +623,9 @@ A caminhada do fazendeiro é um dos exercícios mais completos para o trapézio,
 - Não balance o corpo — mantenha o core rígido
 
 **Meta:** Caminhe até não conseguir mais segurar os halteres. Isso é uma série.
-
+`,
+  "semana-4-quinta": `
+# 4.3 — Quinta: Puxadas
 ## Quinta-feira: Superset + Contração Estática
 
 ### 1. Puxador Unilateral com Contração Estática — 3 séries
@@ -593,7 +647,9 @@ Pull-over com halter ou máquina. O melhor exercício de isolamento para o dorsa
 ### 4. Barra Fixa Horizontal no TRX — superar Semana 3
 
 Se você fez 10 repetições no TRX na Semana 3, a meta agora é 11. Progressão é progressão — mesmo que seja uma repetição.
-
+`,
+  "semana-4-sabado": `
+# 4.4 — Sábado: Giant Sets
 ## Sábado: Trisets
 
 **Triset 1 (3 rodadas):**
@@ -616,7 +672,8 @@ Se você fez 10 repetições no TRX na Semana 3, a meta agora é 11. Progressão
 
 *"Volume não é desculpa para técnica pobre. Cada repetição precisa ter um propósito — mesmo na décima oitava série do sábado."*
 `,
-  "semana-5-sobrecarga": `
+    "semana-5-visao-geral": `
+# 5.1 — Visão Geral e Preparação
 # Capítulo 7: Semana 5 — Sobrecarga Máxima
 
 ## Visão Geral
@@ -632,7 +689,9 @@ A Semana 5 é a fronteira final. Você não está mais construindo base, acumula
 - Lat Hang — descompressão da coluna
 
 **Aviso:** Esta é a semana mais intensa do programa. Seu sistema nervoso vai estar sob carga máxima. Respeite o descanso entre os treinos.
-
+`,
+  "semana-5-segunda": `
+# 5.2 — Segunda: Volume
 ## Segunda-feira: Sobrecarga + Déficit
 
 ### 1. Remada Unilateral com Barra — Pirâmide Lenta
@@ -693,7 +752,9 @@ O terra com déficit é um dos exercícios mais desafiadores do programa. Você 
 - Empurre o chão com os pés, não puxe com as costas
 
 **Dica de Meadows:** Se você não consegue manter a coluna neutra no terra com déficit, reduza a altura da elevação ou volte para o terra normal. Um terra com as costas arredondadas não é terra — é lesão esperando para acontecer.
-
+`,
+  "semana-5-quinta": `
+# 5.3 — Quinta: Puxadas
 ## Quinta-feira: Chin Up Death
 
 ### 1. Puxador com Pegada na Largura dos Ombros com Contração Sustentada — 3 séries
@@ -725,7 +786,9 @@ Pull-over na máquina (ou com halter) para isolar o dorsal após o Chin Up Death
 ### 4. Puxador Supinado Unilateral com Alongamento — 3 séries
 
 Puxador unilateral com pegada supinada, com ênfase no alongamento forçado no topo do movimento. Peça ajuda para alongar seus dorsais por 5 segundos entre as repetições.
-
+`,
+  "semana-5-sabado": `
+# 5.4 — Sábado: Giant Sets
 ## Sábado: Giant Sets + Lat Hang (25 Séries!)
 
 **5 rodadas:**
@@ -752,7 +815,8 @@ O Lat Hang é simplesmente se pendurar na barra sem fazer força para subir. A s
 
 **Meta:** 60 segundos. Se conseguir, você está liberado.
 `,
-  "semana-6-finalizacao": `
+    "semana-6-visao-geral": `
+# 6.1 — Visão Geral e Preparação
 # Capítulo 8: Semana 6 — Finalização
 
 ## Visão Geral
@@ -767,7 +831,9 @@ A Semana 6 é o clímax do programa. Aqui você aplica tudo o que aprendeu nas 5
 - ISO Hold + Smith Deadlift — o finalizador final
 
 ---
-
+`,
+  "semana-6-segunda": `
+# 6.2 — Segunda: Volume
 ## Segunda-feira: Quad Drop + Superset
 
 ### 1. Remada com Halteres com Quadruple Drop Set — 4 séries
@@ -820,7 +886,9 @@ Encolhimento de ombros deitado em um banco inclinado, com barra ou halteres. Est
 Hiperextensão reversa trabalha os eretores da espinha e os glúteos em um movimento de extensão do quadril. É um excelente exercício de finalização para a lombar.
 
 ---
-
+`,
+  "semana-6-quinta": `
+# 6.3 — Quinta: Puxadas
 ## Quinta-feira: Mega Chin Up Death
 
 ### 1. Mega Chin Up Death — 9 séries (3 ampla, 3 média, 3 estreita)
@@ -849,7 +917,9 @@ Puxador unilateral com pegada supinada. Foco na contração do dorsal inferior. 
 Pull-over para finalizar o dorsal. Máquina ou halter, o foco é o alongamento completo no fundo e a contração máxima no topo.
 
 ---
-
+`,
+  "semana-6-sabado": `
+# 6.4 — Sábado: Giant Sets
 ## Sábado: Trisets Finais + ISO Hold + Smith Deadlift
 
 ### Triset 1 (3 rodadas)

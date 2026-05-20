@@ -14,6 +14,7 @@ import { ExerciseLogger } from '@/components/ExerciseLogger';
 import { WorkoutLogForm } from '@/components/WorkoutLogForm';
 import { WorkoutHistory } from '@/components/WorkoutHistory';
 import type { PlanilhaData, ActualSet } from '@/types/planilha';
+import { getWorkoutsByUser } from '@/lib/storage';
 
 type Tab = 'semana' | 'log' | 'historico';
 
@@ -43,6 +44,20 @@ export default function PlanilhaUnificadaPage() {
     setSaving(true);
     savePlanilha(user.userId, newData);
     setTimeout(() => setSaving(false), 800);
+  }, [user]);
+
+  const getLastWeight = useCallback((exerciseName: string): number | undefined => {
+    if (!user) return undefined;
+    const workouts = getWorkoutsByUser(user.userId);
+    const sorted = [...workouts].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    for (const w of sorted) {
+      const ex = w.exercises.find(e => e.exerciseName === exerciseName);
+      if (ex && ex.sets.length > 0) {
+        const lastSet = [...ex.sets].reverse().find(s => s.weight > 0);
+        if (lastSet) return lastSet.weight;
+      }
+    }
+    return undefined;
   }, [user]);
 
   const updateActual = (weekIdx: number, dayIdx: number, exIdx: number, setIdx: number, field: string, value: number | string) => {
@@ -272,6 +287,7 @@ export default function PlanilhaUnificadaPage() {
                     exerciseName={ex.name}
                     planned={ex.planned}
                     actual={ex.actual}
+                    lastSavedWeight={getLastWeight(ex.name)}
                     onUpdateActual={(setIdx, field, value) =>
                       updateActual(selectedDayInfo.weekIdx, selectedDayInfo.dayIdx, exIdx, setIdx, field, value)
                     }

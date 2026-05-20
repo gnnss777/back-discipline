@@ -1,7 +1,9 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { Plus, Save, X, Dumbbell, Calendar } from 'lucide-react';
+import { toast } from 'sonner';
 import { ExerciseSelector } from './ExerciseSelector';
 import { SetInput } from './SetInput';
 import { saveWorkout, getSession } from '../lib/storage';
@@ -13,6 +15,7 @@ interface WorkoutLogFormProps {
 }
 
 export function WorkoutLogForm({ onSave, onCancel }: WorkoutLogFormProps) {
+  const router = useRouter();
   const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
   const [notes, setNotes] = useState('');
   const [exercises, setExercises] = useState<WorkoutExercise[]>([]);
@@ -64,12 +67,16 @@ export function WorkoutLogForm({ onSave, onCancel }: WorkoutLogFormProps) {
 
   const handleSave = async () => {
     const session = getSession();
-    if (!session) return;
+    if (!session) {
+      toast.error('Faça login primeiro para salvar o treino');
+      router.push('/login');
+      return;
+    }
 
     const validExercises = exercises.filter(ex => ex.exerciseName && ex.sets.length > 0);
     
     if (validExercises.length === 0) {
-      alert('Adicione pelo menos um exercício com uma série');
+      toast.error('Adicione pelo menos um exercício com uma série');
       return;
     }
 
@@ -116,9 +123,9 @@ export function WorkoutLogForm({ onSave, onCancel }: WorkoutLogFormProps) {
               <button
                 type="button"
                 onClick={() => removeExercise(index)}
-                className="text-gray-500 hover:text-red-500 transition-colors"
+                className="p-2 text-gray-500 hover:text-red-500 transition-colors"
               >
-                <X className="w-4 h-4" />
+                <X className="w-5 h-5" />
               </button>
             </div>
 

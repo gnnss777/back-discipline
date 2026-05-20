@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Sparkles, ChevronDown, ChevronUp, Plus, Check } from 'lucide-react';
 import type { PlannedSet, ActualSet } from '@/types/planilha';
 
@@ -11,10 +11,13 @@ interface ExerciseLoggerProps {
   planned: PlannedSet[];
   actual?: ActualSet[];
   onUpdateActual: (setIdx: number, field: string, value: number | string) => void;
+  lastSavedWeight?: number;
 }
 
-export function ExerciseLogger({ exerciseName, planned, actual, onUpdateActual }: ExerciseLoggerProps) {
+export function ExerciseLogger({ exerciseName, planned, actual, onUpdateActual, lastSavedWeight }: ExerciseLoggerProps) {
   const [expanded, setExpanded] = useState(true);
+  const [showRpe, setShowRpe] = useState(false);
+  const autoFilled = useRef(false);
 
   const lastActualWeight = actual?.length
     ? [...actual].reverse().find(a => a.weight !== undefined)?.weight
@@ -25,7 +28,19 @@ export function ExerciseLogger({ exerciseName, planned, actual, onUpdateActual }
 
   const suggestedWeight = allCompleted && lastActualWeight
     ? Math.round((lastActualWeight + 2.5) * 10) / 10
-    : lastActualWeight || planned[0]?.weight || 0;
+    : lastActualWeight || lastSavedWeight || planned[0]?.weight || 0;
+
+  // Auto-fill peso da última sessão e reps do plano na primeira abertura
+  if (!autoFilled.current && actual && actual.length > 0) {
+    const hasAnyData = actual.some(a => a.weight !== undefined || a.reps !== undefined);
+    if (!hasAnyData) {
+      planned.forEach((p, idx) => {
+        if (lastSavedWeight) onUpdateActual(idx, 'weight', lastSavedWeight);
+        if (p.reps) onUpdateActual(idx, 'reps', p.reps);
+      });
+    }
+    autoFilled.current = true;
+  }
 
   const applySuggestion = () => {
     planned.forEach((_, idx) => {
@@ -52,6 +67,11 @@ export function ExerciseLogger({ exerciseName, planned, actual, onUpdateActual }
       >
         <div className="flex items-center gap-2 min-w-0">
           <span className="text-sm font-medium truncate">{exerciseName}</span>
+          {!expanded && hasAnyData && (
+            <span className="text-[10px] text-gray-500 shrink-0">
+              {actual?.filter(a => a.reps !== undefined).length || 0}/{planned.length}
+            </span>
+          )}
           {hasAnyData && !allCompleted && (
             <span className="text-xs text-yellow-400 shrink-0">Incompleto</span>
           )}
@@ -64,7 +84,17 @@ export function ExerciseLogger({ exerciseName, planned, actual, onUpdateActual }
 
       {expanded && (
         <div className="px-3 pb-3 space-y-2 border-t border-[#2A2A2A]">
-          <div className="pt-2 grid grid-cols-[1fr_auto] gap-1">
+          <div className="flex items-center justify-between pt-2 pb-1">
+            <span className="text-[10px] text-gray-500">Séries</span>
+            <button
+              type="button"
+              onClick={() => setShowRpe(!showRpe)}
+              className="text-[10px] text-gray-500 hover:text-[#B8956A] transition-colors"
+            >
+              {showRpe ? 'Ocultar RPE' : 'Mostrar RPE'}
+            </button>
+          </div>
+          <div className="grid grid-cols-[1fr_auto] gap-1">
             {planned.map((p, sIdx) => {
               const a = actual?.[sIdx] || { reps: undefined, weight: undefined, rpe: undefined };
               const isLast = sIdx === planned.length - 1;
@@ -78,14 +108,14 @@ export function ExerciseLogger({ exerciseName, planned, actual, onUpdateActual }
                       Meta: {p.reps} reps{p.weight ? ` @${p.weight}kg` : ''}
                     </span>
                   </div>
-                  <div className="grid grid-cols-3 gap-1.5">
+                  <div className={`grid ${showRpe ? 'grid-cols-3' : 'grid-cols-2'} gap-1.5`}>
                     <div>
                       <label className="block text-[#555] text-[9px] mb-0.5">Reps</label>
                       <input
                         type="number"
                         min={0}
                         max={99}
-                        value={a.reps ?? ''}
+                        value={a.reps ?? p.reps ?? ''}
                         onChange={e => onUpdateActual(sIdx, 'reps', parseInt(e.target.value) || 0)}
                         className="w-full bg-[#1A1A1A] border border-[#2A2A2A] rounded py-1.5 px-2 text-white text-center text-xs focus:border-[#B8956A] focus:outline-none"
                         placeholder={String(p.reps)}
@@ -98,23 +128,25 @@ export function ExerciseLogger({ exerciseName, planned, actual, onUpdateActual }
                         min={0}
                         max={500}
                         step={0.5}
-                        value={a.weight ?? ''}
+                        value={a.weight ?? lastSavedWeight ?? ''}
                         onChange={e => onUpdateActual(sIdx, 'weight', parseFloat(e.target.value) || 0)}
                         className="w-full bg-[#1A1A1A] border border-[#2A2A2A] rounded py-1.5 px-2 text-white text-center text-xs focus:border-[#B8956A] focus:outline-none"
                         placeholder={p.weight ? String(p.weight) : '0'}
                       />
                     </div>
-                    <div className="relative">
-                      <label className="block text-[#555] text-[9px] mb-0.5">RPE</label>
-                      <select
-                        value={a.rpe ?? ''}
-                        onChange={e => onUpdateActual(sIdx, 'rpe', parseFloat(e.target.value) || 0)}
-                        className="w-full bg-[#1A1A1A] border border-[#2A2A2A] rounded py-1.5 px-1 text-white text-center text-xs focus:border-[#B8956A] focus:outline-none appearance-none"
-                      >
-                        <option value="">-</option>
-                        {RPE_VALUES.map(r => <option key={r} value={r}>{r}</option>)}
-                      </select>
-                    </div>
+                    {showRpe && (
+                      <div className="relative">
+                        <label className="block text-[#555] text-[9px] mb-0.5">RPE</label>
+                        <select
+                          value={a.rpe ?? ''}
+                          onChange={e => onUpdateActual(sIdx, 'rpe', parseFloat(e.target.value) || 0)}
+                          className="w-full bg-[#1A1A1A] border border-[#2A2A2A] rounded py-1.5 px-1 text-white text-center text-xs focus:border-[#B8956A] focus:outline-none appearance-none"
+                        >
+                          <option value="">-</option>
+                          {RPE_VALUES.map(r => <option key={r} value={r}>{r}</option>)}
+                        </select>
+                      </div>
+                    )}
                   </div>
                   {hasPrev && (
                     <button
@@ -134,7 +166,7 @@ export function ExerciseLogger({ exerciseName, planned, actual, onUpdateActual }
             <button
               type="button"
               onClick={applySuggestion}
-              className="w-full flex items-center justify-center gap-1.5 py-2 bg-[#1A1A1A] border border-[#2A2A2A] rounded text-xs text-gray-400 hover:text-[#B8956A] hover:border-[#B8956A] transition-colors"
+              className="w-full flex items-center justify-center gap-1.5 py-2.5 bg-[#1A1A1A] border border-[#2A2A2A] rounded text-sm text-gray-400 hover:text-[#B8956A] hover:border-[#B8956A] transition-colors"
             >
               <Sparkles className="w-3 h-3" />
               Aplicar {suggestedWeight}kg em todas as séries
