@@ -119,7 +119,7 @@ A primeira semana estabelece a fundação. O objetivo é ativar os músculos das
 
 ### Exercício 4: Levantamento Terra com Correntes
 - Pyramide até 8 reps difíceis (RPE 9)
-- Final: redução + correntes até failure (~15-20 reps)
+- Final: redução + correntes até falha (~15-20 reps)
 - RPE 13
 
 ## Quinta-feira: Puxadas e Alongamento
@@ -195,7 +195,7 @@ O foco é o trabalho de contração máxima.
 1. Supinated Pulldown Unilateral — 3x12
 2. Underhand Pulldown com ISO Hold — última série
 3. Banded Shrugs — 3x12
-4. TRX Horizontal Chins — até failure
+4. TRX Horizontal Chins — até falha
 
 ## Sábado: Giant Sets + Stretchers
 
@@ -256,7 +256,7 @@ A Semana 5 é a mais desafiadora do programa. Você trabalhará com cargas pesad
 ## Quinta-feira: Chin Up Death
 
 1. Shoulder Width Pulldowns com Contração Sustentada — 3 séries
-2. Chin Up Death (6 séries: 2 wide, 2 meio, 2 narrow) — até failure
+2. Chin Up Death (6 séries: 2 wide, 2 meio, 2 narrow) — até falha
 3. Machine Pullovers — 3 séries
 4. One Arm Supinated Pulldowns com Stretch — 3 séries
 

@@ -34,11 +34,11 @@ export const MUSCLE_DISPLAY_NAMES: Record<MuscleGroup, string> = {
 };
 
 export const EXERCISE_MUSCLES: Record<string, MuscleGroup[]> = {
-  'Meadows Row': ['costas', 'biceps'],
+  'Remada Meadows': ['costas', 'biceps'],
   'Remada Unilateral com Barra': ['costas', 'biceps'],
-  'Smith Machine Row': ['costas', 'biceps'],
-  'Deadstop Dumbbell Row': ['costas', 'biceps'],
-  'T-Bar Row': ['costas', 'biceps'],
+  'Remada no Smith': ['costas', 'biceps'],
+  'Remada Deadstop com Haltere': ['costas', 'biceps'],
+  'Remada T-Bar': ['costas', 'biceps'],
   'Puxada na Barra': ['costas', 'biceps'],
   'Puxada no Cabo': ['costas', 'biceps'],
   'Remada Cavalinho': ['costas', 'biceps'],

@@ -117,7 +117,7 @@ export function ExerciseSelector({ selectedExercise, onSelect }: ExerciseSelecto
                   onClick={handleAddNew}
                   className="px-3 bg-[#B8956A] text-[#0A0A0A] rounded-lg text-sm font-medium"
                 >
-                  Add
+Adicionar
                 </button>
                 <button
                   type="button"

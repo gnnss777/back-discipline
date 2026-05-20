@@ -96,7 +96,7 @@ export function RestTimer({ defaultSeconds = 90, onComplete }: RestTimerProps) {
   return (
     <div className="bg-[#111] border border-[#333] rounded-xl p-6">
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-lg font-bold text-white tracking-wider">REST TIMER</h3>
+        <h3 className="text-lg font-bold text-white tracking-wider">CRONÔMETRO</h3>
         <button
           onClick={() => setSoundEnabled(!soundEnabled)}
           className={`p-2 rounded-lg transition-colors ${
@@ -176,7 +176,7 @@ export function RestTimer({ defaultSeconds = 90, onComplete }: RestTimerProps) {
           className="text-gray-500 hover:text-white transition-colors flex items-center gap-2 mx-auto"
         >
           <RotateCcw className="w-4 h-4" />
-          <span className="text-sm">Reset</span>
+          <span className="text-sm">Reiniciar</span>
         </button>
       </div>
 
