@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { ArrowRight, BookOpen, ChevronDown, ChevronUp, Dumbbell, X, Check, BarChart2, Sparkles } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
 import { loadPlanilha, savePlanilha, ensureSeed } from '@/utils/planilhaStorage';
+import { syncPlanilhaDay, syncAllPlanilhaDays } from '@/utils/planilhaSync';
 import type { PlanilhaData, ExerciseSaved, WeekSaved, DaySaved, PlannedSet, ActualSet } from '@/types/planilha';
 import planilhaSeed from './planilhaSeed';
 
@@ -27,6 +28,7 @@ export default function PlanilhaProgressoPage() {
     const loaded = loadPlanilha(user.userId);
     if (loaded) {
       setData(loaded);
+      syncAllPlanilhaDays(user.userId);
     } else {
       setData(ensureSeed(user.userId));
     }
@@ -54,6 +56,7 @@ export default function PlanilhaProgressoPage() {
     }
     (ex.actual[setIdx] as Record<string, unknown>)[field] = value === '' ? undefined : value;
     persist(newData);
+    if (user) syncPlanilhaDay(user.userId, weekIdx, dayIdx);
   };
 
   const exerciseKey = (w: number, d: number, e: number) => `${w}-${d}-${e}`;

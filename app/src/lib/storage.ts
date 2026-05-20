@@ -68,6 +68,17 @@ export function saveWorkout(workout: Workout): void {
   setItem(STORAGE_KEYS.WORKOUTS, workouts);
 }
 
+export function upsertWorkout(workout: Workout): void {
+  const workouts = getWorkouts();
+  const index = workouts.findIndex(w => w.id === workout.id);
+  if (index >= 0) {
+    workouts[index] = workout;
+  } else {
+    workouts.push(workout);
+  }
+  setItem(STORAGE_KEYS.WORKOUTS, workouts);
+}
+
 export function getProgress(userId: string): UserProgress | null {
   return getItem<UserProgress>(`${STORAGE_KEYS.PROGRESS}_${userId}`);
 }
