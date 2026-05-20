@@ -11,7 +11,9 @@ export function Providers({ children }: { children: React.ReactNode }) {
     <ErrorBoundary>
       <AuthProvider>
         <ProgressProvider>
-          {children}
+          <div className="lg:ml-56">
+            {children}
+          </div>
           <BottomNav />
           <Toaster theme="dark" richColors position="top-center" />
         </ProgressProvider>
