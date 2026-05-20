@@ -406,74 +406,79 @@ O Face Pull é um dos exercícios mais importantes que você pode fazer para a s
 
 ## Visão Geral
 
-A Semana 3 é onde a intensidade sobe de nível. Você vai usar duas ferramentas poderosas: o **Meadows Row** (um exercício que leva o nome do criador deste manual) e as **séries descendentes (drop sets)**.
-
-O foco da semana é contração máxima — cada repetição deve terminar com um aperto consciente do músculo alvo.
+A Semana 3 é onde o programa começa a ficar sério. Você já ativou as conexões neurais na Semana 1 e acumulou volume na Semana 2. Agora é hora de introduzir técnicas de alta intensidade que forçam seus músculos a trabalhar além do que você achava que era capaz.
 
 **O que há de novo:**
-- Remada Meadows — técnica completa
-- Drop set como finalizador na última série
+- Meadows Row — o exercício que leva o nome do mentor deste programa
+- Drop sets como ferramenta de finalização
 - Deadstop Row — cada repetição do zero
 - Contração estática (ISO Hold) nos puxadores
-- Stretchers para alongamento profundo
 
 ## Segunda-feira: Meadows Rows + Contrações
 
-### 1. Remada Meadows — 4 séries com série descendente na última
-A Remada Meadows é um exercício criado por John Meadows que combina as vantagens da remada unilateral com um ângulo de tração único. Ela permite um alongamento profundo do dorsal e uma linha de puxada que atinge fibras que outros exercícios não alcançam.
+### 1. Meadows Row — 4 séries com drop set na última
+
+A Remada Meadows é mais que um exercício — é uma assinatura. John Meadows desenvolveu esta variação para criar um estímulo único no dorsal: o alongamento profundo na descida combinado com um ângulo de tração que atinge o dorsal inferior de uma forma que nenhuma outra remada consegue.
 
 **Setup:**
-- Ancore uma barra em um canto da sala ou use um suporte fixo
-- Posicione-se ao lado da barra, com o pé da frente apontando para ela
-- Segure a barra próximo à ponta, com a mão do lado da perna da frente
-- A outra mão pressiona o joelho da perna da frente
+- Coloque uma barra no canto de um rack ou máquina, com uma ponta fixa no chão
+- Posicione-se ao lado da barra, com a perna do lado oposto à frente
+- Segure a barra próxima à ponta carregada
+- Puxe a barra em direção ao quadril, não ao ombro
 
-**Execução:**
-1. Inicie com o dorsal totalmente alongado — o braço estendido e o ombro à frente
-2. Puxe a barra em direção ao quadril, não ao ombro
-3. Mantenha o cotovelo alto — mais alto que o dorso da mão
-4. No pico, faça uma leve rotação do tronco para maximizar a contração
-5. Segure a contração por 1 segundo
-6. Retorne lentamente ao alongamento total
+**Dica técnica:** A mão livre pressionando a perna da frente gera um contra-torque que enrijece toda a musculatura da lombar. Isso permite puxar com mais potência e segurança.
 
-**Dica avançada:** A mão pressionando o joelho não é apenas para apoio. Ela gera um contra-torque que enrijece a lombar e permite puxar com mais potência. Quanto mais forte você pressionar, mais força pode gerar na puxada.
+**Drop set na última série:** Após atingir a falha, reduza 20-30% da carga e continue sem descanso. Repita para 2-3 quedas. O Meadows Row com drop set é um finalizador brutal para o dorsal.
 
-**Drop set na última série:**
-- Execute a série até a falha
-- Reduza 20-30% da carga (pré-preparada)
-- Vá até a falha novamente
-- O drop set na Remada Meadows é brutalmente eficaz para o dorsal
+### 2. Remada Baixa com Barra W (EZ Bar Cable Row) — 4x10
+**Foco: contração do dorsal inferior**
 
-### 2. Remada no Cabo com Barra W — 4x10
-A remada no cabo com barra W permite uma pegada mais neutra e um foco no dorsal inferior. A tensão constante do cabo mantém o músculo sob trabalho durante toda a amplitude.
+A barra W no cabo permite uma pegada mais neutra, reduzindo o estresse no punho e no cotovelo. O foco aqui é a contração do dorsal inferior — aquela região do latíssimo que dá o formato de "V" nas costas.
 
-**Foco:** No topo da contração, pense em apertar o cotovelo contra as costelas. Esse movimento de adução do braço é a função primária do dorsal.
+**Técnica:**
+- Sente-se com os pés apoiados e joelhos levemente flexionados
+- Puxe o cabo em direção ao abdômen, mantendo os cotovelos próximos ao corpo
+- No pico, aperte as escápulas por 2 segundos
+- Controle o retorno — não deixe o peso "voar" de volta
 
-### 3. Remada com Halteres (Saída Morta) — 4x8
-A remada com halteres com saída morta (deadstop) elimina o impulso entre repetições. Cada repetição começa com o haltere parado no chão — sem balanço, sem impulso elástico, sem trapaça.
+### 3. Remada Unilateral com Haltere com Saída Morta (Deadstop Row) — 4x8
+**Alongamento profundo em cada repetição**
 
-**Por que funciona:** Quando você elimina o impulso elástico, cada repetição é uma contração concêntrica pura. Isso força o dorsal a trabalhar desde o ponto de máximo alongamento, recrutando mais fibras e construindo força na amplitude completa.
+A remada unilateral com saída morta elimina o impulso elástico entre repetições. Você coloca o haltere no chão a cada repetição, solta completamente a tensão e recomeça do zero.
+
+**Por que funciona:** Quando você remove o ciclo alongamento-encurtamento (stretch-shortening cycle), cada repetição é uma contração concêntrica pura. Isso recruta mais fibras musculares e constrói força real desde a posição mais alongada.
+
+**Dica:** No fundo do movimento, sinta o dorsal esticar completamente antes de iniciar a próxima repetição. Esse alongamento-forçado cria microlesões controladas que estimulam o crescimento.
 
 ### 4. Hiperextensão com Bandas — 4 séries com progressão
-A hiperextensão com bandas adiciona resistência progressiva ao movimento de extensão da coluna.
 
-**Progressão:** Comece com a banda mais leve. A cada série, aumente a tensão da banda (enrole mais ou troque para uma banda mais pesada).
+A hiperextensão com bandas adiciona resistência progressiva ao movimento de extensão do tronco. Quanto mais você sobe, mais a banda estica, mais pesado fica.
+
+**Progressão:** Comece com banda leve. Se conseguir 15 repetições limpas, aumente a resistência da banda na próxima série.
 
 ## Quinta-feira: Puxadas com Contração Estática
 
-### 1. Pulldown Supinado Unilateral — 3x12
-Puxador unilateral com pegada supinada. Permite foco em cada lado isoladamente e maior amplitude de movimento.
+### 1. Puxador Supinado Unilateral — 3x12
 
-### 2. Underhand Pulldown com Contração Estática — última série
-Puxador supinado onde a última série termina com 10 segundos de sustentação no pico da contração.
+Puxador unilateral com pegada supinada (palmas para você). A supinação coloca o bíceps em uma posição mais forte, permitindo puxar com mais carga, mas o foco continua sendo o dorsal.
 
-**ISO Hold:** No final da série, segure a posição de contração máxima por 10 segundos. Solte lentamente. Você vai sentir o dorsal queimar como nunca.
+**Dica:** No pico da contração, gire levemente o tronco para o lado ativo. Isso encurta a distância origem-inserção do dorsal e maximiza a ativação.
 
-### 3. Encolhimento com Bandas — 3x12
-Encolhimento de ombros com bandas elásticas. A banda cria resistência máxima no topo do movimento, exatamente onde o trapézio superior precisa de mais estímulo.
+### 2. Puxador Supinado com Contração Estática — última série
 
-### 4. TRX Horizontal Chins — até falha
-Barra fixa horizontal no TRX ou anilhas. Puxe o peito em direção às argolas. Vá até a falha em cada série.
+Na última série, ao atingir a falha, segure a posição de pico de contração por 5-10 segundos. A contração estática no final da série recruta fibras de contração lenta que não foram totalmente ativadas durante o movimento dinâmico.
+
+### 3. Encolhimento com Banda (Banded Shrugs) — 3x12
+
+Encolhimento de ombros com banda elástica. A tensão constante da banda mantém o trapézio sob trabalho contínuo durante toda a amplitude.
+
+**Técnica:** Em pé, segure a banda com os braços estendidos ao lado do corpo. Eleve os ombros em direção às orelhas, segure por 1 segundo, e desça controladamente.
+
+### 4. Barra Fixa Horizontal no TRX (TRX Horizontal Chins) — até falha
+
+Remada horizontal com os pés no chão e o TRX como apoio. A dificuldade é ajustada pela distância dos pés do ponto de ancoragem: quanto mais vertical, mais fácil; quanto mais horizontal, mais difícil.
+
+**Meta:** Superar o número de repetições da semana anterior.
 
 ## Sábado: Giant Sets + Stretchers
 
@@ -486,226 +491,240 @@ Barra fixa horizontal no TRX ou anilhas. Puxe o peito em direção às argolas. 
 | Remada com Kettlebell | 10 |
 | Stretcher | 10 |
 
-### Stretchers
-Stretchers são exercícios de alongamento ativo para as costas, geralmente feitos na polia ou com banda. O objetivo é alongar o dorsal sob tensão, criando microlesões controladas que estimulam o crescimento.
+**Descanso:** 60-90 segundos entre rodadas.
 
-**Execução:**
-- Segure uma barra reta ou corda em uma polia alta
-- Estenda os braços completamente, sentindo o alongamento do dorsal
-- Mantenha a posição por 2-3 segundos
-- Retorne lentamente
+**Stretcher:** O exercício "esticador" — segure uma carga leve e realize o movimento de puxador com foco total no alongamento do dorsal no topo. Inspira profundamente no alongamento e expire na contração.
+
+---
 
 ## Notas Técnicas para a Semana 3
 
-- **Remada Meadows:** A rotação do tronco no topo é sutil — não exagere. O movimento vem do ombro, não da coluna.
-- **Drop set:** Prepare a carga reduzida antes de começar a série. Você não quer ficar procurando anilha enquanto o músculo esfria.
-- **ISO Hold:** A contração estática não precisa ser longa — 10 segundos de qualidade valem mais que 30 segundos de sofrimento.
-
-> *"Se você não sente o músculo, não está treinando — está só suando."* — Esta semana vai testar se você realmente aprendeu a sentir.
+- **Drop set requer preparação:** Tenha as cargas reduzidas pré-selecionadas antes de iniciar a série. Não perca tempo ajustando peso.
+- **Controle o ego:** Meadows Row com muita carga sacrifica a amplitude. Use carga que permita sentir o dorsal trabalhando.
+- **Deadstop não é desculpa para trapacear:** A saída morta é mais difícil, mas não justifica usar o corpo para balançar a carga.
 `,
   "semana-4-desafio": `
 # Capítulo 6: Semana 4 — Desafio de Resistência
 
 ## Visão Geral
 
-A Semana 4 representa o pico de volume do programa — 18 séries no total. É aqui que você descobre do que é feito. O volume aumenta, o descanso diminui e as técnicas de intensidade entram em ação.
+A Semana 4 marca o pico de volume do programa — 18 séries de trabalho direto para costas. Aqui você não está mais apenas construindo força; está ensinando seus músculos a trabalhar sob fadiga acumulada. É a semana do desafio.
 
 **O que há de novo:**
-- Challenge Set — o protocolo que testa sua resistência mental
-- Descanso-Pausa (Rest-Pause) no T-Bar — volume pesado com micro-pausas
-- Farmer Walk — carga manual + trapézio + pegada
-- Superséries e triséries combinadas
-- 18 séries de volume total — o maior dia do programa até aqui
+- Challenge Set — o teste definitivo de resistência muscular
+- Rest-Pause no T-Bar — volume com carga máxima
+- Farmer's Walk — trabalho funcional para trapézio e pegada
+- Superséries combinadas para densidade
 
 ## Segunda-feira: Desafio + Volume Máximo
 
-### 1. Remada Meadows com Challenge Set — 3 séries
-O Challenge Set é um protocolo de alta intensidade que testa sua capacidade de repetir o desempenho sob fadiga.
+### 1. Meadows Row com Challenge Set — 3 séries
 
-**Protocolo Challenge Set:**
-1. Escolha uma carga que você consegue fazer 10-12 repetições
-2. **Rodada 1:** Faça o máximo de repetições possível
-3. Descanse exatamente 30 segundos
-4. **Rodada 2:** Tente igualar o número da rodada 1
-5. Descanse exatamente 30 segundos
-6. **Rodada 3:** Tente igualar novamente
+O Challenge Set é um protocolo criado por John Meadows para extrair o máximo de um exercício em um curto espaço de tempo. Não é sobre carga — é sobre resistência e determinação.
 
-**O objetivo:** Manter o mesmo número de repetições nas 3 rodadas. Se você fizer 12, depois 12, depois 11, venceu. Se cair de 12 para 8, perdeu o desafio.
+**Protocolo do Challenge Set:**
+1. Escolha uma carga com a qual você consegue 10-12 repetições
+2. Faça o máximo de repetições possível (RPE 13)
+3. Descanse **exatos** 30 segundos
+4. Tente igualar o número de repetições da primeira rodada
+5. Descanse 30 segundos
+6. Tente novamente
 
-> *"O Challenge Set não testa só seu músculo — testa seu caráter."*
+**A meta:** Manter o mesmo número de repetições nas três rodadas. Se fizer 12, 12, 10 — você venceu. Se fizer 12, 9, 6 — o desafio ganhou de você.
+
+*"O Challenge Set não testa só seu músculo — testa seu caráter."*
 
 ### 2. Remada T-Bar com Descanso-Pausa — 4 séries
-A remada T-Bar com descanso-pausa permite acumular mais repetições com cargas elevadas do que uma série contínua permitiria.
 
-**Protocolo Descanso-Pausa:**
-1. Execute a série até a falha (6-8 repetições)
-2. Descanse 15-20 segundos
+O T-Bar permite cargas mais altas que a remada curvada com barra, pois a coluna fica em um ângulo mais favorável. A técnica de descanso-pausa (rest-pause) maximiza o volume com essa carga pesada.
+
+**Protocolo de Descanso-Pausa:**
+1. Faça o máximo de repetições com a carga escolhida
+2. Descanse 15-20 segundos (respire fundo, prepare-se)
 3. Faça mais 2-4 repetições
 4. Descanse 15-20 segundos
 5. Faça mais 1-3 repetições
 
-Isso conta como 1 série. Repita por 4 séries.
+**Dica:** O descanso-pausa é diferente de uma série normal com pausas longas. O descanso é curto o suficiente para manter o sistema neuromuscular engajado, mas longo o bastante para permitir que o ATP muscular seja parcialmente regenerado.
 
-**Por que funciona:** O descanso curto permite que o ATP muscular seja parcialmente regenerado, mantendo a intensidade alta por mais repetições totais.
+### 3. Remada Baixa Unilateral (Single Arm Cable Row) — 4 séries
 
-### 3. Remada Baixa Unilateral no Cabo — 4 séries
-A remada unilateral no cabo oferece tensão constante durante toda a amplitude e permite foco em cada lado das costas isoladamente.
+Remada unilateral no cabo. A tensão constante do cabo mantém o dorsal sob trabalho durante toda a amplitude — algo que os pesos livres não conseguem replicar.
 
 **Técnica:**
-- Sente-se no banco da remada baixa
-- Use o pegador de mão única (não o triângulo)
-- Puxe o cabo em direção ao quadril, mantendo o cotovelo próximo ao corpo
-- Segure a contração por 2 segundos no pico
-- Controle o retorno — não deixe o cabo "voar" de volta
+- Sente-se de lado para a polia
+- Segure o pegador com uma mão
+- Puxe em direção ao quadril, mantendo o cotovelo próximo ao corpo
+- No pico, segure a contração por 2 segundos
 
-### 4. Remada Apoiada (Supported Row) — 4 séries
-Remada com o peito apoiado em um banco inclinado. O apoio elimina a necessidade de estabilizar o tronco, permitindo foco total na contração das costas.
+### 4. Supported Rows — 4 séries
 
-### 5. Farmer Walk — 3 séries
-Carregue halteres pesados ao lado do corpo e caminhe. Parece simples, mas é brutalmente eficaz para o trapézio, a pegada e o core.
+Remada com suporte (peito apoiado em banco inclinado). O suporte elimina a necessidade de estabilização do tronco, permitindo isolar completamente os dorsais e romboides.
+
+### 5. Farmer's Walk — 3 séries
+
+A caminhada do fazendeiro é um dos exercícios mais completos para o trapézio, a pegada e o core. Pegue dois halteres pesados e caminhe por distância ou tempo.
 
 **Execução:**
-- Pegue halteres pesados — o mais pesado que você consegue segurar
-- Mantenha os ombros para trás e para baixo (escapulas deprimidas)
-- Caminhe 20-30 metros ou 30-45 segundos
-- Descanse 60 segundos entre séries
+- Mantenha os ombros deprimidos (para baixo) e o peito erguido
+- Passos curtos e controlados
+- Não balance o corpo — mantenha o core rígido
 
-**Benefícios:** O Farmer Walk desenvolve o trapézio superior de uma forma que nenhum outro exercício consegue, porque a resistência não é apenas vertical — é também a carga de sustentação isométrica.
+**Meta:** Caminhe até não conseguir mais segurar os halteres. Isso é uma série.
 
-## Quinta-feira: Supersérie + Contração Estática
+## Quinta-feira: Superset + Contração Estática
 
-### 1. Pulldown Unilateral com Contração Estática — 3 séries
-Puxador unilateral com pegada pronada. Na última repetição de cada série, segure a contração por 5-10 segundos.
+### 1. Puxador Unilateral com Contração Estática — 3 séries
 
-### 2. Supersérie de Puxadores — 3 rodadas
-- **Puxador de Frente (Away Facing):** Incline o tronco para trás enquanto puxa, alongando o dorsal
-- **Puxador Inclinado (Toward Facing):** Incline o tronco para frente, intensificando a contração no pico
+Puxador unilateral com 5 segundos de sustentação no pico da contração. A contração estática no final recruta fibras que o movimento dinâmico não alcança.
 
-Execute os dois sem descanso entre eles. Descanse 60-90 segundos após completar o par.
+### 2. Superset de Puxadores (Away + Toward) — 3 rodadas
 
-### 3. Pull-overs — 3 séries
-Pull-over com halter ou máquina. Foco no alongamento do dorsal na fase excêntrica.
+Dois puxadores consecutivos sem descanso:
+- **Away Facing Pulldown:** Puxador de frente com tronco inclinado para trás — 10 reps
+- **Toward Facing Pulldown:** Puxador padrão — 10 reps
 
-### 4. TRX Horizontal Chins — superar a Semana 3
-Barra fixa horizontal. Tente superar o número de repetições da Semana 3. Progressão é a meta.
+**Benefício:** O primeiro alonga o dorsal, o segundo contrai. Juntos, criam um bombeamento completo.
+
+### 3. Pull-over — 3 séries
+
+Pull-over com halter ou máquina. O melhor exercício de isolamento para o dorsal em toda a sua amplitude.
+
+### 4. Barra Fixa Horizontal no TRX — superar Semana 3
+
+Se você fez 10 repetições no TRX na Semana 3, a meta agora é 11. Progressão é progressão — mesmo que seja uma repetição.
 
 ## Sábado: Trisets
 
-### Triset 1 (3 rodadas):
+**Triset 1 (3 rodadas):**
+
 | Exercício | Repetições |
 |-----------|-----------|
-| Remada no Cabo (Triângulo) | 10 |
-| Remada com Halteres | 10 cada lado |
+| Remada Baixa com Triângulo (Pronada) | 10 |
+| Remada Unilateral com Haltere | 10 cada |
 | Face Pull | 12 |
 
-### Triset 2 (3 rodadas):
+**Triset 2 (3 rodadas):**
+
 | Exercício | Repetições |
 |-----------|-----------|
 | Puxador com Pegada Neutra | 10 |
-| Remada com Barra Hexagonal (Trap Bar) | 10 |
+| Remada com Barra Hexagonal (Trap Bar Row) | 10 |
 | Stretcher | 10 |
 
-**Como executar:** Execute os 3 exercícios do triset em sequência, sem descanso. Descanse 60 segundos após completar o triset.
+**Descanso:** 60 segundos entre trisséries completas.
 
-## Notas Técnicas para a Semana 4
-
-- **18 séries é muito volume:** Mantenha a intensidade, mas não sacrifique a técnica. Se sua forma estiver quebrada, pare.
-- **Challenge Set:** Respeite os 30 segundos de descanso. Mais descanso que isso tira o propósito do desafio.
-- **Farmer Walk:** Caminhe ereto, ombros para trás. Olhe para frente, não para o chão.
-- **Progressão:** O objetivo não é apenas completar a semana — é superar os números da semana anterior.
-
-> *"Cada repetição tem que ter um propósito."* — Na Semana 4, esse propósito é sobreviver ao volume e sair mais forte.
+*"Volume não é desculpa para técnica pobre. Cada repetição precisa ter um propósito — mesmo na décima oitava série do sábado."*
 `,
   "semana-5-sobrecarga": `
 # Capítulo 7: Semana 5 — Sobrecarga Máxima
 
 ## Visão Geral
 
-A Semana 5 é a mais desafiadora do programa. Se o programa fosse uma montanha-russa, esta semana é a descida mais íngreme. Você vai trabalhar com cargas pesadas, déficit no levantamento terra, e o temido "Chin Up Death".
-
-O volume encontra a intensidade máxima aqui. Seu sistema nervoso vai ser testado, seus dorsais vão gritar, e sua determinação vai ser medida repetição por repetição.
+A Semana 5 é a fronteira final. Você não está mais construindo base, acumulando volume ou testando resistência — está treinando pesado para extrair o máximo de força e densidade muscular possível antes da semana de finalização.
 
 **O que há de novo:**
-- Pirâmide Lenta (Slow Pyramid) — progressão de carga por série
-- Descanso-Pausa com Tríplice Série Descendente no Smith
-- Remada T-Bar no estilo Tom Platz — pura intensidade
-- Levantamento Terra com Déficit — amplitude aumentada
-- Chin Up Death — 6 séries até a falha
-- Lat Hang — suspensão passiva para descompressão
+- Pirâmide Lenta na Remada Unilateral
+- Drop Set Triplo com Descanso-Pausa no Smith
+- Remada T-Bar no estilo Tom Platz — repetições parciais no final
+- Levantamento Terra com Déficit — amplitude total
+- Chin Up Death — 6 séries até a falha total
+- Lat Hang — descompressão da coluna
+
+**Aviso:** Esta é a semana mais intensa do programa. Seu sistema nervoso vai estar sob carga máxima. Respeite o descanso entre os treinos.
 
 ## Segunda-feira: Sobrecarga + Déficit
 
-### 1. Remada Unilateral com Barra — Pirâmide Lenta — 4 séries
-A pirâmide lenta é um método de progressão onde você aumenta a carga e reduz as repetições a cada série.
+### 1. Remada Unilateral com Barra — Pirâmide Lenta
+
+A pirâmide lenta é o oposto de uma pirâmide tradicional. Você começa com uma carga moderada e altas repetições, adiciona peso a cada série e reduz as repetições — até atingir o pico de carga, depois desce novamente.
 
 **Protocolo:**
-- Série 1: Carga leve, 12 repetições (aquecimento)
-- Série 2: Carga moderada, 10 repetições
-- Série 3: Carga pesada, 6-8 repetições
-- Série 4: Carga máxima, 4-6 repetições
+- Série 1: 50% da carga máxima — 12 repetições
+- Série 2: 65% — 10 repetições
+- Série 3: 80% — 8 repetições
+- Série 4: 90-100% — 4-6 repetições (pico)
+- Em seguida, reduza a carga e faça uma série final com 12 repetições para bombeamento
 
-**Por que funciona:** A pirâmide prepara seu sistema nervoso progressivamente para cargas mais altas, reduz o risco de lesão e acumula volume útil antes da série mais pesada.
+**Por que funciona:** A pirâmide lenta aquece gradualmente o sistema nervoso, permitindo que você atinja cargas máximas com menor risco de lesão. As séries iniciais também acumulam volume metabólico antes do esforço máximo.
 
-### 2. Remada no Smith com Descanso-Pausa e Tríplice Série Descendente — 4 séries
-Esta é uma das combinações mais intensas do programa inteiro. Você combina duas técnicas de alta intensidade em um único exercício.
+### 2. Remada no Smith — Descanso-Pausa com Drop Set Triplo — 4 séries
+
+Uma combinação brutal de duas técnicas de intensidade. A remada no Smith oferece a segurança necessária para executar este protocolo extremo.
 
 **Protocolo:**
-- Execute a série com descanso-pausa: falha → 15s descanso → mais reps → 15s descanso → mais reps
-- Ao terminar o descanso-pausa, reduza a carga em 20% e vá até a falha
-- Reduza mais 20% e vá até a falha novamente
-- Três quedas de carga no total
+1. Faça o máximo de repetições com a carga pesada
+2. Descanse 15-20 segundos
+3. Faça mais 2-4 repetições
+4. Reduza a carga em 20%
+5. Faça o máximo de repetições
+6. Descanse 15-20 segundos
+7. Faça mais 2-4 repetições
+8. Reduza mais 20%
+9. Faça o máximo até a falha final
 
-**Isso é 1 série.** Repita por 4 séries. Você vai entender por que o programa chama isso de "Nightmare".
+*"Isso não é para todo mundo. Se você não está preparado mentalmente, nem comece."*
 
 ### 3. Remada T-Bar (Estilo Tom Platz) — 4 séries
-Tom Platz — o lendário "Quad God" — também tinha um método para costas. O estilo dele na T-Bar envolve:
 
-- Puxar explosivamente na concêntrica
-- Segurar a contração por 2 segundos
-- Controlar a descida por 3-4 segundos
-- Repetições ininterruptas até a falha
+Tom Platz, lendário fisiculturista conhecido por suas pernas, também aplicava sua filosofia de intensidade nas costas. O estilo Tom Platz na remada T-Bar significa: pegue uma carga pesada, faça repetições completas até a falha e, quando não conseguir mais, continue com repetições parciais até não conseguir mover a barra nem um centímetro.
+
+**Execução:**
+- 8-10 repetições completas com forma rigorosa
+- 4-6 repetições parciais (meia amplitude) imediatamente após
+- 2-4 repetições com o mínimo de movimento possível
+
+**Dica:** As repetições parciais não são desculpa para técnica suja. O movimento deve ser controlado, mesmo que pequeno.
 
 ### 4. Levantamento Terra com Déficit — 3x6
-O levantamento terra com déficit é executado com os pés elevados sobre uma plataforma (2-4 polegadas — uma anilha ou step). Isso aumenta a amplitude de movimento, fazendo a barra começar mais baixo que o normal.
 
-**Por que é mais difícil:**
-- Aumenta o range de movimento na saída do chão
-- Força os eretores a trabalhar desde uma posição mais alongada
-- Desenvolve força na posição mais vulnerável do movimento — o início
+O terra com déficit é um dos exercícios mais desafiadores do programa. Você executa o levantamento terra sobre uma plataforma elevada (step, anilha ou caixa de 5-10 cm de altura), o que aumenta a amplitude de movimento.
+
+**O que o déficit faz:**
+- Aumenta o alcance do movimento em 5-10 cm
+- Força o dorsal e os eretores a trabalhar desde uma posição mais alongada
+- Melhora a força de saída do chão
+- Expõe fraquezas na posição inicial que o terra normal esconde
 
 **Técnica:**
-- Fique em pé sobre uma anilha ou step baixo (2-4 polegadas)
-- A barra deve começar na altura do meio do seu peito do pé
-- Mantenha a coluna neutra — o déficit aumenta a tentação de arredondar
-- Tire os sapatos para mais estabilidade e menor altura de déficit
+- Posicione os pés sobre a elevação, na largura dos quadris
+- A barra deve estar alinhada com o meio do pé
+- Mantenha a coluna neutra — o déficit tende a arredondar as costas, então redobre a atenção
+- Empurre o chão com os pés, não puxe com as costas
+
+**Dica de Meadows:** Se você não consegue manter a coluna neutra no terra com déficit, reduza a altura da elevação ou volte para o terra normal. Um terra com as costas arredondadas não é terra — é lesão esperando para acontecer.
 
 ## Quinta-feira: Chin Up Death
 
-### 1. Puxador na Largura dos Ombros com Contração Sustentada — 3 séries
-Puxador com pegada na largura dos ombros. Segure cada repetição no pico da contração por 2 segundos.
+### 1. Puxador com Pegada na Largura dos Ombros com Contração Sustentada — 3 séries
 
-### 2. Chin Up Death — 6 séries até a falha
-O Chin Up Death é um dos momentos mais emblemáticos do programa. São 6 séries de barra fixa, todas até a falha, alternando pegadas.
+Puxador padrão (largura dos ombros) com 3 segundos de contração no pico. Pré-exausta o dorsal antes do Chin Up Death.
+
+### 2. Chin Up Death — 6 séries até a falha (2 ampla, 2 média, 2 estreita)
+
+O Chin Up Death é o teste final de resistência e força do dorsal. Seis séries de barra fixa ou puxador, alternando pegadas, todas até a falha absoluta.
 
 **Formato:**
-- **Séries 1-2:** Pegada ampla (pronada) — até falha
-- **Séries 3-4:** Pegada média (supinada) — até falha
-- **Séries 5-6:** Pegada estreita (neutra) — até falha
+1. Série 1: Pegada ampla pronada — até falha
+2. Série 2: Pegada ampla pronada — até falha
+3. Série 3: Pegada média pronada — até falha
+4. Série 4: Pegada média pronada — até falha
+5. Série 5: Pegada estreita supinada — até falha
+6. Série 6: Pegada estreita supinada — até falha
 
-**Regras:**
-- Descanso entre séries: o mínimo necessário para conseguir fazer pelo menos 1 repetição
-- Anote o total de repetições de cada série
-- O objetivo não é uma série específica — é o total acumulado
+**Descanso:** Descanse o necessário entre as séries. O objetivo não é terminar rápido — é fazer o máximo de repetições possível em cada série.
 
-**Meta:** Tente acumular pelo menos 40 repetições no total das 6 séries. Se você fizer 8+8+7+6+5+5 = 39, está perto. Se fizer 10+8+7+6+5+4 = 40, atingiu a meta.
+**Meta:** Some o total de repetições das 6 séries. Na próxima vez que fizer o Chin Up Death, tente superar esse número.
 
-> *"O Chin Up Death não é sobre força — é sobre sobrevivência. Cada repetição depois da décima é uma vitória da mente sobre o corpo."*
+*"Chin Up Death não é sobre quantas você faz na primeira série — é sobre quantas você consegue arrastar na sexta."*
 
 ### 3. Pull-over na Máquina — 3 séries
-Pull-over na máquina para isolar o dorsal com carga controlada.
 
-### 4. Pulldown Supinado Unilateral com Alongamento — 3 séries
-Puxador unilateral supinado com um alongamento extra de 5 segundos no topo de cada repetição.
+Pull-over na máquina (ou com halter) para isolar o dorsal após o Chin Up Death. O alongamento no fundo do movimento é onde o crescimento acontece.
+
+### 4. Puxador Supinado Unilateral com Alongamento — 3 séries
+
+Puxador unilateral com pegada supinada, com ênfase no alongamento forçado no topo do movimento. Peça ajuda para alongar seus dorsais por 5 segundos entre as repetições.
 
 ## Sábado: Giant Sets + Lat Hang (25 Séries!)
 
@@ -714,155 +733,165 @@ Puxador unilateral supinado com um alongamento extra de 5 segundos no topo de ca
 | Exercício | Repetições |
 |-----------|-----------|
 | Remada no Smith | 8 |
-| Pull-over com Halteres | 8 |
+| Pull-over com Haltere | 8 |
 | Remada com Kettlebell | 8 |
 | Face Pull com Banda | 8 |
 | Lat Hang | Máximo possível (meta: 60s) |
 
-### Lat Hang — A Importância da Suspensão Passiva
-O Lat Hang é uma suspensão passiva na barra fixa. Você simplesmente segura a barra com o corpo completamente relaxado, permitindo que o peso do corpo alongue os dorsais e descomprima a coluna.
+O sábado é o dia mais volumoso do programa — 25 séries em 5 rodadas de 5 exercícios. Se você chegou aqui, seu corpo já está preparado para este volume.
 
-**Benefícios:**
-- Descompressão da coluna vertebral após cargas pesadas
-- Alongamento passivo do dorsal e dos músculos da cintura escapular
-- Melhora da mobilidade do ombro
-- Recuperação ativa entre séries pesadas
+### Lat Hang — Suspensão Passiva
 
-**Como fazer:**
-- Segure a barra com pegada pronada, na largura dos ombros
-- Relaxe completamente — deixe o corpo pendurado
-- Respire fundo e mantenha a posição
-- Meta: 60 segundos contínuos
+O Lat Hang é simplesmente se pendurar na barra sem fazer força para subir. A suspensão passiva descomprime a coluna vertebral, alonga os dorsais e alivia a tensão acumulada durante a semana.
 
-**25 séries no total.** Seu corpo vai doer. Mas suas costas vão agradecer na Semana 6.
+**Técnica:**
+- Segure a barra com pegada pronada, largura dos ombros
+- Relaxe completamente os ombros — deixe o peso do corpo alongar os dorsais
+- Respire profundamente: inspire expandindo o peito, expire relaxando ainda mais
+- Mantenha-se suspenso pelo máximo de tempo possível
 
-## Notas Técnicas para a Semana 5
-
-- **Pirâmide Lenta:** Resista à tentação de pular para a carga máxima muito rápido. A preparação é o que torna a série pesada segura.
-- **Chin Up Death:** Se você não consegue fazer barra fixa, substitua por puxador com carga máxima até a falha. Mesmo protocolo, mesmo esforço.
-- **Déficit:** Não exagere na altura do déficit. 2-4 polegadas é o suficiente. Mais que isso aumenta o risco de arredondamento da coluna.
-- **Lat Hang:** Não é descanso — é trabalho. Seus dorsais estão sendo alongados sob tração.
-
-> *"Deixe o ego do lado de fora da academia."* — Na Semana 5, isso vale mais do que nunca. Não tente impressionar ninguém. Faça o trabalho.
+**Meta:** 60 segundos. Se conseguir, você está liberado.
 `,
   "semana-6-finalizacao": `
 # Capítulo 8: Semana 6 — Finalização
 
 ## Visão Geral
 
-A Semana 6 é o clímax de tudo. Seis semanas de trabalho acumulado, técnica aperfeiçoada, conexão mente-músculo estabelecida — agora é hora de aplicar tudo em um só dia.
+A Semana 6 é o clímax do programa. Aqui você aplica tudo o que aprendeu nas 5 semanas anteriores — ativação, volume, técnicas de intensidade, sobrecarga máxima — e combina em uma sinfonia final de estímulos para as costas.
 
-Esta semana apresenta o **Quad Drop Set** (quatro quedas de carga), **superséries combinadas**, **Mega Chin Up Death** (9 séries) e o finisher **ISO Hold + Smith Deadlift**.
+**O que há de novo:**
+- Quadruple Drop Set — 4 quedas de carga em sequência
+- Supersérie: Remada Unilateral + Meadows Row
+- Remada Baixa Elevada — polia alta, dois pegadores
+- Mega Chin Up Death — 9 séries totais
+- ISO Hold + Smith Deadlift — o finalizador final
 
-Não segure nada. Esta é a última semana. Dê tudo o que tem.
-
-> *"O programa te preparou para este momento. Agora é só executar."*
+---
 
 ## Segunda-feira: Quad Drop + Superset
 
-### 1. Remada com Halteres com Série Descendente Quádrupla — 4 séries
-A série descendente quádrupla (quad drop set) é exatamente o que o nome diz: quatro quedas de carga consecutivas, sem descanso, até a falha em cada uma.
+### 1. Remada com Halteres com Quadruple Drop Set — 4 séries
+
+O Quadruple Drop Set (Série Descendente Quádrupla) é uma das técnicas mais intensas do arsenal de Meadows. São 4 quedas de carga em sequência, sem descanso.
 
 **Protocolo:**
-- **Carga 1:** Execute até a falha (8-10 repetições)
-- **Reduza 20%** — execute até a falha
-- **Reduza mais 20%** — execute até a falha
-- **Reduza mais 20%** — execute até a falha
+1. Carga pesada: 6-8 repetições até a falha
+2. Reduza 15-20%: 6-8 repetições até a falha
+3. Reduza 15-20%: 8-10 repetições até a falha
+4. Reduza 15-20%: 10-12 repetições até a falha
 
-**4 séries disto.** Sim, você leu certo. Prepare quatro pares de halteres antes de começar — você não vai querer procurar peso enquanto o músculo está queimando.
+**Preparação:** Tenha 4 halteres pré-selecionados antes de começar. Não há tempo para procurar carga entre as quedas.
 
-**Por que funciona:** A série descendente quádrupla recruta fibras musculares em toda a hierarquia de recrutamento — desde as fibras de contração rápida (primeira carga) até as de contração lenta (última carga). É o esgotamento completo do músculo.
+*"No Quad Drop, você não descansa entre as quedas. Se você parar para respirar, perdeu o propósito do exercício."*
 
 ### 2. Supersérie: Remada Unilateral com Barra + Remada Meadows — 4 rodadas
-Duas remadas clássicas combinadas em uma supersérie sem descanso.
 
-**Protocolo:**
-- **Remada Unilateral com Barra:** 8 repetições cada braço
-- **Remada Meadows:** 8 repetições cada braço
-- **Descanso:** 60-90 segundos após completar as duas
+Duas remadas icônicas em sequência, sem descanso entre elas:
+- **Remada Unilateral com Barra:** 8 repetições cada lado — foco na espessura
+- **Remada Meadows:** 8 repetições cada lado — foco no dorsal inferior
 
-A primeira exercita a remada pesada e controlada; a segunda ataca o dorsal de um ângulo diferente, com o contra-torque da mão livre gerando estabilidade.
+**Benefício:** A primeira exercita o dorsal em um plano, a segunda exercita em outro ângulo. Juntas, cobrem toda a musculatura das costas em um único bloco de treino.
 
-### 3. Remada Baixa Elevada — 4 séries
-A remada baixa elevada é uma variação onde o banco é elevado para que a polia fique em um ângulo mais alto. Use dois pegadores individuais — um em cada mão — para máxima amplitude.
+**Descanso:** 60-90 segundos após completar as duas remadas.
 
-**Técnica avançada:**
-- Comece com as palmas para baixo (pronada) no alongamento
-- Durante a puxada, gire as palmas para cima (semisupinada) na contração
-- Essa rotação do antebraço maximiza o recrutamento do dorsal
+### 3. Remada Baixa Elevada (Seated Cable Row Elevada) — 4 séries
 
-### 4. Encolhimento Deitado (Prone Shrugs) no Rack — 3 séries
-Deite-se de bruços em um banco inclinado, segurando uma barra ou halteres. Encolha os ombros para cima e para trás.
+Uma variação avançada da remada baixa. Eleve o banco para que a polia fique em um ângulo mais alto. Use dois pegadores individuais (um em cada mão) para maior amplitude de movimento.
 
-**Por que deitado:** A posição deitada elimina a trapaça — você não pode usar o impulso das pernas ou do tronco. O trapézio trabalha isoladamente.
+**Técnica:**
+- Comece com os braços estendidos à frente, pegadores em pronação (palmas para baixo)
+- Puxe girando os antebraços para semisupinação (palmas uma para a outra)
+- No pico da contração, aperte as escápulas
 
-### 5. Hiperextensão Reversa — 3 séries
-Hiperextensão reversa na máquina ou no banco romano. Foco nos eretores e glúteos.
+**Por que funciona:** A rotação do antebraço de pronada para semisupinada durante a remada aumenta o recrutamento do dorsal em comparação com uma pegada fixa.
 
-## Quinta-feira: Mega Chin Ups + Alongamento
+### 4. Encolhimento Deitado (Prone Shrugs no Rack) — 3 séries
 
-### 1. Chin Up Mega Death — 9 séries
-Se o Chin Up Death (6 séries) da Semana 5 foi difícil, o Mega Death é a versão hardcore. São 9 séries de barra fixa até a falha.
+Encolhimento de ombros deitado em um banco inclinado, com barra ou halteres. Esta posição isola o trapézio médio e inferior, removendo a ajuda do trapézio superior e dos deltóides.
+
+**Setup:**
+- Deite-se de bruços em um banco inclinado a 45°
+- Segure halteres com os braços estendidos para baixo
+- Eleve os ombros em direção ao teto, apertando as escápulas
+- Segure por 1 segundo e desça controladamente
+
+### 5. Hiperextensão Reversa (Reverse Hyperextension) — 3 séries
+
+Hiperextensão reversa trabalha os eretores da espinha e os glúteos em um movimento de extensão do quadril. É um excelente exercício de finalização para a lombar.
+
+---
+
+## Quinta-feira: Mega Chin Up Death
+
+### 1. Mega Chin Up Death — 9 séries (3 ampla, 3 média, 3 estreita)
+
+O Chin Up Death original da Semana 5 era 6 séries. O Mega Chin Up Death é 9. Se você sobreviveu ao Chin Up Death, o Mega é a versão estendida — o teste final de resistência do dorsal.
 
 **Formato:**
-- **Séries 1-3:** Pegada ampla (pronada) — até falha
-- **Séries 4-6:** Pegada média (supinada) — até falha
-- **Séries 7-9:** Pegada estreita (neutra) — até falha
+1. Série 1-3: Pegada ampla pronada — até falha
+2. Série 4-6: Pegada média pronada — até falha
+3. Série 7-9: Pegada estreita supinada — até falha
 
-**Regras:**
-- Descanso mínimo entre séries (15-30 segundos)
-- Meta total: 50+ repetições acumuladas
-- Se cair para 0 repetições em uma pegada, troque para a próxima
+**Descanso:** O necessário entre as séries. O objetivo não é o relógio — é o total de repetições.
 
-### 2. Pulldown Corda (Straight Arm) — 3 séries
-Isolamento do dorsal com tensão constante.
+**Meta:** Some o total e compare com o Chin Up Death da Semana 5. Se o total for maior, você progrediu. Se for menor, você deu o máximo que podia — e isso também é progresso.
 
-### 3. Pulldown Supinado Unilateral — 3 séries
-Puxador unilateral com pegada supinada, com alongamento extra no topo.
+### 2. Pulldown Corda (Straight Arm Pulldown) — 3 séries
+
+Pulldown com os braços estendidos usando a corda. Isola o dorsal sem envolvimento dos braços. O alongamento no topo e a contração no fundo criam um bombeamento completo.
+
+### 3. Puxador Supinado Unilateral — 3 séries
+
+Puxador unilateral com pegada supinada. Foco na contração do dorsal inferior. Ao final de cada repetição, segure o alongamento por 2 segundos.
 
 ### 4. Pull-over na Máquina — 3 séries
-Finalizador para o dorsal. Sensação de alongamento e bombeamento.
+
+Pull-over para finalizar o dorsal. Máquina ou halter, o foco é o alongamento completo no fundo e a contração máxima no topo.
+
+---
 
 ## Sábado: Trisets Finais + ISO Hold + Smith Deadlift
 
-### Triset 1 (3 rodadas):
+### Triset 1 (3 rodadas)
+
 | Exercício | Repetições |
 |-----------|-----------|
-| Puxador com Pegada Ampla | 10 |
-| Remada Corda | 10 |
-| Remada Baixa (Triângulo) | 10 |
+| Puxador Amplo (Wide Grip Pulldown) | 10 |
+| Remada com Corda (Rope Row) | 10 |
+| Remada Baixa (Seated Cable Row) | 10 |
 
-### Triset 2 (3 rodadas):
+### Triset 2 (3 rodadas)
+
 | Exercício | Repetições |
 |-----------|-----------|
 | Remada Apoiada com Banda | 10 |
-| Remada com Halteres | 10 cada lado |
-| Pulldown Supinado | 12 |
+| Remada com Haltere | 10 cada |
+| Puxador Supinado | 12 |
 
-### FINISHER: ISO Hold (10s) + Smith Deadlift — 5 rodadas
-O finisher final do programa. Uma combinação brutal de contração estática seguida de movimento completo.
+### Finalizador: ISO Hold + Smith Deadlift — 5 rodadas
+
+O finalizador final do programa. Uma combinação de contração estática seguida de levantamento terra no Smith.
 
 **Protocolo:**
-1. **ISO Hold:** Segure a posição de contração máxima de uma remada ou puxador por 10 segundos
-2. **Imediatamente após:** Execute um levantamento terra no Smith por 5-8 repetições
-3. Descanse 30 segundos
-4. Repita por 5 rodadas
+1. Segure a posição de contração estática no pico de um puxador por 10 segundos
+2. Imediatamente após, vá para o Smith e faça um levantamento terra até a falha
+3. Descanse 30-45 segundos
+4. Repita por 5 rodadas no total
 
-**Por que funciona:** A contração estática de 10 segundos esgota as reservas de ATP do músculo. Quando você parte para o movimento completo imediatamente depois, o músculo está em estado de fadiga máxima, recrutando fibras que normalmente não seriam ativadas.
+*"Este finalizador não é sobre carga — é sobre falha total. No Smith, você pode ir até não conseguir mais sem risco. É aqui que você deixa tudo."*
 
-## Encerramento — O Que Fazer Após o Programa
+---
 
-Você completou 6 semanas de Back Discipline. Suas costas não são as mesmas — e você também não.
+## Considerações Finais do Programa
 
-**Recomendações pós-programa:**
-1. **Deload:** Tire uma semana de treino leve ou descanso total. Seu sistema nervoso precisa se recuperar.
-2. **Frequência:** Volte para 2x por semana ou 1x a cada 5 dias para costas. Não precisa mais que isso.
-3. **Mobilidade:** Continue os exercícios de ombro (Face Pull, rotação externa, Cuban Press) como prevenção.
-4. **Progressão:** Refaça o programa com cargas maiores. Você vai se surpreender com o quanto evoluiu.
+Você completou 6 semanas de treino de costas seguindo um dos métodos mais rigorosos já desenvolvidos. Se você chegou até aqui, parabéns — você tem a mentalidade Back Discipline.
 
-> *"Costas se constroem com a cabeça, não só com a força."* — Você aprendeu isso nas últimas 6 semanas. Leve esse princípio para todos os seus treinos, para todos os seus dias.
+**O que fazer após o programa:**
+- Descanse 3-5 dias antes de começar um novo ciclo
+- Considere repetir o programa com cargas mais altas
+- Ou mude para uma rotina de manutenção 2x por semana
 
-Obrigado por confiar no Back Discipline. Agora vá olhar no espelho e veja o resultado do seu trabalho.
+*"Costas se constroem com a cabeça, não só com a força. Você aprendeu isso nas últimas 6 semanas. Agora leva isso para o resto da sua jornada."*
 `,
   "anatomia-funcional": `
 # Capítulo 9: Anatomia Funcional Aplicada
