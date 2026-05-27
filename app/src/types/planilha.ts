@@ -18,6 +18,7 @@ export type DaySaved = {
   name: string;
   focus: string;
   exercises: ExerciseSaved[];
+  notes?: string;
 };
 
 export type WeekSaved = {

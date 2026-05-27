@@ -27,6 +27,14 @@ export default function PlanilhaUnificadaPage() {
   const [selectedDay, setSelectedDay] = useState<string | null>(null);
   const [showStarter, setShowStarter] = useState(false);
   const [daySaving, setDaySaving] = useState(false);
+  const [dayNotes, setDayNotes] = useState('');
+
+  // Load saved notes when changing days
+  useEffect(() => {
+    if (!selectedDay || !data || !selectedDayInfo) return;
+    const source = data[selectedDayInfo.weekIdx]?.days[selectedDayInfo.dayIdx];
+    setDayNotes((source as any)?.notes || '');
+  }, [selectedDay]);
 
   useEffect(() => {
     if (!user) return;
@@ -177,16 +185,24 @@ export default function PlanilhaUnificadaPage() {
     : null;
 
   const handleSaveDay = useCallback(() => {
-    if (!user || !selectedDayInfo) return;
+    if (!user || !selectedDayInfo || !data) return;
     setDaySaving(true);
     const { weekIdx, dayIdx } = selectedDayInfo;
+
+    // Save notes to planilha data
+    if (dayNotes) {
+      const newData = JSON.parse(JSON.stringify(data));
+      newData[weekIdx].days[dayIdx].notes = dayNotes;
+      persist(newData);
+    }
+
     syncPlanilhaDay(user.userId, weekIdx, dayIdx);
     toast.success('Treino salvo com sucesso!');
     setTimeout(() => {
       setDaySaving(false);
       setSelectedDay(null);
-    }, 500);
-  }, [user, selectedDayInfo]);
+    }, 1200);
+  }, [user, selectedDayInfo, data, dayNotes, persist]);
 
   return (
     <div className="min-h-screen bg-[#0A0A0A] text-white pb-24">
@@ -310,6 +326,14 @@ export default function PlanilhaUnificadaPage() {
                   />
                 ))}
 
+                <textarea
+                  value={dayNotes}
+                  onChange={(e) => setDayNotes(e.target.value)}
+                  placeholder="Notas do treino (opcional)..."
+                  rows={2}
+                  className="w-full bg-[#1A1A1A] border border-[#2A2A2A] rounded-lg py-2.5 px-3 text-white text-sm placeholder-gray-500 focus:border-[#B8956A] focus:outline-none resize-none"
+                />
+
                 <button
                   type="button"
                   onClick={handleSaveDay}
@@ -317,7 +341,7 @@ export default function PlanilhaUnificadaPage() {
                   className="w-full flex items-center justify-center gap-2 py-3 bg-[#B8956A] hover:bg-[#c9a67a] text-black font-bold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-sm"
                 >
                   <Save className="w-4 h-4" />
-                  {daySaving ? 'Salvando...' : 'Salvar Treino do Dia'}
+                  {daySaving ? '✓ Salvo!' : 'Salvar Treino do Dia'}
                 </button>
               </div>
             )}
