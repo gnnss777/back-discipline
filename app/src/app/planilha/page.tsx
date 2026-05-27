@@ -184,12 +184,24 @@ export default function PlanilhaUnificadaPage() {
       })()
     : null;
 
+  // Auto-save notes when changing days
+  const handleSelectDay = useCallback((date: string) => {
+    if (selectedDay && selectedDayInfo && data && dayNotes) {
+      const savedNotes = data[selectedDayInfo.weekIdx]?.days[selectedDayInfo.dayIdx]?.notes || '';
+      if (dayNotes !== savedNotes) {
+        const newData = JSON.parse(JSON.stringify(data));
+        newData[selectedDayInfo.weekIdx].days[selectedDayInfo.dayIdx].notes = dayNotes;
+        persist(newData);
+      }
+    }
+    setSelectedDay(prev => prev === date ? null : date);
+  }, [selectedDay, selectedDayInfo, data, dayNotes, persist]);
+
   const handleSaveDay = useCallback(() => {
     if (!user || !selectedDayInfo || !data) return;
     setDaySaving(true);
     const { weekIdx, dayIdx } = selectedDayInfo;
 
-    // Save notes to planilha data
     if (dayNotes) {
       const newData = JSON.parse(JSON.stringify(data));
       newData[weekIdx].days[dayIdx].notes = dayNotes;
@@ -298,7 +310,7 @@ export default function PlanilhaUnificadaPage() {
               <WeekSchedule
                 week={progInfo.weeks[displayWeekIdx]}
                 selectedDay={selectedDay}
-                onSelectDay={(date) => setSelectedDay(prev => prev === date ? null : date)}
+                onSelectDay={handleSelectDay}
                 onPrevWeek={() => setWeekView(Math.max(0, displayWeekIdx - 1))}
                 onNextWeek={() => setWeekView(Math.min((data?.length || 1) - 1, displayWeekIdx + 1))}
               />
