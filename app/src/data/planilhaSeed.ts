@@ -1,4 +1,4 @@
-// Seed data for Planilha (local MVP)
+﻿// Seed data for Planilha (local MVP)
 type Part = {
   weekNumber: number;
   title: string;
@@ -35,7 +35,7 @@ const seed: Part = [
         ],
       },
       {
-        name: 'Sábado',
+        name: 'S├íbado',
         focus: 'Giant Sets (Volume)',
         exercises: [
           { name: 'Rope Straight Arm Pulldown', chapterSlug: 'semana-1-ativacao', planned: [{ sets: 4, reps: 12, weight: 0 }] },
@@ -65,7 +65,7 @@ const seed: Part = [
         ],
       },
       {
-        name: 'Sábado',
+        name: 'S├íbado',
         focus: 'Giant Sets',
         exercises: [
           { name: 'Low Cable Row', chapterSlug: 'semana-2-progressao', planned: [{ sets: 4, reps: 10, weight: 40 }] },
@@ -78,9 +78,9 @@ const seed: Part = [
     weekNumber: 3,
     title: 'Semana 3',
     days: [
-      { name: 'Segunda', focus: 'Pico de Contração', exercises: [ { name: 'Meadows Row', chapterSlug: 'semana-3-pico', planned: [{ sets: 4, reps: 8, weight: 40 }] } ] },
+      { name: 'Segunda', focus: 'Pico de Contra├º├úo', exercises: [ { name: 'Meadows Row', chapterSlug: 'semana-3-pico', planned: [{ sets: 4, reps: 8, weight: 40 }] } ] },
       { name: 'Quinta', focus: 'Drop Sets', exercises: [ { name: 'Pulldown Supinado', chapterSlug: 'semana-3-pico', planned: [{ sets: 3, reps: 12, weight: 40 }] } ] },
-      { name: 'Sábado', focus: 'Giant Sets', exercises: [ { name: 'Rope Pulldown', chapterSlug: 'semana-3-pico', planned: [{ sets: 4, reps: 12, weight: 0 }] } ] },
+      { name: 'S├íbado', focus: 'Giant Sets', exercises: [ { name: 'Rope Pulldown', chapterSlug: 'semana-3-pico', planned: [{ sets: 4, reps: 12, weight: 0 }] } ] },
     ],
   },
   {
@@ -89,7 +89,7 @@ const seed: Part = [
     days: [
       { name: 'Segunda', focus: 'Desafio + Volume', exercises: [ { name: 'Desafio Remada', chapterSlug: 'semana-4-desafio', planned: [{ sets: 3, reps: 12, weight: 60 }] } ] },
       { name: 'Quinta', focus: 'Superset + ISO', exercises: [ { name: 'Pulldown com ISO Hold', chapterSlug: 'semana-4-desafio', planned: [{ sets: 3, reps: 12, weight: 40 }] } ] },
-      { name: 'Sábado', focus: 'Trisets', exercises: [ { name: 'Triset Lat', chapterSlug: 'semana-4-desafio', planned: [{ sets: 3, reps: 10, weight: 40 }] } ] },
+      { name: 'S├íbado', focus: 'Trisets', exercises: [ { name: 'Triset Lat', chapterSlug: 'semana-4-desafio', planned: [{ sets: 3, reps: 10, weight: 40 }] } ] },
     ],
   },
   {
@@ -98,16 +98,16 @@ const seed: Part = [
     days: [
       { name: 'Segunda', focus: 'Sobrecarga', exercises: [ { name: 'One Arm Barbell Row', chapterSlug: 'semana-5-sobrecarga', planned: [{ sets: 4, reps: 6, weight: 60 }] } ] },
       { name: 'Quinta', focus: 'Chin Up Death', exercises: [ { name: 'Chin Up Death', chapterSlug: 'semana-5-sobrecarga', planned: [{ sets: 6, reps: 6, weight: 0 }] } ] },
-      { name: 'Sábado', focus: 'Giant Sets + Lat Hang', exercises: [ { name: 'Lat Hang', chapterSlug: 'semana-5-sobrecarga', planned: [{ sets: 3, reps: 0, weight: 0 }] } ] },
+      { name: 'S├íbado', focus: 'Giant Sets + Lat Hang', exercises: [ { name: 'Lat Hang', chapterSlug: 'semana-5-sobrecarga', planned: [{ sets: 3, reps: 0, weight: 0 }] } ] },
     ],
   },
   {
     weekNumber: 6,
     title: 'Semana 6',
     days: [
-      { name: 'Segunda', focus: 'Finalização', exercises: [ { name: 'Quad Drop + Superset', chapterSlug: 'semana-6-finalizacao', planned: [{ sets: 4, reps: 10, weight: 40 }] } ] },
+      { name: 'Segunda', focus: 'Finaliza├º├úo', exercises: [ { name: 'Quad Drop + Superset', chapterSlug: 'semana-6-finalizacao', planned: [{ sets: 4, reps: 10, weight: 40 }] } ] },
       { name: 'Quinta', focus: 'Mega Chin Ups', exercises: [ { name: 'Chin Up Mega Death', chapterSlug: 'semana-6-finalizacao', planned: [{ sets: 9, reps: 6, weight: 0 }] } ] },
-      { name: 'Sábado', focus: 'Finish', exercises: [ { name: 'ISO Hold + Smith Deadlift', chapterSlug: 'semana-6-finalizacao', planned: [{ sets: 5, reps: 8, weight: 60 }] } ] },
+      { name: 'S├íbado', focus: 'Finish', exercises: [ { name: 'ISO Hold + Smith Deadlift', chapterSlug: 'semana-6-finalizacao', planned: [{ sets: 5, reps: 8, weight: 60 }] } ] },
     ],
   },
 ];

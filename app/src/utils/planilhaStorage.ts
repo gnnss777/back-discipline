@@ -1,4 +1,4 @@
-import seed from '@/app/planilha-progresso/planilhaSeed';
+import seed from '@/data/planilhaSeed';
 import type { PlanilhaData } from '@/types/planilha';
 
 const storageKey = (userId: string) => `planilha_user_${userId}`;
