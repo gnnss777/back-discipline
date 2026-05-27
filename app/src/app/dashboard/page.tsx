@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { BookOpen, Trophy, Target, Dumbbell, ClipboardList, Search, ArrowLeft } from 'lucide-react';
+import { BookOpen, Trophy, Target, Dumbbell, ClipboardList, Search, Timer, ArrowLeft } from 'lucide-react';
 import { useAuth } from '../../hooks/useAuth';
 import { useProgress } from '../../context/ProgressContext';
 import { chapters } from '@/lib/chapters';
@@ -129,10 +129,10 @@ export default function DashboardPage() {
             <div className="font-bold tracking-wider">PLANILHA</div>
             <div className="text-sm text-gray-500 mt-1">6 semanas de treino</div>
           </Link>
-          <Link href="/historico" className="p-6 bg-[#111] border border-[#2A2A2A] rounded-lg hover:border-[#B8956A] transition-colors text-center">
-            <Dumbbell className="w-8 h-8 text-[#B8956A] mx-auto mb-3" />
-            <div className="font-bold tracking-wider">TREINO</div>
-            <div className="text-sm text-gray-500 mt-1">Registrar e histórico</div>
+          <Link href="/timer" className="p-6 bg-[#111] border border-[#2A2A2A] rounded-lg hover:border-[#B8956A] transition-colors text-center">
+            <Timer className="w-8 h-8 text-[#B8956A] mx-auto mb-3" />
+            <div className="font-bold tracking-wider">CRONÔMETRO</div>
+            <div className="text-sm text-gray-500 mt-1">Descanso entre séries</div>
           </Link>
           <Link href="/biblioteca" className="p-6 bg-[#111] border border-[#2A2A2A] rounded-lg hover:border-[#B8956A] transition-colors text-center">
             <Search className="w-8 h-8 text-[#B8956A] mx-auto mb-3" />
