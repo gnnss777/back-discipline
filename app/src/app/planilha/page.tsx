@@ -2,7 +2,8 @@
 
 import { useCallback, useEffect, useState } from 'react';
 import Link from 'next/link';
-import { ArrowRight, Dumbbell, BarChart2, History, Plus, Check, AlertTriangle } from 'lucide-react';
+import { ArrowRight, Dumbbell, BarChart2, History, Check, AlertTriangle, Save } from 'lucide-react';
+import { toast } from 'sonner';
 import { useAuth } from '@/hooks/useAuth';
 import { loadPlanilha, savePlanilha, ensureSeed } from '@/utils/planilhaStorage';
 import { syncPlanilhaDay, syncAllPlanilhaDays } from '@/utils/planilhaSync';
@@ -11,12 +12,11 @@ import type { ProgramAlert } from '@/utils/programTracker';
 import { ProgramStarter } from '@/components/ProgramStarter';
 import { WeekSchedule } from '@/components/WeekSchedule';
 import { ExerciseLogger } from '@/components/ExerciseLogger';
-import { WorkoutLogForm } from '@/components/WorkoutLogForm';
 import { WorkoutHistory } from '@/components/WorkoutHistory';
-import type { PlanilhaData, ActualSet } from '@/types/planilha';
+import type { PlanilhaData, ActualSet, PlannedSet, ExerciseSaved } from '@/types/planilha';
 import { getWorkoutsByUser } from '@/lib/storage';
 
-type Tab = 'semana' | 'log' | 'historico';
+type Tab = 'semana' | 'historico';
 
 export default function PlanilhaUnificadaPage() {
   const { user, isLoading } = useAuth();
@@ -26,6 +26,7 @@ export default function PlanilhaUnificadaPage() {
   const [weekView, setWeekView] = useState(0);
   const [selectedDay, setSelectedDay] = useState<string | null>(null);
   const [showStarter, setShowStarter] = useState(false);
+  const [daySaving, setDaySaving] = useState(false);
 
   useEffect(() => {
     if (!user) return;
@@ -136,7 +137,7 @@ export default function PlanilhaUnificadaPage() {
     );
   }
 
-  // Build selected day info
+  // Build selected day info with pre-filled actual arrays
   const selectedDayInfo = data && selectedDay
     ? (() => {
         const date = new Date(selectedDay);
@@ -152,8 +153,20 @@ export default function PlanilhaUnificadaPage() {
     const planilhaDayIdx = trainingDays.indexOf(dayOfWeek);
     if (planilhaDayIdx < 0 || planilhaDayIdx >= (weekData.days || []).length) return null;
 
-    const day = weekData.days[planilhaDayIdx];
-    if (!day) return null;
+    const day = JSON.parse(JSON.stringify(weekData.days[planilhaDayIdx])) as { name: string; focus: string; exercises: { name: string; planned: PlannedSet[]; actual?: ActualSet[] }[] };
+
+    // Pre-fill actual arrays with planned reps + last weight
+    day.exercises.forEach((ex: { planned: PlannedSet[]; actual?: ActualSet[]; name: string }) => {
+      const hasActualData = ex.actual?.some((a: ActualSet) => a.reps !== undefined || a.weight !== undefined);
+      if (!hasActualData) {
+        ex.actual = ex.planned.map((p: PlannedSet) => ({
+          reps: p.reps,
+          weight: getLastWeight(ex.name) || p.weight || 0,
+          rpe: undefined,
+          date: new Date().toISOString(),
+        }));
+      }
+    });
 
     return {
       weekIdx: displayWeekIdx,
@@ -162,6 +175,18 @@ export default function PlanilhaUnificadaPage() {
     };
       })()
     : null;
+
+  const handleSaveDay = useCallback(() => {
+    if (!user || !selectedDayInfo) return;
+    setDaySaving(true);
+    const { weekIdx, dayIdx } = selectedDayInfo;
+    syncPlanilhaDay(user.userId, weekIdx, dayIdx);
+    toast.success('Treino salvo com sucesso!');
+    setTimeout(() => {
+      setDaySaving(false);
+      setSelectedDay(null);
+    }, 500);
+  }, [user, selectedDayInfo]);
 
   return (
     <div className="min-h-screen bg-[#0A0A0A] text-white pb-24">
@@ -200,15 +225,6 @@ export default function PlanilhaUnificadaPage() {
             >
               <Dumbbell className="w-4 h-4" />
               Semana
-            </button>
-            <button
-              onClick={() => setActiveTab('log')}
-              className={`flex-1 flex items-center justify-center gap-2 py-2 px-4 rounded-md text-sm font-medium transition-colors ${
-                activeTab === 'log' ? 'bg-[#B8956A] text-black' : 'text-gray-400 hover:text-white'
-              }`}
-            >
-              <Plus className="w-4 h-4" />
-              Log
             </button>
             <button
               onClick={() => setActiveTab('historico')}
@@ -293,6 +309,16 @@ export default function PlanilhaUnificadaPage() {
                     }
                   />
                 ))}
+
+                <button
+                  type="button"
+                  onClick={handleSaveDay}
+                  disabled={daySaving}
+                  className="w-full flex items-center justify-center gap-2 py-3 bg-[#B8956A] hover:bg-[#c9a67a] text-black font-bold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+                >
+                  <Save className="w-4 h-4" />
+                  {daySaving ? 'Salvando...' : 'Salvar Treino do Dia'}
+                </button>
               </div>
             )}
 
@@ -304,14 +330,6 @@ export default function PlanilhaUnificadaPage() {
               </div>
             )}
           </div>
-        )}
-
-        {/* TAB: LOG */}
-        {activeTab === 'log' && (
-          <WorkoutLogForm
-            onSave={() => setActiveTab('historico')}
-            onCancel={() => setActiveTab('semana')}
-          />
         )}
 
         {/* TAB: HISTÓRICO */}
