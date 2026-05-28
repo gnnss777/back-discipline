@@ -47,11 +47,15 @@ export default function PlanilhaUnificadaPage() {
     }
   }, [user]);
 
-  // Auto-select day from ?day= query param
+  // Auto-select week and day from ?week= & ?day= query params
   useEffect(() => {
     if (!user || typeof window === 'undefined') return;
     const params = new URLSearchParams(window.location.search);
+    const weekParam = params.get('week');
     const dayParam = params.get('day');
+    if (weekParam) {
+      setWeekView(parseInt(weekParam, 10));
+    }
     if (dayParam) {
       setSelectedDay(dayParam);
     }

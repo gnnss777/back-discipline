@@ -2,9 +2,10 @@
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { BookOpen, Trophy, Target, Dumbbell, ClipboardList, Search, Timer, ArrowLeft } from 'lucide-react';
+import { BookOpen, Trophy, Target, Dumbbell, ClipboardList, Search, Timer, ArrowLeft, AlertTriangle, ChevronRight } from 'lucide-react';
 import { useAuth } from '../../hooks/useAuth';
 import { useProgress } from '../../context/ProgressContext';
+import { getProgramInfo } from '@/utils/programTracker';
 import { chapters } from '@/lib/chapters';
 import { exercises } from '../../data/exercises';
 import { UserAvatar } from '../../components/UserAvatar';
@@ -117,6 +118,38 @@ export default function DashboardPage() {
             />
           </div>
         </div>
+
+        {/* Alerts */}
+        {(() => {
+          const progInfo = getProgramInfo(user.userId);
+          const alerts = progInfo?.alerts.filter(a => a.type !== 'program_not_started' && a.type !== 'week_complete') || [];
+          if (alerts.length === 0) return null;
+          return (
+            <div className="mb-8 space-y-2">
+              {alerts.map((alert, i) => {
+                const classes = `flex items-start gap-3 p-3 rounded border text-sm ${
+                  alert.severity === 'warning'
+                    ? 'border-yellow-900/30 bg-yellow-900/10 text-yellow-400'
+                    : 'border-red-900/30 bg-red-900/10 text-red-400'
+                }${alert.action ? ' cursor-pointer hover:opacity-80 transition-opacity' : ''}`;
+                const inner = (
+                  <>
+                    <AlertTriangle className="w-4 h-4 mt-0.5 shrink-0" />
+                    <span className="flex-1">{alert.message}</span>
+                    {alert.action && <ChevronRight className="w-4 h-4 shrink-0 self-center" />}
+                  </>
+                );
+                return alert.action ? (
+                  <Link key={i} href={alert.action.href} className={classes}>
+                    {inner}
+                  </Link>
+                ) : (
+                  <div key={i} className={classes}>{inner}</div>
+                );
+              })}
+            </div>
+          );
+        })()}
 
         <div className="grid grid-cols-2 gap-4">
           <Link href="/livro" className="p-6 bg-[#111] border border-[#2A2A2A] rounded-lg hover:border-[#B8956A] transition-colors text-center">
