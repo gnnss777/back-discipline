@@ -34,6 +34,7 @@ export interface ProgramAlert {
   type: 'missed_training' | 'missed_reading' | 'program_not_started' | 'week_complete';
   message: string;
   severity: 'info' | 'warning' | 'error';
+  action?: { label: string; href: string };
 }
 
 export function getProgramInfo(userId: string): {
@@ -98,6 +99,7 @@ export function getProgramInfo(userId: string): {
       type: 'missed_training',
       message: `${missedDays.length} treino${missedDays.length > 1 ? 's' : ''} perdido${missedDays.length > 1 ? 's' : ''} n${missedDays.length > 1 ? 'est' : 'a'} semana.`,
       severity: 'warning',
+      action: { label: 'Recuperar', href: `/planilha?day=${missedDays[0]}` },
     });
   }
 
@@ -115,6 +117,7 @@ export function getProgramInfo(userId: string): {
           type: 'missed_reading',
           message: `${unreadChapters.length} capítulo${unreadChapters.length > 1 ? 's' : ''} não lido${unreadChapters.length > 1 ? 's' : ''} para esta semana.`,
           severity: 'warning',
+          action: { label: 'Ler', href: `/livro/${unreadChapters[0]}` },
         });
       }
     }

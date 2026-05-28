@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from 'react';
 import Link from 'next/link';
-import { ArrowRight, Dumbbell, BarChart2, History, Check, AlertTriangle, Save } from 'lucide-react';
+import { ArrowRight, Dumbbell, BarChart2, History, Check, AlertTriangle, Save, ChevronRight } from 'lucide-react';
 import { toast } from 'sonner';
 import { useAuth } from '@/hooks/useAuth';
 import { loadPlanilha, savePlanilha, ensureSeed } from '@/utils/planilhaStorage';
@@ -44,6 +44,16 @@ export default function PlanilhaUnificadaPage() {
       syncAllPlanilhaDays(user.userId);
     } else {
       setData(ensureSeed(user.userId));
+    }
+  }, [user]);
+
+  // Auto-select day from ?day= query param
+  useEffect(() => {
+    if (!user || typeof window === 'undefined') return;
+    const params = new URLSearchParams(window.location.search);
+    const dayParam = params.get('day');
+    if (dayParam) {
+      setSelectedDay(dayParam);
     }
   }, [user]);
 
@@ -289,21 +299,29 @@ export default function PlanilhaUnificadaPage() {
             )}
 
             {/* Alerts */}
-            {progInfo?.alerts.filter(a => a.type !== 'program_not_started').map((alert, i) => (
-              <div
-                key={i}
-                className={`flex items-start gap-3 p-3 rounded border text-sm ${
-                  alert.severity === 'error'
-                    ? 'border-red-900/30 bg-red-900/10 text-red-400'
-                    : alert.severity === 'warning'
-                      ? 'border-yellow-900/30 bg-yellow-900/10 text-yellow-400'
-                      : 'border-green-900/30 bg-green-900/10 text-green-400'
-                }`}
-              >
-                <AlertTriangle className="w-4 h-4 mt-0.5 shrink-0" />
-                <span>{alert.message}</span>
-              </div>
-            ))}
+            {progInfo?.alerts.filter(a => a.type !== 'program_not_started').map((alert, i) => {
+              const classes = `flex items-start gap-3 p-3 rounded border text-sm ${
+                alert.severity === 'error'
+                  ? 'border-red-900/30 bg-red-900/10 text-red-400'
+                  : alert.severity === 'warning'
+                    ? 'border-yellow-900/30 bg-yellow-900/10 text-yellow-400'
+                    : 'border-green-900/30 bg-green-900/10 text-green-400'
+              }${alert.action ? ' cursor-pointer hover:opacity-80 transition-opacity' : ''}`;
+              const inner = (
+                <>
+                  <AlertTriangle className="w-4 h-4 mt-0.5 shrink-0" />
+                  <span className="flex-1">{alert.message}</span>
+                  {alert.action && <ChevronRight className="w-4 h-4 shrink-0 self-center" />}
+                </>
+              );
+              return alert.action ? (
+                <Link key={i} href={alert.action.href} className={classes}>
+                  {inner}
+                </Link>
+              ) : (
+                <div key={i} className={classes}>{inner}</div>
+              );
+            })}
 
             {/* Week Schedule */}
             {progInfo && (
