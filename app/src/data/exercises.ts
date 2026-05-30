@@ -17,7 +17,9 @@ export const exercises: Exercise[] = [
     muscles: ['Latíssimo', 'Rombóides', 'Trapézio Médio'],
     difficulty: 'Avançado',
     description: 'Remada unilateral com barra no landmine para desenvolvimento de espessura e ângulos variados.',
-    tips: ['Mantenha o abdômen contraído', 'Controle a fase excêntrica', 'Sinta a contração no dorsal'],
+    fullDescription: 'A Remada Meadows é mais que um exercício — é uma assinatura. John Meadows desenvolveu esta variação para criar um estímulo único no dorsal: o alongamento profundo na descida combinado com um ângulo de tração que atinge o dorsal inferior de uma forma que nenhuma outra remada consegue.\n\nPosicione-se ao lado da barra, com a perna do lado oposto à frente. Segure a barra próxima à ponta carregada. Puxe a barra em direção ao quadril, não ao ombro. A mão livre pressionando a perna da frente gera um contra-torque que enrijece toda a musculatura da lombar, permitindo puxar com mais potência e segurança.\n\nA remada Meadows permite um alongamento profundo e um ângulo de tração único, ideal para espessura e desenvolvimento do dorsal inferior. Use a mão livre para gerar contra-torque pressionando a perna de apoio.',
+    tips: ['Mantenha o abdômen contraído', 'Controle a fase excêntrica', 'Puxe em direção ao quadril, não ao ombro', 'Mão livre pressiona a perna para contra-torque'],
+    chapterSlugs: ['semana-3-pico', 'semana-4-desafio', 'semana-6-finalizacao'],
   },
   {
     id: 'one-arm-barbell-row',
@@ -26,7 +28,9 @@ export const exercises: Exercise[] = [
     muscles: ['Latíssimo', 'Rombóides', 'Deltoide Posterior'],
     difficulty: 'Intermediário',
     description: 'Remada unilateral para focar cada lado individualmente e corrigir desequilíbrios.',
-    tips: ['Mantenha a coluna neutra', 'Puxe com o cotovelo', 'Evite rotacionar o quadril'],
+    fullDescription: 'A remada unilateral com barra é o exercício de abertura ideal. Ela permite isolar cada lado das costas, corrigir desequilíbrios e estabelecer a conexão mente-músculo desde a primeira série.\n\nPosicione a barra no chão à sua frente, apontando para longe de você. Segure a ponta da barra com uma mão, a outra mão apoie no joelho da perna da frente. Puxe a barra em direção ao quadril, não ao ombro. Mantenha o cotovelo alto durante todo o movimento.\n\nA mão livre pressionando o joelho não é apenas apoio — ela cria uma força de contra-torque que enrijece toda a musculatura da lombar, permitindo puxar com mais potência e segurança.',
+    tips: ['Mantenha a coluna neutra', 'Puxe com o cotovelo', 'Evite rotacionar o quadril', 'Contra-torque com a mão livre'],
+    chapterSlugs: ['semana-1-ativacao', 'semana-2-progressao', 'semana-5-sobrecarga', 'semana-6-finalizacao'],
   },
   {
     id: 'smith-machine-row',
@@ -34,8 +38,10 @@ export const exercises: Exercise[] = [
     category: 'Remadas',
     muscles: ['Latíssimo', 'Rombóides', 'Eretores'],
     difficulty: 'Iniciante',
-    description: 'Remada na máquina Smith com movimento controlado e descanso no fundo.',
-    tips: ['Controle o peso', 'Mantenha os ombros para baixo', 'Pause no fundo'],
+    description: 'Remada na máquina Smith com movimento controlado e descanso no fundo (saída morta).',
+    fullDescription: 'A remada no Smith com saída morta — também chamada de deadstop row — elimina o impulso elástico entre repetições. Cada repetição começa do zero absoluto, sem o benefício do estiramento muscular, forçando seus dorsais a gerar potência do início ao fim.\n\nSuba no Smith com a barra próxima ao chão. Posicione-se de forma que a barra fique alinhada com o meio do seu pé. Puxe, solte completamente a tensão no fundo, e puxe novamente. Quando você tira o impulso elástico, cada repetição é uma contração concêntrica pura, recrutando mais fibras musculares.\n\nO movimento guiado permite trabalhar a falha com segurança, ideal para séries descendentes e técnicas de alta intensidade como descanso-pausa com drop set triplo.',
+    tips: ['Controle o peso', 'Mantenha os ombros para baixo', 'Pause no fundo — saída morta', 'Cada repetição começa do zero'],
+    chapterSlugs: ['semana-1-ativacao', 'semana-5-sobrecarga'],
   },
   {
     id: 'deadstop-dumbbell-row',
@@ -43,8 +49,10 @@ export const exercises: Exercise[] = [
     category: 'Remadas',
     muscles: ['Latíssimo', 'Rombóides'],
     difficulty: 'Intermediário',
-    description: 'Remada com halter onde cada repetição começa do zero para eliminar impulso.',
-    tips: ['Toque o haltere no chão', 'Exploda na subida', 'Mantenha o tronco estável'],
+    description: 'Remada com halter onde cada repetição começa do zero para eliminar impulso elástico.',
+    fullDescription: 'A remada unilateral com saída morta elimina o impulso elástico entre repetições. Você coloca o haltere no chão a cada repetição, solta completamente a tensão e recomeça do zero.\n\nQuando você remove o ciclo alongamento-encurtamento, cada repetição é uma contração concêntrica pura. Isso recruta mais fibras musculares e constrói força real desde a posição mais alongada do movimento.\n\nNo fundo do movimento, sinta o dorsal esticar completamente antes de iniciar a próxima repetição. Esse alongamento-forçado cria microlesões controladas que estimulam o crescimento.',
+    tips: ['Toque o haltere no chão', 'Exploda na subida', 'Mantenha o tronco estável', 'Solte toda tensão no fundo'],
+    chapterSlugs: ['semana-3-pico'],
   },
   {
     id: 't-bar-row',
@@ -52,8 +60,10 @@ export const exercises: Exercise[] = [
     category: 'Remadas',
     muscles: ['Latíssimo', 'Trapézio Médio', 'Rombóides'],
     difficulty: 'Intermediário',
-    description: 'Remada estilo old school para criar espessura nas costas.',
-    tips: ['Mantenha o peito erguido', 'Puxe para o abdômen', 'Controle a descida'],
+    description: 'Remada old school que permite altas cargas com excelente suporte para criar espessura.',
+    fullDescription: 'A remada T-Bar permite cargas mais altas que a remada curvada com barra, pois a coluna fica em um ângulo mais favorável. Posicione-se sobre a barra com os pés na largura dos ombros, mantenha o peito erguido e as escápulas deprimidas.\n\nPuxe a barra em direção ao peito, não ao abdômen. Controle a descida — não deixe o peso cair. O estilo Tom Platz na remada T-Bar significa: pegue uma carga pesada, faça repetições completas até a falha e, quando não conseguir mais, continue com repetições parciais.\n\nRemada old school que permite altas cargas com excelente suporte. Ideal para criar espessura nas costas.',
+    tips: ['Mantenha o peito erguido', 'Puxe para o abdômen', 'Controle a descida', 'Repetições parciais no final'],
+    chapterSlugs: ['semana-4-desafio', 'semana-5-sobrecarga'],
   },
   {
     id: 'rack-pull',
@@ -61,8 +71,10 @@ export const exercises: Exercise[] = [
     category: 'Levantamento',
     muscles: ['Eretores', 'Latíssimo', 'Trapézio'],
     difficulty: 'Avançado',
-    description: 'Variação do levantamento terra com a barra iniciando na altura dos joelhos.',
-    tips: ['Barra na altura dos joelhos', 'Engaje o posterior', 'Mantenha a barra próxima'],
+    description: 'Variação do levantamento terra com a barra iniciando na altura dos joelhos para isolar a fase de maior alavancagem.',
+    fullDescription: 'O Rack Pull é o levantamento terra feito a partir de pinos colocados alguns centímetros abaixo do joelho. Ao eliminar a parte mais baixa do movimento, você permite que a cadeia posterior trabalhe com cargas mais altas, focando especificamente no trapézio médio e superior, eretores e glúteos.\n\nPosicione os pinos aproximadamente 10 cm abaixo do joelho. Mantenha a coluna neutra em todo o movimento. A barra deve permanecer colada ao corpo. No topo, aperte os glúteos e retraia as escápulas.\n\nO Rack Pull isola a fase de maior alavancagem do terra, permitindo sobrecarga máxima no trapézio e nos eretores sem o risco de arredondamento da coluna.',
+    tips: ['Barra na altura dos joelhos', 'Engaje o posterior', 'Mantenha a barra próxima', 'Aperte os glúteos no topo'],
+    chapterSlugs: ['semana-2-progressao'],
   },
   {
     id: 'deficit-deadlift',
@@ -70,8 +82,10 @@ export const exercises: Exercise[] = [
     category: 'Levantamento',
     muscles: ['Eretores', 'Latíssimo', 'Cadeia Posterior'],
     difficulty: 'Avançado',
-    description: 'Levantamento terra com os pés elevados para aumentar a amplitude de movimento.',
-    tips: ['Comece com déficit pequeno', 'Quebre a barra no chão', 'Mantenha a posição'],
+    description: 'Levantamento terra com os pés elevados sobre plataforma para aumentar amplitude de movimento.',
+    fullDescription: 'O terra com déficit é um dos exercícios mais desafiadores do programa. Você executa o levantamento terra sobre uma plataforma elevada (step, anilha ou caixa de 5-10 cm), o que aumenta a amplitude de movimento.\n\nO déficit força o dorsal e os eretores a trabalhar desde uma posição mais alongada, melhora a força de saída do chão e expõe fraquezas na posição inicial que o terra normal esconde. Posicione os pés sobre a elevação, na largura dos quadris, com a barra alinhada com o meio do pé.\n\nMantenha a coluna neutra — o déficit tende a arredondar as costas, então redobre a atenção. Empurre o chão com os pés, não puxe com as costas. Se não conseguir manter a coluna neutra, reduza a altura da elevação.',
+    tips: ['Comece com déficit pequeno (5 cm)', 'Quebre a barra no chão', 'Mantenha a coluna neutra', 'Empurre o chão com os pés'],
+    chapterSlugs: ['semana-5-sobrecarga'],
   },
   {
     id: 'chin-up',
@@ -79,8 +93,10 @@ export const exercises: Exercise[] = [
     category: 'Puxadas',
     muscles: ['Latíssimo', 'Rombóides', 'Bíceps'],
     difficulty: 'Intermediário',
-    description: 'Puxada com pegada supinada para desenvolvimento do dorsal.',
-    tips: ['Pegada supinada', 'Puxe o peito à barra', 'Controle a descida'],
+    description: 'Puxada com pegada supinada para desenvolvimento do dorsal com auxílio do bíceps.',
+    fullDescription: 'A barra fixa é um dos exercícios mais desafiadores e recompensadores para o desenvolvimento das costas. Estudos demonstram que a barra fixa estrita (sem balanço) é superior à barra fixa com kipping em termos de ativação do dorsal e trapézio.\n\nO Chin Up Death é o teste final de resistência e força do dorsal: 6 séries de barra fixa alternando pegadas, todas até a falha absoluta. Se você sobreviveu ao Chin Up Death, o Mega Chin Up Death é a versão estendida: 9 séries.\n\nChin Up Death não é sobre quantas você faz na primeira série — é sobre quantas você consegue arrastar na sexta.',
+    tips: ['Pegada supinada', 'Puxe o peito à barra', 'Controle a descida', 'Escápulas deprimidas no topo'],
+    chapterSlugs: ['semana-2-progressao', 'semana-5-sobrecarga', 'semana-6-finalizacao'],
   },
   {
     id: 'lat-pulldown',
@@ -88,8 +104,10 @@ export const exercises: Exercise[] = [
     category: 'Puxadas',
     muscles: ['Latíssimo'],
     difficulty: 'Iniciante',
-    description: 'Puxada na máquina para trabalhar o dorsal com foco na conexão mente-músculo.',
-    tips: ['Puxe para o peito', 'Cotovelos para baixo', 'Sinta o dorsal trabalhar'],
+    description: 'Puxada na máquina para trabalhar o dorsal com foco na conexão mente-músculo e técnica de pegada.',
+    fullDescription: 'O puxador frontal é o exercício base para desenvolvimento da largura do dorsal. A execução correta começa antes do movimento: deprima a escápula — empurre o ombro para baixo antes de iniciar o movimento. Faça uma leve rotação externa do braço e puxe o cotovelo em direção à pelve.\n\nA largura de pegada influencia diretamente quais músculos são recrutados. Pegada ampla (200% da largura dos ombros) é melhor para o trapézio. Pegada média (100%) é superior para o trapézio superior. Pegada estreita (50%) tem maior envolvimento do dorsal.\n\nO movimento unilateral permite maior amplitude de movimento e mais ênfase na contração no pico, com alongamento completo e contração máxima mais facilmente alcançados.',
+    tips: ['Puxe para o peito', 'Cotovelos para baixo', 'Deprima a escápula antes de puxar', 'Incline levemente o tronco'],
+    chapterSlugs: ['semana-1-ativacao'],
   },
   {
     id: 'underhand-pulldown',
@@ -97,8 +115,10 @@ export const exercises: Exercise[] = [
     category: 'Puxadas',
     muscles: ['Latíssimo', 'Bíceps'],
     difficulty: 'Iniciante',
-    description: 'Puxador com pegada supinada para ênfase no dorsal inferior.',
-    tips: ['Pegada mais estreita', 'Puxe em arco', 'Segure a contração'],
+    description: 'Puxador com pegada supinada (palmas para você) para ênfase no dorsal inferior.',
+    fullDescription: 'O puxador com pegada supinada (palmas para você) reduz o envolvimento do bíceps em comparação com a pronada e permite uma linha de puxada mais natural para o dorsal. A supinação coloca o bíceps em uma posição mais forte, permitindo puxar com mais carga.\n\nNo pico da contração, gire levemente o tronco para o lado ativo. Isso encurta a distância origem-inserção do dorsal e maximiza a ativação. Na última série, ao atingir a falha, segure a posição de pico de contração por 5-10 segundos.\n\nA contração estática no final da série recruta fibras de contração lenta que não foram totalmente ativadas durante o movimento dinâmico.',
+    tips: ['Pegada mais estreita', 'Puxe em arco', 'Segure a contração', 'Gire o tronco para o lado ativo no pico'],
+    chapterSlugs: ['semana-2-progressao', 'semana-3-pico'],
   },
   {
     id: 'trx-horizontal-chin',
@@ -106,8 +126,10 @@ export const exercises: Exercise[] = [
     category: 'Puxadas',
     muscles: ['Latíssimo', 'Rombóides'],
     difficulty: 'Iniciante',
-    description: 'Puxada horizontal no TRX para trabalho profundo do dorsal.',
-    tips: ['Corpo inclinado', 'Puxe com os cotovelos', 'Mantenha o corpo rígido'],
+    description: 'Puxada horizontal no TRX para trabalho profundo do dorsal com ajuste de dificuldade.',
+    fullDescription: 'Remada horizontal com os pés no chão e o TRX como apoio. A dificuldade é ajustada pela distância dos pés do ponto de ancoragem: quanto mais vertical, mais fácil; quanto mais horizontal, mais difícil.\n\nÉ um exercício progressivo — a meta é superar o número de repetições da semana anterior. Se você fez 10 repetições na semana anterior, a meta agora é 11. Progressão é progressão, mesmo que seja uma repetição.',
+    tips: ['Corpo inclinado', 'Puxe com os cotovelos', 'Mantenha o corpo rígido', 'Ajuste distância para progressão'],
+    chapterSlugs: ['semana-3-pico', 'semana-4-desafio'],
   },
   {
     id: 'face-pull',
@@ -115,8 +137,10 @@ export const exercises: Exercise[] = [
     category: 'Isolamento',
     muscles: ['Trapézio Médio', 'Rombóides', 'Deltoide Posterior'],
     difficulty: 'Iniciante',
-    description: 'Exercício para saúde do ombro e desenvolvimento do trapézio médio.',
-    tips: ['Puxe para o rosto', 'Roto o ombro externamente', 'Cotovelos altos'],
+    description: 'Exercício para saúde do ombro e desenvolvimento do trapézio médio e deltóide posterior.',
+    fullDescription: 'O Face Pull é um dos exercícios mais importantes para a saúde dos ombros. Ele trabalha o trapézio médio, o deltóide posterior e o manguito rotador simultaneamente — três áreas críticas para estabilidade articular.\n\nPrenda uma corda no topo de uma polia. Segure com ambas as mãos, polegares para trás. Puxe as mãos em direção ao rosto, dirigindo os cotovelos para trás e para baixo. Segure a contração por 1 segundo.\n\nSe seus ombros são problemáticos, faça Face Pulls antes de todo treino de costas — não apenas aos sábados. A variação com press cubano combina Face Pull com rotação externa e extensão acima da cabeça.',
+    tips: ['Puxe para o rosto', 'Rotacione o ombro externamente', 'Cotovelos altos', 'Polegares para trás'],
+    chapterSlugs: ['semana-2-progressao'],
   },
   {
     id: 'banded-pullover',
@@ -124,8 +148,10 @@ export const exercises: Exercise[] = [
     category: 'Isolamento',
     muscles: ['Latíssimo'],
     difficulty: 'Iniciante',
-    description: 'Pullover com banda elástica para trabalho na posição alongada.',
-    tips: ['Alongue o dorsal', 'Resistência constante', 'Controle o retorno'],
+    description: 'Pullover com banda elástica para trabalho do dorsal com tensão constante em toda amplitude.',
+    fullDescription: 'O pull-over com banda é um dos melhores exercícios para isolar o dorsal. A tensão constante da banda mantém o músculo sob trabalho durante toda a amplitude, algo que os pesos livres não conseguem replicar.\n\nO movimento de alongamento na posição estendida seguido da contração máxima proporciona um bombeamento completo do dorsal. Ideal como exercício de finalização ou ativação.',
+    tips: ['Alongue o dorsal no início', 'Resistência constante', 'Controle o retorno', 'Sinta a queimadura'],
+    chapterSlugs: ['semana-1-ativacao', 'semana-2-progressao'],
   },
   {
     id: 'dumbbell-pullover',
@@ -133,8 +159,10 @@ export const exercises: Exercise[] = [
     category: 'Isolamento',
     muscles: ['Latíssimo'],
     difficulty: 'Iniciante',
-    description: 'Pullover com halter para trabalho de alongamento do dorsal.',
-    tips: ['Apóie as escápulas', 'Mantenha os braços estendidos', 'Sinta o alongamento'],
+    description: 'Pullover com halter para trabalho de alongamento e contração máxima do dorsal.',
+    fullDescription: 'O pull-over com halter ou máquina é o melhor exercício de isolamento para o dorsal em toda a sua amplitude. O alongamento completo no fundo estica o dorsal ao máximo, e a contração no topo completa o movimento.\n\nApoie as escápulas em um banco transversal, mantenha os braços ligeiramente flexionados e alongue profundamente atrás da cabeça. Expire na contração e inspire no alongamento.',
+    tips: ['Apoie as escápulas no banco', 'Mantenha os braços estendidos', 'Sinta o alongamento profundo', 'Expire na contração'],
+    chapterSlugs: ['semana-4-desafio', 'semana-5-sobrecarga'],
   },
   {
     id: 'hyperextension-bands',
@@ -142,8 +170,10 @@ export const exercises: Exercise[] = [
     category: 'Isolamento',
     muscles: ['Eretores', 'Glúteos'],
     difficulty: 'Iniciante',
-    description: 'Hiperextensão com resistência progressiva de bandas.',
-    tips: ['Movimento controlado', 'Contração nos glúteos', 'Não hiperextenda'],
+    description: 'Hiperextensão com resistência progressiva de bandas para fortalecimento da cadeia posterior.',
+    fullDescription: 'A hiperextensão com bandas adiciona resistência progressiva ao movimento de extensão do tronco. Quanto mais você sobe, mais a banda estica, mais pesado fica.\n\nComece com banda leve. Se conseguir 15 repetições limpas, aumente a resistência da banda na próxima série. Mantenha o movimento controlado, contraia os glúteos no topo e não hiperextenda a coluna lombar.',
+    tips: ['Movimento controlado', 'Contração nos glúteos', 'Não hiperextenda', 'Progrida a resistência'],
+    chapterSlugs: ['semana-3-pico'],
   },
   {
     id: 'farmers-walk',
@@ -151,20 +181,21 @@ export const exercises: Exercise[] = [
     category: 'Funcional',
     muscles: ['Trapézio Superior', 'Eretores', 'Abdômen'],
     difficulty: 'Intermediário',
-    description: 'Carregamento de peso para desenvolvimento de força de preensão e estabilidade.',
-    tips: ['Ombros para trás', 'Abdômen contraído', 'Olhar à frente'],
+    description: 'Carregamento de peso para desenvolvimento de força de preensão e estabilidade do core.',
+    fullDescription: 'A caminhada do fazendeiro é um dos exercícios mais completos para o trapézio, a pegada e o core. Pegue dois halteres pesados e caminhe por distância ou tempo.\n\nMantenha os ombros deprimidos (para baixo) e o peito erguido. Passos curtos e controlados. Não balance o corpo — mantenha o core rígido. A meta é caminhar até não conseguir mais segurar os halteres. Isso é uma série.',
+    tips: ['Ombros para trás', 'Abdômen contraído', 'Olhar à frente', 'Passos curtos e controlados'],
+    chapterSlugs: ['semana-4-desafio'],
   },
-
-  // ════════ NOVOS EXERCÍCIOS DO LIVRO ════════
-
   {
     id: 'dumbbell-row',
     name: 'Remada com Halteres',
     category: 'Remadas',
     muscles: ['Latíssimo', 'Rombóides', 'Trapézio Médio'],
     difficulty: 'Intermediário',
-    description: 'Remada com halteres apoiando um joelho no banco. Exercício clássico para espessura e correção de desequilíbrios.',
-    tips: ['Mantenha a coluna neutra', 'Puxe o haltere em direção ao quadril', 'Alongue completamente na descida'],
+    description: 'Remada com halteres apoiando um joelho no banco. Clássico para espessura e correção de desequilíbrios.',
+    fullDescription: 'A remada com halteres oferece amplitude de movimento total. O alongamento completo no fundo estica o dorsal ao máximo, e o aperto no topo maximiza a contração.\n\nApoie o joelho e a mão em um banco. Mantenha a coluna neutra e o abdômen contraído. Puxe o haltere em direção ao quadril. No topo, aperte o cotovelo contra as costelas — pense em apertar um papel ali. Não basta mover o peso — você precisa sentir cada fibra.\n\nA série de alimentação (feeder set) é um ritual de ativação: 8-12 repetições com ~50% da carga de trabalho, foco total na conexão mente-músculo, preparando o dorsal para o trabalho pesado.',
+    tips: ['Mantenha a coluna neutra', 'Puxe o haltere em direção ao quadril', 'Alongue completamente na descida', 'Aperte o cotovelo contra as costelas no topo'],
+    chapterSlugs: ['semana-1-ativacao', 'semana-2-progressao', 'semana-6-finalizacao'],
   },
   {
     id: 'seated-cable-row',
@@ -172,8 +203,10 @@ export const exercises: Exercise[] = [
     category: 'Remadas',
     muscles: ['Latíssimo', 'Rombóides', 'Trapézio Médio'],
     difficulty: 'Iniciante',
-    description: 'Remada sentada na máquina de cabos. Ótimo para volume e bombeamento muscular com tensão constante.',
-    tips: ['Mantenha o peito erguido', 'Puxe com os cotovelos', 'Segure a contração por 1 segundo'],
+    description: 'Remada sentada na máquina de cabos. Tensão constante para volume e bombeamento muscular.',
+    fullDescription: 'A remada baixa oferece tensão constante durante toda a amplitude de movimento, algo que os pesos livres não conseguem replicar. Sente-se com os pés apoiados e joelhos ligeiramente flexionados.\n\nIncline o tronco ligeiramente à frente para alongar os dorsais e puxe o cabo em direção ao abdômen, mantendo os cotovelos próximos ao corpo. No pico da contração, aperte as escápulas por 1-2 segundos. Controle o retorno — não deixe o peso "voar" de volta.\n\nA variação com barra W reduz o estresse no punho e cotovelo. A remada unilateral no cabo permite isolar cada lado com tensão constante.',
+    tips: ['Mantenha o peito erguido', 'Puxe com os cotovelos', 'Segure a contração por 1 segundo', 'Controle o retorno'],
+    chapterSlugs: ['semana-1-ativacao', 'semana-3-pico', 'semana-6-finalizacao'],
   },
   {
     id: 'straight-arm-pulldown',
@@ -182,7 +215,9 @@ export const exercises: Exercise[] = [
     muscles: ['Latíssimo'],
     difficulty: 'Iniciante',
     description: 'Pulldown com braços estendidos usando a corda no cabo alto. Isola o dorsal sem envolvimento dos braços.',
-    tips: ['Braços ligeiramente flexionados', 'Alongue no topo', 'Empurre a corda para baixo e para trás'],
+    fullDescription: 'O pulldown com os braços estendidos usando a corda isola o dorsal sem envolvimento dos braços. O alongamento no topo e a contração no fundo criam um bombeamento completo.\n\nMantenha os braços ligeiramente flexionados, alongue no topo e empurre a corda para baixo e para trás, sentindo o dorsal contrair em toda a amplitude. A tensão constante da corda mantém o músculo sob trabalho contínuo.',
+    tips: ['Braços ligeiramente flexionados', 'Alongue no topo', 'Empurre para baixo e para trás', 'Tensão constante'],
+    chapterSlugs: ['semana-1-ativacao', 'semana-6-finalizacao'],
   },
   {
     id: 'kettlebell-row',
@@ -190,8 +225,10 @@ export const exercises: Exercise[] = [
     category: 'Remadas',
     muscles: ['Latíssimo', 'Rombóides', 'Trapézio Médio'],
     difficulty: 'Intermediário',
-    description: 'Remada com kettlebell para trabalho de espessura e força de preensão. O centro de gravidade do kettlebell desafia a estabilidade.',
-    tips: ['Posicione o kettlebell no chão entre as pernas', 'Puxe com o cotovelo alto', 'Mantenha o core contraído'],
+    description: 'Remada com kettlebell para trabalho de espessura e força de preensão. Centro de gravidade desafiador.',
+    fullDescription: 'A remada com kettlebell desafia a estabilidade devido ao centro de gravidade deslocado do kettlebell. Posicione o kettlebell no chão entre as pernas, puxe com o cotovelo alto e mantenha o core contraído.\n\nO formato do kettlebell exige mais da pegada e da estabilização escapular, recrutando fibras musculares adicionais em comparação com a remada com halteres tradicional.',
+    tips: ['Posicione o kettlebell no chão', 'Puxe com o cotovelo alto', 'Mantenha o core contraído', 'Desafio extra de estabilidade'],
+    chapterSlugs: ['semana-2-progressao', 'semana-3-pico'],
   },
   {
     id: 'machine-pullover',
@@ -199,8 +236,10 @@ export const exercises: Exercise[] = [
     category: 'Isolamento',
     muscles: ['Latíssimo'],
     difficulty: 'Iniciante',
-    description: 'Pull-over realizado na máquina específica. Alongamento completo no fundo e contração máxima no topo para finalizar o dorsal.',
-    tips: ['Ajuste o banco para alinhar os ombros com o eixo', 'Alongue completamente no fundo', 'Expire na contração'],
+    description: 'Pull-over na máquina para alongamento completo no fundo e contração máxima no topo.',
+    fullDescription: 'O pull-over na máquina (ou com halter) isola o dorsal após exercícios pesados como o Chin Up Death. O alongamento no fundo do movimento é onde o crescimento acontece.\n\nAjuste o banco para alinhar os ombros com o eixo da máquina. Alongue completamente no fundo, sentindo o dorsal esticar, e expire na contração. É o melhor exercício de isolamento para o dorsal em toda a sua amplitude.',
+    tips: ['Ajuste o banco para alinhar os ombros', 'Alongue completamente no fundo', 'Expire na contração', 'Finalizador perfeito'],
+    chapterSlugs: ['semana-4-desafio', 'semana-5-sobrecarga', 'semana-6-finalizacao'],
   },
   {
     id: 'one-arm-dumbbell-row',
@@ -208,8 +247,10 @@ export const exercises: Exercise[] = [
     category: 'Remadas',
     muscles: ['Latíssimo', 'Rombóides', 'Deltoide Posterior'],
     difficulty: 'Iniciante',
-    description: 'Remada unilateral clássica com haltere. Essencial para corrigir desequilíbrios e estabelecer conexão mente-músculo.',
-    tips: ['Apoie joelho e mão no banco', 'Puxe em direção ao quadril', 'Sinta o dorsal contrair no topo'],
+    description: 'Remada unilateral clássica com haltere para corrigir desequilíbrios e conectar mente-músculo.',
+    fullDescription: 'A remada unilateral com haltere é excelente para corrigir desequilíbrios e melhorar a conexão mente-músculo. Apoie o joelho e a mão em um banco, mantenha a coluna neutra e o abdômen contraído.\n\nPuxe o haltere em direção ao quadril, não ao ombro. No topo, sinta a contração do dorsal — pense em apertar o cotovelo contra as costelas. Alongue completamente na descida, sentindo o dorsal esticar.\n\nA amplitude de movimento total — alongamento completo no fundo e aperto máximo no topo — faz deste um dos exercícios mais eficientes para espessura das costas.',
+    tips: ['Apoie joelho e mão no banco', 'Puxe em direção ao quadril', 'Sinta o dorsal contrair no topo', 'Alongue completamente na descida'],
+    chapterSlugs: ['semana-1-ativacao', 'semana-4-desafio'],
   },
   {
     id: 'away-facing-pulldown',
@@ -217,8 +258,10 @@ export const exercises: Exercise[] = [
     category: 'Puxadas',
     muscles: ['Latíssimo', 'Rombóides'],
     difficulty: 'Intermediário',
-    description: 'Puxador de frente com o tronco inclinado para trás. Alonga o dorsal no início e intensifica a contração no final.',
-    tips: ['Incline o tronco para trás', 'Puxe a barra em direção ao colo', 'Sinta o alongamento no início'],
+    description: 'Puxador de frente com o tronco inclinado para trás. Alonga o dorsal no início e intensifica a contração.',
+    fullDescription: 'O Away Facing Pulldown é o puxador de frente com o tronco inclinado para trás. Essa variação alonga o dorsal no início do movimento e intensifica a contração no final.\n\nIncline o tronco para trás, puxe a barra em direção ao colo e sinta o alongamento no início. Quando combinado com o Toward Facing Pulldown (puxador padrão) em superset, o primeiro alonga o dorsal e o segundo contrai — juntos criam um bombeamento completo.',
+    tips: ['Incline o tronco para trás', 'Puxe a barra em direção ao colo', 'Sinta o alongamento no início', 'Combine com puxador padrão em superset'],
+    chapterSlugs: ['semana-2-progressao', 'semana-4-desafio'],
   },
   {
     id: 'wide-grip-pulldown',
@@ -226,8 +269,10 @@ export const exercises: Exercise[] = [
     category: 'Puxadas',
     muscles: ['Latíssimo', 'Rombóides'],
     difficulty: 'Iniciante',
-    description: 'Puxador com pegada ampla para ênfase na largura do dorsal. Maior abertura dos braços recruta as fibras superiores.',
-    tips: ['Pegada na curvatura da barra', 'Puxe para o peito', 'Evite balançar o tronco'],
+    description: 'Puxador com pegada ampla para ênfase na largura do dorsal e segurança articular.',
+    fullDescription: 'O puxador com pegada ampla (200% da largura dos ombros) é ideal para o trapézio com menos risco de síndrome do impacto. Estudos de Signorile (2002) encontraram que o puxador frontal com pegada ampla é superior para atividade do dorsal.\n\nSegure na curvatura da barra, puxe para o peito e evite balançar o tronco. A pegada ampla proporciona o melhor equilíbrio entre ativação muscular e segurança articular.',
+    tips: ['Pegada na curvatura da barra', 'Puxe para o peito', 'Evite balançar o tronco', 'Segurança articular'],
+    chapterSlugs: ['semana-6-finalizacao'],
   },
   {
     id: 'lat-hang',
@@ -235,8 +280,10 @@ export const exercises: Exercise[] = [
     category: 'Isolamento',
     muscles: ['Latíssimo', 'Eretores'],
     difficulty: 'Iniciante',
-    description: 'Suspensão na barra fixa com foco no alongamento e descompressão da coluna. Excelente para saúde dos ombros e dorsais.',
-    tips: ['Relaxe os braços completamente', 'Respire fundo', 'Mantenha por 30-60 segundos'],
+    description: 'Suspensão na barra fixa com foco no alongamento e descompressão da coluna.',
+    fullDescription: 'O Lat Hang é simplesmente se pendurar na barra sem fazer força para subir. A suspensão passiva descomprime a coluna vertebral, alonga os dorsais e alivia a tensão acumulada durante a semana.\n\nSegure a barra com pegada pronada, largura dos ombros. Relaxe completamente os ombros — deixe o peso do corpo alongar os dorsais. Respire profundamente: inspire expandindo o peito, expire relaxando ainda mais.\n\nA meta é 60 segundos de suspensão. Se conseguir, você está liberado. Use também como protocolo de ativação: 4 séries de 5 segundos com escápulas deprimidas.',
+    tips: ['Relaxe os braços completamente', 'Respire fundo', 'Mantenha por 30-60 segundos', 'Descompressão da coluna'],
+    chapterSlugs: ['semana-5-sobrecarga'],
   },
   {
     id: 'dy-row',
@@ -244,8 +291,10 @@ export const exercises: Exercise[] = [
     category: 'Remadas',
     muscles: ['Latíssimo', 'Rombóides', 'Deltoide Posterior'],
     difficulty: 'Avançado',
-    description: 'Remada com halteres em ângulo específico, nomeada em homenagem ao fisiculturista que a popularizou. Permite alongamento profundo.',
-    tips: ['Use um ângulo de tronco mais fechado', 'Deixe o haltere ir à frente do ombro', 'Puxe com o cotovelo alto'],
+    description: 'Remada com halteres em ângulo específico, nomeada em homenagem ao fisiculturista que a popularizou.',
+    fullDescription: 'A D.Y. Row é uma remada com halteres em um ângulo específico, nomeada em homenagem ao fisiculturista que a popularizou. Use um ângulo de tronco mais fechado, deixe o haltere ir à frente do ombro para um alongamento profundo e puxe com o cotovelo alto.\n\nA variação com repetições forçadas exige um parceiro que aplique pressão mínima para ajudar nas últimas repetições após a falha. Execute até a falha, peça 2-3 repetições forçadas e finalize segurando o alongamento por 10 segundos.',
+    tips: ['Ângulo de tronco mais fechado', 'Deixe o haltere ir à frente do ombro', 'Puxe com o cotovelo alto', 'Repetições forçadas no final'],
+    chapterSlugs: ['semana-2-progressao'],
   },
   {
     id: 'reverse-hyperextension',
@@ -253,8 +302,10 @@ export const exercises: Exercise[] = [
     category: 'Isolamento',
     muscles: ['Eretores', 'Glúteos', 'Cadeia Posterior'],
     difficulty: 'Intermediário',
-    description: 'Hiperextensão reversa para trabalho isolado dos eretores e glúteos. Move as pernas ao invés do tronco.',
-    tips: ['Mantenha as pernas estendidas', 'Eleve até alinhar com o tronco', 'Controle a descida'],
+    description: 'Hiperextensão reversa para trabalho isolado dos eretores e glúteos movendo as pernas ao invés do tronco.',
+    fullDescription: 'A hiperextensão reversa trabalha os eretores da espinha e os glúteos em um movimento de extensão do quadril. Diferente da hiperextensão tradicional, aqui você move as pernas ao invés do tronco.\n\nMantenha as pernas estendidas, eleve até alinhar com o tronco e controle a descida. É um excelente exercício de finalização para a lombar, proporcionando bombeamento sem compressão da coluna.',
+    tips: ['Mantenha as pernas estendidas', 'Eleve até alinhar com o tronco', 'Controle a descida', 'Sem compressão da coluna'],
+    chapterSlugs: ['semana-6-finalizacao'],
   },
   {
     id: 'banded-shrugs',
@@ -262,8 +313,10 @@ export const exercises: Exercise[] = [
     category: 'Isolamento',
     muscles: ['Trapézio Superior', 'Trapézio Médio'],
     difficulty: 'Iniciante',
-    description: 'Encolhimento de ombros com resistência de banda elástica para desenvolvimento do trapézio superior.',
-    tips: ['Pise na banda com os dois pés', 'Eleja os ombros em direção às orelhas', 'Segure 1 segundo no topo'],
+    description: 'Encolhimento de ombros com resistência de banda elástica para desenvolvimento do trapézio.',
+    fullDescription: 'O encolhimento de ombros com banda elástica mantém o trapézio sob trabalho contínuo durante toda a amplitude. Em pé, segure a banda com os braços estendidos ao lado do corpo.\n\nEleve os ombros em direção às orelhas, segure por 1 segundo no topo e desça controladamente. A tensão constante da banda proporciona um estímulo que pesos livres não conseguem replicar.',
+    tips: ['Pise na banda com os dois pés', 'Eleve os ombros em direção às orelhas', 'Segure 1 segundo no topo', 'Tensão constante'],
+    chapterSlugs: ['semana-3-pico'],
   },
   {
     id: 'supported-row',
@@ -271,8 +324,10 @@ export const exercises: Exercise[] = [
     category: 'Remadas',
     muscles: ['Latíssimo', 'Rombóides', 'Trapézio Médio'],
     difficulty: 'Intermediário',
-    description: 'Remada com o peito apoiado em um banco inclinado. Elimina o uso do quadril e isolam as costas completamente.',
-    tips: ['Ajuste o banco para 30-45°', 'Puxe os halteres em direção ao quadril', 'Aperte as escápulas no topo'],
+    description: 'Remada com peito apoiado em banco inclinado. Elimina estabilização do tronco para isolar as costas.',
+    fullDescription: 'A remada com suporte (peito apoiado em banco inclinado) elimina a necessidade de estabilização do tronco, permitindo isolar completamente os dorsais e romboides.\n\nAjuste o banco para 30-45°, puxe os halteres em direção ao quadril e aperte as escápulas no topo. Sem a preocupação de equilibrar o corpo, você pode focar 100% na contração muscular.',
+    tips: ['Ajuste o banco para 30-45°', 'Puxe em direção ao quadril', 'Aperte as escápulas no topo', 'Isolamento total'],
+    chapterSlugs: ['semana-4-desafio'],
   },
   {
     id: 'deadlift-chains',
@@ -280,8 +335,10 @@ export const exercises: Exercise[] = [
     category: 'Levantamento',
     muscles: ['Eretores', 'Cadeia Posterior', 'Trapézio'],
     difficulty: 'Avançado',
-    description: 'Levantamento terra com correntes penduradas na barra. A resistência progressiva desenvolve potência explosiva no terço final.',
-    tips: ['Correntes começam no chão', 'Mais elos fora do chão = mais peso', 'Mantenha a barra próxima ao corpo'],
+    description: 'Levantamento terra com correntes para resistência progressiva e potência explosiva no terço final.',
+    fullDescription: 'O levantamento terra com correntes é um exercício único. As correntes criam resistência progressiva: quanto mais você levanta a barra, mais elos saem do chão, mais pesada fica a carga. Isso significa que o movimento fica mais pesado exatamente onde seu corpo tem mais vantagem mecânica.\n\nAs correntes começam no chão e, a cada centímetro que a barra sobe, mais elos são suspensos, aumentando gradualmente a carga. Isso desenvolve potência explosiva no terço final do movimento. Tire os sapatos ou use tênis com sola fina — a estabilidade do pé descalço melhora a transmissão de força.',
+    tips: ['Correntes começam no chão', 'Mais elos fora do chão = mais peso', 'Mantenha a barra próxima ao corpo', 'Tênis de sola fina ou descalço'],
+    chapterSlugs: ['semana-1-ativacao'],
   },
   {
     id: 'stretcher',
@@ -289,8 +346,10 @@ export const exercises: Exercise[] = [
     category: 'Isolamento',
     muscles: ['Latíssimo'],
     difficulty: 'Iniciante',
-    description: 'Exercício "esticador" para alongamento profundo do dorsal. Segure uma carga leve e realize o movimento de puxador com foco total no alongamento.',
-    tips: ['Carga muito leve', 'Inspire no alongamento', 'Expire na contração'],
+    description: 'Exercício "esticador" para alongamento profundo do dorsal com carga leve.',
+    fullDescription: 'O Stretcher é o exercício "esticador" — segure uma carga leve e realize o movimento de puxador com foco total no alongamento do dorsal no topo. Inspire profundamente no alongamento e expire na contração.\n\nUse carga muito leve. O objetivo não é força, mas sim alongamento profundo e bombeamento sanguíneo. É o exercício de finalização perfeito para esgotar completamente o dorsal.',
+    tips: ['Carga muito leve', 'Inspire no alongamento', 'Expire na contração', 'Foco total no alongamento'],
+    chapterSlugs: ['semana-3-pico', 'semana-4-desafio'],
   },
 ];
 
@@ -299,11 +358,19 @@ export function getExercisesByCategory(category: ExerciseCategory | 'Todas'): Ex
   return exercises.filter(ex => ex.category === category);
 }
 
+export function findExerciseByHeadingName(heading: string): Exercise | undefined {
+  const lower = heading.toLowerCase().trim();
+  return exercises.find(ex => {
+    const n = ex.name.toLowerCase();
+    return n === lower || lower.startsWith(n) || n.startsWith(lower) || lower.includes(n) || n.includes(lower);
+  });
+}
+
 export function searchExercises(query: string): Exercise[] {
   const lower = query.toLowerCase();
   return exercises.filter(ex =>
     ex.name.toLowerCase().includes(lower) ||
     ex.muscles.some(m => m.toLowerCase().includes(lower)) ||
-    ex.description.toLowerCase().includes(lower)
+    (ex.description && ex.description.toLowerCase().includes(lower))
   );
 }

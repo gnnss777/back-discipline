@@ -2,6 +2,7 @@
 
 import { Dumbbell, Lightbulb, AlertTriangle, Info, Quote, BookOpen, ExternalLink } from 'lucide-react';
 import Link from 'next/link';
+import { findExerciseByHeadingName } from '../../../data/exercises';
 
 // ─── Types ───────────────────────────────────────────
 
@@ -301,13 +302,20 @@ function ExerciseCard({ raw }: { raw: string }) {
         })}
       </div>
 
-      <Link
-        href={`/biblioteca?search=${encodeURIComponent(headingName.replace(/^(\d+\.?\s*|Exercício\s+\d+:\s*)/, '').split(' — ')[0])}`}
-        className="mt-4 pt-4 border-t border-[#3A2E22] flex items-center gap-2 text-xs text-[#555] hover:text-[#B8956A] transition-colors tracking-wider"
-      >
-        <ExternalLink className="w-3 h-3" />
-        VER NA BIBLIOTECA
-      </Link>
+      {(() => {
+        const searchName = headingName.replace(/^(\d+\.?\s*|Exercício\s+\d+:\s*)/, '').split(' — ')[0];
+        const exRef = findExerciseByHeadingName(searchName);
+        const href = exRef ? `/biblioteca/${exRef.id}` : `/biblioteca?search=${encodeURIComponent(searchName)}`;
+        return (
+          <Link
+            href={href}
+            className="mt-4 pt-4 border-t border-[#3A2E22] flex items-center gap-2 text-xs text-[#555] hover:text-[#B8956A] transition-colors tracking-wider"
+          >
+            <ExternalLink className="w-3 h-3" />
+            VER NA BIBLIOTECA
+          </Link>
+        );
+      })()}
     </div>
   );
 }

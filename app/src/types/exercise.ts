@@ -8,8 +8,11 @@ export interface Exercise {
   muscles: string[];
   difficulty: Difficulty;
   description: string;
+  fullDescription?: string;
   videoUrl?: string;
+  imageUrl?: string;
   tips?: string[];
+  chapterSlugs?: string[];
 }
 
 export function extractYouTubeId(url: string): string | null {

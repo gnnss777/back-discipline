@@ -3,7 +3,7 @@
 import { useState, useMemo, Suspense } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import { ArrowLeft, Search, Filter, Play, Lock, ClipboardList, ExternalLink } from 'lucide-react';
+import { ArrowLeft, Search, Filter, Play, Lock, ClipboardList, ExternalLink, ChevronRight } from 'lucide-react';
 import { exercises, categories } from '../../data/exercises';
 import type { Exercise } from '../../types/exercise';
 import { VideoModal } from '../../components/VideoModal';
@@ -135,13 +135,14 @@ function BibliotecaContent() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredExercises.map(exercise => (
-            <div 
+            <Link
               key={exercise.id}
-              className="p-6 bg-[#111] border border-[#2A2A2A] rounded-sm hover:border-[#B8956A] hover:bg-[#151515] transition-all group relative"
+              href={`/biblioteca/${exercise.id}`}
+              className="block p-6 bg-[#111] border border-[#2A2A2A] rounded-sm hover:border-[#B8956A] hover:bg-[#151515] transition-all group relative"
             >
               {exercise.videoUrl && user && (
                 <button
-                  onClick={() => setSelectedExercise(exercise)}
+                  onClick={(e) => { e.preventDefault(); setSelectedExercise(exercise); }}
                   className="absolute top-4 right-4 w-10 h-10 bg-[#B8956A]/80 hover:bg-[#B8956A] rounded-full flex items-center justify-center transition-colors z-10"
                 >
                   <Play className="w-5 h-5 text-[#0A0A0A] fill-[#0A0A0A]" />
@@ -182,15 +183,21 @@ function BibliotecaContent() {
                 ))}
               </div>
 
-              {user && (
-                <Link
-                  href="/planilha"
-                  className="mt-4 pt-4 border-t border-[#2A2A2A] flex items-center gap-2 text-xs text-gray-500 hover:text-[#B8956A] transition-colors tracking-wider"
-                >
-                  <ClipboardList className="w-3.5 h-3.5" />
-                  VER NA PLANILHA
-                </Link>
-              )}
+              <div className="mt-4 pt-4 border-t border-[#2A2A2A] flex items-center justify-between">
+                {user ? (
+                  <Link
+                    href="/planilha"
+                    onClick={(e) => e.stopPropagation()}
+                    className="flex items-center gap-2 text-xs text-gray-500 hover:text-[#B8956A] transition-colors tracking-wider"
+                  >
+                    <ClipboardList className="w-3.5 h-3.5" />
+                    VER NA PLANILHA
+                  </Link>
+                ) : <div />}
+                <span className="flex items-center gap-1 text-xs text-[#555] group-hover:text-[#B8956A] transition-colors">
+                  VER MAIS <ChevronRight className="w-3 h-3" />
+                </span>
+              </div>
 
               {exercise.tips && exercise.tips.length > 0 && (
                 <div className="mt-4 pt-4 border-t border-[#2A2A2A]">
@@ -202,7 +209,7 @@ function BibliotecaContent() {
                   </ul>
                 </div>
               )}
-            </div>
+            </Link>
           ))}
         </div>
 
