@@ -88,22 +88,25 @@ export default function PlanilhaUnificadaPage() {
   }, [user]);
 
   const updateActual = (weekIdx: number, dayIdx: number, exIdx: number, setIdx: number, field: string, value: number | string) => {
-    if (!data) return;
-    const newData = JSON.parse(JSON.stringify(data)) as PlanilhaData;
-    const ex = newData[weekIdx].days[dayIdx].exercises[exIdx];
+    if (!user) return;
+    const planilha = loadPlanilha(user.userId);
+    if (!planilha) return;
+    const ex = planilha[weekIdx]?.days[dayIdx]?.exercises[exIdx];
+    if (!ex) return;
     if (!ex.actual) {
-      ex.actual = data[weekIdx].days[dayIdx].exercises[exIdx].planned.map((): ActualSet => ({
-        reps: undefined, weight: undefined, rpe: undefined, date: new Date().toISOString(),
+      ex.actual = ex.planned.map((p): ActualSet => ({
+        reps: p.reps,
+        weight: p.weight || 0,
+        rpe: undefined,
+        date: new Date().toISOString(),
       }));
     }
     while (ex.actual.length <= setIdx) {
-      ex.actual.push({ reps: undefined, weight: undefined, rpe: undefined, date: undefined });
+      ex.actual.push({ reps: undefined, weight: undefined, rpe: undefined, date: new Date().toISOString() });
     }
     (ex.actual[setIdx] as Record<string, unknown>)[field] = value === '' ? undefined : value;
-    if (!ex.actual[setIdx]?.date) {
-      (ex.actual[setIdx] as Record<string, unknown>).date = new Date().toISOString();
-    }
-    persist(newData);
+    savePlanilha(user.userId, planilha);
+    setData(planilha);
   };
 
   // Program tracking (reactive — recomputes when progVersion changes)
@@ -225,14 +228,19 @@ export default function PlanilhaUnificadaPage() {
     if (!day) return;
 
     day.exercises.forEach((ex) => {
-      const hasActual = ex.actual?.some(a => a.reps !== undefined || a.weight !== undefined);
-      if (!hasActual) {
+      if (!ex.actual || !ex.actual.some(a => a.reps !== undefined || a.weight !== undefined)) {
         ex.actual = ex.planned.map(p => ({
           reps: p.reps,
           weight: p.weight || 0,
           rpe: undefined,
           date: new Date().toISOString(),
         }));
+      } else {
+        ex.actual.forEach((a, i) => {
+          if (a.reps === undefined && ex.planned[i]) {
+            a.reps = ex.planned[i].reps;
+          }
+        });
       }
     });
 
