@@ -30,7 +30,7 @@ const seed: Part = [
         name: 'Quinta',
         focus: 'Puxadas + Pulldowns',
         exercises: [
-          { name: 'Pulldown Supinado', chapterSlug: 'semana-1-ativacao', planned: [{ sets: 3, reps: 10, weight: 40 }] },
+          { name: 'Puxador Supinado', chapterSlug: 'semana-1-ativacao', planned: [{ sets: 3, reps: 10, weight: 40 }] },
           { name: 'Pulldown com Alongamento', chapterSlug: 'semana-1-ativacao', planned: [{ sets: 3, reps: 12, weight: 45 }] },
         ],
       },
@@ -38,8 +38,8 @@ const seed: Part = [
         name: 'S├íbado',
         focus: 'Giant Sets (Volume)',
         exercises: [
-          { name: 'Rope Straight Arm Pulldown', chapterSlug: 'semana-1-ativacao', planned: [{ sets: 4, reps: 12, weight: 0 }] },
-          { name: 'Chin-ups (barra)', chapterSlug: 'semana-1-ativacao', planned: [{ sets: 4, reps: 8, weight: 0 }] },
+          { name: 'Pulldown Corda (Straight Arm Pulldown)', chapterSlug: 'semana-1-ativacao', planned: [{ sets: 4, reps: 12, weight: 0 }] },
+          { name: 'Barra Fixa Supinada (Chin-Up)', chapterSlug: 'semana-1-ativacao', planned: [{ sets: 4, reps: 8, weight: 0 }] },
         ],
       }
     ],
@@ -60,16 +60,16 @@ const seed: Part = [
         name: 'Quinta',
         focus: 'Puxadas Variadas',
         exercises: [
-          { name: 'Rope Pulldown', chapterSlug: 'semana-2-progressao', planned: [{ sets: 3, reps: 12, weight: 40 }] },
-          { name: 'Face Pulls', chapterSlug: 'semana-2-progressao', planned: [{ sets: 3, reps: 15, weight: 0 }] },
+          { name: 'Pulldown Corda (Straight Arm Pulldown)', chapterSlug: 'semana-2-progressao', planned: [{ sets: 3, reps: 12, weight: 40 }] },
+          { name: 'Face Pull', chapterSlug: 'semana-2-progressao', planned: [{ sets: 3, reps: 15, weight: 0 }] },
         ],
       },
       {
         name: 'S├íbado',
         focus: 'Giant Sets',
         exercises: [
-          { name: 'Low Cable Row', chapterSlug: 'semana-2-progressao', planned: [{ sets: 4, reps: 10, weight: 40 }] },
-          { name: 'Kettlebell Row', chapterSlug: 'semana-2-progressao', planned: [{ sets: 4, reps: 8, weight: 16 }] },
+          { name: 'Remada Baixa (Seated Cable Row)', chapterSlug: 'semana-2-progressao', planned: [{ sets: 4, reps: 10, weight: 40 }] },
+          { name: 'Remada com Kettlebell', chapterSlug: 'semana-2-progressao', planned: [{ sets: 4, reps: 8, weight: 16 }] },
         ],
       }
     ],
@@ -78,9 +78,9 @@ const seed: Part = [
     weekNumber: 3,
     title: 'Semana 3',
     days: [
-      { name: 'Segunda', focus: 'Pico de Contra├º├úo', exercises: [ { name: 'Meadows Row', chapterSlug: 'semana-3-pico', planned: [{ sets: 4, reps: 8, weight: 40 }] } ] },
-      { name: 'Quinta', focus: 'Drop Sets', exercises: [ { name: 'Pulldown Supinado', chapterSlug: 'semana-3-pico', planned: [{ sets: 3, reps: 12, weight: 40 }] } ] },
-      { name: 'S├íbado', focus: 'Giant Sets', exercises: [ { name: 'Rope Pulldown', chapterSlug: 'semana-3-pico', planned: [{ sets: 4, reps: 12, weight: 0 }] } ] },
+      { name: 'Segunda', focus: 'Pico de Contra├º├úo', exercises: [ { name: 'Remada Meadows', chapterSlug: 'semana-3-pico', planned: [{ sets: 4, reps: 8, weight: 40 }] } ] },
+      { name: 'Quinta', focus: 'Drop Sets', exercises: [ { name: 'Puxador Supinado', chapterSlug: 'semana-3-pico', planned: [{ sets: 3, reps: 12, weight: 40 }] } ] },
+      { name: 'S├íbado', focus: 'Giant Sets', exercises: [ { name: 'Pulldown Corda (Straight Arm Pulldown)', chapterSlug: 'semana-3-pico', planned: [{ sets: 4, reps: 12, weight: 0 }] } ] },
     ],
   },
   {
@@ -96,7 +96,7 @@ const seed: Part = [
     weekNumber: 5,
     title: 'Semana 5',
     days: [
-      { name: 'Segunda', focus: 'Sobrecarga', exercises: [ { name: 'One Arm Barbell Row', chapterSlug: 'semana-5-sobrecarga', planned: [{ sets: 4, reps: 6, weight: 60 }] } ] },
+      { name: 'Segunda', focus: 'Sobrecarga', exercises: [ { name: 'Remada Unilateral com Barra', chapterSlug: 'semana-5-sobrecarga', planned: [{ sets: 4, reps: 6, weight: 60 }] } ] },
       { name: 'Quinta', focus: 'Chin Up Death', exercises: [ { name: 'Chin Up Death', chapterSlug: 'semana-5-sobrecarga', planned: [{ sets: 6, reps: 6, weight: 0 }] } ] },
       { name: 'S├íbado', focus: 'Giant Sets + Lat Hang', exercises: [ { name: 'Lat Hang', chapterSlug: 'semana-5-sobrecarga', planned: [{ sets: 3, reps: 0, weight: 0 }] } ] },
     ],

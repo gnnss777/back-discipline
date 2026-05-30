@@ -31,9 +31,12 @@ function BibliotecaContent() {
 
   const filteredExercises = useMemo(() => {
     return exercises.filter(ex => {
+      const q = searchQuery.toLowerCase();
+      const n = ex.name.toLowerCase();
       const matchesSearch = searchQuery === '' || 
-        ex.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        ex.muscles.some(m => m.toLowerCase().includes(searchQuery.toLowerCase()));
+        n.includes(q) ||
+        q.includes(n) ||
+        ex.muscles.some(m => m.toLowerCase().includes(q));
       
       const matchesCategory = selectedCategory === 'Todas' || ex.category === selectedCategory;
       
