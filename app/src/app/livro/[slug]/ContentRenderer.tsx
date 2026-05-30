@@ -1,6 +1,7 @@
 'use client';
 
-import { Dumbbell, Lightbulb, AlertTriangle, Info, Quote, BookOpen } from 'lucide-react';
+import { Dumbbell, Lightbulb, AlertTriangle, Info, Quote, BookOpen, ExternalLink } from 'lucide-react';
+import Link from 'next/link';
 
 // ─── Types ───────────────────────────────────────────
 
@@ -299,6 +300,14 @@ function ExerciseCard({ raw }: { raw: string }) {
           return <p key={i} className="text-[#bbb] leading-relaxed">{renderInline(t)}</p>;
         })}
       </div>
+
+      <Link
+        href={`/biblioteca?search=${encodeURIComponent(headingName.replace(/^(\d+\.?\s*|Exercício\s+\d+:\s*)/, '').split(' — ')[0])}`}
+        className="mt-4 pt-4 border-t border-[#3A2E22] flex items-center gap-2 text-xs text-[#555] hover:text-[#B8956A] transition-colors tracking-wider"
+      >
+        <ExternalLink className="w-3 h-3" />
+        VER NA BIBLIOTECA
+      </Link>
     </div>
   );
 }

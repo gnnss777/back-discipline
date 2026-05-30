@@ -1,8 +1,9 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
-import { ArrowLeft, Search, Filter, Play, Lock, ClipboardList } from 'lucide-react';
+import { useSearchParams } from 'next/navigation';
+import { ArrowLeft, Search, Filter, Play, Lock, ClipboardList, ExternalLink } from 'lucide-react';
 import { exercises, categories } from '../../data/exercises';
 import type { Exercise } from '../../types/exercise';
 import { VideoModal } from '../../components/VideoModal';
@@ -10,7 +11,8 @@ import { AuthModal } from '../../components/AuthModal';
 import { useAuth } from '../../hooks/useAuth';
 
 export default function BibliotecaPage() {
-  const [searchQuery, setSearchQuery] = useState('');
+  const searchParams = useSearchParams();
+  const [searchQuery, setSearchQuery] = useState(searchParams.get('search') || '');
   const [selectedCategory, setSelectedCategory] = useState<string>('Todas');
   const [selectedExercise, setSelectedExercise] = useState<Exercise | null>(null);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
