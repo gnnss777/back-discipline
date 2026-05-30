@@ -406,7 +406,7 @@ export default function PlanilhaUnificadaPage() {
 
         {/* TAB: HISTÓRICO */}
         {activeTab === 'historico' && (
-          <WorkoutHistory userId={user.userId} />
+          <WorkoutHistory key={progVersion} userId={user.userId} />
         )}
       </main>
     </div>
