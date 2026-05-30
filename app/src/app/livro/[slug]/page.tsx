@@ -5,6 +5,7 @@ import { getChapterContent } from "@/lib/content";
 import { ChapterAuthGuard } from "./ChapterAuthGuard";
 import { ChapterHeader } from './ChapterHeader';
 import { ConcluirButton } from './ConcluirButton';
+import { ContentRenderer } from './ContentRenderer';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -68,52 +69,7 @@ export default async function ChapterPage({ params }: PageProps) {
           {/* Content */}
           <article className="max-w-none">
             {content ? (
-              <div className="space-y-6 text-[#bbb] text-lg leading-[2.0] font-light">
-                {content.split('\n\n').map((paragraph, i) => {
-                  if (paragraph.startsWith('# ')) 
-                    return <h1 key={i} className="text-3xl font-medium text-[#E8E0D0] mt-8 mb-4 tracking-wider">{paragraph.replace('# ', '')}</h1>;
-                  if (paragraph.startsWith('## ')) 
-                    return <h2 key={i} className="text-2xl font-medium text-[#E8E0D0] mt-8 mb-4 tracking-wider">{paragraph.replace('## ', '')}</h2>;
-                  if (paragraph.startsWith('### ')) 
-                    return <h3 key={i} className="text-lg font-bold text-[#B8956A] mt-6 mb-3 tracking-wider">{paragraph.replace('### ', '')}</h3>;
-                  if (paragraph.startsWith('**') && paragraph.endsWith('**')) 
-                    return <h4 key={i} className="font-bold text-[#E8E0D0] mt-4 mb-2 tracking-wider">{paragraph.replace(/\*\*/g, '')}</h4>;
-                  if (paragraph.startsWith('|')) {
-                    const rows = paragraph.split('\n').filter(r => r.trim());
-                    if (rows.length > 1) {
-                      return (
-                        <div key={i} className="overflow-x-auto my-4">
-                          <table className="min-w-full border border-[#3A2E22]">
-                            <tbody>
-                              {rows.map((row, rowIndex) => (
-                                <tr key={rowIndex} className={rowIndex % 2 === 0 ? 'bg-[#0F0F0F]' : ''}>
-                                  {row.split('|').filter(c => c.trim()).map((cell, cellIndex) => (
-                                    <td key={cellIndex} className="px-4 py-2 border border-[#3A2E22] text-sm">{cell.trim()}</td>
-                                  ))}
-                                </tr>
-                              ))}
-                            </tbody>
-                          </table>
-                        </div>
-                      );
-                    }
-                  }
-                  if (paragraph.trim().startsWith('-') || paragraph.trim().startsWith('*')) {
-                    const items = paragraph.split('\n').filter(p => p.trim());
-                    return (
-                      <ul key={i} className="space-y-2 ml-6 list-disc">
-                        {items.map((item, idx) => (
-                          <li key={idx} className="text-[#aaa]">{item.replace(/^[-*]\s*/, '')}</li>
-                        ))}
-                      </ul>
-                    );
-                  }
-                  if (paragraph.trim()) {
-                    return <p key={i} className="text-[#aaa]">{paragraph}</p>;
-                  }
-                  return null;
-                })}
-              </div>
+              <ContentRenderer content={content} />
             ) : (
               <div className="p-8 bg-[#0F0F0F] rounded-sm border border-[#3A2E22]">
                 <p className="text-[#444]">Este capítulo está sendo preparado.</p>
