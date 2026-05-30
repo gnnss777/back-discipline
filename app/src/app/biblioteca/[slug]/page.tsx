@@ -4,12 +4,17 @@ import { ArrowLeft, Play, ExternalLink, Dumbbell, AlertTriangle } from 'lucide-r
 import { exercises } from '../../../data/exercises';
 import { extractYouTubeId, getYouTubeThumbnail, getYouTubeEmbedUrl } from '../../../types/exercise';
 
+interface PageProps {
+  params: Promise<{ slug: string }>;
+}
+
 export function generateStaticParams() {
   return exercises.map(ex => ({ slug: ex.id }));
 }
 
-export default function ExercisePage({ params }: { params: { slug: string } }) {
-  const exercise = exercises.find(ex => ex.id === params.slug);
+export default async function ExercisePage({ params }: PageProps) {
+  const { slug } = await params;
+  const exercise = exercises.find(ex => ex.id === slug);
   if (!exercise) notFound();
 
   const videoId = exercise.videoUrl ? extractYouTubeId(exercise.videoUrl) : null;
