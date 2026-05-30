@@ -215,19 +215,21 @@ export default function PlanilhaUnificadaPage() {
   }, [selectedDay, selectedDayInfo, data, dayNotes, persist]);
 
   const handleSaveDay = useCallback(() => {
-    if (!user || !selectedDayInfo || !data) return;
+    if (!user || !selectedDayInfo) return;
     setDaySaving(true);
     const { weekIdx, dayIdx } = selectedDayInfo;
 
-    const newData = JSON.parse(JSON.stringify(data)) as PlanilhaData;
-    const day = newData[weekIdx].days[dayIdx];
+    const planilha = loadPlanilha(user.userId);
+    if (!planilha) return;
+    const day = planilha[weekIdx]?.days[dayIdx];
+    if (!day) return;
 
     day.exercises.forEach((ex) => {
       const hasActual = ex.actual?.some(a => a.reps !== undefined || a.weight !== undefined);
       if (!hasActual) {
         ex.actual = ex.planned.map(p => ({
           reps: p.reps,
-          weight: getLastWeight(ex.name) || p.weight || 0,
+          weight: p.weight || 0,
           rpe: undefined,
           date: new Date().toISOString(),
         }));
@@ -238,7 +240,8 @@ export default function PlanilhaUnificadaPage() {
       day.notes = dayNotes;
     }
 
-    persist(newData);
+    savePlanilha(user.userId, planilha);
+    setData(planilha);
     syncPlanilhaDay(user.userId, weekIdx, dayIdx);
     setProgVersion(v => v + 1);
     refreshProgress();
@@ -247,7 +250,7 @@ export default function PlanilhaUnificadaPage() {
       setDaySaving(false);
       setSelectedDay(null);
     }, 1200);
-  }, [user, selectedDayInfo, data, dayNotes, persist, getLastWeight, refreshProgress]);
+  }, [user, selectedDayInfo, dayNotes, refreshProgress]);
 
   return (
     <div className="min-h-screen bg-[#0A0A0A] text-white pb-24">
