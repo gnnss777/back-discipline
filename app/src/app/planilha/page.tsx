@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
 import { ArrowRight, Dumbbell, BarChart2, History, Check, AlertTriangle, Save, ChevronRight } from 'lucide-react';
 import { toast } from 'sonner';
@@ -15,6 +15,7 @@ import { ExerciseLogger } from '@/components/ExerciseLogger';
 import { WorkoutHistory } from '@/components/WorkoutHistory';
 import type { PlanilhaData, ActualSet, PlannedSet, ExerciseSaved } from '@/types/planilha';
 import { getWorkoutsByUser } from '@/lib/storage';
+import { useProgress } from '@/context/ProgressContext';
 
 type Tab = 'semana' | 'historico';
 
@@ -28,6 +29,9 @@ export default function PlanilhaUnificadaPage() {
   const [showStarter, setShowStarter] = useState(false);
   const [daySaving, setDaySaving] = useState(false);
   const [dayNotes, setDayNotes] = useState('');
+  const [progVersion, setProgVersion] = useState(0);
+  const { progress, stats, refresh: refreshProgress } = useProgress();
+  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Load saved notes when changing days
   useEffect(() => {
@@ -100,11 +104,19 @@ export default function PlanilhaUnificadaPage() {
       (ex.actual[setIdx] as Record<string, unknown>).date = new Date().toISOString();
     }
     persist(newData);
-    if (user) syncPlanilhaDay(user.userId, weekIdx, dayIdx);
+
+    // Debounce sync to localStorage (300ms) to avoid thrashing on every keystroke
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+    debounceRef.current = setTimeout(() => {
+      if (user) {
+        syncPlanilhaDay(user.userId, weekIdx, dayIdx);
+        setProgVersion(v => v + 1);
+      }
+    }, 300);
   };
 
-  // Program tracking
-  const progInfo = user ? getProgramInfo(user.userId) : null;
+  // Program tracking (reactive — recomputes when progVersion changes)
+  const progInfo = useMemo(() => user ? getProgramInfo(user.userId) : null, [user, progVersion, data]);
   const progStarted = progInfo?.started ?? false;
 
   // Determine which week index to show
@@ -223,12 +235,14 @@ export default function PlanilhaUnificadaPage() {
     }
 
     syncPlanilhaDay(user.userId, weekIdx, dayIdx);
+    setProgVersion(v => v + 1);
+    refreshProgress();
     toast.success('Treino salvo com sucesso!');
     setTimeout(() => {
       setDaySaving(false);
       setSelectedDay(null);
     }, 1200);
-  }, [user, selectedDayInfo, data, dayNotes, persist]);
+  }, [user, selectedDayInfo, data, dayNotes, persist, refreshProgress]);
 
   return (
     <div className="min-h-screen bg-[#0A0A0A] text-white pb-24">

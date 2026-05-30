@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, Suspense } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { ArrowLeft, Search, Filter, Play, Lock, ClipboardList, ExternalLink } from 'lucide-react';
@@ -10,7 +10,7 @@ import { VideoModal } from '../../components/VideoModal';
 import { AuthModal } from '../../components/AuthModal';
 import { useAuth } from '../../hooks/useAuth';
 
-export default function BibliotecaPage() {
+function BibliotecaContent() {
   const searchParams = useSearchParams();
   const [searchQuery, setSearchQuery] = useState(searchParams.get('search') || '');
   const [selectedCategory, setSelectedCategory] = useState<string>('Todas');
@@ -223,5 +223,17 @@ export default function BibliotecaPage() {
         title={selectedExercise?.name || ''}
       />
     </div>
+  );
+}
+
+export default function BibliotecaPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-[#0A0A0A] flex items-center justify-center">
+        <div className="w-12 h-12 border-4 border-[#B8956A] border-t-transparent rounded-full animate-spin mb-4" />
+      </div>
+    }>
+      <BibliotecaContent />
+    </Suspense>
   );
 }
