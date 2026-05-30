@@ -104,15 +104,6 @@ export default function PlanilhaUnificadaPage() {
       (ex.actual[setIdx] as Record<string, unknown>).date = new Date().toISOString();
     }
     persist(newData);
-
-    // Debounce sync to localStorage (300ms) to avoid thrashing on every keystroke
-    if (debounceRef.current) clearTimeout(debounceRef.current);
-    debounceRef.current = setTimeout(() => {
-      if (user) {
-        syncPlanilhaDay(user.userId, weekIdx, dayIdx);
-        setProgVersion(v => v + 1);
-      }
-    }, 300);
   };
 
   // Program tracking (reactive — recomputes when progVersion changes)
