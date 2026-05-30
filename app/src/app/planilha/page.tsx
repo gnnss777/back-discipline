@@ -219,12 +219,26 @@ export default function PlanilhaUnificadaPage() {
     setDaySaving(true);
     const { weekIdx, dayIdx } = selectedDayInfo;
 
+    const newData = JSON.parse(JSON.stringify(data)) as PlanilhaData;
+    const day = newData[weekIdx].days[dayIdx];
+
+    day.exercises.forEach((ex) => {
+      const hasActual = ex.actual?.some(a => a.reps !== undefined || a.weight !== undefined);
+      if (!hasActual) {
+        ex.actual = ex.planned.map(p => ({
+          reps: p.reps,
+          weight: getLastWeight(ex.name) || p.weight || 0,
+          rpe: undefined,
+          date: new Date().toISOString(),
+        }));
+      }
+    });
+
     if (dayNotes) {
-      const newData = JSON.parse(JSON.stringify(data));
-      newData[weekIdx].days[dayIdx].notes = dayNotes;
-      persist(newData);
+      day.notes = dayNotes;
     }
 
+    persist(newData);
     syncPlanilhaDay(user.userId, weekIdx, dayIdx);
     setProgVersion(v => v + 1);
     refreshProgress();
@@ -233,7 +247,7 @@ export default function PlanilhaUnificadaPage() {
       setDaySaving(false);
       setSelectedDay(null);
     }, 1200);
-  }, [user, selectedDayInfo, data, dayNotes, persist, refreshProgress]);
+  }, [user, selectedDayInfo, data, dayNotes, persist, getLastWeight, refreshProgress]);
 
   return (
     <div className="min-h-screen bg-[#0A0A0A] text-white pb-24">
