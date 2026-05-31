@@ -1,7 +1,7 @@
 'use client';
 
 import { ChevronLeft, ChevronRight, Flame } from 'lucide-react';
-import { getDayName } from '@/utils/programTracker';
+import { getDayName, localDateStr } from '@/utils/programTracker';
 import type { ProgramWeekInfo } from '@/utils/programTracker';
 
 interface ProgramInfoShape {
@@ -37,7 +37,7 @@ interface DayHeroProps {
 export function DayHero({ currentDate, weekInfo, progInfo, onPrevDay, onNextDay, onGoToday }: DayHeroProps) {
   const date = new Date(currentDate + 'T12:00:00');
   const dayOfWeek = date.getDay();
-  const isToday = currentDate === new Date().toISOString().split('T')[0];
+  const isToday = currentDate === localDateStr(new Date());
   const dayName = getDayName(dayOfWeek, true);
   const dateFormatted = date.toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' });
 

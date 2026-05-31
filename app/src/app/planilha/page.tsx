@@ -7,7 +7,7 @@ import { toast } from 'sonner';
 import { useAuth } from '@/hooks/useAuth';
 import { loadPlanilha, savePlanilha, ensureSeed } from '@/utils/planilhaStorage';
 import { syncPlanilhaDay, syncAllPlanilhaDays } from '@/utils/planilhaSync';
-import { getProgramInfo } from '@/utils/programTracker';
+import { getProgramInfo, localDateStr } from '@/utils/programTracker';
 import { ProgramStarter } from '@/components/ProgramStarter';
 import { DayHero } from '@/components/DayHero';
 import { WeekStrip } from '@/components/WeekStrip';
@@ -29,7 +29,7 @@ export default function PlanilhaUnificadaPage() {
   const [showHistory, setShowHistory] = useState(false);
 
   // currentDate drives everything — default to today
-  const todayStr = new Date().toISOString().split('T')[0];
+  const todayStr = localDateStr(new Date());
   const [currentDate, setCurrentDate] = useState(todayStr);
 
   useEffect(() => {
@@ -178,7 +178,7 @@ export default function PlanilhaUnificadaPage() {
   const navigateDay = useCallback((direction: -1 | 1) => {
     const date = new Date(currentDate + 'T12:00:00');
     date.setDate(date.getDate() + direction);
-    setCurrentDate(date.toISOString().split('T')[0]);
+    setCurrentDate(localDateStr(date));
   }, [currentDate]);
 
   const goToToday = useCallback(() => {

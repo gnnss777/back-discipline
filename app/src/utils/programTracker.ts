@@ -8,6 +8,14 @@ export function getDayName(dayIndex: number, full = false): string {
   return full ? DAY_NAMES_FULL[dayIndex] : DAY_NAMES[dayIndex];
 }
 
+/** Return YYYY-MM-DD in local timezone */
+export function localDateStr(date: Date): string {
+  const y = date.getFullYear();
+  const m = String(date.getMonth() + 1).padStart(2, '0');
+  const d = String(date.getDate()).padStart(2, '0');
+  return `${y}-${m}-${d}`;
+}
+
 export interface ProgramWeekInfo {
   weekNumber: number;
   weekStart: string;
@@ -81,7 +89,7 @@ export function getProgramInfo(userId: string): {
     for (let d = 0; d < 7; d++) {
       const date = new Date(weekStartDate);
       date.setDate(weekStartDate.getDate() + d);
-      const dateStr = date.toISOString().split('T')[0];
+      const dateStr = localDateStr(date);
       const dayIdx = date.getDay();
       const isTrainingDay = trainingDays.includes(dayIdx);
 
@@ -124,8 +132,8 @@ export function getProgramInfo(userId: string): {
 
     weeks.push({
       weekNumber: w,
-      weekStart: weekStartDate.toISOString().split('T')[0],
-      weekEnd: weekEndDate.toISOString().split('T')[0],
+      weekStart: localDateStr(weekStartDate),
+      weekEnd: localDateStr(weekEndDate),
       days,
       isCurrent: w === currentWeek,
     });
@@ -145,7 +153,7 @@ export function getProgramInfo(userId: string): {
   for (let d = 0; d < 7; d++) {
     const date = new Date(currentWeekStart);
     date.setDate(currentWeekStart.getDate() + d);
-    const dateStr = date.toISOString().split('T')[0];
+    const dateStr = localDateStr(date);
 
     if (trainingDays.includes(date.getDay()) && date < today) {
       if (!workoutDates.has(dateStr)) {
