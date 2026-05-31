@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { ChevronDown, ChevronUp, Dumbbell, Calendar, Target } from 'lucide-react';
+import { ChevronDown, ChevronUp, Dumbbell } from 'lucide-react';
 import { getWorkoutsByUser } from '../lib/storage';
 import type { Workout } from '../types';
 
@@ -28,10 +28,6 @@ function WorkoutCard({ workout }: { workout: Workout }) {
   const [expanded, setExpanded] = useState(false);
   const volume = calculateVolume(workout);
   const totalSets = workout.exercises.reduce((acc, ex) => acc + ex.sets.length, 0);
-  const completedSets = workout.exercises.reduce(
-    (acc, ex) => acc + ex.sets.filter(s => s.completed).length,
-    0
-  );
 
   return (
     <div className="bg-[#151515] border border-[#2A2A2A] rounded-lg overflow-hidden">

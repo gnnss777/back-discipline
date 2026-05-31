@@ -1,76 +1,50 @@
 'use client';
 
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
-import { ArrowRight, Dumbbell, BarChart2, History, Check, AlertTriangle, Save, ChevronRight } from 'lucide-react';
+import { ArrowRight, Dumbbell, BarChart2, Save, AlertTriangle, ChevronRight } from 'lucide-react';
 import { toast } from 'sonner';
 import { useAuth } from '@/hooks/useAuth';
 import { loadPlanilha, savePlanilha, ensureSeed } from '@/utils/planilhaStorage';
 import { syncPlanilhaDay, syncAllPlanilhaDays } from '@/utils/planilhaSync';
 import { getProgramInfo } from '@/utils/programTracker';
-import type { ProgramAlert } from '@/utils/programTracker';
 import { ProgramStarter } from '@/components/ProgramStarter';
-import { WeekSchedule } from '@/components/WeekSchedule';
+import { DayHero } from '@/components/DayHero';
+import { WeekStrip } from '@/components/WeekStrip';
 import { ExerciseLogger } from '@/components/ExerciseLogger';
 import { WorkoutHistory } from '@/components/WorkoutHistory';
-import type { PlanilhaData, ActualSet, PlannedSet, ExerciseSaved } from '@/types/planilha';
+import type { PlanilhaData, ActualSet, PlannedSet } from '@/types/planilha';
 import { getWorkoutsByUser } from '@/lib/storage';
 import { useProgress } from '@/context/ProgressContext';
 
-type Tab = 'semana' | 'historico';
-
 export default function PlanilhaUnificadaPage() {
   const { user, isLoading } = useAuth();
-  const [activeTab, setActiveTab] = useState<Tab>('semana');
   const [data, setData] = useState<PlanilhaData | null>(null);
-  const [saving, setSaving] = useState(false);
-  const [weekView, setWeekView] = useState(0);
-  const [selectedDay, setSelectedDay] = useState<string | null>(null);
+  const [saving] = useState(false);
   const [showStarter, setShowStarter] = useState(false);
   const [daySaving, setDaySaving] = useState(false);
   const [dayNotes, setDayNotes] = useState('');
   const [progVersion, setProgVersion] = useState(0);
-  const { progress, stats, refresh: refreshProgress } = useProgress();
-  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const { progress, refresh: refreshProgress } = useProgress();
+  const [showHistory, setShowHistory] = useState(false);
 
-  // Load saved notes when changing days
-  useEffect(() => {
-    if (!selectedDay || !data || !selectedDayInfo) return;
-    const source = data[selectedDayInfo.weekIdx]?.days[selectedDayInfo.dayIdx];
-    setDayNotes((source as any)?.notes || '');
-  }, [selectedDay]);
+  // currentDate drives everything — default to today
+  const todayStr = new Date().toISOString().split('T')[0];
+  const [currentDate, setCurrentDate] = useState(todayStr);
 
   useEffect(() => {
     if (!user) return;
     const loaded = loadPlanilha(user.userId);
-    if (loaded) {
-      setData(loaded);
-      syncAllPlanilhaDays(user.userId);
-    } else {
-      setData(ensureSeed(user.userId));
-    }
+    setData(loaded ? loaded : ensureSeed(user.userId));
+    if (loaded) syncAllPlanilhaDays(user.userId);
   }, [user]);
 
-  // Auto-select week and day from ?week= & ?day= query params
+  // Deep-link from ?day=YYYY-MM-DD
   useEffect(() => {
     if (!user || typeof window === 'undefined') return;
     const params = new URLSearchParams(window.location.search);
-    const weekParam = params.get('week');
     const dayParam = params.get('day');
-    if (weekParam) {
-      setWeekView(parseInt(weekParam, 10));
-    }
-    if (dayParam) {
-      setSelectedDay(dayParam);
-    }
-  }, [user]);
-
-  const persist = useCallback((newData: PlanilhaData) => {
-    if (!user) return;
-    setData(newData);
-    setSaving(true);
-    savePlanilha(user.userId, newData);
-    setTimeout(() => setSaving(false), 800);
+    if (dayParam) setCurrentDate(dayParam);
   }, [user]);
 
   const getLastWeight = useCallback((exerciseName: string): number | undefined => {
@@ -109,85 +83,37 @@ export default function PlanilhaUnificadaPage() {
     setData(planilha);
   };
 
-  // Program tracking (reactive — recomputes when progVersion changes)
-  const progInfo = useMemo(() => user ? getProgramInfo(user.userId) : null, [user, progVersion, data]);
+  const progInfo = useMemo(() => user ? getProgramInfo(user.userId) : null, [user, data]);
   const progStarted = progInfo?.started ?? false;
 
-  // Determine which week index to show
-  const currentWeekIdx = progInfo ? Math.min(progInfo.currentWeek - 1, (data?.length || 1) - 1) : 0;
-  const displayWeekIdx = Math.min(weekView, (data?.length || 1) - 1);
+  // Find which week currentDate belongs to
+  const currentWeekIdx = useMemo(() => {
+    if (!progInfo) return 0;
+    return progInfo.weeks.findIndex(w => w.days.some(d => d.date === currentDate));
+  }, [progInfo, currentDate]);
+  const currentWeek = (progInfo?.weeks ?? [])[currentWeekIdx] ?? null;
 
-  // Map selectedDay's weekday to planilha day index
-  const getPlanilhaDayIndices = (dateStr: string): { weekIdx: number; dayIdx: number } | null => {
-    if (!data || !user) return null;
-    const date = new Date(dateStr);
+  // Find planilha indices for currentDate
+  const dayInfo = useMemo(() => {
+    if (!data || !user || !currentWeek || !progress) return null;
+    const date = new Date(currentDate + 'T12:00:00');
     const dayOfWeek = date.getDay();
-    const trainingDays = progInfo?.weeks[displayWeekIdx]?.days.find(d => d.date === dateStr)?.isTrainingDay;
-    if (!trainingDays) return null;
+    const dayProg = currentWeek.days.find(d => d.date === currentDate);
+    if (!dayProg?.isTrainingDay) return null;
 
-    // Map training day order to planilha day order
-    const prog = getUserProgressLocal(user.userId);
-    const days = prog?.trainingDays || [1, 4, 6];
-    const planilhaDayIdx = days.indexOf(dayOfWeek);
-    if (planilhaDayIdx < 0 || planilhaDayIdx >= (data[displayWeekIdx]?.days.length || 0)) return null;
-
-    return { weekIdx: displayWeekIdx, dayIdx: planilhaDayIdx };
-  };
-
-  const ifLogged = !!user;
-
-  if (isLoading) return null;
-
-  if (!user) {
-    return (
-      <div className="min-h-screen bg-[#0A0A0A] text-white pb-24">
-        <header className="border-b border-[#2A2A2A] sticky top-0 bg-[#0A0A0A]/95 backdrop-blur-sm z-50">
-          <div className="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
-            <Link href="/dashboard" className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors text-sm">
-              <ArrowRight className="w-4 h-4 rotate-180" /> Voltar
-            </Link>
-            <div className="flex items-center gap-2">
-              <Dumbbell className="w-4 h-4 text-[#B8956A]" />
-            <span className="text-sm font-bold tracking-[0.15em] text-[#B8956A]">PLANO DE TREINO</span>
-          </div>
-          <div className="w-16" />
-        </div>
-      </header>
-      <main className="max-w-4xl mx-auto px-4 py-6">
-        <div className="mb-6 p-5 rounded border border-[#3A2E22] bg-[#0F0F0F] text-center">
-            <p className="mb-3 text-[#999]">Faça login para registrar e acompanhar seu progresso.</p>
-            <Link href="/login" className="inline-flex items-center gap-2 px-5 py-2 bg-[#B8956A] text-black rounded-sm font-bold tracking-wider text-sm">
-              Entrar
-            </Link>
-          </div>
-        </main>
-      </div>
-    );
-  }
-
-  // Build selected day info with pre-filled actual arrays
-  const selectedDayInfo = data && selectedDay
-    ? (() => {
-        const date = new Date(selectedDay);
-        const dayOfWeek = date.getDay();
-        const days = progInfo?.weeks[displayWeekIdx]?.days.find(d => d.date === selectedDay);
-        if (!days?.isTrainingDay) return null;
-
-    const weekData = data[displayWeekIdx];
-    if (!weekData) return null;
-
-    const prog = getUserProgressLocal(user.userId);
-    const trainingDays = prog?.trainingDays || [1, 4, 6];
+    const trainingDays = progress?.trainingDays || [1, 4, 6];
     const planilhaDayIdx = trainingDays.indexOf(dayOfWeek);
-    if (planilhaDayIdx < 0 || planilhaDayIdx >= (weekData.days || []).length) return null;
+    if (planilhaDayIdx < 0 || planilhaDayIdx >= (data[currentWeekIdx]?.days || []).length) return null;
 
-    const day = JSON.parse(JSON.stringify(weekData.days[planilhaDayIdx])) as { name: string; focus: string; exercises: { name: string; planned: PlannedSet[]; actual?: ActualSet[] }[] };
+    const day = JSON.parse(JSON.stringify(data[currentWeekIdx].days[planilhaDayIdx])) as {
+      name: string; focus: string; exercises: { name: string; planned: PlannedSet[]; actual?: ActualSet[] }[];
+    };
 
-    // Pre-fill actual arrays with planned reps + last weight
-    day.exercises.forEach((ex: { planned: PlannedSet[]; actual?: ActualSet[]; name: string }) => {
-      const hasActualData = ex.actual?.some((a: ActualSet) => a.reps !== undefined || a.weight !== undefined);
+    // Pre-fill actual arrays
+    day.exercises.forEach((ex) => {
+      const hasActualData = ex.actual?.some((a) => a.reps !== undefined || a.weight !== undefined);
       if (!hasActualData) {
-        ex.actual = ex.planned.map((p: PlannedSet) => ({
+        ex.actual = ex.planned.map((p) => ({
           reps: p.reps,
           weight: getLastWeight(ex.name) || p.weight || 0,
           rpe: undefined,
@@ -196,31 +122,22 @@ export default function PlanilhaUnificadaPage() {
       }
     });
 
-    return {
-      weekIdx: displayWeekIdx,
-      dayIdx: planilhaDayIdx,
-      day,
-    };
-      })()
-    : null;
+    return { weekIdx: currentWeekIdx, dayIdx: planilhaDayIdx, day, dayProg };
+  }, [data, user, progress, currentDate, currentWeek, getLastWeight, currentWeekIdx]);
 
-  // Auto-save notes when changing days
-  const handleSelectDay = useCallback((date: string) => {
-    if (selectedDay && selectedDayInfo && data && dayNotes) {
-      const savedNotes = data[selectedDayInfo.weekIdx]?.days[selectedDayInfo.dayIdx]?.notes || '';
-      if (dayNotes !== savedNotes) {
-        const newData = JSON.parse(JSON.stringify(data));
-        newData[selectedDayInfo.weekIdx].days[selectedDayInfo.dayIdx].notes = dayNotes;
-        persist(newData);
-      }
+  // Derive notes from planilha data when day changes
+  useEffect(() => {
+    if (!dayInfo || !data) return;
+    const source = data[dayInfo.weekIdx]?.days[dayInfo.dayIdx];
+    if (source && 'notes' in source) {
+      setDayNotes((source as { notes?: string }).notes || '');
     }
-    setSelectedDay(prev => prev === date ? null : date);
-  }, [selectedDay, selectedDayInfo, data, dayNotes, persist]);
+  }, [currentDate, data, dayInfo]);
 
   const handleSaveDay = useCallback(() => {
-    if (!user || !selectedDayInfo) return;
+    if (!user || !dayInfo) return;
     setDaySaving(true);
-    const { weekIdx, dayIdx } = selectedDayInfo;
+    const { weekIdx, dayIdx } = dayInfo;
 
     const planilha = loadPlanilha(user.userId);
     if (!planilha) return;
@@ -254,11 +171,52 @@ export default function PlanilhaUnificadaPage() {
     setProgVersion(v => v + 1);
     refreshProgress();
     toast.success('Treino salvo com sucesso!');
-    setTimeout(() => {
-      setDaySaving(false);
-      setSelectedDay(null);
-    }, 1200);
-  }, [user, selectedDayInfo, dayNotes, refreshProgress]);
+    setTimeout(() => setDaySaving(false), 800);
+  }, [user, dayInfo, dayNotes, refreshProgress]);
+
+  // Day navigation
+  const navigateDay = useCallback((direction: -1 | 1) => {
+    const date = new Date(currentDate + 'T12:00:00');
+    date.setDate(date.getDate() + direction);
+    setCurrentDate(date.toISOString().split('T')[0]);
+  }, [currentDate]);
+
+  const goToToday = useCallback(() => {
+    setCurrentDate(todayStr);
+  }, [todayStr]);
+
+  const handleDayClick = useCallback((date: string) => {
+    setCurrentDate(date);
+  }, []);
+
+  if (isLoading) return null;
+
+  if (!user) {
+    return (
+      <div className="min-h-screen bg-[#0A0A0A] text-white pb-24">
+        <header className="border-b border-[#2A2A2A] sticky top-0 bg-[#0A0A0A]/95 backdrop-blur-sm z-50">
+          <div className="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
+            <Link href="/dashboard" className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors text-sm">
+              <ArrowRight className="w-4 h-4 rotate-180" /> Voltar
+            </Link>
+            <div className="flex items-center gap-2">
+              <Dumbbell className="w-4 h-4 text-[#B8956A]" />
+              <span className="text-sm font-bold tracking-[0.15em] text-[#B8956A]">PLANO DE TREINO</span>
+            </div>
+            <div className="w-16" />
+          </div>
+        </header>
+        <main className="max-w-4xl mx-auto px-4 py-6">
+          <div className="mb-6 p-5 rounded border border-[#3A2E22] bg-[#0F0F0F] text-center">
+            <p className="mb-3 text-[#999]">Faça login para registrar e acompanhar seu progresso.</p>
+            <Link href="/login" className="inline-flex items-center gap-2 px-5 py-2 bg-[#B8956A] text-black rounded-sm font-bold tracking-wider text-sm">
+              Entrar
+            </Link>
+          </div>
+        </main>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-[#0A0A0A] text-white pb-24">
@@ -285,35 +243,10 @@ export default function PlanilhaUnificadaPage() {
             </Link>
           </div>
         </div>
-
-        {/* Tab bar */}
-        <div className="max-w-4xl mx-auto px-4 pb-3">
-          <div className="flex bg-[#111] rounded-lg p-1">
-            <button
-              onClick={() => setActiveTab('semana')}
-              className={`flex-1 flex items-center justify-center gap-2 py-2 px-4 rounded-md text-sm font-medium transition-colors ${
-                activeTab === 'semana' ? 'bg-[#B8956A] text-black' : 'text-gray-400 hover:text-white'
-              }`}
-            >
-              <Dumbbell className="w-4 h-4" />
-              Semana
-            </button>
-            <button
-              onClick={() => setActiveTab('historico')}
-              className={`flex-1 flex items-center justify-center gap-2 py-2 px-4 rounded-md text-sm font-medium transition-colors ${
-                activeTab === 'historico' ? 'bg-[#B8956A] text-black' : 'text-gray-400 hover:text-white'
-              }`}
-            >
-              <History className="w-4 h-4" />
-              Histórico
-            </button>
-          </div>
-        </div>
       </header>
 
       <main className="max-w-4xl mx-auto px-4 py-6">
-        {/* TAB: SEMANA */}
-        {activeTab === 'semana' && data && (
+        {data && (
           <div className="space-y-6">
             {/* Program Starter prompt */}
             {!progStarted && (
@@ -326,7 +259,6 @@ export default function PlanilhaUnificadaPage() {
                   onClick={() => setShowStarter(true)}
                   className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#B8956A] text-black rounded-lg font-bold text-sm hover:bg-[#c9a67a] transition-colors"
                 >
-                  <Check className="w-4 h-4" />
                   Iniciar Programa
                 </button>
               </div>
@@ -357,35 +289,45 @@ export default function PlanilhaUnificadaPage() {
               );
             })}
 
-            {/* Week Schedule */}
-            {progInfo && (
-              <WeekSchedule
-                week={progInfo.weeks[displayWeekIdx]}
-                selectedDay={selectedDay}
-                onSelectDay={handleSelectDay}
-                onPrevWeek={() => setWeekView(Math.max(0, displayWeekIdx - 1))}
-                onNextWeek={() => setWeekView(Math.min((data?.length || 1) - 1, displayWeekIdx + 1))}
+            {/* Day Hero */}
+            {progInfo && currentWeek && (
+              <DayHero
+                currentDate={currentDate}
+                weekInfo={currentWeek}
+                progInfo={progInfo}
+                onPrevDay={() => navigateDay(-1)}
+                onNextDay={() => navigateDay(1)}
+                onGoToday={goToToday}
               />
             )}
 
-            {/* Day logging */}
-            {selectedDayInfo && (
+            {/* Week Strip */}
+            {progInfo && (
+              <WeekStrip
+                weeks={progInfo.weeks}
+                currentDate={currentDate}
+                onDayClick={handleDayClick}
+              />
+            )}
+
+            {/* Training day exercises or rest message */}
+            {dayInfo ? (
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <h3 className="text-sm font-bold">
-                    {selectedDayInfo.day.name} — {selectedDayInfo.day.focus}
+                  <h3 className="text-sm font-bold text-gray-400 tracking-wider">
+                    {dayInfo.day.name} — {dayInfo.day.focus}
                   </h3>
                 </div>
 
-                {selectedDayInfo.day.exercises.map((ex, exIdx) => (
+                {dayInfo.day.exercises.map((ex, exIdx) => (
                   <ExerciseLogger
-                    key={`${selectedDayInfo.weekIdx}-${selectedDayInfo.dayIdx}-${exIdx}`}
+                    key={`${dayInfo.weekIdx}-${dayInfo.dayIdx}-${exIdx}`}
                     exerciseName={ex.name}
                     planned={ex.planned}
                     actual={ex.actual}
                     lastSavedWeight={getLastWeight(ex.name)}
                     onUpdateActual={(setIdx, field, value) =>
-                      updateActual(selectedDayInfo.weekIdx, selectedDayInfo.dayIdx, exIdx, setIdx, field, value)
+                      updateActual(dayInfo.weekIdx, dayInfo.dayIdx, exIdx, setIdx, field, value)
                     }
                   />
                 ))}
@@ -408,30 +350,37 @@ export default function PlanilhaUnificadaPage() {
                   {daySaving ? '✓ Salvo!' : 'Salvar Treino do Dia'}
                 </button>
               </div>
+            ) : (
+              progStarted && (
+                <div className="text-center py-8">
+                  <Dumbbell className="w-8 h-8 text-gray-600 mx-auto mb-3" />
+                  <p className="text-sm text-gray-500">Dia de descanso</p>
+                </div>
+              )
             )}
 
-            {/* No day selected */}
-            {!selectedDay && progStarted && (
-              <div className="text-center py-8">
-                <Dumbbell className="w-8 h-8 text-gray-600 mx-auto mb-3" />
-                <p className="text-sm text-gray-500">Selecione um dia para registrar seu treino</p>
+            {/* History toggle */}
+            {user && (
+              <div className="border-t border-[#2A2A2A] pt-6">
+                <button
+                  type="button"
+                  onClick={() => setShowHistory(!showHistory)}
+                  className="flex items-center gap-2 text-sm text-gray-500 hover:text-[#B8956A] transition-colors"
+                >
+                  {showHistory ? '—' : '+'} Histórico de treinos
+                </button>
+                {showHistory && (
+                  <div className="mt-4">
+                    <WorkoutHistory key={progVersion} userId={user.userId} />
+                  </div>
+                )}
               </div>
             )}
           </div>
-        )}
-
-        {/* TAB: HISTÓRICO */}
-        {activeTab === 'historico' && (
-          <WorkoutHistory key={progVersion} userId={user.userId} />
         )}
       </main>
     </div>
   );
 }
 
-// Helper to get UserProgress synchronously (used in render)
-function getUserProgressLocal(userId: string) {
-  if (typeof window === 'undefined') return null;
-  const raw = localStorage.getItem(`backdiscipline_progress_${userId}`);
-  return raw ? JSON.parse(raw) : null;
-}
+

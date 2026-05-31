@@ -1,8 +1,10 @@
 'use client';
 
-import { useState, useRef } from 'react';
-import { Sparkles, ChevronDown, ChevronUp, Plus, Check } from 'lucide-react';
+import { useState, useRef, useEffect } from 'react';
+import { Sparkles, ChevronDown, ChevronUp, Check, Timer, ExternalLink } from 'lucide-react';
+import Link from 'next/link';
 import type { PlannedSet, ActualSet } from '@/types/planilha';
+import { findExerciseByHeadingName } from '@/data/exercises';
 
 const RPE_VALUES = [6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10];
 
@@ -17,6 +19,7 @@ interface ExerciseLoggerProps {
 export function ExerciseLogger({ exerciseName, planned, actual, onUpdateActual, lastSavedWeight }: ExerciseLoggerProps) {
   const [expanded, setExpanded] = useState(true);
   const [showRpe, setShowRpe] = useState(false);
+  const [justCompleted, setJustCompleted] = useState<number | null>(null);
   const autoFilled = useRef(false);
 
   const lastActualWeight = actual?.length
@@ -30,17 +33,18 @@ export function ExerciseLogger({ exerciseName, planned, actual, onUpdateActual, 
     ? Math.round((lastActualWeight + 2.5) * 10) / 10
     : lastActualWeight || lastSavedWeight || planned[0]?.weight || 0;
 
-  // Auto-fill peso da última sessão e reps do plano na primeira abertura
-  if (!autoFilled.current && actual && actual.length > 0) {
-    const hasAnyData = actual.some(a => a.weight !== undefined || a.reps !== undefined);
-    if (!hasAnyData) {
-      planned.forEach((p, idx) => {
-        if (lastSavedWeight) onUpdateActual(idx, 'weight', lastSavedWeight);
-        if (p.reps) onUpdateActual(idx, 'reps', p.reps);
-      });
+  useEffect(() => {
+    if (!autoFilled.current && actual && actual.length > 0) {
+      const hasAnyData = actual.some(a => a.weight !== undefined || a.reps !== undefined);
+      if (!hasAnyData) {
+        planned.forEach((p, idx) => {
+          if (lastSavedWeight) onUpdateActual(idx, 'weight', lastSavedWeight);
+          if (p.reps) onUpdateActual(idx, 'reps', p.reps);
+        });
+      }
+      autoFilled.current = true;
     }
-    autoFilled.current = true;
-  }
+  }, [actual, planned, lastSavedWeight, onUpdateActual]);
 
   const applySuggestion = () => {
     planned.forEach((_, idx) => {
@@ -58,17 +62,29 @@ export function ExerciseLogger({ exerciseName, planned, actual, onUpdateActual, 
     }
   };
 
+  const handleSetComplete = (sIdx: number) => {
+    setJustCompleted(sIdx);
+    setTimeout(() => setJustCompleted(null), 800);
+  };
+
+  const exRef = findExerciseByHeadingName(exerciseName);
+  const biblioHref = exRef ? `/biblioteca/${exRef.id}` : `/biblioteca?search=${encodeURIComponent(exerciseName)}`;
+
   return (
     <div className="border border-[#2A2A2A] rounded-lg overflow-hidden bg-[#111]">
+      {/* Header */}
       <button
         type="button"
         onClick={() => setExpanded(!expanded)}
-        className="w-full flex items-center justify-between p-3 hover:bg-[#1A1A1A] transition-colors"
+        className="w-full flex items-center justify-between p-4 hover:bg-[#1A1A1A] transition-colors"
       >
-        <div className="flex items-center gap-2 min-w-0">
-          <span className="text-sm font-medium truncate">{exerciseName}</span>
+        <div className="flex items-center gap-3 min-w-0">
+          <span className="text-base font-semibold text-[#E8E0D0] truncate">{exerciseName}</span>
+          <Link href={biblioHref} onClick={(e) => e.stopPropagation()} className="shrink-0 text-gray-500 hover:text-[#B8956A] transition-colors">
+            <ExternalLink className="w-3.5 h-3.5" />
+          </Link>
           {!expanded && hasAnyData && (
-            <span className="text-[10px] text-gray-500 shrink-0">
+            <span className="text-xs text-gray-500 shrink-0">
               {actual?.filter(a => a.reps !== undefined).length || 0}/{planned.length}
             </span>
           )}
@@ -76,53 +92,69 @@ export function ExerciseLogger({ exerciseName, planned, actual, onUpdateActual, 
             <span className="text-xs text-yellow-400 shrink-0">Incompleto</span>
           )}
           {allCompleted && (
-            <Check className="w-3.5 h-3.5 text-green-500 shrink-0" />
+            <Check className="w-4 h-4 text-green-500 shrink-0" />
           )}
         </div>
         {expanded ? <ChevronUp className="w-4 h-4 text-gray-500 shrink-0" /> : <ChevronDown className="w-4 h-4 text-gray-500 shrink-0" />}
       </button>
 
       {expanded && (
-        <div className="px-3 pb-3 space-y-2 border-t border-[#2A2A2A]">
-          <div className="flex items-center justify-between pt-2 pb-1">
-            <span className="text-[10px] text-gray-500">Séries</span>
-            <button
-              type="button"
-              onClick={() => setShowRpe(!showRpe)}
-              className="text-[10px] text-gray-500 hover:text-[#B8956A] transition-colors"
-            >
-              {showRpe ? 'Ocultar RPE' : 'Mostrar RPE'}
-            </button>
+        <div className="px-4 pb-4 space-y-3 border-t border-[#2A2A2A]">
+          {/* Header row */}
+          <div className="flex items-center justify-between pt-3 pb-1">
+            <span className="text-xs text-gray-500 font-medium tracking-wider">SÉRIES</span>
+            <div className="flex items-center gap-2">
+              <Link href="/timer" className="text-xs text-gray-500 hover:text-[#B8956A] transition-colors flex items-center gap-1">
+                <Timer className="w-3 h-3" />
+                Timer
+              </Link>
+              <button
+                type="button"
+                onClick={() => setShowRpe(!showRpe)}
+                className="text-xs text-gray-500 hover:text-[#B8956A] transition-colors"
+              >
+                {showRpe ? 'Ocultar RPE' : 'RPE'}
+              </button>
+            </div>
           </div>
-          <div className="grid grid-cols-[1fr_auto] gap-1">
+
+          {/* Sets */}
+          <div className="space-y-2">
             {planned.map((p, sIdx) => {
               const a = actual?.[sIdx] || { reps: undefined, weight: undefined, rpe: undefined };
-              const isLast = sIdx === planned.length - 1;
-              const hasPrev = sIdx > 0;
+              const isAnimating = justCompleted === sIdx;
 
               return (
-                <div key={sIdx} className={`col-span-2 bg-[#0F0F0F] border border-[#2A2A2A] rounded p-2 ${isLast ? 'mb-1' : ''}`}>
-                  <div className="flex items-center justify-between mb-1.5">
-                    <span className="text-[#B8956A] text-[11px] font-bold">Série {sIdx + 1}</span>
-                    <span className="text-[#444] text-[10px]">
-                      Meta: {p.reps} reps{p.weight ? ` @${p.weight}kg` : ''}
+                <div
+                  key={sIdx}
+                  className={`bg-[#0F0F0F] border rounded-lg p-3 transition-all duration-300 ${
+                    isAnimating ? 'border-green-500/50 bg-green-900/10 scale-[1.01]' : 'border-[#2A2A2A]'
+                  }`}
+                >
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-sm font-bold text-[#B8956A]">Série {sIdx + 1}</span>
+                    <span className="text-xs text-gray-600">
+                      Planejado: {p.reps} reps{p.weight ? ` @ ${p.weight}kg` : ''}
                     </span>
                   </div>
-                  <div className={`grid ${showRpe ? 'grid-cols-3' : 'grid-cols-2'} gap-1.5`}>
+                  <div className={`grid ${showRpe ? 'grid-cols-4' : 'grid-cols-3'} gap-2`}>
                     <div>
-                      <label className="block text-[#555] text-[9px] mb-0.5">Reps</label>
+                      <label className="block text-[#555] text-[10px] mb-1 font-medium">Reps</label>
                       <input
                         type="number"
                         min={0}
                         max={99}
                         value={a.reps ?? p.reps ?? ''}
                         onChange={e => onUpdateActual(sIdx, 'reps', parseInt(e.target.value) || 0)}
-                        className="w-full bg-[#1A1A1A] border border-[#2A2A2A] rounded py-1.5 px-2 text-white text-center text-xs focus:border-[#B8956A] focus:outline-none"
+                        onBlur={() => { if (a.reps && a.reps > 0) handleSetComplete(sIdx); }}
+                        className="w-full bg-[#1A1A1A] border border-[#2A2A2A] rounded py-2 px-2 text-white text-center text-sm focus:border-[#B8956A] focus:outline-none"
                         placeholder={String(p.reps)}
                       />
                     </div>
                     <div>
-                      <label className="block text-[#555] text-[9px] mb-0.5">Peso</label>
+                      <label className="block text-[#555] text-[10px] mb-1 font-medium">
+                        Peso <span className="text-gray-600">(kg)</span>
+                      </label>
                       <input
                         type="number"
                         min={0}
@@ -130,31 +162,40 @@ export function ExerciseLogger({ exerciseName, planned, actual, onUpdateActual, 
                         step={0.5}
                         value={a.weight ?? lastSavedWeight ?? ''}
                         onChange={e => onUpdateActual(sIdx, 'weight', parseFloat(e.target.value) || 0)}
-                        className="w-full bg-[#1A1A1A] border border-[#2A2A2A] rounded py-1.5 px-2 text-white text-center text-xs focus:border-[#B8956A] focus:outline-none"
+                        className="w-full bg-[#1A1A1A] border border-[#2A2A2A] rounded py-2 px-2 text-white text-center text-sm focus:border-[#B8956A] focus:outline-none"
                         placeholder={p.weight ? String(p.weight) : '0'}
                       />
                     </div>
                     {showRpe && (
-                      <div className="relative">
-                        <label className="block text-[#555] text-[9px] mb-0.5">RPE</label>
+                      <div>
+                        <label className="block text-[#555] text-[10px] mb-1 font-medium">RPE</label>
                         <select
                           value={a.rpe ?? ''}
                           onChange={e => onUpdateActual(sIdx, 'rpe', parseFloat(e.target.value) || 0)}
-                          className="w-full bg-[#1A1A1A] border border-[#2A2A2A] rounded py-1.5 px-1 text-white text-center text-xs focus:border-[#B8956A] focus:outline-none appearance-none"
+                          className="w-full bg-[#1A1A1A] border border-[#2A2A2A] rounded py-2 px-1 text-white text-center text-sm focus:border-[#B8956A] focus:outline-none appearance-none"
                         >
                           <option value="">-</option>
                           {RPE_VALUES.map(r => <option key={r} value={r}>{r}</option>)}
                         </select>
                       </div>
                     )}
+                    <div>
+                      <label className="block text-[#555] text-[10px] mb-1 font-medium">Timer</label>
+                      <Link
+                        href="/timer"
+                        className="flex items-center justify-center w-full bg-[#1A1A1A] border border-[#2A2A2A] rounded py-2 text-gray-500 hover:text-[#B8956A] hover:border-[#B8956A] transition-colors"
+                      >
+                        <Timer className="w-4 h-4" />
+                      </Link>
+                    </div>
                   </div>
-                  {hasPrev && (
+                  {sIdx > 0 && (
                     <button
                       type="button"
                       onClick={() => copyPreviousSet(sIdx)}
-                      className="mt-1 text-[10px] text-gray-500 hover:text-[#B8956A] transition-colors"
+                      className="mt-2 text-xs text-gray-500 hover:text-[#B8956A] transition-colors"
                     >
-                      Copiar da anterior
+                      ← Copiar da série anterior
                     </button>
                   )}
                 </div>
@@ -162,13 +203,14 @@ export function ExerciseLogger({ exerciseName, planned, actual, onUpdateActual, 
             })}
           </div>
 
+          {/* Suggestion button */}
           {hasAnyData && (
             <button
               type="button"
               onClick={applySuggestion}
-              className="w-full flex items-center justify-center gap-1.5 py-2.5 bg-[#1A1A1A] border border-[#2A2A2A] rounded text-sm text-gray-400 hover:text-[#B8956A] hover:border-[#B8956A] transition-colors"
+              className="w-full flex items-center justify-center gap-2 py-3 bg-[#1A1A1A] border border-[#2A2A2A] rounded-lg text-sm text-gray-400 hover:text-[#B8956A] hover:border-[#B8956A] transition-colors"
             >
-              <Sparkles className="w-3 h-3" />
+              <Sparkles className="w-3.5 h-3.5" />
               Aplicar {suggestedWeight}kg em todas as séries
               {allCompleted && <span className="text-green-500 font-bold"> (+2.5kg)</span>}
             </button>
