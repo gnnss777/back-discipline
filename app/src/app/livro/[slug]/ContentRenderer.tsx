@@ -512,8 +512,42 @@ type BlockRenderer = React.FC<{ raw: string }>;
 
 const blockRenderers: Record<Block['type'], BlockRenderer> = {
   'h1': ({ raw }) => <h1 className="text-3xl font-medium text-[#E8E0D0] mt-10 mb-6 tracking-wider">{raw.replace('# ', '')}</h1>,
-  'h2': ({ raw }) => <h2 className="text-2xl font-medium text-[#E8E0D0] mt-8 mb-5 tracking-wider border-b border-[#3A2E22] pb-2">{raw.replace('## ', '')}</h2>,
-  'h3': ({ raw }) => <h3 className="text-lg font-bold text-[#B8956A] mt-6 mb-4 tracking-wider">{raw.replace('### ', '')}</h3>,
+  'h2': ({ raw }) => {
+    const headingText = raw.replace('## ', '');
+    const exRef = findExerciseByHeadingName(headingText);
+    return (
+      <h2 className="text-2xl font-medium text-[#E8E0D0] mt-8 mb-5 tracking-wider border-b border-[#3A2E22] pb-2 flex items-center gap-3 flex-wrap">
+        <span>{headingText}</span>
+        {exRef && (
+          <Link
+            href={`/biblioteca/${exRef.id}`}
+            className="inline-flex items-center gap-1 text-xs text-[#555] hover:text-[#B8956A] transition-colors font-normal tracking-wider no-underline"
+          >
+            <ExternalLink className="w-3 h-3" />
+            VER NA BIBLIOTECA
+          </Link>
+        )}
+      </h2>
+    );
+  },
+  'h3': ({ raw }) => {
+    const headingText = raw.replace('### ', '');
+    const exRef = findExerciseByHeadingName(headingText);
+    return (
+      <h3 className="text-lg font-bold text-[#B8956A] mt-6 mb-4 tracking-wider flex items-center gap-3 flex-wrap">
+        <span>{headingText}</span>
+        {exRef && (
+          <Link
+            href={`/biblioteca/${exRef.id}`}
+            className="inline-flex items-center gap-1 text-xs text-[#555] hover:text-[#B8956A] transition-colors font-normal tracking-wider no-underline"
+          >
+            <ExternalLink className="w-3 h-3" />
+            VER NA BIBLIOTECA
+          </Link>
+        )}
+      </h3>
+    );
+  },
   'h4': ({ raw }) => <h4 className="font-bold text-[#E8E0D0] mt-6 mb-3 tracking-wider uppercase text-sm">{raw.replace(/\*\*/g, '')}</h4>,
   'hr': () => <hr className="border-[#3A2E22] my-8" />,
   'paragraph': ({ raw }) => <p className="text-[#bbb] leading-[2.0] text-lg font-light">{renderInline(raw.trim())}</p>,
