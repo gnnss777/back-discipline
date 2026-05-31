@@ -43,7 +43,7 @@ useEffect(() => {
   };
 
 const part1Groups = chapterGroups.filter(g => g.part === 'I').sort((a, b) => a.order - b.order);
-const part2Chapters = chapters.filter(c => c.part === 'II');
+const part2Groups = chapterGroups.filter(g => g.part === 'II').sort((a, b) => a.order - b.order);
 const standaloneChapters = chapters.filter(c => c.part);
 
 const allTrackableSlugs = standaloneChapters.map(c => c.slug);
@@ -220,46 +220,85 @@ const lastReadChapter = progressData
             <h2 className="text-xl font-medium tracking-wider">FUNDAMENTOS TÉCNICOS</h2>
           </div>
 
-          <div className="space-y-3">
-            {part2Chapters.map((chapter) => {
-              const isCompleted = progressData.some(p => p.chapter_slug === chapter.slug && p.completed);
-              const isLastRead = lastReadChapter === chapter.slug;
+          <div className="space-y-6">
+            {part2Groups.map((group) => {
+              const groupCompleted = getGroupCompletedCount(group, progressData);
+              const totalInGroup = group.children.length;
+              const isFullyComplete = groupCompleted === totalInGroup;
+              const lastReadSlug = lastReadChapter && group.children.includes(lastReadChapter) ? lastReadChapter : null;
 
               return (
-                <Link
-                  key={chapter.slug}
-                  href={user ? `/livro/${chapter.slug}` : '#'}
-                  onClick={(e) => { if (!user) { e.preventDefault(); openLogin(); } }}
-                  className={`block p-5 border transition-all group rounded-sm ${
-                    isLastRead
-                    ? 'bg-[#0F0F0F] border-l-2 border-l-[#B8956A] border-[#3A2E22]'
-                    : isCompleted
-                    ? 'bg-[#0F0F0F] border-[#B8956A]/30'
-                    : user
-                    ? 'bg-[#0F0F0F] border-[#3A2E22] hover:border-[#B8956A]'
-                    : 'bg-[#0F0F0F] border-[#2A2A2A] cursor-pointer'
-                  }`}
-                >
-                  <div className="flex items-center gap-4">
-                    <div className={`w-10 h-10 flex items-center justify-center rounded-sm ${
-                      isCompleted
-                      ? 'bg-[#B8956A]/20 text-[#B8956A]'
-                      : user
-                      ? 'bg-[#1a1a1a] text-[#444] group-hover:bg-[#B8956A]/20 group-hover:text-[#B8956A] transition-colors'
-                      : 'bg-[#1a1a1a] text-[#333]'
-                    }`}>
-                      {isCompleted ? <CheckCircle className="w-5 h-5" /> : user ? <ArrowRight className="w-5 h-5" /> : <Lock className="w-5 h-5" />}
-                    </div>
-                    <div className="flex-1">
-                      <h3 className={`font-bold tracking-wider text-sm ${user ? 'group-hover:text-[#B8956A]' : ''} transition-colors`}>{chapter.title}</h3>
-                      <p className="text-xs text-[#444]">{chapter.description}</p>
-                      {isLastRead && (
-                        <span className="text-xs text-[#B8956A] font-medium tracking-wider">CONTINUAR LEITURA</span>
+                <div key={group.id} className="border border-[#3A2E22] rounded-sm overflow-hidden">
+                  {/* Group header */}
+                  <div className={`px-5 py-4 ${isFullyComplete ? 'bg-[#B8956A]/10' : 'bg-[#0F0F0F]'} border-b border-[#3A2E22]`}>
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <h3 className="font-bold tracking-wider text-sm">{group.title}</h3>
+                        <p className="text-xs text-[#555] mt-1">{group.description}</p>
+                      </div>
+                      {user && (
+                        <div className="text-right">
+                          <span className={`text-sm font-bold tracking-wider ${isFullyComplete ? 'text-[#B8956A]' : 'text-[#555]'}`}>
+                            {groupCompleted}/{totalInGroup}
+                          </span>
+                        </div>
                       )}
                     </div>
-                    {!user && <Lock className="w-4 h-4 text-[#333]" />}
+                    {user && (
+                      <div className="mt-2 h-0.5 bg-[#1a1a1a] rounded-full overflow-hidden">
+                        <div className="h-full bg-[#B8956A] transition-all duration-500" style={{ width: `${Math.round((groupCompleted / totalInGroup) * 100)}%` }} />
+                      </div>
+                    )}
                   </div>
-                </Link>
+
+                  {/* Children */}
+                  <div className="divide-y divide-[#3A2E22]/50">
+                    {group.children.map((childSlug) => {
+                      const child = chapters.find(c => c.slug === childSlug);
+                      if (!child) return null;
+                      const isCompleted = progressData.some(p => p.chapter_slug === childSlug && p.completed);
+                      const isLastRead = lastReadSlug === childSlug;
+
+                      return (
+                        <Link
+                          key={childSlug}
+                          href={user ? `/livro/${childSlug}` : '#'}
+                          onClick={(e) => { if (!user) { e.preventDefault(); openLogin(); } }}
+                          className={`block px-5 py-3 transition-all group ${
+                            isLastRead
+                            ? 'bg-[#0F0F0F] border-l-2 border-l-[#B8956A]'
+                            : isCompleted
+                            ? 'bg-[#0F0F0F]'
+                            : user
+                            ? 'bg-[#0A0A0A] hover:bg-[#0F0F0F]'
+                            : 'bg-[#0A0A0A] cursor-pointer'
+                          }`}
+                        >
+                          <div className="flex items-center gap-3">
+                            <div className={`w-8 h-8 flex items-center justify-center rounded-sm text-sm ${
+                              isCompleted
+                              ? 'bg-[#B8956A]/20 text-[#B8956A]'
+                              : user
+                              ? 'bg-[#1a1a1a] text-[#444] group-hover:bg-[#B8956A]/20 group-hover:text-[#B8956A] transition-colors'
+                              : 'bg-[#1a1a1a] text-[#333]'
+                            }`}>
+                              {isCompleted ? <CheckCircle className="w-4 h-4" /> : user ? <ArrowRight className="w-4 h-4" /> : <Lock className="w-4 h-4" />}
+                            </div>
+                            <div className="flex-1">
+                              <span className={`text-sm font-medium tracking-wider ${user ? 'group-hover:text-[#B8956A]' : ''} transition-colors`}>
+                                {child.title}
+                              </span>
+                              {isLastRead && (
+                                <span className="ml-2 text-xs text-[#B8956A] font-medium">CONTINUAR</span>
+                              )}
+                            </div>
+                            {!user && <Lock className="w-3 h-3 text-[#333]" />}
+                          </div>
+                        </Link>
+                      );
+                    })}
+                  </div>
+                </div>
               );
             })}
           </div>

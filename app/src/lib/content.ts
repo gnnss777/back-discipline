@@ -997,8 +997,9 @@ O trapézio inferior é frequentemente negligenciado, mas é crucial para a saú
 **Ativado em:** puxadores, barra fixa.
 
 **Melhor isolamento:** Face Pull com banda elástica.
-
----
+`,
+  "anatomia-romboides-dorsal": `
+# 9.2 — Romboides e Latíssimo do Dorso
 
 ## Os Romboides
 
@@ -1039,8 +1040,9 @@ Antes do treino de costas, é fundamental ativar o latíssimo para estabelecer a
 2. Faça 4 séries de 5 segundos de suspensão passiva (dead hang), mantendo a postura escapular correta
 3. Progressão: pule e segure no topo, com descida excêntrica lenta de 4 segundos
 4. Realize 2 séries de 10 repetições de ativação com halter leve, focando no alongamento e contração
-
----
+`,
+  "anatomia-eretores-deltoide": `
+# 9.3 — Eretores da Espinha e Deltóide Posterior
 
 ## Os Eretores da Espinha
 
@@ -1065,10 +1067,9 @@ Embora frequentemente ignorado, o deltóide posterior desempenha papel crucial n
 **Melhores exercícios:** crucifixo inverso no cabo, Face Pull, remada alta.
 
 O deltóide posterior trabalha em sinergia com romboides e trapézio médio durante remadas. Um deltóide posterior bem desenvolvido contribui para a aparência de costas largas e cheias, especialmente em poses de costas duplas.
-
----
-
-## Conexão Mente-Músculo e Ativação Neural
+`,
+  "anatomia-conexao-neural": `
+# 9.4 — Conexão Mente-Músculo e Ativação Neural
 
 Estudos utilizando eletromiografia (EMG) demonstram que a ativação muscular pode ser aumentada significativamente através do foco mental e de comandos verbais específicos. O ganho médio relatado na literatura é de 13% na atividade do dorsal quando o praticante recebe orientação verbal sobre como contrair o músculo alvo.
 
@@ -1133,10 +1134,9 @@ A fase descendente é frequentemente negligenciada, mas é onde ocorre o maior r
 - Não hiperestenda a coluna no topo do movimento
 - Em cargas pesadas, expire no esforço (subida) e inspire na descida
 - Se sua forma estiver comprometida, pare imediatamente — repetições sujas não são aceitas
-
----
-
-## Remadas
+`,
+  "analise-remadas": `
+# 10.2 — Remadas
 
 A remada deve ser o maior foco do desenvolvimento de costas. Existem diversas variações, cada uma com ênfase específica. Abaixo estão as principais variações com análise técnica detalhada.
 
@@ -1197,10 +1197,9 @@ A remada baixa oferece tensão constante durante toda a amplitude de movimento, 
 - Controle o retorno — não deixe o peso "voar" de volta
 
 **Variação elevada:** Eleve o banco para que a polia fique em um ângulo mais alto. Use dois pegadores individuais para maior amplitude de movimento. A técnica envolve ir de pronada no alongamento para semisupinada na contração, maximizando o recrutamento do dorsal.
-
----
-
-## Puxadores e Barra Fixa
+`,
+  "analise-puxadores": `
+# 10.3 — Puxadores e Barra Fixa
 
 Enquanto as remadas constroem espessura, os puxadores e a barra fixa constroem largura — a silhueta em V.
 
@@ -1243,10 +1242,9 @@ A barra fixa é um dos exercícios mais desafiadores e recompensadores para o de
 3. **Semanas 5-6:** 2 repetições completas por dia de costas
 4. **Semanas 7-8:** Aumente 1 repetição por semana até chegar a 5
 5. **Semanas 9-12:** Adicione 1 repetição a cada 2 dias até chegar a 10 repetições
-
----
-
-## Dicas Técnicas Gerais
+`,
+  "analise-dicas-gerais": `
+# 10.4 — Dicas Técnicas Gerais
 
 - **Conexão mente-músculo:** Estudos mostram aumento de 13% na atividade do dorsal com comandos verbais e palpação. Toque o músculo que deseja ativar antes de iniciar a série.
 - **Postura escapular:** Mantenha as escápulas deprimidas (empurradas para baixo) e ligeiramente retraídas em todos os exercícios de costas. Isso mantém um espaço aberto entre as orelhas e as escápulas.
@@ -1254,7 +1252,7 @@ A barra fixa é um dos exercícios mais desafiadores e recompensadores para o de
 - **Cadência:** Controle a fase excêntrica (2-3 segundos), execute a concêntrica de forma explosiva, segure o pico da contração por 1-2 segundos.
 - **Respiração:** Inspire na fase de alongamento, expire na fase de esforço. Não prenda a respiração durante séries longas.
 `,
-    "saude-ombro": `
+  "saude-ombro": `
 # Capítulo 11: Saúde do Ombro e Manguito Rotador
 
 ## Os 4 Músculos do Manguito Rotador (SITS)
@@ -1302,8 +1300,9 @@ O maior e mais forte dos 4 músculos, localizado na face anterior da escápula.
 **Equilíbrio:** O subescapular trabalha em parceria com o infraespinhal. Um desequilíbrio entre esses dois músculos (subescapular muito forte, infraespinhal fraco) é uma das causas mais comuns de síndrome do impacto e dor no ombro.
 
 **Melhor exercício:** Rotação interna no cabo.
-
----
+`,
+  "ombro-exercicios": `
+# 11.2 — Cuban Press e Rotação Externa
 
 ## Cuban Press — Desenvolvimento Completo do Manguito
 
@@ -1336,8 +1335,9 @@ Uma variação avançada do trabalho de rotação externa, com ênfase na fase e
 2. Segure a contração por 2 segundos
 3. Retorne lentamente (4-5 segundos) à posição inicial
 4. 3 séries de 10-12 repetições por braço, 2 vezes por semana
-
----
+`,
+  "ombro-face-pull-aquecimento": `
+# 11.3 — Face Pull e Aquecimento do Ombro
 
 ## Face Pull com Banda Elástica
 
@@ -1368,8 +1368,9 @@ Uma rotina de aquecimento adequada para os ombros deve ser realizada antes de qu
 4. **Face Pull com banda:** 2 séries de 15 repetições
 5. **Cuban Press com halteres leves:** 2 séries de 10 repetições, 1-2 kg
 6. **Elevação lateral pendular (leaning lateral raise):** 2 séries de 12 repetições por braço
-
----
+`,
+  "ombro-prevencao": `
+# 11.4 — Prevenção e Considerações Finais
 
 ## Prevenção da Síndrome do Impacto
 
