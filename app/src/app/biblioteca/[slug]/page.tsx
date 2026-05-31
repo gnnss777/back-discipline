@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { ArrowLeft, Play, ExternalLink, Dumbbell, AlertTriangle } from 'lucide-react';
 import { exercises } from '../../../data/exercises';
-import { extractYouTubeId, getYouTubeThumbnail, getYouTubeEmbedUrl } from '../../../types/exercise';
+import { extractYouTubeId, getYouTubeThumbnail, getYouTubeEmbedUrl, getExercisePlaceholders } from '../../../types/exercise';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -65,7 +65,7 @@ export default async function ExercisePage({ params }: PageProps) {
           ))}
         </div>
 
-        {videoId && (
+        {videoId ? (
           <div className="mb-10">
             <div className="relative aspect-video bg-[#111] rounded-sm overflow-hidden border border-[#2A2A2A] group">
               <img
@@ -94,7 +94,31 @@ export default async function ExercisePage({ params }: PageProps) {
               ASSISTIR NO YOUTUBE
             </a>
           </div>
+        ) : (
+          <div className="mb-10">
+            <div className="aspect-video bg-[#111] rounded-sm border border-[#2A2A2A] flex items-center justify-center">
+              <div className="text-center">
+                <Play className="w-12 h-12 text-[#333] mx-auto mb-3" />
+                <p className="text-[#444] text-sm tracking-wider">VÍDEO EM BREVE</p>
+              </div>
+            </div>
+          </div>
         )}
+
+        <section className="mb-10">
+          <h2 className="text-xl font-bold text-[#E8E0D0] tracking-wider mb-4">GALERIA</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {(exercise.images || getExercisePlaceholders(exercise.name)).map((url, i) => (
+              <div key={i} className="aspect-[4/3] bg-[#111] rounded-sm overflow-hidden border border-[#2A2A2A]">
+                <img
+                  src={url}
+                  alt={`${exercise.name} — ${i + 1}`}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            ))}
+          </div>
+        </section>
 
         {exercise.fullDescription && (
           <section className="mb-10">

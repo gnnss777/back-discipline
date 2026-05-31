@@ -11,8 +11,17 @@ export interface Exercise {
   fullDescription?: string;
   videoUrl?: string;
   imageUrl?: string;
+  images?: string[];
   tips?: string[];
   chapterSlugs?: string[];
+}
+
+/** Gera placeholders de imagem via placehold.co */
+export function getExercisePlaceholders(name: string, count = 3): string[] {
+  const label = encodeURIComponent(name.substring(0, 28));
+  return Array.from({ length: count }, (_, i) =>
+    `https://placehold.co/800x600/1a1a1a/B8956A?text=${label}+${i + 1}`
+  );
 }
 
 export function extractYouTubeId(url: string): string | null {
