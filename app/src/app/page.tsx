@@ -95,9 +95,11 @@ export default function Home() {
       </div>
       
         <h1 className="font-display text-3xl sm:text-5xl md:text-7xl font-bold mb-6 tracking-tight sm:tracking-wide leading-tight">
-         NÃO É GENÉTICA.
+         TREINAR COSTAS NÃO É
          <br />
-         <span className="text-primary text-glow">É MÉTODO PARA COSTAS COMPLETAS.</span>
+         SOBRE GENÉTICA.
+         <br />
+         <span className="text-primary text-glow">É MÉTODO. É BACK DISCIPLINE.</span>
         </h1>
       
         <div className="text-base sm:text-lg text-muted-foreground/80 mb-6 max-w-xs mx-auto font-bold leading-relaxed tracking-wide">
