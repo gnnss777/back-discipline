@@ -329,7 +329,7 @@ export default function Home() {
       </div>
 
       {/* Credentials */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 max-w-3xl mx-auto">
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 max-w-3xl mx-auto">
        {[
         'EDUCAÇÃO FÍSICA',
         'NUTRIÇÃO',
@@ -338,9 +338,9 @@ export default function Home() {
         '+20 TÍTULOS BODYBUILDER',
         'KINESIOLOGIA',
        ].map((credential, i) => (
-        <div key={i} className="p-4 bg-background border border-border rounded-lg">
-         <GraduationCap className="w-5 h-5 text-primary mx-auto mb-2" />
-         <span className="text-[10px] sm:text-xs font-bold tracking-wider text-muted-foreground">{credential}</span>
+        <div key={i} className="p-3 sm:p-4 bg-background border border-border rounded-lg">
+         <GraduationCap className="w-4 h-4 sm:w-5 sm:h-5 text-primary mx-auto mb-1 sm:mb-2" />
+         <span className="text-[9px] sm:text-xs font-bold tracking-wider text-muted-foreground break-words leading-tight">{credential}</span>
         </div>
        ))}
       </div>
