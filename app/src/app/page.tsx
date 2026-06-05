@@ -94,10 +94,12 @@ export default function Home() {
        DISCIPLINA NÃO É MOTIVAÇÃO. É MÉTODO.
       </div>
       
-        <h1 className="font-display text-2xl sm:text-4xl md:text-6xl font-bold mb-6 tracking-tight sm:tracking-wide leading-tight">
-         TREINAR COSTAS NÃO É SOBRE GENÉTICA.
+        <h1 className="font-display text-lg sm:text-3xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight sm:tracking-wide leading-tight">
+         NÃO É SOBRE GENÉTICA.
          <br />
-         <span className="text-primary text-glow">É MÉTODO. É BACK DISCIPLINE.</span>
+         <span className="text-primary">É MÉTODO.</span>
+         <br />
+         <span className="text-primary text-glow">BACK DISCIPLINE.</span>
         </h1>
       
         <div className="text-base sm:text-lg text-muted-foreground/80 mb-6 max-w-xs mx-auto font-bold leading-relaxed tracking-wide">
