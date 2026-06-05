@@ -58,22 +58,25 @@ export default function Home() {
 
    {/* Header */}
    <header className="border-b border-secondary">
-    <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-     <div className="flex items-center gap-3">
-      <span className="text-2xl font-medium tracking-[0.3em]">JJ</span>
-      <span className="text-2xl font-light tracking-[0.2em] text-muted">MONTEIRO</span>
-      <span className="text-lg font-bold tracking-[0.15em] text-primary">BACK DISCIPLINE</span>
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between gap-2">
+     <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+      <span className="hidden sm:inline text-xl lg:text-2xl font-medium tracking-[0.3em]">JOÃO</span>
+      <span className="hidden sm:inline text-xl lg:text-2xl font-light tracking-[0.2em] text-muted">MONTEIRO</span>
+      <span className="sm:hidden w-8 h-8 bg-primary flex items-center justify-center rounded shrink-0">
+       <span className="text-background text-xs font-bold">JM</span>
+      </span>
+      <span className="text-sm sm:text-base lg:text-lg font-bold tracking-[0.15em] text-primary truncate">BACK DISCIPLINE</span>
      </div>
-     <div className="flex items-center gap-4">
+     <div className="flex items-center gap-2 sm:gap-4 shrink-0">
       <button 
        onClick={openLogin}
-       className="text-sm font-medium text-gray-400 hover:text-primary transition-colors"
+       className="text-xs sm:text-sm font-medium text-muted hover:text-primary transition-colors whitespace-nowrap"
       >
        Entrar
       </button>
       <button 
        onClick={openRegister}
-       className="px-4 py-2 bg-primary text-background text-sm font-bold tracking-wider rounded hover:bg-primary-dark transition-colors"
+       className="px-3 sm:px-4 py-1.5 sm:py-2 bg-primary text-background text-xs sm:text-sm font-bold tracking-wider rounded hover:bg-primary-dark transition-colors whitespace-nowrap"
       >
        Cadastrar
       </button>
@@ -92,14 +95,14 @@ export default function Home() {
        DISCIPLINA NÃO É MOTIVAÇÃO. É MÉTODO.
       </div>
       
-      <h1 className="font-display text-5xl md:text-7xl font-medium mb-6 tracking-wide leading-tight">
+       <h1 className="font-display text-3xl sm:text-5xl md:text-7xl font-medium mb-6 tracking-tight sm:tracking-wide leading-tight">
        CONSTRUA AS COSTAS
        <br />
        <span className="text-primary">QUE VOCÊ MERECE</span>
       </h1>
       
-      <p className="text-xl text-muted mb-4 max-w-2xl mx-auto font-light tracking-wide">
-       6 semanas de treinamento estruturado por JJ Monteiro, com base acadêmica em Educação Física e Nutrição e anos de experiência prática.
+      <p className="text-base sm:text-xl text-muted mb-4 max-w-2xl mx-auto font-light tracking-wide">
+       6 semanas de treinamento estruturado por João Monteiro, com base acadêmica em Educação Física e Nutrição e anos de experiência prática.
       </p>
       <p className="text-sm text-muted mb-10 font-light tracking-wide">
        Cada série, cada técnica e cada nível de esforço com propósito definido por quem estuda e aplica.
@@ -158,13 +161,13 @@ export default function Home() {
           </div>
           <span className="font-medium">{week.name}</span>
          </div>
-         <Lock className="w-4 h-4 text-gray-600" />
+          <Lock className="w-4 h-4 text-muted-foreground" />
         </div>
         <div className="px-6 py-3 bg-background space-y-2">
          {week.chapters.map((chapter) => (
           <div 
            key={chapter.slug}
-           className="flex items-center justify-between text-sm text-gray-500 py-2 border-b border-card last:border-0"
+            className="flex items-center justify-between text-sm text-muted-foreground py-2 border-b border-card last:border-0"
           >
            <span>{chapter.title}</span>
            <button 
@@ -196,11 +199,11 @@ export default function Home() {
     <section className="max-w-6xl mx-auto px-6 py-16 text-center border-t border-secondary">
      <h2 className="font-display text-2xl font-medium mb-6 tracking-wider">SOBRE O PROGRAMA</h2>
      <p className="text-muted font-light text-lg leading-relaxed mb-8">
-      Back Discipline não é uma rotina de treino. É a síntese de tudo que JJ Monteiro desenvolveu sobre treinamento de costas — traduzida em um programa que qualquer pessoa comprometida pode executar. Cada capítulo, cada série e cada RPE foi pensado para quem quer resultado real, não apenas motivação.
+       Back Discipline não é uma rotina de treino. É a síntese de tudo que João Monteiro desenvolveu sobre treinamento de costas — traduzida em um programa que qualquer pessoa comprometida pode executar. Cada capítulo, cada série e cada RPE foi pensado para quem quer resultado real, não apenas motivação.
      </p>
      <div className="flex items-center justify-center gap-3 text-primary">
       <GraduationCap className="w-5 h-5" />
-      <span className="text-sm tracking-wider font-medium">JJ MONTEIRO — EDUCADOR FÍSICO E NUTRICIONISTA</span>
+       <span className="text-sm tracking-wider font-medium">JOÃO MONTEIRO — EDUCADOR FÍSICO E NUTRICIONISTA</span>
      </div>
     </section>
    </main>
@@ -208,7 +211,7 @@ export default function Home() {
    {/* Footer */}
    <footer className="border-t border-secondary py-8">
     <div className="max-w-6xl mx-auto px-6 text-center text-muted text-sm font-light tracking-wider">
-     <p>JJ MONTEIRO · BACK DISCIPLINE · PROGRAMA DESENVOLVIDO COM BASE ACADÊMICA E EXPERIÊNCIA PRÁTICA</p>
+      <p>JOÃO MONTEIRO · BACK DISCIPLINE · PROGRAMA DESENVOLVIDO COM BASE ACADÊMICA E EXPERIÊNCIA PRÁTICA</p>
     </div>
    </footer>
   </div>

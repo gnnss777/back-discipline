@@ -68,7 +68,7 @@ function BibliotecaContent() {
      </Link>
      <div className="flex items-center gap-2">
       <div className="w-8 h-8 bg-primary flex items-center justify-center rounded">
-       <span className="text-background text-sm font-bold">JJ</span>
+        <span className="text-background text-sm font-bold">JM</span>
       </div>
       <span className="font-bold tracking-wider">BIBLIOTECA</span>
      </div>

@@ -15,13 +15,13 @@ Obrigado por adquirir o Back Discipline! Este programa foi desenvolvido para tra
 - Técnicas de contração máxima e progressão de volume
 - Fundamentos técnicos e anatomia aplicada
 
-Este não é um app genérico de treino. É o conhecimento acumulado de JJ Monteiro — Educador Físico e Nutricionista — traduzido em um programa que você pode executar.
+Este não é um app genérico de treino. É o conhecimento acumulado de João Monteiro — Educador Físico e Nutricionista — traduzido em um programa que você pode executar.
 
 ---
 
-**Sobre JJ Monteiro**
+**Sobre João Monteiro**
 
-JJ Monteiro é Educador Físico e Nutricionista. Com formação acadêmica sólida e anos de aplicação prática no treinamento de costas, ele desenvolveu o Back Discipline como a síntese do que aprendeu estudando, errando e acertando — traduzido em um programa rigoroso, direto e construído para quem leva o treino a sério.
+João Monteiro é Educador Físico e Nutricionista. Com formação acadêmica sólida e anos de aplicação prática no treinamento de costas, ele desenvolveu o Back Discipline como a síntese do que aprendeu estudando, errando e acertando — traduzido em um programa rigoroso, direto e construído para quem leva o treino a sério.
 `,
   "mentalidade-principios": `
 # Capítulo 1: Mentalidade Back Discipline

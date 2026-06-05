@@ -47,7 +47,7 @@ export default async function ChapterPage({ params }: PageProps) {
        ÍNDICE
       </Link>
       <div className="flex items-center gap-2">
-       <span className="text-sm font-medium tracking-[0.2em] text-muted">JJ MONTEIRO</span>
+        <span className="text-sm font-medium tracking-[0.2em] text-muted">JOÃO MONTEIRO</span>
        <span className="text-sm font-bold tracking-[0.15em] text-primary">BD</span>
       </div>
 <ChapterHeader slug={slug} />
