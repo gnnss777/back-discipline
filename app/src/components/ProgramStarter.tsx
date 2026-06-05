@@ -17,11 +17,11 @@ export function ProgramStarter({ userId, onStart }: ProgramStarterProps) {
  const [selectedDays, setSelectedDays] = useState<number[]>([1, 4, 6]);
  const [starting, setStarting] = useState(false);
 
- const toggleDay = (day: number) => {
-  setSelectedDays(prev =>
-   prev.includes(day) ? prev.filter(d => d !== day) : [...prev].sort()
-  );
- };
+  const toggleDay = (day: number) => {
+   setSelectedDays(prev =>
+    prev.includes(day) ? prev.filter(d => d !== day) : [...prev, day].sort()
+   );
+  };
 
   const handleStart = async () => {
    if (selectedDays.length === 0) return;
