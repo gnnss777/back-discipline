@@ -332,7 +332,6 @@ export default function Home() {
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 max-w-3xl mx-auto">
        {[
         'EDUCAÇÃO FÍSICA',
-        'NUTRIÇÃO',
         'PÓS EM NUTRIÇÃO COMPORTAMENTAL',
         'EMBAIXADOR IFBB',
         '+20 TÍTULOS BODYBUILDER',
