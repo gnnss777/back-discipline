@@ -140,6 +140,7 @@ export function getProgramInfo(userId: string): {
   }
 
   const workoutDates = new Set(workouts.map(w => w.date.split('T')[0]));
+  const programStartStr = localDateStr(startDate);
 
   const alerts: ProgramAlert[] = [];
 
@@ -155,7 +156,7 @@ export function getProgramInfo(userId: string): {
     date.setDate(currentWeekStart.getDate() + d);
     const dateStr = localDateStr(date);
 
-    if (trainingDays.includes(date.getDay()) && date < today) {
+    if (trainingDays.includes(date.getDay()) && date < today && dateStr >= programStartStr) {
       if (!workoutDates.has(dateStr)) {
         missedDays.push(dateStr);
       }
