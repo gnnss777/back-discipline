@@ -62,7 +62,7 @@ function BibliotecaContent() {
 
    <header className="border-b border-border sticky top-0 bg-background/95 backdrop-blur-sm z-50">
     <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-     <Link href={user ? '/dashboard' : '/'} className="flex items-center gap-2 text-gray-500 hover:text-white transition-colors font-medium tracking-wider text-sm">
+     <Link href={user ? '/dashboard' : '/'} className="flex items-center gap-2 text-muted-foreground hover:text-white transition-colors font-medium tracking-wider text-sm">
       <ArrowLeft className="w-4 h-4" />
       VOLTAR
      </Link>
@@ -73,7 +73,7 @@ function BibliotecaContent() {
       <span className="font-bold tracking-wider">BIBLIOTECA</span>
      </div>
      {user ? (
-      <Link href="/dashboard" className="text-sm text-gray-500 hover:text-white font-medium tracking-wider">
+      <Link href="/dashboard" className="text-sm text-muted-foreground hover:text-white font-medium tracking-wider">
        PAINEL
       </Link>
      ) : (
@@ -87,7 +87,7 @@ function BibliotecaContent() {
    <main className="max-w-6xl mx-auto px-6 py-12">
     <div className="text-center mb-10">
      <h1 className="text-3xl font-bold mb-2 tracking-wider">BIBLIOTECA <span className="text-primary">TÉCNICA</span></h1>
-     <p className="text-gray-500 tracking-wide font-medium">GUIA COMPLETO DE EXERCÍCIOS</p>
+     <p className="text-muted-foreground tracking-wide font-medium">GUIA COMPLETO DE EXERCÍCIOS</p>
     </div>
 
     {!user && (
@@ -106,17 +106,17 @@ function BibliotecaContent() {
 
     <div className="flex flex-col md:flex-row gap-4 mb-8">
      <div className="relative flex-1">
-      <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
+      <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
       <input 
        type="text" 
        placeholder="BUSCAR EXERCÍCIO..." 
        value={searchQuery}
        onChange={(e) => setSearchQuery(e.target.value)}
-       className="w-full pl-12 pr-4 py-3 bg-card border border-border rounded text-white placeholder:text-gray-500 focus:outline-none focus:border-primary font-medium tracking-wider"
+       className="w-full pl-12 pr-4 py-3 bg-card border border-border rounded text-white placeholder:text-muted-foreground focus:outline-none focus:border-primary font-medium tracking-wider"
       />
      </div>
      <div className="flex items-center gap-2">
-      <Filter className="w-5 h-5 text-gray-500" />
+      <Filter className="w-5 h-5 text-muted-foreground" />
       <select 
        value={selectedCategory}
        onChange={(e) => setSelectedCategory(e.target.value)}
@@ -129,7 +129,7 @@ function BibliotecaContent() {
      </div>
     </div>
 
-    <div className="mb-4 text-sm text-gray-500">
+    <div className="mb-4 text-sm text-muted-foreground">
      {filteredExercises.length} exercício{filteredExercises.length !== 1 ? 's' : ''} encontrado{filteredExercises.length !== 1 ? 's' : ''}
     </div>
 
@@ -173,11 +173,11 @@ function BibliotecaContent() {
         </span>
        </div>
        
-       <p className="text-sm text-gray-500 mb-4">{exercise.description}</p>
+       <p className="text-sm text-muted-foreground mb-4">{exercise.description}</p>
        
        <div className="flex flex-wrap gap-2">
         {exercise.muscles.map(muscle => (
-         <span key={muscle} className="text-xs text-muted bg-card px-2 py-1 rounded tracking-wider">
+         <span key={muscle} className="text-xs text-muted-foreground bg-card px-2 py-1 rounded tracking-wider">
           {muscle.toUpperCase()}
          </span>
         ))}
@@ -188,21 +188,21 @@ function BibliotecaContent() {
          <Link
           href="/planilha"
           onClick={(e) => e.stopPropagation()}
-          className="flex items-center gap-2 text-xs text-gray-500 hover:text-primary transition-colors tracking-wider"
+          className="flex items-center gap-2 text-xs text-muted-foreground hover:text-primary transition-colors tracking-wider"
          >
           <ClipboardList className="w-3.5 h-3.5" />
           VER NA PLANILHA
          </Link>
         ) : <div />}
-        <span className="flex items-center gap-1 text-xs text-muted group-hover:text-primary transition-colors">
+        <span className="flex items-center gap-1 text-xs text-muted-foreground group-hover:text-primary transition-colors">
          VER MAIS <ChevronRight className="w-3 h-3" />
         </span>
        </div>
 
        {exercise.tips && exercise.tips.length > 0 && (
         <div className="mt-4 pt-4 border-t border-border">
-         <div className="text-xs text-gray-500 mb-2">DICAS:</div>
-         <ul className="text-xs text-muted space-y-1">
+         <div className="text-xs text-muted-foreground mb-2">DICAS:</div>
+         <ul className="text-xs text-muted-foreground space-y-1">
           {exercise.tips.slice(0, 2).map((tip, i) => (
            <li key={i}>• {tip}</li>
           ))}
@@ -215,7 +215,7 @@ function BibliotecaContent() {
 
     {filteredExercises.length === 0 && (
      <div className="text-center py-12">
-      <p className="text-gray-500">Nenhum exercício encontrado.</p>
+      <p className="text-muted-foreground">Nenhum exercício encontrado.</p>
       <button
        onClick={() => { setSearchQuery(''); setSelectedCategory('Todas'); }}
        className="mt-4 text-primary hover:underline"

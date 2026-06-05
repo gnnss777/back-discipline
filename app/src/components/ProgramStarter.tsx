@@ -45,12 +45,12 @@ export function ProgramStarter({ userId, onStart }: ProgramStarterProps) {
      </div>
 
      <h2 className="text-lg font-bold text-center mb-2">Iniciar Programa</h2>
-     <p className="text-sm text-gray-400 text-center mb-6">
+     <p className="text-sm text-muted-foreground text-center mb-6">
       Escolha os dias da semana que você treina. Acompanharemos seu progresso automaticamente.
      </p>
 
      <div className="space-y-3">
-      <label className="block text-sm text-gray-300 font-medium mb-2">
+      <label className="block text-sm text-muted-foreground font-medium mb-2">
        Dias de treino
       </label>
       <div className="grid grid-cols-7 gap-2">
@@ -65,7 +65,7 @@ export function ProgramStarter({ userId, onStart }: ProgramStarterProps) {
           className={`py-3 rounded-lg text-sm font-medium transition-all ${
            isSelected
             ? 'bg-primary text-black shadow-lg shadow-primary/20'
-            : 'bg-card text-gray-500 hover:bg-border hover:text-white'
+            : 'bg-card text-muted-foreground hover:bg-border hover:text-white'
           }`}
          >
           {label[0]}
@@ -73,7 +73,7 @@ export function ProgramStarter({ userId, onStart }: ProgramStarterProps) {
         );
        })}
       </div>
-      <p className="text-xs text-gray-500 text-center">
+      <p className="text-xs text-muted-foreground text-center">
        {selectedDays.length === 0 ? 'Selecione pelo menos 1 dia' : `${selectedDays.length} dia${selectedDays.length > 1 ? 's' : ''} por semana`}
       </p>
      </div>
@@ -83,7 +83,7 @@ export function ProgramStarter({ userId, onStart }: ProgramStarterProps) {
      <button
       type="button"
       disabled
-      className="flex-1 py-2.5 border border-border rounded-lg text-gray-500 text-sm cursor-not-allowed"
+      className="flex-1 py-2.5 border border-border rounded-lg text-muted-foreground text-sm cursor-not-allowed"
      >
       Cancelar
      </button>

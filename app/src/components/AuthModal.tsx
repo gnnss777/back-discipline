@@ -68,7 +68,7 @@ export function AuthModal({ isOpen, onClose, initialMode = 'login' }: AuthModalP
    <div className="relative w-full max-w-md mx-4 bg-surface border border-secondary rounded-lg p-6">
     <button
      onClick={onClose}
-     className="absolute top-4 right-4 text-gray-500 hover:text-white transition-colors"
+     className="absolute top-4 right-4 text-muted-foreground hover:text-white transition-colors"
     >
      <X className="w-5 h-5" />
     </button>
@@ -76,7 +76,7 @@ export function AuthModal({ isOpen, onClose, initialMode = 'login' }: AuthModalP
     <h2 className="text-2xl font-bold text-white mb-2">
      {mode === 'login' ? 'Entrar' : 'Criar Conta'}
     </h2>
-    <p className="text-gray-400 mb-6">
+    <p className="text-muted-foreground mb-6">
      {mode === 'login' 
       ? 'Entre com sua conta para continuar' 
       : 'Cadastre-se para começar seu treino'}
@@ -91,9 +91,9 @@ export function AuthModal({ isOpen, onClose, initialMode = 'login' }: AuthModalP
 
      {mode === 'register' && (
       <div>
-       <label className="block text-gray-300 mb-2">Nome (opcional)</label>
+       <label className="block text-muted-foreground mb-2">Nome (opcional)</label>
        <div className="relative">
-        <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
+        <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
         <input
          type="text"
          value={name}
@@ -106,9 +106,9 @@ export function AuthModal({ isOpen, onClose, initialMode = 'login' }: AuthModalP
      )}
 
      <div>
-      <label className="block text-gray-300 mb-2">Email</label>
+      <label className="block text-muted-foreground mb-2">Email</label>
       <div className="relative">
-       <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
+       <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
        <input
         type="email"
         value={email}
@@ -121,9 +121,9 @@ export function AuthModal({ isOpen, onClose, initialMode = 'login' }: AuthModalP
      </div>
 
      <div>
-      <label className="block text-gray-300 mb-2">Senha</label>
+      <label className="block text-muted-foreground mb-2">Senha</label>
       <div className="relative">
-       <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
+       <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
        <input
         type={showPassword ? 'text' : 'password'}
         value={password}
@@ -135,7 +135,7 @@ export function AuthModal({ isOpen, onClose, initialMode = 'login' }: AuthModalP
        <button
         type="button"
         onClick={() => setShowPassword(!showPassword)}
-        className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-300"
+        className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-muted-foreground"
        >
         {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
        </button>
@@ -144,9 +144,9 @@ export function AuthModal({ isOpen, onClose, initialMode = 'login' }: AuthModalP
 
      {mode === 'register' && (
       <div>
-       <label className="block text-gray-300 mb-2">Confirmar Senha</label>
+       <label className="block text-muted-foreground mb-2">Confirmar Senha</label>
        <div className="relative">
-        <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
+        <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
         <input
          type={showPassword ? 'text' : 'password'}
          value={confirmPassword}
@@ -170,7 +170,7 @@ export function AuthModal({ isOpen, onClose, initialMode = 'login' }: AuthModalP
      </button>
     </form>
 
-    <p className="text-center text-gray-400 mt-6">
+    <p className="text-center text-muted-foreground mt-6">
      {mode === 'login' ? (
       <>
        Não tem conta?{' '}

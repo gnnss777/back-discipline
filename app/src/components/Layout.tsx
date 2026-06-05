@@ -42,7 +42,7 @@ export function BottomNav() {
         className={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
          isActive
           ? 'bg-primary/10 text-primary'
-          : 'text-gray-400 hover:text-white hover:bg-card'
+          : 'text-muted-foreground hover:text-white hover:bg-card'
         }`}
        >
         <Icon className="w-5 h-5" />
@@ -67,7 +67,7 @@ export function BottomNav() {
          key={item.href}
          href={item.href}
          className={`flex flex-col items-center py-1.5 px-1.5 min-w-0 flex-1 ${
-          isActive ? 'text-primary' : 'text-muted'
+          isActive ? 'text-primary' : 'text-muted-foreground'
          }`}
         >
          <Icon className="w-5 h-5" />
@@ -96,7 +96,7 @@ export function Header({ title }: { title: string }) {
     {user ? (
      <UserAvatar name={user.name} email={user.email} />
     ) : (
-     <span className="text-gray-400 text-sm">{title}</span>
+     <span className="text-muted-foreground text-sm">{title}</span>
     )}
    </div>
   </header>

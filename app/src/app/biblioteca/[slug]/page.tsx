@@ -39,7 +39,7 @@ function DescriptionBlocks({ text }: { text: string }) {
    elements.push(
     <div key={key++} className="flex gap-3 p-4 bg-surface border border-primary/20 rounded my-4">
      <Lightbulb className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-     <div className="text-muted text-sm leading-relaxed">{renderInline(content)}</div>
+     <div className="text-muted-foreground text-sm leading-relaxed">{renderInline(content)}</div>
     </div>
    );
    continue;
@@ -51,7 +51,7 @@ function DescriptionBlocks({ text }: { text: string }) {
    elements.push(
     <div key={key++} className="flex gap-3 p-4 bg-surface border border-primary/30 rounded my-4">
      <AlertTriangle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-     <div className="text-muted text-sm leading-relaxed">{renderInline(content)}</div>
+     <div className="text-muted-foreground text-sm leading-relaxed">{renderInline(content)}</div>
     </div>
    );
    continue;
@@ -65,7 +65,7 @@ function DescriptionBlocks({ text }: { text: string }) {
    elements.push(
     <div key={key++} className="p-4 bg-surface border border-secondary rounded my-4">
      <span className="font-bold text-primary text-sm tracking-wider">{label}:</span>
-     <div className="mt-1 text-muted leading-relaxed">{renderInline(content)}</div>
+     <div className="mt-1 text-muted-foreground leading-relaxed">{renderInline(content)}</div>
     </div>
    );
    continue;
@@ -84,7 +84,7 @@ function DescriptionBlocks({ text }: { text: string }) {
      </h4>
      <ul className="space-y-2">
       {items.map((item, idx) => (
-       <li key={idx} className="flex gap-2 text-muted leading-relaxed">
+       <li key={idx} className="flex gap-2 text-muted-foreground leading-relaxed">
         <span className="text-primary mt-1 flex-shrink-0">•</span>
         <span>{renderInline(item.replace(/^[-*]\s*/, ''))}</span>
        </li>
@@ -101,7 +101,7 @@ function DescriptionBlocks({ text }: { text: string }) {
    elements.push(
     <ul key={key++} className="space-y-1.5 ml-5 my-4">
      {items.map((item, idx) => (
-      <li key={idx} className="text-muted leading-relaxed list-disc">{renderInline(item.replace(/^[-*]\s*/, ''))}</li>
+      <li key={idx} className="text-muted-foreground leading-relaxed list-disc">{renderInline(item.replace(/^[-*]\s*/, ''))}</li>
      ))}
     </ul>
    );
@@ -116,7 +116,7 @@ function DescriptionBlocks({ text }: { text: string }) {
      {steps.map((step, idx) => (
       <li key={idx} className="flex gap-4 items-start">
        <span className="flex-shrink-0 w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm font-bold mt-0.5">{idx + 1}</span>
-       <span className="text-muted leading-relaxed pt-0.5">{renderInline(step.replace(/^\d+\.\s*/, ''))}</span>
+       <span className="text-muted-foreground leading-relaxed pt-0.5">{renderInline(step.replace(/^\d+\.\s*/, ''))}</span>
       </li>
      ))}
     </ol>
@@ -126,7 +126,7 @@ function DescriptionBlocks({ text }: { text: string }) {
 
   // Plain paragraph
   elements.push(
-   <p key={key++} className="text-muted leading-[2.0] text-lg font-light">{renderInline(block)}</p>
+   <p key={key++} className="text-muted-foreground leading-[2.0] text-lg font-light">{renderInline(block)}</p>
   );
  }
 
@@ -157,7 +157,7 @@ export default async function ExercisePage({ params }: PageProps) {
   <div className="min-h-screen bg-background text-white pb-24">
    <header className="border-b border-border sticky top-0 bg-background/95 backdrop-blur-sm z-50">
     <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-     <Link href="/biblioteca" className="flex items-center gap-2 text-gray-500 hover:text-white transition-colors font-medium tracking-wider text-sm">
+     <Link href="/biblioteca" className="flex items-center gap-2 text-muted-foreground hover:text-white transition-colors font-medium tracking-wider text-sm">
       <ArrowLeft className="w-4 h-4" />
       BIBLIOTECA
      </Link>
@@ -167,7 +167,7 @@ export default async function ExercisePage({ params }: PageProps) {
       </div>
       <span className="font-bold tracking-wider">{exercise.name.split('(')[0].trim()}</span>
      </div>
-     <Link href="/dashboard" className="text-sm text-gray-500 hover:text-white font-medium tracking-wider">
+     <Link href="/dashboard" className="text-sm text-muted-foreground hover:text-white font-medium tracking-wider">
       PAINEL
      </Link>
     </div>
@@ -178,17 +178,17 @@ export default async function ExercisePage({ params }: PageProps) {
      <span className="px-3 py-1 bg-primary/20 text-primary text-sm font-bold tracking-wider rounded">
       {exercise.category.toUpperCase()}
      </span>
-     <span className={`px-3 py-1 text-xs font-bold tracking-wider rounded ${difficultyColors[exercise.difficulty] || 'bg-gray-900/50 text-gray-500'}`}>
+     <span className={`px-3 py-1 text-xs font-bold tracking-wider rounded ${difficultyColors[exercise.difficulty] || 'bg-gray-900/50 text-muted-foreground'}`}>
       {exercise.difficulty.toUpperCase()}
      </span>
     </div>
 
     <h1 className="text-3xl md:text-4xl font-bold mb-4 tracking-wider">{exercise.name}</h1>
-    <p className="text-muted text-lg mb-8">{exercise.description}</p>
+    <p className="text-muted-foreground text-lg mb-8">{exercise.description}</p>
 
     <div className="flex flex-wrap gap-2 mb-10">
      {exercise.muscles.map(muscle => (
-      <span key={muscle} className="text-xs text-muted bg-card px-3 py-1.5 rounded tracking-wider">
+      <span key={muscle} className="text-xs text-muted-foreground bg-card px-3 py-1.5 rounded tracking-wider">
        {muscle.toUpperCase()}
       </span>
      ))}
@@ -217,7 +217,7 @@ export default async function ExercisePage({ params }: PageProps) {
        href={exercise.videoUrl}
        target="_blank"
        rel="noopener noreferrer"
-       className="mt-2 flex items-center gap-1 text-xs text-gray-500 hover:text-primary transition-colors"
+       className="mt-2 flex items-center gap-1 text-xs text-muted-foreground hover:text-primary transition-colors"
       >
        <ExternalLink className="w-3 h-3" />
        ASSISTIR NO YOUTUBE
@@ -228,7 +228,7 @@ export default async function ExercisePage({ params }: PageProps) {
       <div className="aspect-video bg-card rounded border border-border flex items-center justify-center">
        <div className="text-center">
         <Play className="w-12 h-12 text-border mx-auto mb-3" />
-        <p className="text-muted text-sm tracking-wider">VÍDEO EM BREVE</p>
+        <p className="text-muted-foreground text-sm tracking-wider">VÍDEO EM BREVE</p>
        </div>
       </div>
      </div>
@@ -262,7 +262,7 @@ export default async function ExercisePage({ params }: PageProps) {
       <div className="bg-card border border-border rounded p-6">
        <ul className="space-y-3">
         {exercise.tips.map((tip, i) => (
-         <li key={i} className="flex items-start gap-3 text-muted">
+         <li key={i} className="flex items-start gap-3 text-muted-foreground">
           <span className="w-6 h-6 bg-primary/20 text-primary rounded-full flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">
            {i + 1}
           </span>
@@ -282,7 +282,7 @@ export default async function ExercisePage({ params }: PageProps) {
         <Link
          key={slug}
          href={`/livro/${slug}`}
-         className="flex items-center gap-2 px-4 py-2 bg-card border border-border rounded text-sm text-gray-400 hover:border-primary hover:text-primary transition-colors"
+         className="flex items-center gap-2 px-4 py-2 bg-card border border-border rounded text-sm text-muted-foreground hover:border-primary hover:text-primary transition-colors"
         >
          <Dumbbell className="w-3.5 h-3.5" />
          {slug
@@ -300,7 +300,7 @@ export default async function ExercisePage({ params }: PageProps) {
     <div className="border-t border-border pt-6 flex justify-between items-center">
      <Link
       href="/biblioteca"
-      className="flex items-center gap-2 text-sm text-gray-500 hover:text-white transition-colors tracking-wider"
+      className="flex items-center gap-2 text-sm text-muted-foreground hover:text-white transition-colors tracking-wider"
      >
       <ArrowLeft className="w-4 h-4" />
       VOLTAR PARA BIBLIOTECA

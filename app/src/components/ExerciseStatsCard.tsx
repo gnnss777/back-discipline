@@ -30,29 +30,29 @@ export function ExerciseStatsCard({ stats }: ExerciseStatsCardProps) {
      <div className="text-lg font-bold text-white">
       {stats.personalRecord > 0 ? `${stats.personalRecord}kg` : '-'}
      </div>
-     <div className="text-xs text-muted">PR</div>
+     <div className="text-xs text-muted-foreground">PR</div>
     </div>
     <div>
      <div className="text-lg font-bold text-white">
       {stats.totalVolume > 0 ? formatVolume(stats.totalVolume) : '-'}
      </div>
-     <div className="text-xs text-muted">Volume</div>
+     <div className="text-xs text-muted-foreground">Volume</div>
     </div>
     <div>
      <div className="text-lg font-bold text-white">
       {stats.bestSet.weight > 0 ? `${stats.bestSet.weight}x${stats.bestSet.reps}` : '-'}
      </div>
-     <div className="text-xs text-muted">Melhor</div>
+     <div className="text-xs text-muted-foreground">Melhor</div>
     </div>
     <div>
      <div className="text-lg font-bold text-white">{stats.totalWorkouts}</div>
-     <div className="text-xs text-muted">Treinos</div>
+     <div className="text-xs text-muted-foreground">Treinos</div>
     </div>
    </div>
    
    {stats.lastPerformed && (
     <div className="mt-3 pt-3 border-t border-border">
-     <span className="text-xs text-muted">
+     <span className="text-xs text-muted-foreground">
       Último treino: {formatDate(stats.lastPerformed)}
      </span>
     </div>

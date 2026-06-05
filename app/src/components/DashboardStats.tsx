@@ -19,14 +19,14 @@ export function DashboardStats({ title, value, subtitle, icon: Icon, accent }: D
     <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
      accent ? 'bg-primary/20' : 'bg-card'
     }`}>
-     <Icon className={`w-5 h-5 ${accent ? 'text-primary' : 'text-gray-400'}`} />
+     <Icon className={`w-5 h-5 ${accent ? 'text-primary' : 'text-muted-foreground'}`} />
     </div>
     <div>
-     <div className="text-gray-400 text-sm">{title}</div>
+     <div className="text-muted-foreground text-sm">{title}</div>
      <div className={`text-xl font-bold ${accent ? 'text-primary' : 'text-white'}`}>
       {value}
      </div>
-     {subtitle && <div className="text-gray-500 text-xs">{subtitle}</div>}
+     {subtitle && <div className="text-muted-foreground text-xs">{subtitle}</div>}
     </div>
    </div>
   </div>

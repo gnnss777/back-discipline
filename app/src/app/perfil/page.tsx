@@ -53,7 +53,7 @@ export default function PerfilPage() {
   <div className="min-h-screen bg-background text-white pb-24">
    <header className="border-b border-border sticky top-0 bg-background/95 backdrop-blur-sm z-40">
     <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-     <Link href="/dashboard" className="flex items-center gap-2 text-muted hover:text-white transition-colors font-medium tracking-wider text-sm">
+     <Link href="/dashboard" className="flex items-center gap-2 text-muted-foreground hover:text-white transition-colors font-medium tracking-wider text-sm">
       <ArrowLeft className="w-4 h-4" />
       VOLTAR
      </Link>
@@ -70,7 +70,7 @@ export default function PerfilPage() {
      <h1 className="text-2xl font-bold tracking-wider">
       {user.name || 'SEM NOME'}
      </h1>
-     <p className="text-muted text-sm mt-1">{user.email}</p>
+     <p className="text-muted-foreground text-sm mt-1">{user.email}</p>
     </div>
 
     <div className="max-w-md mx-auto space-y-6">
@@ -102,11 +102,11 @@ export default function PerfilPage() {
       <h2 className="text-lg font-bold mb-4 tracking-wider">CONTA</h2>
       <div className="space-y-3 text-sm">
        <div className="flex justify-between">
-        <span className="text-muted">Email</span>
-        <span className="text-gray-300">{user.email}</span>
+        <span className="text-muted-foreground">Email</span>
+        <span className="text-muted-foreground">{user.email}</span>
        </div>
        <div className="flex justify-between">
-        <span className="text-muted">Status</span>
+        <span className="text-muted-foreground">Status</span>
         <span className="text-primary uppercase">{user.paymentStatus || 'FREE'}</span>
        </div>
       </div>

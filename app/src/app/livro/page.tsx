@@ -74,12 +74,12 @@ const lastReadChapter = progressData
 
    <header className="border-b border-secondary sticky top-0 bg-background/95 backdrop-blur-sm z-50">
     <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-     <Link href={user ? '/dashboard' : '/'} className="flex items-center gap-2 text-muted hover:text-primary transition-colors font-medium tracking-wider text-sm">
+     <Link href={user ? '/dashboard' : '/'} className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors font-medium tracking-wider text-sm">
       <ArrowLeft className="w-4 h-4" />
       VOLTAR
      </Link>
      <div className="flex items-center gap-2">
-       <span className="text-sm font-medium tracking-[0.2em] text-muted">JOÃO MONTEIRO</span>
+       <span className="text-sm font-medium tracking-[0.2em] text-muted-foreground">JOÃO MONTEIRO</span>
       <span className="text-sm font-bold tracking-[0.15em] text-primary">BACK DISCIPLINE</span>
      </div>
      {!user && (
@@ -93,7 +93,7 @@ const lastReadChapter = progressData
    <main className="max-w-6xl mx-auto px-6 py-12">
     <div className="text-center mb-12">
      <h1 className="text-4xl font-medium mb-4 tracking-wider">PROGRAMA <span className="text-primary">6 SEMANAS</span></h1>
-     <p className="text-muted font-light tracking-wide">DE TREINAMENTO DE COSTAS</p>
+     <p className="text-muted-foreground font-light tracking-wide">DE TREINAMENTO DE COSTAS</p>
     </div>
 
     {!user && (
@@ -113,7 +113,7 @@ const lastReadChapter = progressData
     {user && (
      <div className="mb-12 p-4 bg-surface rounded border border-secondary">
       <div className="flex items-center justify-between text-sm mb-2">
-       <span className="text-muted font-medium tracking-wider">SEU PROGRESSO</span>
+       <span className="text-muted-foreground font-medium tracking-wider">SEU PROGRESSO</span>
        <span className="text-primary font-bold tracking-wider">{completedCount} / {totalSlugs} CAPÍTULOS</span>
       </div>
       <div className="h-1 bg-card rounded-full overflow-hidden">
@@ -143,11 +143,11 @@ const lastReadChapter = progressData
           <div className="flex items-center justify-between">
            <div>
             <h3 className="font-bold tracking-wider text-sm">{group.title}</h3>
-            <p className="text-xs text-muted mt-1">{group.description}</p>
+            <p className="text-xs text-muted-foreground mt-1">{group.description}</p>
            </div>
            {user && (
             <div className="text-right">
-             <span className={`text-sm font-bold tracking-wider ${isFullyComplete ? 'text-primary' : 'text-muted'}`}>
+             <span className={`text-sm font-bold tracking-wider ${isFullyComplete ? 'text-primary' : 'text-muted-foreground'}`}>
               {groupCompleted}/{totalInGroup}
              </span>
             </div>
@@ -188,7 +188,7 @@ const lastReadChapter = progressData
                isCompleted
                ? 'bg-primary/20 text-primary'
                : user
-               ? 'bg-card text-muted group-hover:bg-primary/20 group-hover:text-primary transition-colors'
+               ? 'bg-card text-muted-foreground group-hover:bg-primary/20 group-hover:text-primary transition-colors'
                : 'bg-card text-border'
               }`}>
                {isCompleted ? <CheckCircle className="w-4 h-4" /> : user ? <ArrowRight className="w-4 h-4" /> : <Lock className="w-4 h-4" />}
@@ -234,11 +234,11 @@ const lastReadChapter = progressData
           <div className="flex items-center justify-between">
            <div>
             <h3 className="font-bold tracking-wider text-sm">{group.title}</h3>
-            <p className="text-xs text-muted mt-1">{group.description}</p>
+            <p className="text-xs text-muted-foreground mt-1">{group.description}</p>
            </div>
            {user && (
             <div className="text-right">
-             <span className={`text-sm font-bold tracking-wider ${isFullyComplete ? 'text-primary' : 'text-muted'}`}>
+             <span className={`text-sm font-bold tracking-wider ${isFullyComplete ? 'text-primary' : 'text-muted-foreground'}`}>
               {groupCompleted}/{totalInGroup}
              </span>
             </div>
@@ -279,7 +279,7 @@ const lastReadChapter = progressData
                isCompleted
                ? 'bg-primary/20 text-primary'
                : user
-               ? 'bg-card text-muted group-hover:bg-primary/20 group-hover:text-primary transition-colors'
+               ? 'bg-card text-muted-foreground group-hover:bg-primary/20 group-hover:text-primary transition-colors'
                : 'bg-card text-border'
               }`}>
                {isCompleted ? <CheckCircle className="w-4 h-4" /> : user ? <ArrowRight className="w-4 h-4" /> : <Lock className="w-4 h-4" />}
@@ -306,7 +306,7 @@ const lastReadChapter = progressData
 
     {!user && (
      <div className="mt-12 p-6 bg-surface rounded-xl border border-secondary text-center">
-      <p className="text-muted mb-4 font-light tracking-wide">FAÇA LOGIN PARA ACOMPANHAR SEU PROGRESSO</p>
+      <p className="text-muted-foreground mb-4 font-light tracking-wide">FAÇA LOGIN PARA ACOMPANHAR SEU PROGRESSO</p>
       <button onClick={openRegister} className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-background font-bold tracking-wider rounded hover:bg-primary-dark transition-colors">
        CADASTRAR PARA ACESSAR
       </button>

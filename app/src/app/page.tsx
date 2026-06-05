@@ -61,7 +61,7 @@ export default function Home() {
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between gap-2">
      <div className="flex items-center gap-2 sm:gap-3 min-w-0">
       <span className="hidden sm:inline text-xl lg:text-2xl font-medium tracking-[0.3em]">JOÃO</span>
-      <span className="hidden sm:inline text-xl lg:text-2xl font-light tracking-[0.2em] text-muted">MONTEIRO</span>
+      <span className="hidden sm:inline text-xl lg:text-2xl font-light tracking-[0.2em] text-muted-foreground">MONTEIRO</span>
       <span className="sm:hidden w-8 h-8 bg-primary flex items-center justify-center rounded shrink-0">
        <span className="text-background text-xs font-bold">JM</span>
       </span>
@@ -70,7 +70,7 @@ export default function Home() {
      <div className="flex items-center gap-2 sm:gap-4 shrink-0">
       <button 
        onClick={openLogin}
-       className="text-xs sm:text-sm font-medium text-muted hover:text-primary transition-colors whitespace-nowrap"
+       className="text-xs sm:text-sm font-medium text-muted-foreground hover:text-primary transition-colors whitespace-nowrap"
       >
        Entrar
       </button>
@@ -101,10 +101,10 @@ export default function Home() {
        <span className="text-primary">QUE VOCÊ MERECE</span>
       </h1>
       
-      <p className="text-base sm:text-xl text-muted mb-4 max-w-2xl mx-auto font-light tracking-wide">
+      <p className="text-base sm:text-xl text-muted-foreground mb-4 max-w-2xl mx-auto font-light tracking-wide">
        6 semanas de treinamento estruturado por João Monteiro, com base acadêmica em Educação Física e Nutrição e anos de experiência prática.
       </p>
-      <p className="text-sm text-muted mb-10 font-light tracking-wide">
+      <p className="text-sm text-muted-foreground mb-10 font-light tracking-wide">
        Cada série, cada técnica e cada nível de esforço com propósito definido por quem estuda e aplica.
       </p>
 
@@ -131,15 +131,15 @@ export default function Home() {
      <div className="max-w-6xl mx-auto px-6 grid grid-cols-3 gap-8 text-center">
       <div>
        <div className="text-4xl font-medium text-primary tracking-wider">6</div>
-       <div className="text-sm text-muted mt-2 tracking-wider">SEMANAS</div>
+       <div className="text-sm text-muted-foreground mt-2 tracking-wider">SEMANAS</div>
       </div>
       <div>
        <div className="text-4xl font-medium text-primary tracking-wider">11</div>
-       <div className="text-sm text-muted mt-2 tracking-wider">CAPÍTULOS</div>
+       <div className="text-sm text-muted-foreground mt-2 tracking-wider">CAPÍTULOS</div>
       </div>
       <div>
        <div className="text-4xl font-medium text-primary tracking-wider">16+</div>
-       <div className="text-sm text-muted mt-2 tracking-wider">EXERCÍCIOS</div>
+       <div className="text-sm text-muted-foreground mt-2 tracking-wider">EXERCÍCIOS</div>
       </div>
      </div>
     </section>
@@ -148,7 +148,7 @@ export default function Home() {
     <section className="max-w-6xl mx-auto px-6 py-16">
      <div className="text-center mb-8">
       <h2 className="font-display text-2xl font-medium mb-4 tracking-wider">PROGRAMA — 6 SEMANAS</h2>
-      <p className="text-muted mb-6">Faça login para acessar o conteúdo completo</p>
+      <p className="text-muted-foreground mb-6">Faça login para acessar o conteúdo completo</p>
      </div>
 
      <div className="space-y-4">
@@ -198,7 +198,7 @@ export default function Home() {
     {/* About Section */}
     <section className="max-w-6xl mx-auto px-6 py-16 text-center border-t border-secondary">
      <h2 className="font-display text-2xl font-medium mb-6 tracking-wider">SOBRE O PROGRAMA</h2>
-     <p className="text-muted font-light text-lg leading-relaxed mb-8">
+     <p className="text-muted-foreground font-light text-lg leading-relaxed mb-8">
        Back Discipline não é uma rotina de treino. É a síntese de tudo que João Monteiro desenvolveu sobre treinamento de costas — traduzida em um programa que qualquer pessoa comprometida pode executar. Cada capítulo, cada série e cada RPE foi pensado para quem quer resultado real, não apenas motivação.
      </p>
      <div className="flex items-center justify-center gap-3 text-primary">
@@ -210,7 +210,7 @@ export default function Home() {
 
    {/* Footer */}
    <footer className="border-t border-secondary py-8">
-    <div className="max-w-6xl mx-auto px-6 text-center text-muted text-sm font-light tracking-wider">
+    <div className="max-w-6xl mx-auto px-6 text-center text-muted-foreground text-sm font-light tracking-wider">
       <p>JOÃO MONTEIRO · BACK DISCIPLINE · PROGRAMA DESENVOLVIDO COM BASE ACADÊMICA E EXPERIÊNCIA PRÁTICA</p>
     </div>
    </footer>

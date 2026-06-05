@@ -80,11 +80,11 @@ export function ExerciseLogger({ exerciseName, planned, actual, onUpdateActual, 
    >
     <div className="flex items-center gap-3 min-w-0">
      <span className="text-base font-semibold text-foreground truncate">{exerciseName}</span>
-     <Link href={biblioHref} onClick={(e) => e.stopPropagation()} className="shrink-0 text-gray-500 hover:text-primary transition-colors">
+     <Link href={biblioHref} onClick={(e) => e.stopPropagation()} className="shrink-0 text-muted-foreground hover:text-primary transition-colors">
       <ExternalLink className="w-3.5 h-3.5" />
      </Link>
      {!expanded && hasAnyData && (
-      <span className="text-xs text-gray-500 shrink-0">
+      <span className="text-xs text-muted-foreground shrink-0">
        {actual?.filter(a => a.reps !== undefined).length || 0}/{planned.length}
       </span>
      )}
@@ -95,23 +95,23 @@ export function ExerciseLogger({ exerciseName, planned, actual, onUpdateActual, 
       <Check className="w-4 h-4 text-green-500 shrink-0" />
      )}
     </div>
-    {expanded ? <ChevronUp className="w-4 h-4 text-gray-500 shrink-0" /> : <ChevronDown className="w-4 h-4 text-gray-500 shrink-0" />}
+    {expanded ? <ChevronUp className="w-4 h-4 text-muted-foreground shrink-0" /> : <ChevronDown className="w-4 h-4 text-muted-foreground shrink-0" />}
    </button>
 
    {expanded && (
     <div className="px-4 pb-4 space-y-3 border-t border-border">
      {/* Header row */}
      <div className="flex items-center justify-between pt-3 pb-1">
-      <span className="text-xs text-gray-500 font-medium tracking-wider">SÉRIES</span>
+      <span className="text-xs text-muted-foreground font-medium tracking-wider">SÉRIES</span>
       <div className="flex items-center gap-2">
-       <Link href="/timer" className="text-xs text-gray-500 hover:text-primary transition-colors flex items-center gap-1">
+       <Link href="/timer" className="text-xs text-muted-foreground hover:text-primary transition-colors flex items-center gap-1">
         <Timer className="w-3 h-3" />
         Timer
        </Link>
        <button
         type="button"
         onClick={() => setShowRpe(!showRpe)}
-        className="text-xs text-gray-500 hover:text-primary transition-colors"
+        className="text-xs text-muted-foreground hover:text-primary transition-colors"
        >
         {showRpe ? 'Ocultar RPE' : 'RPE'}
        </button>
@@ -133,13 +133,13 @@ export function ExerciseLogger({ exerciseName, planned, actual, onUpdateActual, 
         >
          <div className="flex items-center justify-between mb-2">
           <span className="text-sm font-bold text-primary">Série {sIdx + 1}</span>
-          <span className="text-xs text-gray-600">
+          <span className="text-xs text-muted-foreground">
            Planejado: {p.reps} reps{p.weight ? ` @ ${p.weight}kg` : ''}
           </span>
          </div>
          <div className={`grid ${showRpe ? 'grid-cols-4' : 'grid-cols-3'} gap-2`}>
           <div>
-           <label className="block text-muted text-[10px] mb-1 font-medium">Reps</label>
+           <label className="block text-muted-foreground text-[10px] mb-1 font-medium">Reps</label>
            <input
             type="number"
             min={0}
@@ -152,8 +152,8 @@ export function ExerciseLogger({ exerciseName, planned, actual, onUpdateActual, 
            />
           </div>
           <div>
-           <label className="block text-muted text-[10px] mb-1 font-medium">
-            Peso <span className="text-gray-600">(kg)</span>
+           <label className="block text-muted-foreground text-[10px] mb-1 font-medium">
+            Peso <span className="text-muted-foreground">(kg)</span>
            </label>
            <input
             type="number"
@@ -168,7 +168,7 @@ export function ExerciseLogger({ exerciseName, planned, actual, onUpdateActual, 
           </div>
           {showRpe && (
            <div>
-            <label className="block text-muted text-[10px] mb-1 font-medium">RPE</label>
+            <label className="block text-muted-foreground text-[10px] mb-1 font-medium">RPE</label>
             <select
              value={a.rpe ?? ''}
              onChange={e => onUpdateActual(sIdx, 'rpe', parseFloat(e.target.value) || 0)}
@@ -180,10 +180,10 @@ export function ExerciseLogger({ exerciseName, planned, actual, onUpdateActual, 
            </div>
           )}
           <div>
-           <label className="block text-muted text-[10px] mb-1 font-medium">Timer</label>
+           <label className="block text-muted-foreground text-[10px] mb-1 font-medium">Timer</label>
            <Link
             href="/timer"
-            className="flex items-center justify-center w-full bg-card border border-border rounded py-2 text-gray-500 hover:text-primary hover:border-primary transition-colors"
+            className="flex items-center justify-center w-full bg-card border border-border rounded py-2 text-muted-foreground hover:text-primary hover:border-primary transition-colors"
            >
             <Timer className="w-4 h-4" />
            </Link>
@@ -193,7 +193,7 @@ export function ExerciseLogger({ exerciseName, planned, actual, onUpdateActual, 
           <button
            type="button"
            onClick={() => copyPreviousSet(sIdx)}
-           className="mt-2 text-xs text-gray-500 hover:text-primary transition-colors"
+           className="mt-2 text-xs text-muted-foreground hover:text-primary transition-colors"
           >
            ← Copiar da série anterior
           </button>
@@ -208,7 +208,7 @@ export function ExerciseLogger({ exerciseName, planned, actual, onUpdateActual, 
       <button
        type="button"
        onClick={applySuggestion}
-       className="w-full flex items-center justify-center gap-2 py-3 bg-card border border-border rounded-lg text-sm text-gray-400 hover:text-primary hover:border-primary transition-colors"
+       className="w-full flex items-center justify-center gap-2 py-3 bg-card border border-border rounded-lg text-sm text-muted-foreground hover:text-primary hover:border-primary transition-colors"
       >
        <Sparkles className="w-3.5 h-3.5" />
        Aplicar {suggestedWeight}kg em todas as séries

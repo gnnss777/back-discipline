@@ -42,15 +42,15 @@ function WorkoutCard({ workout }: { workout: Workout }) {
      </div>
      <div className="text-left">
       <div className="text-white font-medium">{formatDate(workout.date)}</div>
-      <div className="text-gray-500 text-sm">
+      <div className="text-muted-foreground text-sm">
        {workout.exercises.length} exercícios · {totalSets} séries · {volume.toLocaleString()} kg
       </div>
      </div>
     </div>
     {expanded ? (
-     <ChevronUp className="w-5 h-5 text-gray-500" />
+     <ChevronUp className="w-5 h-5 text-muted-foreground" />
     ) : (
-     <ChevronDown className="w-5 h-5 text-gray-500" />
+     <ChevronDown className="w-5 h-5 text-muted-foreground" />
     )}
    </button>
 
@@ -62,14 +62,14 @@ function WorkoutCard({ workout }: { workout: Workout }) {
        <div className="space-y-1">
         {exercise.sets.map((set, setIndex) => (
          <div key={setIndex} className="flex items-center justify-between text-sm">
-          <span className="text-gray-400">
+          <span className="text-muted-foreground">
            Série {setIndex + 1}: {set.reps} reps × {set.weight}kg
            {set.rpe > 0 && <span className="text-primary"> @RPE{set.rpe}</span>}
           </span>
           {set.completed ? (
            <span className="text-green-500 text-xs">✓</span>
           ) : (
-           <span className="text-gray-600 text-xs">-</span>
+           <span className="text-muted-foreground text-xs">-</span>
           )}
          </div>
         ))}
@@ -78,8 +78,8 @@ function WorkoutCard({ workout }: { workout: Workout }) {
      ))}
      {workout.notes && (
       <div className="pt-2 border-t border-border">
-       <div className="text-gray-500 text-xs mb-1">Notas:</div>
-       <div className="text-gray-400 text-sm">{workout.notes}</div>
+       <div className="text-muted-foreground text-xs mb-1">Notas:</div>
+       <div className="text-muted-foreground text-sm">{workout.notes}</div>
       </div>
      )}
     </div>
@@ -104,7 +104,7 @@ export function WorkoutHistory({ userId }: WorkoutHistoryProps) {
 
  if (isLoading) {
   return (
-   <div className="text-center py-8 text-gray-500">
+   <div className="text-center py-8 text-muted-foreground">
     Carregando...
    </div>
   );
@@ -113,9 +113,9 @@ export function WorkoutHistory({ userId }: WorkoutHistoryProps) {
  if (workouts.length === 0) {
   return (
    <div className="text-center py-12">
-    <Dumbbell className="w-12 h-12 text-gray-700 mx-auto mb-4" />
-    <p className="text-gray-500">Nenhum treino registrado ainda.</p>
-    <p className="text-gray-600 text-sm">Comece a treinar!</p>
+    <Dumbbell className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
+    <p className="text-muted-foreground">Nenhum treino registrado ainda.</p>
+    <p className="text-muted-foreground text-sm">Comece a treinar!</p>
    </div>
   );
  }

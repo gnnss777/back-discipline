@@ -61,14 +61,14 @@ export function DayHero({ currentDate, weekInfo, progInfo, onPrevDay, onNextDay,
   <div className="mb-6">
    {/* Day navigation */}
    <div className="flex items-center justify-between mb-3">
-    <button onClick={onPrevDay} className="p-2 text-gray-500 hover:text-white transition-colors">
+    <button onClick={onPrevDay} className="p-2 text-muted-foreground hover:text-white transition-colors">
      <ChevronLeft className="w-5 h-5" />
     </button>
     <div className="text-center flex-1">
      <h2 className="text-xl font-bold text-foreground tracking-wider">{dayName}</h2>
-     <p className="text-sm text-gray-500">{dateFormatted}</p>
+     <p className="text-sm text-muted-foreground">{dateFormatted}</p>
     </div>
-    <button onClick={onNextDay} className="p-2 text-gray-500 hover:text-white transition-colors">
+    <button onClick={onNextDay} className="p-2 text-muted-foreground hover:text-white transition-colors">
      <ChevronRight className="w-5 h-5" />
     </button>
    </div>
@@ -84,7 +84,7 @@ export function DayHero({ currentDate, weekInfo, progInfo, onPrevDay, onNextDay,
    {/* Week progress + Streak */}
    <div className="flex items-center gap-4 mb-4">
     <div className="flex-1">
-     <div className="flex items-center justify-between text-xs text-gray-500 mb-1">
+     <div className="flex items-center justify-between text-xs text-muted-foreground mb-1">
       <span>Semana {weekInfo.weekNumber} de {progInfo.totalWeeks}</span>
       <span>{weekPct}%</span>
      </div>
@@ -93,8 +93,8 @@ export function DayHero({ currentDate, weekInfo, progInfo, onPrevDay, onNextDay,
      </div>
     </div>
     <div className="flex items-center gap-1.5 shrink-0">
-     <Flame className={`w-4 h-4 ${streak > 0 ? 'text-orange-500' : 'text-gray-600'}`} />
-     <span className={`text-sm font-bold ${streak > 0 ? 'text-orange-500' : 'text-gray-600'}`}>{streak}</span>
+     <Flame className={`w-4 h-4 ${streak > 0 ? 'text-orange-500' : 'text-muted-foreground'}`} />
+     <span className={`text-sm font-bold ${streak > 0 ? 'text-orange-500' : 'text-muted-foreground'}`}>{streak}</span>
     </div>
    </div>
 
@@ -110,8 +110,8 @@ export function DayHero({ currentDate, weekInfo, progInfo, onPrevDay, onNextDay,
    {/* Next training preview */}
    {nextTraining && !dayInfo?.isCompleted && (
     <div className="mt-3 p-3 bg-surface border border-border rounded">
-     <p className="text-xs text-gray-500">
-      🎯 Próximo treino: <span className="text-gray-300 font-medium">{getDayName(new Date(nextTraining.date + 'T12:00:00').getDay(), true)}</span>
+     <p className="text-xs text-muted-foreground">
+      🎯 Próximo treino: <span className="text-muted-foreground font-medium">{getDayName(new Date(nextTraining.date + 'T12:00:00').getDay(), true)}</span>
       {daysUntilNext !== null && ` (${daysUntilNext === 0 ? 'amanhã' : daysUntilNext === 1 ? 'depois de amanhã' : `em ${daysUntilNext} dias`})`}
      </p>
     </div>

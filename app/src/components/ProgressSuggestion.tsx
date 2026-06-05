@@ -28,8 +28,8 @@ export function ProgressSuggestion({ exerciseName, planilha, currentWeight, onAp
   }`}>
    <div className="flex items-center justify-between">
     <div className="flex items-center gap-1">
-     <Sparkles className={`w-3 h-3 ${suggestion.completedAllSets ? 'text-green-400' : 'text-muted'}`} />
-     <span className="text-muted">Sugestão:</span>
+     <Sparkles className={`w-3 h-3 ${suggestion.completedAllSets ? 'text-green-400' : 'text-muted-foreground'}`} />
+     <span className="text-muted-foreground">Sugestão:</span>
     </div>
     <div className="flex items-center gap-2">
      <span className={`font-bold ${suggestion.completedAllSets ? 'text-green-400' : 'text-primary'}`}>
@@ -50,7 +50,7 @@ export function ProgressSuggestion({ exerciseName, planilha, currentWeight, onAp
      +{suggestion.increment}kg baseado no último treino completo
     </span>
    ) : (
-    <span className="text-muted text-[10px]">
+    <span className="text-muted-foreground text-[10px]">
      Mantendo peso (treino anterior incompleto)
     </span>
    )}

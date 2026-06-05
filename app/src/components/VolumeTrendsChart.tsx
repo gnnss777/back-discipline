@@ -49,7 +49,7 @@ export function VolumeTrendsChart({ planilha }: VolumeTrendsChartProps) {
    <div className="p-4 bg-card border border-border rounded-lg">
     <h3 className="text-sm font-bold tracking-wider mb-4 text-primary">TENDÊNCIA DE VOLUME</h3>
     <div className="flex items-center justify-center h-24">
-     <p className="text-xs text-muted text-center">
+     <p className="text-xs text-muted-foreground text-center">
       Registre mais semanas para<br />ver a tendência de volume
      </p>
     </div>
@@ -107,14 +107,14 @@ export function VolumeTrendsChart({ planilha }: VolumeTrendsChartProps) {
    </div>
    
    {/* X-axis labels */}
-   <div className="flex justify-between text-[10px] text-muted">
+   <div className="flex justify-between text-[10px] text-muted-foreground">
     <span>Sem {chartData.weeks[0]?.weekNumber}</span>
     <span>Sem {chartData.weeks[chartData.weeks.length - 1]?.weekNumber}</span>
    </div>
    
    {/* Current value */}
    <div className="mt-2 pt-2 border-t border-border flex justify-between text-[10px]">
-    <span className="text-muted">Volume atual</span>
+    <span className="text-muted-foreground">Volume atual</span>
     <span className="text-primary font-bold">
      {formatVolume(chartData.weeks[chartData.weeks.length - 1]?.totalVolume || 0)}
     </span>

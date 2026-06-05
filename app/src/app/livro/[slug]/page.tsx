@@ -42,12 +42,12 @@ export default async function ChapterPage({ params }: PageProps) {
     {/* Header */}
     <header className="border-b border-secondary sticky top-0 bg-background/95 backdrop-blur-sm z-50">
      <div className="max-w-3xl mx-auto px-6 py-4 flex items-center justify-between">
-      <Link href="/livro" className="flex items-center gap-2 text-muted hover:text-primary transition-colors font-medium tracking-wider text-sm">
+      <Link href="/livro" className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors font-medium tracking-wider text-sm">
        <ArrowLeft className="w-4 h-4" />
        ÍNDICE
       </Link>
       <div className="flex items-center gap-2">
-        <span className="text-sm font-medium tracking-[0.2em] text-muted">JOÃO MONTEIRO</span>
+        <span className="text-sm font-medium tracking-[0.2em] text-muted-foreground">JOÃO MONTEIRO</span>
        <span className="text-sm font-bold tracking-[0.15em] text-primary">BD</span>
       </div>
 <ChapterHeader slug={slug} />
@@ -63,7 +63,7 @@ export default async function ChapterPage({ params }: PageProps) {
        <span className="px-3 py-1 bg-primary/20 text-primary text-sm font-bold tracking-wider rounded">PARTE II</span>
       )}
       <h1 className="text-2xl font-medium mt-4 mb-2 tracking-wider">{chapter.title}</h1>
-      <p className="text-muted font-light">{chapter.description}</p>
+      <p className="text-muted-foreground font-light">{chapter.description}</p>
      </div>
 
      {/* Content */}
@@ -72,7 +72,7 @@ export default async function ChapterPage({ params }: PageProps) {
        <ContentRenderer content={content} />
       ) : (
        <div className="p-8 bg-surface rounded border border-secondary">
-        <p className="text-muted">Este capítulo está sendo preparado.</p>
+        <p className="text-muted-foreground">Este capítulo está sendo preparado.</p>
        </div>
       )}
      </article>
@@ -83,7 +83,7 @@ export default async function ChapterPage({ params }: PageProps) {
        <Dumbbell className="w-5 h-5" />
        <div>
         <span className="font-bold tracking-wider text-sm block">VER PLANILHA</span>
-        <span className="text-xs text-muted">Acompanhe os exercícios desta semana</span>
+        <span className="text-xs text-muted-foreground">Acompanhe os exercícios desta semana</span>
        </div>
        <ArrowRight className="w-4 h-4 ml-auto" />
       </Link>

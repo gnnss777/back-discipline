@@ -260,7 +260,7 @@ function ExerciseCard({ raw }: { raw: string }) {
       return (
        <div key={i} className="pt-2">
         <span className="font-bold text-primary text-sm tracking-wider">{label}:</span>
-        <div className="mt-1 text-muted leading-relaxed">{renderInline(content)}</div>
+        <div className="mt-1 text-muted-foreground leading-relaxed">{renderInline(content)}</div>
        </div>
       );
      }
@@ -280,7 +280,7 @@ function ExerciseCard({ raw }: { raw: string }) {
       return (
        <ul key={i} className="space-y-1.5 ml-5">
         {items.map((item, idx) => (
-         <li key={idx} className="text-muted leading-relaxed list-disc">{renderInline(item.replace(/^[-*]\s*/, ''))}</li>
+         <li key={idx} className="text-muted-foreground leading-relaxed list-disc">{renderInline(item.replace(/^[-*]\s*/, ''))}</li>
         ))}
        </ul>
       );
@@ -298,7 +298,7 @@ function ExerciseCard({ raw }: { raw: string }) {
      }
 
      // Plain paragraph
-     return <p key={i} className="text-muted leading-relaxed">{renderInline(t)}</p>;
+     return <p key={i} className="text-muted-foreground leading-relaxed">{renderInline(t)}</p>;
     })}
    </div>
 
@@ -309,7 +309,7 @@ function ExerciseCard({ raw }: { raw: string }) {
     return (
      <Link
       href={href}
-      className="mt-4 pt-4 border-t border-secondary flex items-center gap-2 text-xs text-muted hover:text-primary transition-colors tracking-wider"
+      className="mt-4 pt-4 border-t border-secondary flex items-center gap-2 text-xs text-muted-foreground hover:text-primary transition-colors tracking-wider"
      >
       <ExternalLink className="w-3 h-3" />
       VER NA BIBLIOTECA
@@ -353,7 +353,7 @@ function TipBox({ text }: { text: string }) {
  return (
   <div className="flex gap-3 p-4 bg-surface border border-primary/20 rounded my-4">
    <Lightbulb className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-   <div className="text-muted text-sm leading-relaxed">{renderInline(content)}</div>
+   <div className="text-muted-foreground text-sm leading-relaxed">{renderInline(content)}</div>
   </div>
  );
 }
@@ -363,7 +363,7 @@ function WarningBox({ text }: { text: string }) {
  return (
   <div className="flex gap-3 p-4 bg-surface border border-primary/30 rounded my-4">
    <AlertTriangle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-   <div className="text-muted text-sm leading-relaxed">{renderInline(content)}</div>
+   <div className="text-muted-foreground text-sm leading-relaxed">{renderInline(content)}</div>
   </div>
  );
 }
@@ -376,7 +376,7 @@ function ProtocolList({ steps }: { steps: string[] }) {
      <span className="flex-shrink-0 w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm font-bold mt-0.5">
       {i + 1}
      </span>
-     <span className="text-muted leading-relaxed pt-0.5">{renderInline(step.replace(/^\d+\.\s*/, ''))}</span>
+     <span className="text-muted-foreground leading-relaxed pt-0.5">{renderInline(step.replace(/^\d+\.\s*/, ''))}</span>
     </li>
    ))}
   </ol>
@@ -396,7 +396,7 @@ function OverviewCard({ raw }: { raw: string }) {
    </h4>
    <ul className="space-y-2">
     {items.map((item, i) => (
-     <li key={i} className="flex gap-2 text-muted leading-relaxed">
+     <li key={i} className="flex gap-2 text-muted-foreground leading-relaxed">
       <span className="text-primary mt-1 flex-shrink-0">•</span>
       <span>{renderInline(item.replace(/^[-*]\s*/, ''))}</span>
      </li>
@@ -414,7 +414,7 @@ function LabelGroup({ raw }: { raw: string }) {
  return (
   <div className="p-4 bg-surface border border-secondary rounded my-4">
    <span className="font-bold text-primary text-sm tracking-wider">{label}:</span>
-   <div className="mt-1 text-muted leading-relaxed">{renderInline(content)}</div>
+   <div className="mt-1 text-muted-foreground leading-relaxed">{renderInline(content)}</div>
   </div>
  );
 }
@@ -438,7 +438,7 @@ function AnatomyCard({ raw }: { raw: string }) {
      return (
       <ul key={i} className="space-y-1.5 ml-5 my-2">
        {items.map((item, idx) => (
-        <li key={idx} className="text-muted leading-relaxed list-disc">{renderInline(item.replace(/^[-*]\s*/, ''))}</li>
+        <li key={idx} className="text-muted-foreground leading-relaxed list-disc">{renderInline(item.replace(/^[-*]\s*/, ''))}</li>
        ))}
       </ul>
      );
@@ -449,11 +449,11 @@ function AnatomyCard({ raw }: { raw: string }) {
      return (
       <div key={i} className="mt-2">
        <span className="font-bold text-primary text-sm tracking-wider">{l}:</span>
-       <span className="text-muted ml-1">{renderInline(c)}</span>
+       <span className="text-muted-foreground ml-1">{renderInline(c)}</span>
       </div>
      );
     }
-    return <p key={i} className="text-muted leading-relaxed my-2">{renderInline(t)}</p>;
+    return <p key={i} className="text-muted-foreground leading-relaxed my-2">{renderInline(t)}</p>;
    })}
   </div>
  );
@@ -484,7 +484,7 @@ function ContentTable({ raw }: { raw: string }) {
       return (
        <tr key={ri} className={ri % 2 === 0 ? 'bg-surface' : ''}>
         {cells.map((cell, ci) => (
-         <td key={ci} className="px-4 py-2.5 border border-secondary text-muted text-sm">{cell.trim()}</td>
+         <td key={ci} className="px-4 py-2.5 border border-secondary text-muted-foreground text-sm">{cell.trim()}</td>
         ))}
        </tr>
       );
@@ -500,7 +500,7 @@ function BulletListBlock({ raw }: { raw: string }) {
  return (
   <ul className="space-y-2 ml-6 my-4">
    {items.map((item, i) => (
-    <li key={i} className="text-muted leading-relaxed list-disc">{renderInline(item.replace(/^[-*]\s*/, ''))}</li>
+    <li key={i} className="text-muted-foreground leading-relaxed list-disc">{renderInline(item.replace(/^[-*]\s*/, ''))}</li>
    ))}
   </ul>
  );
@@ -521,7 +521,7 @@ const blockRenderers: Record<Block['type'], BlockRenderer> = {
     {exRef && (
      <Link
       href={`/biblioteca/${exRef.id}`}
-      className="inline-flex items-center gap-1 text-xs text-muted hover:text-primary transition-colors font-normal tracking-wider no-underline"
+      className="inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-primary transition-colors font-normal tracking-wider no-underline"
      >
       <ExternalLink className="w-3 h-3" />
       VER NA BIBLIOTECA
@@ -539,7 +539,7 @@ const blockRenderers: Record<Block['type'], BlockRenderer> = {
     {exRef && (
      <Link
       href={`/biblioteca/${exRef.id}`}
-      className="inline-flex items-center gap-1 text-xs text-muted hover:text-primary transition-colors font-normal tracking-wider no-underline"
+      className="inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-primary transition-colors font-normal tracking-wider no-underline"
      >
       <ExternalLink className="w-3 h-3" />
       VER NA BIBLIOTECA
@@ -550,7 +550,7 @@ const blockRenderers: Record<Block['type'], BlockRenderer> = {
  },
  'h4': ({ raw }) => <h4 className="font-bold text-foreground mt-6 mb-3 tracking-wider uppercase text-sm">{raw.replace(/\*\*/g, '')}</h4>,
  'hr': () => <hr className="border-secondary my-8" />,
- 'paragraph': ({ raw }) => <p className="text-muted leading-[2.0] text-lg font-light">{renderInline(raw.trim())}</p>,
+ 'paragraph': ({ raw }) => <p className="text-muted-foreground leading-[2.0] text-lg font-light">{renderInline(raw.trim())}</p>,
  'exercise': ExerciseCard,
  'quote': ({ raw }) => {
   const text = raw.replace(/^>\s*/, '');
@@ -579,7 +579,7 @@ export function ContentRenderer({ content }: ContentRendererProps) {
  const blocks = buildBlocks(content);
 
  return (
-  <div className="space-y-6 text-muted text-lg leading-[2.0] font-light">
+  <div className="space-y-6 text-muted-foreground text-lg leading-[2.0] font-light">
    {blocks.map((block, i) => {
     const Renderer = blockRenderers[block.type];
     return <Renderer key={i} raw={block.raw} />;

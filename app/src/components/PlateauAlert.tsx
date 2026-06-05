@@ -23,14 +23,14 @@ export function PlateauAlert({ planilha }: PlateauAlertProps) {
      PLATÔ DETECTADO
     </span>
    </div>
-   <p className="text-xs text-muted mb-3">
+   <p className="text-xs text-muted-foreground mb-3">
     Você está em platô em {plateaus.length} exercício{plateaus.length > 1 ? 's' : ''}:
    </p>
    <ul className="text-xs space-y-2 mb-3">
     {plateaus.slice(0, 3).map((p) => (
      <li key={p.exerciseName} className="bg-background p-2 rounded">
       <div className="flex items-center justify-between mb-1">
-       <span className="text-muted font-medium">{p.exerciseName}</span>
+       <span className="text-muted-foreground font-medium">{p.exerciseName}</span>
        <span className="text-primary text-[10px]">
         {p.previousAvg}kg → {p.currentAvg}kg
        </span>
@@ -39,12 +39,12 @@ export function PlateauAlert({ planilha }: PlateauAlertProps) {
      </li>
     ))}
     {plateaus.length > 3 && (
-     <li className="text-muted text-center py-1">
+     <li className="text-muted-foreground text-center py-1">
       +{plateaus.length - 3} mais
      </li>
     )}
    </ul>
-   <div className="flex items-center gap-1 text-[10px] text-muted pt-2 border-t border-yellow-900/30">
+   <div className="flex items-center gap-1 text-[10px] text-muted-foreground pt-2 border-t border-yellow-900/30">
     <Lightbulb className="w-3 h-3 text-yellow-500" />
     <span>Dica: Varie o exercício ou aumente as repetições</span>
    </div>

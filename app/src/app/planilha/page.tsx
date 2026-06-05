@@ -206,7 +206,7 @@ export default function PlanilhaUnificadaPage() {
    <div className="min-h-screen bg-background text-white pb-24">
     <header className="border-b border-border sticky top-0 bg-background/95 backdrop-blur-sm z-50">
      <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-      <Link href="/dashboard" className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors text-sm">
+      <Link href="/dashboard" className="flex items-center gap-2 text-muted-foreground hover:text-white transition-colors text-sm">
        <ArrowRight className="w-4 h-4 rotate-180" /> Voltar
       </Link>
       <div className="flex items-center gap-2">
@@ -218,7 +218,7 @@ export default function PlanilhaUnificadaPage() {
     </header>
     <main className="max-w-6xl mx-auto px-4 py-6">
      <div className="mb-6 p-5 rounded border border-secondary bg-surface text-center">
-      <p className="mb-3 text-muted">Faça login para registrar e acompanhar seu progresso.</p>
+      <p className="mb-3 text-muted-foreground">Faça login para registrar e acompanhar seu progresso.</p>
       <Link href="/login" className="inline-flex items-center gap-2 px-5 py-2 bg-primary text-black rounded font-bold tracking-wider text-sm">
        Entrar
       </Link>
@@ -242,7 +242,7 @@ export default function PlanilhaUnificadaPage() {
 
    <header className="border-b border-border sticky top-0 bg-background/95 backdrop-blur-sm z-50">
     <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-     <Link href="/dashboard" className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors text-sm">
+     <Link href="/dashboard" className="flex items-center gap-2 text-muted-foreground hover:text-white transition-colors text-sm">
       <ArrowRight className="w-4 h-4 rotate-180" /> Voltar
      </Link>
      <div className="flex items-center gap-2">
@@ -251,7 +251,7 @@ export default function PlanilhaUnificadaPage() {
      </div>
      <div className="flex items-center gap-2">
       {saving && <span className="text-xs text-primary">Salvo</span>}
-      <Link href="/estatisticas" className="flex items-center gap-1 text-gray-400 hover:text-primary text-xs">
+      <Link href="/estatisticas" className="flex items-center gap-1 text-muted-foreground hover:text-primary text-xs">
        <BarChart2 className="w-4 h-4" />
       </Link>
      </div>
@@ -264,7 +264,7 @@ export default function PlanilhaUnificadaPage() {
       {/* Program Starter prompt */}
       {!progStarted && (
        <div className="p-5 rounded border border-primary/30 bg-primary/5 text-center">
-        <p className="mb-3 text-sm text-gray-300">
+        <p className="mb-3 text-sm text-muted-foreground">
          Inicie o programa para acompanhar seu progresso semana a semana, receber alertas de treinos perdidos e dicas de leitura.
         </p>
         <button
@@ -327,7 +327,7 @@ export default function PlanilhaUnificadaPage() {
       {dayInfo ? (
        <div className="space-y-3">
         <div className="flex items-center justify-between">
-         <h3 className="text-sm font-bold text-gray-400 tracking-wider">
+         <h3 className="text-sm font-bold text-muted-foreground tracking-wider">
           {dayInfo.day.name} — {dayInfo.day.focus}
          </h3>
         </div>
@@ -366,8 +366,8 @@ export default function PlanilhaUnificadaPage() {
       ) : (
        progStarted && (
         <div className="text-center py-8">
-         <Dumbbell className="w-8 h-8 text-gray-600 mx-auto mb-3" />
-         <p className="text-sm text-gray-500">Dia de descanso</p>
+         <Dumbbell className="w-8 h-8 text-muted-foreground mx-auto mb-3" />
+         <p className="text-sm text-muted-foreground">Dia de descanso</p>
         </div>
        )
       )}
@@ -378,7 +378,7 @@ export default function PlanilhaUnificadaPage() {
         <button
          type="button"
          onClick={() => setShowHistory(!showHistory)}
-         className="flex items-center gap-2 text-sm text-gray-500 hover:text-primary transition-colors"
+         className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
         >
          {showHistory ? '—' : '+'} Histórico de treinos
         </button>

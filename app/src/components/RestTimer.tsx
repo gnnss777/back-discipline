@@ -100,7 +100,7 @@ export function RestTimer({ defaultSeconds = 90, onComplete }: RestTimerProps) {
     <button
      onClick={() => setSoundEnabled(!soundEnabled)}
      className={`p-2 rounded-lg transition-colors ${
-      soundEnabled ? 'text-primary' : 'text-gray-600'
+      soundEnabled ? 'text-primary' : 'text-muted-foreground'
      }`}
     >
      {soundEnabled ? <Volume2 className="w-5 h-5" /> : <VolumeX className="w-5 h-5" />}
@@ -147,7 +147,7 @@ export function RestTimer({ defaultSeconds = 90, onComplete }: RestTimerProps) {
       onClick={() => adjustTime(-15)}
       className="p-2 bg-card border border-border rounded-lg hover:border-primary transition-colors"
      >
-      <Minus className="w-5 h-5 text-gray-400" />
+      <Minus className="w-5 h-5 text-muted-foreground" />
      </button>
      <button
       onClick={toggle}
@@ -167,13 +167,13 @@ export function RestTimer({ defaultSeconds = 90, onComplete }: RestTimerProps) {
       onClick={() => adjustTime(15)}
       className="p-2 bg-card border border-border rounded-lg hover:border-primary transition-colors"
      >
-      <Plus className="w-5 h-5 text-gray-400" />
+      <Plus className="w-5 h-5 text-muted-foreground" />
      </button>
     </div>
 
     <button
      onClick={reset}
-     className="text-gray-500 hover:text-white transition-colors flex items-center gap-2 mx-auto"
+     className="text-muted-foreground hover:text-white transition-colors flex items-center gap-2 mx-auto"
     >
      <RotateCcw className="w-4 h-4" />
      <span className="text-sm">Reiniciar</span>
@@ -188,7 +188,7 @@ export function RestTimer({ defaultSeconds = 90, onComplete }: RestTimerProps) {
       className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
        seconds === preset && timeLeft === preset
         ? 'bg-primary text-background'
-        : 'bg-card border border-border text-gray-400 hover:border-primary hover:text-white'
+        : 'bg-card border border-border text-muted-foreground hover:border-primary hover:text-white'
       }`}
      >
       {preset >= 60 ? `${preset / 60}m` : `${preset}s`}

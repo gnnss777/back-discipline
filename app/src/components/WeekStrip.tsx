@@ -24,7 +24,7 @@ export function WeekStrip({ weeks, currentDate, onDayClick }: WeekStripProps) {
 
      let bgColor = 'bg-card';
      let borderColor = 'border-border';
-     let textColor = 'text-gray-600';
+     let textColor = 'text-muted-foreground';
 
      if (isSelected) {
       bgColor = 'bg-primary/20';
@@ -43,7 +43,7 @@ export function WeekStrip({ weeks, currentDate, onDayClick }: WeekStripProps) {
       borderColor = 'border-primary/30';
       textColor = 'text-primary';
      } else if (day.isTrainingDay) {
-      textColor = 'text-gray-400';
+      textColor = 'text-muted-foreground';
      }
 
      return (
@@ -65,9 +65,9 @@ export function WeekStrip({ weeks, currentDate, onDayClick }: WeekStripProps) {
         ) : day.isToday ? (
          <span className="text-[10px] font-bold text-primary">●</span>
         ) : day.isTrainingDay ? (
-         <span className="text-[8px] text-gray-600">○</span>
+         <span className="text-[8px] text-muted-foreground">○</span>
         ) : (
-         <span className="text-[8px] text-gray-700">—</span>
+         <span className="text-[8px] text-muted-foreground">—</span>
         )}
        </span>
       </button>

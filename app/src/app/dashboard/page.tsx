@@ -32,7 +32,7 @@ export default function DashboardPage() {
    <div className="min-h-screen bg-background text-white">
     <header className="border-b border-border sticky top-0 bg-background/95 backdrop-blur-sm z-50">
      <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-      <Link href="/" className="flex items-center gap-2 text-gray-500 hover:text-white transition-colors font-medium tracking-wider text-sm">
+      <Link href="/" className="flex items-center gap-2 text-muted-foreground hover:text-white transition-colors font-medium tracking-wider text-sm">
        <ArrowLeft className="w-4 h-4" />
        INÍCIO
       </Link>
@@ -48,9 +48,9 @@ export default function DashboardPage() {
     <main className="max-w-6xl mx-auto px-6 py-12">
      <div className="mt-12 p-6 bg-card rounded-xl border border-border text-center">
       <h3 className="text-lg font-bold mb-2 tracking-wider">FAÇA LOGIN PARA ACOMPANHAR SEU PROGRESSO</h3>
-      <p className="text-gray-500 mb-4 tracking-wide">Crie uma conta para acompanhar seu progresso e treinar.</p>
+      <p className="text-muted-foreground mb-4 tracking-wide">Crie uma conta para acompanhar seu progresso e treinar.</p>
       <div className="flex gap-4 justify-center">
-       <Link href="/login" className="px-6 py-2 border border-border text-muted rounded hover:border-primary hover:text-primary transition-colors font-bold tracking-wider">
+       <Link href="/login" className="px-6 py-2 border border-border text-muted-foreground rounded hover:border-primary hover:text-primary transition-colors font-bold tracking-wider">
         ENTRAR
        </Link>
        <Link href="/register" className="px-6 py-2 bg-primary text-background font-bold tracking-wider rounded hover:bg-primary-dark transition-colors">
@@ -85,24 +85,24 @@ export default function DashboardPage() {
    <main className="max-w-6xl mx-auto px-6 py-12 pb-24">
     <div className="text-center mb-10">
      <h1 className="text-3xl font-bold mb-2 tracking-wider">SEU <span className="text-primary">PAINEL</span></h1>
-     <p className="text-gray-500 tracking-wide font-medium">SEMANA {stats.currentWeek} · DIA {stats.currentDay}</p>
+     <p className="text-muted-foreground tracking-wide font-medium">SEMANA {stats.currentWeek} · DIA {stats.currentDay}</p>
     </div>
 
     <div className="grid grid-cols-3 gap-4 mb-8">
      <div className="p-4 bg-card border border-border rounded-lg text-center">
       <BookOpen className="w-5 h-5 text-primary mx-auto mb-2" />
       <div className="text-2xl font-bold tracking-wider">{completedChapters}/{totalChapters}</div>
-      <div className="text-xs text-gray-500 tracking-wider mt-1">CAPÍTULOS</div>
+      <div className="text-xs text-muted-foreground tracking-wider mt-1">CAPÍTULOS</div>
      </div>
      <div className="p-4 bg-card border border-primary/30 rounded-lg text-center">
       <Target className="w-5 h-5 text-primary mx-auto mb-2" />
       <div className="text-2xl font-bold tracking-wider">{progressPercent}%</div>
-      <div className="text-xs text-gray-500 tracking-wider mt-1">PROGRESSO</div>
+      <div className="text-xs text-muted-foreground tracking-wider mt-1">PROGRESSO</div>
      </div>
      <div className="p-4 bg-card border border-border rounded-lg text-center">
       <Dumbbell className="w-5 h-5 text-primary mx-auto mb-2" />
       <div className="text-2xl font-bold tracking-wider">{daysTrained}</div>
-      <div className="text-xs text-gray-500 tracking-wider mt-1">TREINOS</div>
+      <div className="text-xs text-muted-foreground tracking-wider mt-1">TREINOS</div>
      </div>
     </div>
 
@@ -155,22 +155,22 @@ export default function DashboardPage() {
      <Link href="/livro" className="p-6 bg-card border border-border rounded-lg hover:border-primary transition-colors text-center">
       <BookOpen className="w-8 h-8 text-primary mx-auto mb-3" />
       <div className="font-bold tracking-wider">LIVRO</div>
-      <div className="text-sm text-gray-500 mt-1">{totalChapters - completedChapters} capítulos restantes</div>
+      <div className="text-sm text-muted-foreground mt-1">{totalChapters - completedChapters} capítulos restantes</div>
      </Link>
      <Link href="/planilha" className="p-6 bg-card border border-border rounded-lg hover:border-primary transition-colors text-center">
       <ClipboardList className="w-8 h-8 text-primary mx-auto mb-3" />
       <div className="font-bold tracking-wider">PLANILHA</div>
-      <div className="text-sm text-gray-500 mt-1">6 semanas de treino</div>
+      <div className="text-sm text-muted-foreground mt-1">6 semanas de treino</div>
      </Link>
      <Link href="/timer" className="p-6 bg-card border border-border rounded-lg hover:border-primary transition-colors text-center">
       <Timer className="w-8 h-8 text-primary mx-auto mb-3" />
       <div className="font-bold tracking-wider">CRONÔMETRO</div>
-      <div className="text-sm text-gray-500 mt-1">Descanso entre séries</div>
+      <div className="text-sm text-muted-foreground mt-1">Descanso entre séries</div>
      </Link>
      <Link href="/biblioteca" className="p-6 bg-card border border-border rounded-lg hover:border-primary transition-colors text-center">
       <Search className="w-8 h-8 text-primary mx-auto mb-3" />
       <div className="font-bold tracking-wider">BIBLIOTECA</div>
-      <div className="text-sm text-gray-500 mt-1">{exercises.length} exercícios</div>
+      <div className="text-sm text-muted-foreground mt-1">{exercises.length} exercícios</div>
      </Link>
     </div>
    </main>

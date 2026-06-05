@@ -33,7 +33,7 @@ export class ErrorBoundary extends Component<Props, State> {
     <div className="min-h-screen bg-background flex flex-col items-center justify-center p-4">
      <div className="text-red-500 text-4xl mb-4">⚠</div>
      <p className="text-white text-lg mb-2">Algo deu errado</p>
-     <p className="text-gray-500 text-sm mb-6 max-w-md text-center">
+     <p className="text-muted-foreground text-sm mb-6 max-w-md text-center">
       {this.state.error?.message || 'Erro inesperado'}
      </p>
      <button

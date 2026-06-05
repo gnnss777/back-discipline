@@ -4,7 +4,7 @@ export function LoadingState({ message = 'Carregando...' }: { message?: string }
  return (
   <div className="min-h-screen bg-background flex flex-col items-center justify-center">
    <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin mb-4" />
-   <p className="text-gray-400">{message}</p>
+   <p className="text-muted-foreground">{message}</p>
   </div>
  );
 }
@@ -49,7 +49,7 @@ export function EmptyState({
   <div className="text-center py-12">
    <div className="text-5xl mb-4">{icon}</div>
    <h3 className="text-white text-lg font-medium mb-2">{title}</h3>
-   {description && <p className="text-gray-500 mb-4">{description}</p>}
+   {description && <p className="text-muted-foreground mb-4">{description}</p>}
    {action && actionLabel && (
     <button
      onClick={action}
