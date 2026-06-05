@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Oswald } from "next/font/google";
 import { Providers } from "./providers";
+import { InstallPrompt } from "../components/InstallPrompt";
 import "./globals.css";
 
 const oswald = Oswald({
@@ -22,6 +23,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" className={`${oswald.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
+        <InstallPrompt />
         <Providers>{children}</Providers>
       </body>
     </html>
