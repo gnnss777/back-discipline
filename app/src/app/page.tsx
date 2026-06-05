@@ -100,15 +100,18 @@ export default function Home() {
         <span className="text-primary text-glow">QUE VOCÊ MERECE</span>
        </h1>
       
-       <p className="text-base sm:text-lg text-muted-foreground/80 mb-4 max-w-xl mx-auto font-medium tracking-wide">
-        VOCÊ TREINA. VOCÊ TENTA. E AS COSTAS NUNCA APARECEM.
-       </p>
-       <p className="text-base sm:text-xl text-muted-foreground mb-4 max-w-2xl mx-auto font-light tracking-wide">
-        6 semanas de treinamento estruturado por João Monteiro, com base acadêmica em Educação Física e Nutrição e anos de experiência prática.
-       </p>
-       <p className="text-sm text-muted-foreground mb-10 font-light tracking-wide">
-        Cada série, cada técnica e cada nível de esforço com propósito definido por quem estuda e aplica.
-       </p>
+        <div className="text-base sm:text-lg text-muted-foreground/80 mb-6 max-w-xs mx-auto font-bold leading-relaxed tracking-wide">
+         <p>VOCÊ TREINA.</p>
+         <p>VOCÊ TENTA.</p>
+         <p>E AS COSTAS</p>
+         <p className="text-primary">NUNCA APARECEM.</p>
+        </div>
+        <p className="text-sm sm:text-base text-muted-foreground mb-6 max-w-xl mx-auto font-light leading-relaxed normal-case">
+         6 semanas de treinamento estruturado por João Monteiro, com base acadêmica em Educação Física e Nutrição e anos de experiência prática.
+        </p>
+        <p className="text-xs sm:text-sm text-muted-foreground/70 mb-10 max-w-lg mx-auto font-light leading-relaxed normal-case">
+         Cada série, cada técnica e cada nível de esforço com propósito definido por quem estuda e aplica.
+        </p>
 
       <div className="flex flex-col sm:flex-row gap-4 justify-center">
         <button 
