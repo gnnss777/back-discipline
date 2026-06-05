@@ -3,7 +3,7 @@ import type { MetadataRoute } from 'next'
 export default function manifest(): MetadataRoute.Manifest {
  return {
   name: 'Back Discipline',
-  short_name: 'BC',
+  short_name: 'Back Discipline',
   description: 'Um guia prático de 6 semanas para construir costas épicas usando o método John Meadows',
   start_url: '/',
   display: 'standalone',
