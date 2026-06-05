@@ -99,7 +99,7 @@ export default function Home() {
          <br />
          <span className="text-primary">É MÉTODO.</span>
          <br />
-         <span className="text-primary text-glow">BACK DISCIPLINE.</span>
+         <span className="text-primary text-glow">É BACK DISCIPLINE.</span>
         </h1>
       
         <div className="text-base sm:text-lg text-muted-foreground/80 mb-6 max-w-xs mx-auto font-bold leading-relaxed tracking-wide">
