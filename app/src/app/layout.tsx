@@ -31,8 +31,10 @@ export default function RootLayout({
   <html lang="pt-BR" className={`${orbitron.variable} ${montserrat.variable} h-full antialiased`}>
    <body className="min-h-full flex flex-col">
     <InstallPrompt />
-    <NotificationDispatcher />
-    <Providers>{children}</Providers>
+    <Providers>
+      <NotificationDispatcher />
+      {children}
+    </Providers>
    </body>
   </html>
  );

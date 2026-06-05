@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { Check, AlertCircle, Dumbbell, Moon, BedDouble } from 'lucide-react';
 import { getDayName } from '@/utils/programTracker';

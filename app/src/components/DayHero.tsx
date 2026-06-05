@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { ChevronLeft, ChevronRight, Flame, Dumbbell, Moon } from 'lucide-react';
 import { getDayName, localDateStr } from '@/utils/programTracker';
