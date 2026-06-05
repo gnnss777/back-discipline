@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { BookOpen, Dumbbell, Trophy, ArrowRight, Flame, GraduationCap, Lock, Target, BarChart3, Brain, ClipboardList, ChevronDown, HelpCircle } from 'lucide-react';
 import { AuthModal } from '../components/AuthModal';
 import { useAuth } from '../hooks/useAuth';
-import { chapters } from '../lib/chapters';
+import { chapters, chapterGroups } from '../lib/chapters';
 
 export default function Home() {
  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
@@ -30,15 +30,13 @@ export default function Home() {
   setIsAuthModalOpen(true);
  };
 
- const week1Chapters = chapters.filter(c => c.order >= 1 && c.order <= 2);
- const weeks = [
-  { name: 'Semana 1', chapters: chapters.filter(c => c.order >= 1 && c.order <= 2) },
-  { name: 'Semana 2', chapters: chapters.filter(c => c.order >= 3 && c.order <= 4) },
-  { name: 'Semana 3', chapters: chapters.filter(c => c.order >= 5 && c.order <= 6) },
-  { name: 'Semana 4', chapters: chapters.filter(c => c.order >= 7 && c.order <= 8) },
-  { name: 'Semana 5', chapters: chapters.filter(c => c.order >= 9 && c.order <= 10) },
-  { name: 'Semana 6', chapters: [chapters.find(c => c.order === 11)!].filter(Boolean) },
- ];
+ const weeks = chapterGroups
+  .filter(g => g.order >= 3 && g.order <= 8)
+  .map(g => ({
+   name: g.title.replace(/^Semana \d — /, ''),
+   description: g.description,
+   chapters: g.children.map(slug => chapters.find(c => c.slug === slug)!),
+  }));
 
  if (isLoading) {
   return (
@@ -289,26 +287,19 @@ export default function Home() {
           <div className="w-8 h-8 bg-primary/20 flex items-center justify-center rounded">
            <span className="text-primary font-bold text-sm">{weekIndex + 1}</span>
           </div>
-          <span className="font-medium">{week.name}</span>
-         </div>
-          <Lock className="w-4 h-4 text-muted-foreground" />
-        </div>
-        <div className="px-6 py-3 bg-background space-y-2">
-         {week.chapters.map((chapter) => (
-          <div 
-           key={chapter.slug}
-            className="flex items-center justify-between text-sm text-muted-foreground py-2 border-b border-card last:border-0"
-          >
-           <span>{chapter.title}</span>
-           <button 
-            onClick={openLogin}
-            className="text-primary text-xs hover:underline"
-           >
-            <Lock className="w-3 h-3 inline mr-1" />
-            Login
-           </button>
+          <div>
+           <span className="font-medium">SEMANA {weekIndex + 1}</span>
+           <p className="text-xs text-muted-foreground mt-0.5">{week.name}</p>
           </div>
-         ))}
+         </div>
+          <Lock className="w-5 h-5 text-muted-foreground" />
+        </div>
+        <div className="px-6 py-3 bg-background">
+         <p className="text-xs text-muted-foreground font-light leading-relaxed">{week.description}</p>
+         <div className="mt-3 flex items-center gap-2 text-[10px] text-muted-foreground">
+          <Dumbbell className="w-3 h-3" />
+          <span>{week.chapters.filter(c => c).length} treinos</span>
+         </div>
         </div>
        </div>
       ))}
