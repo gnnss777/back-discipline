@@ -114,7 +114,7 @@ export default function Home() {
         </p>
         <div className="inline-flex items-center gap-3 px-4 py-2 bg-surface border border-border rounded-full mb-10">
          <BookOpen className="w-3.5 h-3.5 text-primary" />
-         <span className="text-[10px] sm:text-xs font-bold tracking-wider text-muted-foreground">11 CAPÍTULOS CURTOS · TEXTO DIRETO · LEITURA RÁPIDA</span>
+         <span className="text-[10px] sm:text-xs font-bold tracking-wider text-muted-foreground">11 CAPÍTULOS · TEXTO DIRETO · LEITURA RÁPIDA</span>
         </div>
 
       <div className="flex flex-col sm:flex-row gap-4 justify-center">
