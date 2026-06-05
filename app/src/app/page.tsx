@@ -153,30 +153,12 @@ export default function Home() {
      </div>
     </section>
 
-    {/* Antes de Começar */}
-    <section className="py-16 border-y border-secondary">
-     <div className="max-w-6xl mx-auto px-6 text-center">
-      <h2 className="font-display text-2xl sm:text-3xl font-bold mb-4 tracking-wider">ANTES DE COMEÇAR,<br />SEJA HONESTO.</h2>
-      <p className="text-muted-foreground mb-10 max-w-xl mx-auto">
-       Selecione os problemas com os quais você se identifica.
-      </p>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-4xl mx-auto">
-       {[
-        'Treino costas há meses e não vejo desenvolvimento',
-        'Fico preso nos mesmos 3 exercícios sempre',
-        'Não sei se estou com a intensidade certa',
-        'Meu progresso parou e não sei como ajustar',
-        'Nunca tive um programa específico de costas',
-        'Já tentei vários treinos e nenhum funcionou',
-       ].map((pain, i) => (
-        <div key={i} className="flex items-start gap-3 p-5 bg-surface border border-border rounded-lg text-left">
-         <Target className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-         <span className="text-sm font-medium text-muted-foreground">{pain}</span>
-        </div>
-       ))}
-      </div>
-      <p className="text-primary font-bold tracking-wider mt-8">
-        MARCOU 2 OU MAIS? ESTE PROGRAMA É PARA VOCÊ.
+    {/* O Programa */}
+    <section className="py-16">
+     <div className="max-w-4xl mx-auto px-6 text-center">
+      <h2 className="font-display text-2xl sm:text-3xl font-bold mb-6 tracking-wider">O PROGRAMA</h2>
+      <p className="text-muted-foreground font-light text-base sm:text-lg leading-relaxed max-w-3xl mx-auto normal-case">
+        Back Discipline é um programa de 6 semanas focado exclusivamente em desenvolvimento de costas — espessura, largura e densidade. Cada semana tem progressão de carga, volume e intensidade definidos por RPE. Não é uma coleção de exercícios. É um sistema progressivo construído por João Monteiro a partir de anos de estudo, treino e aplicação prática com atletas de alta performance.
       </p>
      </div>
     </section>
@@ -277,16 +259,6 @@ export default function Home() {
        QUERO COMEÇAR
        <ArrowRight className="w-5 h-5" />
       </button>
-     </div>
-    </section>
-
-    {/* Missão */}
-    <section className="py-16 border-t border-secondary">
-     <div className="max-w-4xl mx-auto px-6 text-center">
-      <h2 className="font-display text-2xl sm:text-3xl font-bold mb-6 tracking-wider">O PROPÓSITO</h2>
-      <p className="text-muted-foreground font-light text-lg leading-relaxed max-w-3xl mx-auto normal-case">
-        Back Discipline não é uma rotina de treino. É a síntese de tudo que João Monteiro desenvolveu sobre treinamento de costas — traduzida em um programa que qualquer pessoa comprometida pode executar. Cada capítulo, cada série e cada RPE foi pensado para quem quer resultado real, não apenas motivação.
-      </p>
      </div>
     </section>
 
