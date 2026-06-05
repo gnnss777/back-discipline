@@ -5,6 +5,7 @@ import { createSupabaseClient } from '@/app/supabase/client';
 import type { User, Session } from '@supabase/supabase-js';
 import type { UserSession } from '../types';
 import { toast } from 'sonner';
+import { dispatchPush } from '../lib/pushNotification';
 
 interface AuthContextType {
   user: UserSession | null;
@@ -87,6 +88,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       return { success: false, error: error.message };
     }
     toast.success('Login realizado com sucesso');
+    dispatchPush('Back Discipline', 'Login realizado com sucesso');
     return { success: true };
   };
 
@@ -111,6 +113,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       return { success: false, error: error.message };
     }
     toast.success('Conta criada com sucesso');
+    dispatchPush('Back Discipline', 'Conta criada com sucesso');
     return { success: true };
   };
 

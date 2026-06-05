@@ -69,11 +69,12 @@ export function getProgramInfo(userId: string): {
 
   const trainingDays = progress.trainingDays;
   const startDate = new Date(progress.programStartedAt!);
+  const startDateOnly = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate());
   const now = new Date();
   const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
   const msPerDay = 24 * 60 * 60 * 1000;
-  const daysSinceStart = Math.floor((today.getTime() - startDate.getTime()) / msPerDay);
+  const daysSinceStart = Math.max(0, Math.floor((today.getTime() - startDateOnly.getTime()) / msPerDay));
   const currentWeek = Math.min(Math.floor(daysSinceStart / 7) + 1, totalWeeks);
   const workouts = getWorkoutsByUser(userId);
 
@@ -121,7 +122,9 @@ export function getProgramInfo(userId: string): {
         dayName: getDayName(dayIdx),
         isTrainingDay,
         isPast: date < today,
-        isToday: date.getTime() === today.getTime(),
+        isToday: date.getFullYear() === today.getFullYear() &&
+                 date.getMonth() === today.getMonth() &&
+                 date.getDate() === today.getDate(),
         isCompleted: hasActualData && isTrainingDay,
         hasActualData,
         exercisesCompleted,

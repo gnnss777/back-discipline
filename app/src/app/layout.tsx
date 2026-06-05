@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Orbitron, Montserrat } from "next/font/google";
 import { Providers } from "./providers";
 import { InstallPrompt } from "../components/InstallPrompt";
+import { NotificationDispatcher } from "../components/NotificationDispatcher";
 import "./globals.css";
 
 const orbitron = Orbitron({
@@ -30,6 +31,7 @@ export default function RootLayout({
   <html lang="pt-BR" className={`${orbitron.variable} ${montserrat.variable} h-full antialiased`}>
    <body className="min-h-full flex flex-col">
     <InstallPrompt />
+    <NotificationDispatcher />
     <Providers>{children}</Providers>
    </body>
   </html>

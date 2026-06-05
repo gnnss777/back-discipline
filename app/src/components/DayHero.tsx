@@ -1,6 +1,6 @@
 'use client';
 
-import { ChevronLeft, ChevronRight, Flame } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Flame, Dumbbell, Moon } from 'lucide-react';
 import { getDayName, localDateStr } from '@/utils/programTracker';
 import type { ProgramWeekInfo } from '@/utils/programTracker';
 
@@ -67,6 +67,24 @@ export function DayHero({ currentDate, weekInfo, progInfo, onPrevDay, onNextDay,
     <div className="text-center flex-1">
      <h2 className="text-xl font-bold text-foreground tracking-wider">{dayName}</h2>
      <p className="text-sm text-muted-foreground">{dateFormatted}</p>
+     {/* Training/rest status badge */}
+     <div className="flex items-center justify-center gap-1.5 mt-1">
+      {dayInfo?.isTrainingDay ? (
+       <span className={`inline-flex items-center gap-1 text-xs font-medium px-2 py-0.5 rounded-full ${
+        dayInfo.isCompleted
+         ? 'bg-green-900/30 text-green-400 border border-green-700/40'
+         : 'bg-primary/15 text-primary border border-primary/30'
+       }`}>
+        <Dumbbell className="w-3 h-3" />
+        {dayInfo.isCompleted ? 'Concluído' : dayInfo.exercisesCompleted > 0 ? 'Em andamento' : 'Treino'}
+       </span>
+      ) : (
+       <span className="inline-flex items-center gap-1 text-xs font-medium px-2 py-0.5 rounded-full bg-surface text-muted-foreground border border-border">
+        <Moon className="w-3 h-3" />
+        Descanso
+       </span>
+      )}
+     </div>
     </div>
     <button onClick={onNextDay} className="p-2 text-muted-foreground hover:text-white transition-colors">
      <ChevronRight className="w-5 h-5" />
@@ -98,18 +116,9 @@ export function DayHero({ currentDate, weekInfo, progInfo, onPrevDay, onNextDay,
     </div>
    </div>
 
-   {/* Day focus */}
-   {dayInfo?.isTrainingDay && (
-    <div className="p-3 bg-primary/10 border border-primary/20 rounded">
-     <p className="text-sm font-medium text-primary tracking-wider">
-      {dayInfo.isCompleted ? '✅ Treino concluído' : dayInfo.exercisesCompleted > 0 ? '📝 Treino em andamento' : '🎯 Dia de treino'}
-     </p>
-    </div>
-   )}
-
    {/* Next training preview */}
    {nextTraining && !dayInfo?.isCompleted && (
-    <div className="mt-3 p-3 bg-surface border border-border rounded">
+    <div className="p-3 bg-surface border border-border rounded">
      <p className="text-xs text-muted-foreground">
       🎯 Próximo treino: <span className="text-muted-foreground font-medium">{getDayName(new Date(nextTraining.date + 'T12:00:00').getDay(), true)}</span>
       {daysUntilNext !== null && ` (${daysUntilNext === 1 ? 'amanhã' : daysUntilNext === 2 ? 'depois de amanhã' : `em ${daysUntilNext} dias`})`}

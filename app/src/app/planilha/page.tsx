@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { ArrowRight, Dumbbell, BarChart2, Save, AlertTriangle, ChevronRight } from 'lucide-react';
 import { toast } from 'sonner';
+import { dispatchPush } from '@/lib/pushNotification';
 import { useAuth } from '@/hooks/useAuth';
 import { loadPlanilha, savePlanilha, ensureSeed } from '@/utils/planilhaStorage';
 import { syncPlanilhaDay, syncAllPlanilhaDays } from '@/utils/planilhaSync';
@@ -181,6 +182,7 @@ export default function PlanilhaUnificadaPage() {
     setProgVersion(v => v + 1);
     refreshProgress();
     toast.success('Treino salvo com sucesso!');
+    dispatchPush('Back Discipline', 'Treino salvo com sucesso!');
   setTimeout(() => setDaySaving(false), 800);
  }, [user, dayInfo, dayNotes, refreshProgress]);
 

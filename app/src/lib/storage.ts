@@ -194,10 +194,15 @@ export function getProgressStats(userId: string): {
   const totalDaysTrained = uniqueDays.size;
   
   const chaptersCompleted = progress?.chapters.filter(c => c.completed).length || 0;
-  const startedAt = progress?.startedAt ? new Date(progress.startedAt) : now;
-  const daysSinceStart = Math.floor((now.getTime() - startedAt.getTime()) / (24 * 60 * 60 * 1000));
-  const currentWeek = Math.min(Math.ceil(daysSinceStart / 7) + 1, 6);
+  const startedAtDate = progress?.programStartedAt
+    ? new Date(progress.programStartedAt)
+    : progress?.startedAt
+      ? new Date(progress.startedAt)
+      : now;
+  const startedDay = new Date(startedAtDate.getFullYear(), startedAtDate.getMonth(), startedAtDate.getDate());
+  const daysSinceStart = Math.max(0, Math.floor((now.getTime() - startedDay.getTime()) / (24 * 60 * 60 * 1000)));
+  const currentWeek = Math.min(Math.floor(daysSinceStart / 7) + 1, 6);
   const currentDay = (daysSinceStart % 7) + 1;
-  
+
   return { chaptersCompleted, totalDaysTrained, weeklyVolume, currentWeek, currentDay };
 }

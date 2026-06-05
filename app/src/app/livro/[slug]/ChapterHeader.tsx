@@ -5,6 +5,7 @@ import { CheckCircle } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
 import { getAllProgress, updateProgress, updateLastRead } from '@/lib/reading-storage';
 import { toast } from 'sonner';
+import { dispatchPush } from '@/lib/pushNotification';
 
 interface ChapterHeaderProps {
  slug: string;
@@ -51,7 +52,9 @@ export function ChapterHeader({ slug }: ChapterHeaderProps) {
    setCompleted(!newCompleted);
    toast.error('Erro ao salvar progresso');
   } else {
-   toast.success(newCompleted ? 'Capítulo concluído!' : 'Capítulo desmarcado');
+    if (newCompleted) {
+      dispatchPush('Back Discipline', `Capítulo concluído!`);
+    }
   }
  };
 

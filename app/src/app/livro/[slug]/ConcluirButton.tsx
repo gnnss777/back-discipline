@@ -7,6 +7,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { updateProgress, updateLastRead } from '@/lib/reading-storage';
 import { getGroupBySlug, chapterGroups, chapters } from '@/lib/chapters';
 import { toast } from 'sonner';
+import { dispatchPush } from '@/lib/pushNotification';
 
 interface ConcluirButtonProps {
  slug: string;
@@ -51,7 +52,8 @@ export function ConcluirButton({ slug }: ConcluirButtonProps) {
   await updateLastRead(user.userId, targetSlug);
 
   if (result.success) {
-   toast.success('Capítulo concluído!');
+    toast.success('Capítulo concluído!');
+    dispatchPush('Back Discipline', 'Capítulo concluído! Continue sua jornada.');
   }
 
   if (nextSlug) {
