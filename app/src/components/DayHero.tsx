@@ -112,7 +112,7 @@ export function DayHero({ currentDate, weekInfo, progInfo, onPrevDay, onNextDay,
     <div className="mt-3 p-3 bg-surface border border-border rounded">
      <p className="text-xs text-muted-foreground">
       🎯 Próximo treino: <span className="text-muted-foreground font-medium">{getDayName(new Date(nextTraining.date + 'T12:00:00').getDay(), true)}</span>
-      {daysUntilNext !== null && ` (${daysUntilNext === 0 ? 'amanhã' : daysUntilNext === 1 ? 'depois de amanhã' : `em ${daysUntilNext} dias`})`}
+      {daysUntilNext !== null && ` (${daysUntilNext === 1 ? 'amanhã' : daysUntilNext === 2 ? 'depois de amanhã' : `em ${daysUntilNext} dias`})`}
      </p>
     </div>
    )}
