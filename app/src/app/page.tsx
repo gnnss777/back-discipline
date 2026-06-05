@@ -310,8 +310,7 @@ export default function Home() {
     <section className="py-16 border-t border-secondary bg-surface">
      <div className="max-w-6xl mx-auto px-6 text-center">
       <h2 className="font-display text-2xl sm:text-3xl font-bold mb-2 tracking-wider">CIÊNCIA, PERFORMANCE E RESULTADO</h2>
-      <p className="text-muted-foreground/80 text-sm font-medium tracking-wider mb-6">TREINO · NUTRIÇÃO · ESTRATÉGIA</p>
-      <p className="text-muted-foreground font-light text-base leading-relaxed mb-8 max-w-3xl mx-auto normal-case">
+       <p className="text-muted-foreground font-light text-base leading-relaxed mb-8 max-w-3xl mx-auto normal-case">
         João Monteiro é formado em Nutrição e Educação Física, com formação internacional em Kinesiologia e pós-graduação em Nutrição Comportamental. Atua há anos na preparação de atletas de alta performance, com experiência nacional e internacional no fisiculturismo e futebol americano.
       </p>
 
