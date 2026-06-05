@@ -57,13 +57,14 @@ export default function Home() {
    {/* Header */}
    <header className="border-b border-secondary">
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between gap-2">
-     <div className="flex items-center gap-2 sm:gap-3 min-w-0">
-      <span className="hidden sm:inline text-xl lg:text-2xl font-medium tracking-[0.3em]">JOÃO</span>
-      <span className="hidden sm:inline text-xl lg:text-2xl font-light tracking-[0.2em] text-muted-foreground">MONTEIRO</span>
-      <span className="sm:hidden w-8 h-8 bg-primary flex items-center justify-center rounded shrink-0">
+     <div className="flex items-center gap-3 min-w-0">
+      <div className="w-8 h-8 bg-primary flex items-center justify-center rounded shrink-0">
        <span className="text-background text-xs font-bold">JM</span>
-      </span>
-      <span className="text-sm sm:text-base lg:text-lg font-bold tracking-[0.15em] text-primary truncate">BACK DISCIPLINE</span>
+      </div>
+      <div className="flex flex-col leading-tight">
+       <span className="text-[10px] sm:text-xs font-medium tracking-[0.2em] text-muted-foreground">JOÃO MONTEIRO</span>
+       <span className="text-xs sm:text-sm font-bold tracking-[0.15em] text-primary">BACK DISCIPLINE</span>
+      </div>
      </div>
      <div className="flex items-center gap-2 sm:gap-4 shrink-0">
       <button 
