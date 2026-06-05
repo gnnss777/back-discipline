@@ -28,10 +28,10 @@ export function UserAvatar({ name, email, size = 'sm' }: UserAvatarProps) {
   return (
     <Link
       href="/perfil"
-      className={`${sizeClasses} bg-[#B8956A] flex items-center justify-center rounded-full hover:opacity-90 transition-opacity`}
+      className={`${sizeClasses} bg-primary flex items-center justify-center rounded-full hover:opacity-90 transition-opacity`}
       title="Perfil"
     >
-      <span className="text-[#0A0A0A] font-bold">{initials}</span>
+      <span className="text-background font-bold">{initials}</span>
     </Link>
   );
 }

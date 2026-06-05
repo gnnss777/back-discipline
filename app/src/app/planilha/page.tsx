@@ -193,23 +193,23 @@ export default function PlanilhaUnificadaPage() {
 
   if (!user) {
     return (
-      <div className="min-h-screen bg-[#0A0A0A] text-white pb-24">
-        <header className="border-b border-[#2A2A2A] sticky top-0 bg-[#0A0A0A]/95 backdrop-blur-sm z-50">
-          <div className="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div className="min-h-screen bg-background text-white pb-24">
+        <header className="border-b border-border sticky top-0 bg-background/95 backdrop-blur-sm z-50">
+          <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
             <Link href="/dashboard" className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors text-sm">
               <ArrowRight className="w-4 h-4 rotate-180" /> Voltar
             </Link>
             <div className="flex items-center gap-2">
-              <Dumbbell className="w-4 h-4 text-[#B8956A]" />
-              <span className="text-sm font-bold tracking-[0.15em] text-[#B8956A]">PLANO DE TREINO</span>
+              <Dumbbell className="w-4 h-4 text-primary" />
+              <span className="text-sm font-bold tracking-[0.15em] text-primary">PLANO DE TREINO</span>
             </div>
             <div className="w-16" />
           </div>
         </header>
-        <main className="max-w-4xl mx-auto px-4 py-6">
-          <div className="mb-6 p-5 rounded border border-[#3A2E22] bg-[#0F0F0F] text-center">
-            <p className="mb-3 text-[#999]">Faça login para registrar e acompanhar seu progresso.</p>
-            <Link href="/login" className="inline-flex items-center gap-2 px-5 py-2 bg-[#B8956A] text-black rounded-sm font-bold tracking-wider text-sm">
+        <main className="max-w-6xl mx-auto px-4 py-6">
+          <div className="mb-6 p-5 rounded border border-secondary bg-surface text-center">
+            <p className="mb-3 text-muted">Faça login para registrar e acompanhar seu progresso.</p>
+            <Link href="/login" className="inline-flex items-center gap-2 px-5 py-2 bg-primary text-black rounded font-bold tracking-wider text-sm">
               Entrar
             </Link>
           </div>
@@ -219,7 +219,7 @@ export default function PlanilhaUnificadaPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0A0A0A] text-white pb-24">
+    <div className="min-h-screen bg-background text-white pb-24">
       {showStarter && (
         <ProgramStarter
           userId={user.userId}
@@ -227,37 +227,37 @@ export default function PlanilhaUnificadaPage() {
         />
       )}
 
-      <header className="border-b border-[#2A2A2A] sticky top-0 bg-[#0A0A0A]/95 backdrop-blur-sm z-50">
-        <div className="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
+      <header className="border-b border-border sticky top-0 bg-background/95 backdrop-blur-sm z-50">
+        <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
           <Link href="/dashboard" className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors text-sm">
             <ArrowRight className="w-4 h-4 rotate-180" /> Voltar
           </Link>
           <div className="flex items-center gap-2">
-            <Dumbbell className="w-4 h-4 text-[#B8956A]" />
-            <span className="text-sm font-bold tracking-[0.15em] text-[#B8956A]">PLANO DE TREINO</span>
+            <Dumbbell className="w-4 h-4 text-primary" />
+            <span className="text-sm font-bold tracking-[0.15em] text-primary">PLANO DE TREINO</span>
           </div>
           <div className="flex items-center gap-2">
-            {saving && <span className="text-xs text-[#B8956A]">Salvo</span>}
-            <Link href="/estatisticas" className="flex items-center gap-1 text-gray-400 hover:text-[#B8956A] text-xs">
+            {saving && <span className="text-xs text-primary">Salvo</span>}
+            <Link href="/estatisticas" className="flex items-center gap-1 text-gray-400 hover:text-primary text-xs">
               <BarChart2 className="w-4 h-4" />
             </Link>
           </div>
         </div>
       </header>
 
-      <main className="max-w-4xl mx-auto px-4 py-6">
+      <main className="max-w-6xl mx-auto px-4 py-6">
         {data && (
           <div className="space-y-6">
             {/* Program Starter prompt */}
             {!progStarted && (
-              <div className="p-5 rounded border border-[#B8956A]/30 bg-[#B8956A]/5 text-center">
+              <div className="p-5 rounded border border-primary/30 bg-primary/5 text-center">
                 <p className="mb-3 text-sm text-gray-300">
                   Inicie o programa para acompanhar seu progresso semana a semana, receber alertas de treinos perdidos e dicas de leitura.
                 </p>
                 <button
                   type="button"
                   onClick={() => setShowStarter(true)}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#B8956A] text-black rounded-lg font-bold text-sm hover:bg-[#c9a67a] transition-colors"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-black rounded-lg font-bold text-sm hover:bg-primary-dark transition-colors"
                 >
                   Iniciar Programa
                 </button>
@@ -337,14 +337,14 @@ export default function PlanilhaUnificadaPage() {
                   onChange={(e) => setDayNotes(e.target.value)}
                   placeholder="Notas do treino (opcional)..."
                   rows={2}
-                  className="w-full bg-[#1A1A1A] border border-[#2A2A2A] rounded-lg py-2.5 px-3 text-white text-sm placeholder-gray-500 focus:border-[#B8956A] focus:outline-none resize-none"
+                  className="w-full bg-card border border-border rounded-lg py-2.5 px-3 text-white text-sm placeholder-gray-500 focus:border-primary focus:outline-none resize-none"
                 />
 
                 <button
                   type="button"
                   onClick={handleSaveDay}
                   disabled={daySaving}
-                  className="w-full flex items-center justify-center gap-2 py-3 bg-[#B8956A] hover:bg-[#c9a67a] text-black font-bold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+                  className="w-full flex items-center justify-center gap-2 py-3 bg-primary hover:bg-primary-dark text-black font-bold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-sm"
                 >
                   <Save className="w-4 h-4" />
                   {daySaving ? '✓ Salvo!' : 'Salvar Treino do Dia'}
@@ -361,11 +361,11 @@ export default function PlanilhaUnificadaPage() {
 
             {/* History toggle */}
             {user && (
-              <div className="border-t border-[#2A2A2A] pt-6">
+              <div className="border-t border-border pt-6">
                 <button
                   type="button"
                   onClick={() => setShowHistory(!showHistory)}
-                  className="flex items-center gap-2 text-sm text-gray-500 hover:text-[#B8956A] transition-colors"
+                  className="flex items-center gap-2 text-sm text-gray-500 hover:text-primary transition-colors"
                 >
                   {showHistory ? '—' : '+'} Histórico de treinos
                 </button>

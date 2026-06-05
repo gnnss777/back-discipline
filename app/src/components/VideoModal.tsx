@@ -36,7 +36,7 @@ export function VideoModal({ isOpen, onClose, videoUrl, title }: VideoModalProps
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-3xl bg-[#0A0A0A] border border-[#2A2A2A] rounded-xl shadow-2xl animate-in zoom-in-95 duration-200"
+        className="relative w-full max-w-3xl bg-background border border-border rounded-xl shadow-2xl animate-in zoom-in-95 duration-200"
         onClick={(e) => e.stopPropagation()}
       >
         <button

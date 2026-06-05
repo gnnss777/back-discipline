@@ -11,8 +11,8 @@ export default function PlanilhaProgressoRedirect() {
   }, [router]);
 
   return (
-    <div className="min-h-screen bg-[#0A0A0A] flex items-center justify-center">
-      <div className="text-[#B8956A]">Redirecionando...</div>
+    <div className="min-h-screen bg-background flex items-center justify-center">
+      <div className="text-primary">Redirecionando...</div>
     </div>
   );
 }

@@ -58,52 +58,52 @@ const lastReadChapter = progressData
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-[#0A0A0A] flex items-center justify-center">
-        <div className="text-[#B8956A]">Carregando...</div>
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-primary">Carregando...</div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#0A0A0A] text-[#E8E0D0] pb-24">
+    <div className="min-h-screen bg-background text-foreground pb-24">
       <AuthModal 
         isOpen={isAuthModalOpen} 
         onClose={() => setIsAuthModalOpen(false)}
         initialMode={authModalMode}
       />
 
-      <header className="border-b border-[#3A2E22] sticky top-0 bg-[#0A0A0A]/95 backdrop-blur-sm z-50">
-        <div className="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
-          <Link href={user ? '/dashboard' : '/'} className="flex items-center gap-2 text-[#666] hover:text-[#B8956A] transition-colors font-medium tracking-wider text-sm">
+      <header className="border-b border-secondary sticky top-0 bg-background/95 backdrop-blur-sm z-50">
+        <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+          <Link href={user ? '/dashboard' : '/'} className="flex items-center gap-2 text-muted hover:text-primary transition-colors font-medium tracking-wider text-sm">
             <ArrowLeft className="w-4 h-4" />
             VOLTAR
           </Link>
           <div className="flex items-center gap-2">
-            <span className="text-sm font-medium tracking-[0.2em] text-[#666]">JJ MONTEIRO</span>
-            <span className="text-sm font-bold tracking-[0.15em] text-[#B8956A]">BACK DISCIPLINE</span>
+            <span className="text-sm font-medium tracking-[0.2em] text-muted">JJ MONTEIRO</span>
+            <span className="text-sm font-bold tracking-[0.15em] text-primary">BACK DISCIPLINE</span>
           </div>
           {!user && (
-            <button onClick={openLogin} className="text-sm text-[#B8956A] hover:text-[#9A7A50] font-medium tracking-wider">
+            <button onClick={openLogin} className="text-sm text-primary hover:text-primary-dark font-medium tracking-wider">
               ENTRAR
             </button>
           )}
         </div>
       </header>
 
-      <main className="max-w-4xl mx-auto px-6 py-12">
+      <main className="max-w-6xl mx-auto px-6 py-12">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-medium mb-4 tracking-wider">PROGRAMA <span className="text-[#B8956A]">6 SEMANAS</span></h1>
-          <p className="text-[#555] font-light tracking-wide">DE TREINAMENTO DE COSTAS</p>
+          <h1 className="text-4xl font-medium mb-4 tracking-wider">PROGRAMA <span className="text-primary">6 SEMANAS</span></h1>
+          <p className="text-muted font-light tracking-wide">DE TREINAMENTO DE COSTAS</p>
         </div>
 
         {!user && (
-          <div className="mb-8 p-4 bg-[#B8956A]/10 border border-[#B8956A]/30 rounded-sm text-center">
-            <p className="text-[#B8956A] mb-2">Faça login para acompanhar seu progresso</p>
+          <div className="mb-8 p-4 bg-primary/10 border border-primary/30 rounded text-center">
+            <p className="text-primary mb-2">Faça login para acompanhar seu progresso</p>
             <div className="flex gap-4 justify-center">
-              <button onClick={openLogin} className="px-4 py-2 border border-[#B8956A] text-[#B8956A] rounded-sm hover:bg-[#B8956A] hover:text-[#0A0A0A] transition-colors font-medium tracking-wider text-sm">
+              <button onClick={openLogin} className="px-4 py-2 border border-primary text-primary rounded hover:bg-primary hover:text-background transition-colors font-medium tracking-wider text-sm">
                 ENTRAR
               </button>
-              <button onClick={openRegister} className="px-4 py-2 bg-[#B8956A] text-[#0A0A0A] rounded-sm hover:bg-[#9A7A50] transition-colors font-medium tracking-wider text-sm">
+              <button onClick={openRegister} className="px-4 py-2 bg-primary text-background rounded hover:bg-primary-dark transition-colors font-medium tracking-wider text-sm">
                 CADASTRAR
               </button>
             </div>
@@ -111,13 +111,13 @@ const lastReadChapter = progressData
         )}
 
         {user && (
-          <div className="mb-12 p-4 bg-[#0F0F0F] rounded-sm border border-[#3A2E22]">
+          <div className="mb-12 p-4 bg-surface rounded border border-secondary">
             <div className="flex items-center justify-between text-sm mb-2">
-              <span className="text-[#555] font-medium tracking-wider">SEU PROGRESSO</span>
-              <span className="text-[#B8956A] font-bold tracking-wider">{completedCount} / {totalSlugs} CAPÍTULOS</span>
+              <span className="text-muted font-medium tracking-wider">SEU PROGRESSO</span>
+              <span className="text-primary font-bold tracking-wider">{completedCount} / {totalSlugs} CAPÍTULOS</span>
             </div>
-            <div className="h-1 bg-[#1a1a1a] rounded-full overflow-hidden">
-              <div className="h-full bg-[#B8956A] transition-all duration-500" style={{ width: `${progressPercent}%` }} />
+            <div className="h-1 bg-card rounded-full overflow-hidden">
+              <div className="h-full bg-primary transition-all duration-500" style={{ width: `${progressPercent}%` }} />
             </div>
           </div>
         )}
@@ -125,7 +125,7 @@ const lastReadChapter = progressData
         {/* Parte I */}
         <section className="mb-12">
           <div className="flex items-center gap-3 mb-6">
-            <span className="px-3 py-1 bg-[#B8956A]/20 text-[#B8956A] text-sm font-bold tracking-wider rounded-sm">PARTE I</span>
+            <span className="px-3 py-1 bg-primary/20 text-primary text-sm font-bold tracking-wider rounded">PARTE I</span>
             <h2 className="text-xl font-medium tracking-wider">SISTEMA E PRÁTICA</h2>
           </div>
 
@@ -137,31 +137,31 @@ const lastReadChapter = progressData
               const lastReadSlug = lastReadChapter && group.children.includes(lastReadChapter) ? lastReadChapter : null;
 
               return (
-                <div key={group.id} className="border border-[#3A2E22] rounded-sm overflow-hidden">
+                <div key={group.id} className="border border-secondary rounded overflow-hidden">
                   {/* Group header */}
-                  <div className={`px-5 py-4 ${isFullyComplete ? 'bg-[#B8956A]/10' : 'bg-[#0F0F0F]'} border-b border-[#3A2E22]`}>
+                  <div className={`px-5 py-4 ${isFullyComplete ? 'bg-primary/10' : 'bg-surface'} border-b border-secondary`}>
                     <div className="flex items-center justify-between">
                       <div>
                         <h3 className="font-bold tracking-wider text-sm">{group.title}</h3>
-                        <p className="text-xs text-[#555] mt-1">{group.description}</p>
+                        <p className="text-xs text-muted mt-1">{group.description}</p>
                       </div>
                       {user && (
                         <div className="text-right">
-                          <span className={`text-sm font-bold tracking-wider ${isFullyComplete ? 'text-[#B8956A]' : 'text-[#555]'}`}>
+                          <span className={`text-sm font-bold tracking-wider ${isFullyComplete ? 'text-primary' : 'text-muted'}`}>
                             {groupCompleted}/{totalInGroup}
                           </span>
                         </div>
                       )}
                     </div>
                     {user && (
-                      <div className="mt-2 h-0.5 bg-[#1a1a1a] rounded-full overflow-hidden">
-                        <div className="h-full bg-[#B8956A] transition-all duration-500" style={{ width: `${Math.round((groupCompleted / totalInGroup) * 100)}%` }} />
+                      <div className="mt-2 h-0.5 bg-card rounded-full overflow-hidden">
+                        <div className="h-full bg-primary transition-all duration-500" style={{ width: `${Math.round((groupCompleted / totalInGroup) * 100)}%` }} />
                       </div>
                     )}
                   </div>
 
                   {/* Children */}
-                  <div className="divide-y divide-[#3A2E22]/50">
+                  <div className="divide-y divide-secondary/50">
                     {group.children.map((childSlug) => {
                       const child = chapters.find(c => c.slug === childSlug);
                       if (!child) return null;
@@ -175,33 +175,33 @@ const lastReadChapter = progressData
                           onClick={(e) => { if (!user) { e.preventDefault(); openLogin(); } }}
                           className={`block px-5 py-3 transition-all group ${
                             isLastRead
-                            ? 'bg-[#0F0F0F] border-l-2 border-l-[#B8956A]'
+                            ? 'bg-surface border-l-2 border-l-primary'
                             : isCompleted
-                            ? 'bg-[#0F0F0F]'
+                            ? 'bg-surface'
                             : user
-                            ? 'bg-[#0A0A0A] hover:bg-[#0F0F0F]'
-                            : 'bg-[#0A0A0A] cursor-pointer'
+                            ? 'bg-background hover:bg-surface'
+                            : 'bg-background cursor-pointer'
                           }`}
                         >
                           <div className="flex items-center gap-3">
-                            <div className={`w-8 h-8 flex items-center justify-center rounded-sm text-sm ${
+                            <div className={`w-8 h-8 flex items-center justify-center rounded text-sm ${
                               isCompleted
-                              ? 'bg-[#B8956A]/20 text-[#B8956A]'
+                              ? 'bg-primary/20 text-primary'
                               : user
-                              ? 'bg-[#1a1a1a] text-[#444] group-hover:bg-[#B8956A]/20 group-hover:text-[#B8956A] transition-colors'
-                              : 'bg-[#1a1a1a] text-[#333]'
+                              ? 'bg-card text-muted group-hover:bg-primary/20 group-hover:text-primary transition-colors'
+                              : 'bg-card text-border'
                             }`}>
                               {isCompleted ? <CheckCircle className="w-4 h-4" /> : user ? <ArrowRight className="w-4 h-4" /> : <Lock className="w-4 h-4" />}
                             </div>
                             <div className="flex-1">
-                              <span className={`text-sm font-medium tracking-wider ${user ? 'group-hover:text-[#B8956A]' : ''} transition-colors`}>
+                              <span className={`text-sm font-medium tracking-wider ${user ? 'group-hover:text-primary' : ''} transition-colors`}>
                                 {child.title}
                               </span>
                               {isLastRead && (
-                                <span className="ml-2 text-xs text-[#B8956A] font-medium">CONTINUAR</span>
+                                <span className="ml-2 text-xs text-primary font-medium">CONTINUAR</span>
                               )}
                             </div>
-                            {!user && <Lock className="w-3 h-3 text-[#333]" />}
+                            {!user && <Lock className="w-3 h-3 text-border" />}
                           </div>
                         </Link>
                       );
@@ -216,7 +216,7 @@ const lastReadChapter = progressData
         {/* Parte II */}
         <section>
           <div className="flex items-center gap-3 mb-6">
-            <span className="px-3 py-1 bg-[#B8956A]/20 text-[#B8956A] text-sm font-bold tracking-wider rounded-sm">PARTE II</span>
+            <span className="px-3 py-1 bg-primary/20 text-primary text-sm font-bold tracking-wider rounded">PARTE II</span>
             <h2 className="text-xl font-medium tracking-wider">FUNDAMENTOS TÉCNICOS</h2>
           </div>
 
@@ -228,31 +228,31 @@ const lastReadChapter = progressData
               const lastReadSlug = lastReadChapter && group.children.includes(lastReadChapter) ? lastReadChapter : null;
 
               return (
-                <div key={group.id} className="border border-[#3A2E22] rounded-sm overflow-hidden">
+                <div key={group.id} className="border border-secondary rounded overflow-hidden">
                   {/* Group header */}
-                  <div className={`px-5 py-4 ${isFullyComplete ? 'bg-[#B8956A]/10' : 'bg-[#0F0F0F]'} border-b border-[#3A2E22]`}>
+                  <div className={`px-5 py-4 ${isFullyComplete ? 'bg-primary/10' : 'bg-surface'} border-b border-secondary`}>
                     <div className="flex items-center justify-between">
                       <div>
                         <h3 className="font-bold tracking-wider text-sm">{group.title}</h3>
-                        <p className="text-xs text-[#555] mt-1">{group.description}</p>
+                        <p className="text-xs text-muted mt-1">{group.description}</p>
                       </div>
                       {user && (
                         <div className="text-right">
-                          <span className={`text-sm font-bold tracking-wider ${isFullyComplete ? 'text-[#B8956A]' : 'text-[#555]'}`}>
+                          <span className={`text-sm font-bold tracking-wider ${isFullyComplete ? 'text-primary' : 'text-muted'}`}>
                             {groupCompleted}/{totalInGroup}
                           </span>
                         </div>
                       )}
                     </div>
                     {user && (
-                      <div className="mt-2 h-0.5 bg-[#1a1a1a] rounded-full overflow-hidden">
-                        <div className="h-full bg-[#B8956A] transition-all duration-500" style={{ width: `${Math.round((groupCompleted / totalInGroup) * 100)}%` }} />
+                      <div className="mt-2 h-0.5 bg-card rounded-full overflow-hidden">
+                        <div className="h-full bg-primary transition-all duration-500" style={{ width: `${Math.round((groupCompleted / totalInGroup) * 100)}%` }} />
                       </div>
                     )}
                   </div>
 
                   {/* Children */}
-                  <div className="divide-y divide-[#3A2E22]/50">
+                  <div className="divide-y divide-secondary/50">
                     {group.children.map((childSlug) => {
                       const child = chapters.find(c => c.slug === childSlug);
                       if (!child) return null;
@@ -266,33 +266,33 @@ const lastReadChapter = progressData
                           onClick={(e) => { if (!user) { e.preventDefault(); openLogin(); } }}
                           className={`block px-5 py-3 transition-all group ${
                             isLastRead
-                            ? 'bg-[#0F0F0F] border-l-2 border-l-[#B8956A]'
+                            ? 'bg-surface border-l-2 border-l-primary'
                             : isCompleted
-                            ? 'bg-[#0F0F0F]'
+                            ? 'bg-surface'
                             : user
-                            ? 'bg-[#0A0A0A] hover:bg-[#0F0F0F]'
-                            : 'bg-[#0A0A0A] cursor-pointer'
+                            ? 'bg-background hover:bg-surface'
+                            : 'bg-background cursor-pointer'
                           }`}
                         >
                           <div className="flex items-center gap-3">
-                            <div className={`w-8 h-8 flex items-center justify-center rounded-sm text-sm ${
+                            <div className={`w-8 h-8 flex items-center justify-center rounded text-sm ${
                               isCompleted
-                              ? 'bg-[#B8956A]/20 text-[#B8956A]'
+                              ? 'bg-primary/20 text-primary'
                               : user
-                              ? 'bg-[#1a1a1a] text-[#444] group-hover:bg-[#B8956A]/20 group-hover:text-[#B8956A] transition-colors'
-                              : 'bg-[#1a1a1a] text-[#333]'
+                              ? 'bg-card text-muted group-hover:bg-primary/20 group-hover:text-primary transition-colors'
+                              : 'bg-card text-border'
                             }`}>
                               {isCompleted ? <CheckCircle className="w-4 h-4" /> : user ? <ArrowRight className="w-4 h-4" /> : <Lock className="w-4 h-4" />}
                             </div>
                             <div className="flex-1">
-                              <span className={`text-sm font-medium tracking-wider ${user ? 'group-hover:text-[#B8956A]' : ''} transition-colors`}>
+                              <span className={`text-sm font-medium tracking-wider ${user ? 'group-hover:text-primary' : ''} transition-colors`}>
                                 {child.title}
                               </span>
                               {isLastRead && (
-                                <span className="ml-2 text-xs text-[#B8956A] font-medium">CONTINUAR</span>
+                                <span className="ml-2 text-xs text-primary font-medium">CONTINUAR</span>
                               )}
                             </div>
-                            {!user && <Lock className="w-3 h-3 text-[#333]" />}
+                            {!user && <Lock className="w-3 h-3 text-border" />}
                           </div>
                         </Link>
                       );
@@ -305,9 +305,9 @@ const lastReadChapter = progressData
         </section>
 
         {!user && (
-          <div className="mt-12 p-6 bg-[#0F0F0F] rounded-xl border border-[#3A2E22] text-center">
-            <p className="text-[#444] mb-4 font-light tracking-wide">FAÇA LOGIN PARA ACOMPANHAR SEU PROGRESSO</p>
-            <button onClick={openRegister} className="inline-flex items-center gap-2 px-6 py-3 bg-[#B8956A] text-[#0A0A0A] font-bold tracking-wider rounded-sm hover:bg-[#9A7A50] transition-colors">
+          <div className="mt-12 p-6 bg-surface rounded-xl border border-secondary text-center">
+            <p className="text-muted mb-4 font-light tracking-wide">FAÇA LOGIN PARA ACOMPANHAR SEU PROGRESSO</p>
+            <button onClick={openRegister} className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-background font-bold tracking-wider rounded hover:bg-primary-dark transition-colors">
               CADASTRAR PARA ACESSAR
             </button>
           </div>

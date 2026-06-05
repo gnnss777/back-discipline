@@ -67,7 +67,7 @@ function PushNotificationManager() {
     return (
       <button
         onClick={subscribeToPush}
-        className="flex items-center gap-1 text-xs text-[#0A0A0A]/70 hover:text-[#0A0A0A] underline"
+        className="flex items-center gap-1 text-xs text-background/70 hover:text-background underline"
       >
         Ativar notificações
       </button>
@@ -77,7 +77,7 @@ function PushNotificationManager() {
   return (
     <button
       onClick={unsubscribeFromPush}
-      className="text-xs text-[#0A0A0A]/70 hover:text-[#0A0A0A] underline"
+      className="text-xs text-background/70 hover:text-background underline"
     >
       Notificações ativadas
     </button>
@@ -135,8 +135,8 @@ export function InstallPrompt() {
   if (!showInstall) return null
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-[60] bg-[#B8956A] text-[#0A0A0A]">
-      <div className="max-w-4xl mx-auto px-4 py-2 flex items-center justify-between gap-4">
+    <div className="fixed top-0 left-0 right-0 z-[60] bg-primary text-background">
+      <div className="max-w-6xl mx-auto px-4 py-2 flex items-center justify-between gap-4">
         <div className="flex items-center gap-3 min-w-0">
           <Smartphone className="w-5 h-5 shrink-0" />
           {isIOS ? (
@@ -159,7 +159,7 @@ export function InstallPrompt() {
           ) : (
             <button
               onClick={handleInstall}
-              className="flex items-center gap-1 px-3 py-1 bg-[#0A0A0A] text-[#B8956A] text-xs font-bold rounded-sm hover:bg-[#1A1A1A] transition-colors"
+              className="flex items-center gap-1 px-3 py-1 bg-background text-primary text-xs font-bold rounded hover:bg-card transition-colors"
             >
               <Download className="w-3.5 h-3.5" />
               Instalar
@@ -170,7 +170,7 @@ export function InstallPrompt() {
 
           <button
             onClick={handleDismiss}
-            className="text-[#0A0A0A]/60 hover:text-[#0A0A0A] transition-colors"
+            className="text-background/60 hover:text-background transition-colors"
             aria-label="Fechar"
           >
             <X className="w-4 h-4" />

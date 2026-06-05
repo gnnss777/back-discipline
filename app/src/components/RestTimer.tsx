@@ -94,13 +94,13 @@ export function RestTimer({ defaultSeconds = 90, onComplete }: RestTimerProps) {
   const isAlmostDone = timeLeft <= 5 && timeLeft > 0;
 
   return (
-    <div className="bg-[#111] border border-[#333] rounded-xl p-6">
+    <div className="bg-card border border-border rounded-xl p-6">
       <div className="flex items-center justify-between mb-4">
         <h3 className="text-lg font-bold text-white tracking-wider">CRONÔMETRO</h3>
         <button
           onClick={() => setSoundEnabled(!soundEnabled)}
           className={`p-2 rounded-lg transition-colors ${
-            soundEnabled ? 'text-[#B8956A]' : 'text-gray-600'
+            soundEnabled ? 'text-primary' : 'text-gray-600'
           }`}
         >
           {soundEnabled ? <Volume2 className="w-5 h-5" /> : <VolumeX className="w-5 h-5" />}
@@ -123,7 +123,7 @@ export function RestTimer({ defaultSeconds = 90, onComplete }: RestTimerProps) {
               cy="96"
               r="88"
               fill="none"
-              stroke={isAlmostDone ? '#ef4444' : '#B8956A'}
+              stroke={isAlmostDone ? '#ef4444' : '#C9A86C'}
               strokeWidth="8"
               strokeLinecap="round"
               strokeDasharray={2 * Math.PI * 88}
@@ -145,7 +145,7 @@ export function RestTimer({ defaultSeconds = 90, onComplete }: RestTimerProps) {
         <div className="flex items-center justify-center gap-4 mb-4">
           <button
             onClick={() => adjustTime(-15)}
-            className="p-2 bg-[#1A1A1A] border border-[#333] rounded-lg hover:border-[#B8956A] transition-colors"
+            className="p-2 bg-card border border-border rounded-lg hover:border-primary transition-colors"
           >
             <Minus className="w-5 h-5 text-gray-400" />
           </button>
@@ -154,18 +154,18 @@ export function RestTimer({ defaultSeconds = 90, onComplete }: RestTimerProps) {
             className={`p-4 rounded-full transition-colors ${
               isRunning
                 ? 'bg-yellow-600 hover:bg-yellow-500'
-                : 'bg-[#B8956A] hover:bg-[#c9a67a]'
+                : 'bg-primary hover:bg-primary-dark'
             }`}
           >
             {isRunning ? (
-              <Pause className="w-8 h-8 text-[#0A0A0A]" />
+              <Pause className="w-8 h-8 text-background" />
             ) : (
-              <Play className="w-8 h-8 text-[#0A0A0A] fill-[#0A0A0A]" />
+              <Play className="w-8 h-8 text-background fill-background" />
             )}
           </button>
           <button
             onClick={() => adjustTime(15)}
-            className="p-2 bg-[#1A1A1A] border border-[#333] rounded-lg hover:border-[#B8956A] transition-colors"
+            className="p-2 bg-card border border-border rounded-lg hover:border-primary transition-colors"
           >
             <Plus className="w-5 h-5 text-gray-400" />
           </button>
@@ -187,8 +187,8 @@ export function RestTimer({ defaultSeconds = 90, onComplete }: RestTimerProps) {
             onClick={() => handlePreset(preset)}
             className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
               seconds === preset && timeLeft === preset
-                ? 'bg-[#B8956A] text-[#0A0A0A]'
-                : 'bg-[#1A1A1A] border border-[#333] text-gray-400 hover:border-[#B8956A] hover:text-white'
+                ? 'bg-primary text-background'
+                : 'bg-card border border-border text-gray-400 hover:border-primary hover:text-white'
             }`}
           >
             {preset >= 60 ? `${preset / 60}m` : `${preset}s`}

@@ -31,10 +31,10 @@ export function MuscleHeatmap({ planilha }: MuscleHeatmapProps) {
 
   if (!heatmapData || heatmapData.totalWorkouts === 0) {
     return (
-      <div className="p-4 bg-[#111] border border-[#333] rounded-lg">
-        <h3 className="text-sm font-bold tracking-wider mb-4 text-[#B8956A]">MÚSCULOS DA SEMANA</h3>
+      <div className="p-4 bg-card border border-border rounded-lg">
+        <h3 className="text-sm font-bold tracking-wider mb-4 text-primary">MÚSCULOS DA SEMANA</h3>
         <div className="flex items-center justify-center h-24">
-          <p className="text-xs text-[#555] text-center">
+          <p className="text-xs text-muted text-center">
             Registre seus treinos para ver<br />quais músculos foram trabalhados
           </p>
         </div>
@@ -43,8 +43,8 @@ export function MuscleHeatmap({ planilha }: MuscleHeatmapProps) {
   }
 
   return (
-    <div className="p-4 bg-[#111] border border-[#333] rounded-lg">
-      <h3 className="text-sm font-bold tracking-wider mb-4 text-[#B8956A]">MÚSCULOS DA SEMANA</h3>
+    <div className="p-4 bg-card border border-border rounded-lg">
+      <h3 className="text-sm font-bold tracking-wider mb-4 text-primary">MÚSCULOS DA SEMANA</h3>
       
       {/* SVG Body */}
       <svg viewBox="0 0 200 180" className="w-full max-w-[160px] mx-auto mb-4">
@@ -76,16 +76,16 @@ export function MuscleHeatmap({ planilha }: MuscleHeatmapProps) {
       {/* Legend */}
       <div className="flex justify-center gap-3 text-[10px] mb-3">
         <div className="flex items-center gap-1">
-          <div className="w-2.5 h-2.5 rounded-sm bg-[#333333]" />
-          <span className="text-[#555]">Não</span>
+          <div className="w-2.5 h-2.5 rounded bg-border" />
+          <span className="text-muted">Não</span>
         </div>
         <div className="flex items-center gap-1">
-          <div className="w-2.5 h-2.5 rounded-sm bg-[#B8956A]" />
-          <span className="text-[#555]">Leve</span>
+          <div className="w-2.5 h-2.5 rounded bg-primary" />
+          <span className="text-muted">Leve</span>
         </div>
         <div className="flex items-center gap-1">
-          <div className="w-2.5 h-2.5 rounded-sm bg-[#8B7355]" />
-          <span className="text-[#555]">Intenso</span>
+          <div className="w-2.5 h-2.5 rounded bg-primary-dark" />
+          <span className="text-muted">Intenso</span>
         </div>
       </div>
       
@@ -96,9 +96,9 @@ export function MuscleHeatmap({ planilha }: MuscleHeatmapProps) {
           .sort((a, b) => b.workoutsThisWeek - a.workoutsThisWeek)
           .slice(0, 6)
           .map(m => (
-            <div key={m.muscle} className="flex items-center justify-between px-2 py-1 bg-[#0A0A0A] rounded">
-              <span className="text-[#777]">{MUSCLE_DISPLAY_NAMES[m.muscle]}</span>
-              <span className="text-[#B8956A] font-bold">{m.workoutsThisWeek}x</span>
+            <div key={m.muscle} className="flex items-center justify-between px-2 py-1 bg-background rounded">
+              <span className="text-muted">{MUSCLE_DISPLAY_NAMES[m.muscle]}</span>
+              <span className="text-primary font-bold">{m.workoutsThisWeek}x</span>
             </div>
           ))}
       </div>

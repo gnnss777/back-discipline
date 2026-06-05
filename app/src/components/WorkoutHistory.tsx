@@ -30,15 +30,15 @@ function WorkoutCard({ workout }: { workout: Workout }) {
   const totalSets = workout.exercises.reduce((acc, ex) => acc + ex.sets.length, 0);
 
   return (
-    <div className="bg-[#151515] border border-[#2A2A2A] rounded-lg overflow-hidden">
+    <div className="bg-card border border-border rounded-lg overflow-hidden">
       <button
         type="button"
         onClick={() => setExpanded(!expanded)}
-        className="w-full p-4 flex items-center justify-between hover:bg-[#1A1A1A] transition-colors"
+        className="w-full p-4 flex items-center justify-between hover:bg-card transition-colors"
       >
         <div className="flex items-center gap-4">
-          <div className="w-10 h-10 bg-[#B8956A]/20 rounded-lg flex items-center justify-center">
-            <Dumbbell className="w-5 h-5 text-[#B8956A]" />
+          <div className="w-10 h-10 bg-primary/20 rounded-lg flex items-center justify-center">
+            <Dumbbell className="w-5 h-5 text-primary" />
           </div>
           <div className="text-left">
             <div className="text-white font-medium">{formatDate(workout.date)}</div>
@@ -55,16 +55,16 @@ function WorkoutCard({ workout }: { workout: Workout }) {
       </button>
 
       {expanded && (
-        <div className="px-4 pb-4 space-y-3 border-t border-[#2A2A2A]">
+        <div className="px-4 pb-4 space-y-3 border-t border-border">
           {workout.exercises.map((exercise, exIndex) => (
             <div key={exIndex} className="pt-3">
-              <div className="text-[#B8956A] font-medium text-sm mb-2">{exercise.exerciseName}</div>
+              <div className="text-primary font-medium text-sm mb-2">{exercise.exerciseName}</div>
               <div className="space-y-1">
                 {exercise.sets.map((set, setIndex) => (
                   <div key={setIndex} className="flex items-center justify-between text-sm">
                     <span className="text-gray-400">
                       Série {setIndex + 1}: {set.reps} reps × {set.weight}kg
-                      {set.rpe > 0 && <span className="text-[#B8956A]"> @RPE{set.rpe}</span>}
+                      {set.rpe > 0 && <span className="text-primary"> @RPE{set.rpe}</span>}
                     </span>
                     {set.completed ? (
                       <span className="text-green-500 text-xs">✓</span>
@@ -77,7 +77,7 @@ function WorkoutCard({ workout }: { workout: Workout }) {
             </div>
           ))}
           {workout.notes && (
-            <div className="pt-2 border-t border-[#2A2A2A]">
+            <div className="pt-2 border-t border-border">
               <div className="text-gray-500 text-xs mb-1">Notas:</div>
               <div className="text-gray-400 text-sm">{workout.notes}</div>
             </div>

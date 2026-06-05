@@ -57,7 +57,7 @@ export function ChapterHeader({ slug }: ChapterHeaderProps) {
 
   if (isLoading) {
     return (
-      <button className="flex items-center gap-2 text-sm text-[#B8956A] font-medium tracking-wider min-h-[44px] px-3">
+      <button className="flex items-center gap-2 text-sm text-primary font-medium tracking-wider min-h-[44px] px-3">
         <CheckCircle className="w-4 h-4" />
         CONCLUIR
       </button>
@@ -69,11 +69,11 @@ export function ChapterHeader({ slug }: ChapterHeaderProps) {
       onClick={handleToggle}
       className={`flex items-center gap-2 text-sm font-medium tracking-wider min-h-[44px] px-3 transition-colors ${
         completed
-          ? 'text-[#B8956A]'
-          : 'text-[#B8956A] hover:text-[#9A7A50]'
+          ? 'text-primary'
+          : 'text-primary hover:text-primary-dark'
       }`}
     >
-      <CheckCircle className={`w-4 h-4 ${completed ? 'fill-[#B8956A]' : ''}`} />
+      <CheckCircle className={`w-4 h-4 ${completed ? 'fill-primary' : ''}`} />
       {completed ? 'CONCLUÍDO' : 'CONCLUIR'}
     </button>
   );

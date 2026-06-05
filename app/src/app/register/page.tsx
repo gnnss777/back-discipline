@@ -7,7 +7,7 @@ export default function RegisterPage() {
   const router = useRouter();
 
   return (
-    <div className="min-h-screen bg-[#0A0A0A]">
+    <div className="min-h-screen bg-background">
       <AuthModal
         isOpen={true}
         onClose={() => router.push('/')}

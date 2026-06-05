@@ -65,7 +65,7 @@ export function AuthModal({ isOpen, onClose, initialMode = 'login' }: AuthModalP
         className="absolute inset-0 bg-black/70 backdrop-blur-sm" 
         onClick={onClose}
       />
-      <div className="relative w-full max-w-md mx-4 bg-[#0F0F0F] border border-[#3A2E22] rounded-lg p-6">
+      <div className="relative w-full max-w-md mx-4 bg-surface border border-secondary rounded-lg p-6">
         <button
           onClick={onClose}
           className="absolute top-4 right-4 text-gray-500 hover:text-white transition-colors"
@@ -98,7 +98,7 @@ export function AuthModal({ isOpen, onClose, initialMode = 'login' }: AuthModalP
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full bg-[#1A1A1A] border border-[#2A2A2A] rounded-lg py-3 pl-11 pr-4 text-white placeholder-gray-500 focus:border-[#B8956A] focus:outline-none"
+                  className="w-full bg-card border border-border rounded-lg py-3 pl-11 pr-4 text-white placeholder-gray-500 focus:border-primary focus:outline-none"
                   placeholder="Seu nome"
                 />
               </div>
@@ -113,7 +113,7 @@ export function AuthModal({ isOpen, onClose, initialMode = 'login' }: AuthModalP
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full bg-[#1A1A1A] border border-[#2A2A2A] rounded-lg py-3 pl-11 pr-4 text-white placeholder-gray-500 focus:border-[#B8956A] focus:outline-none"
+                className="w-full bg-card border border-border rounded-lg py-3 pl-11 pr-4 text-white placeholder-gray-500 focus:border-primary focus:outline-none"
                 placeholder="seu@email.com"
                 required
               />
@@ -128,7 +128,7 @@ export function AuthModal({ isOpen, onClose, initialMode = 'login' }: AuthModalP
                 type={showPassword ? 'text' : 'password'}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full bg-[#1A1A1A] border border-[#2A2A2A] rounded-lg py-3 pl-11 pr-12 text-white placeholder-gray-500 focus:border-[#B8956A] focus:outline-none"
+                className="w-full bg-card border border-border rounded-lg py-3 pl-11 pr-12 text-white placeholder-gray-500 focus:border-primary focus:outline-none"
                 placeholder="••••••••"
                 required
               />
@@ -151,7 +151,7 @@ export function AuthModal({ isOpen, onClose, initialMode = 'login' }: AuthModalP
                   type={showPassword ? 'text' : 'password'}
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
-                  className="w-full bg-[#1A1A1A] border border-[#2A2A2A] rounded-lg py-3 pl-11 pr-4 text-white placeholder-gray-500 focus:border-[#B8956A] focus:outline-none"
+                  className="w-full bg-card border border-border rounded-lg py-3 pl-11 pr-4 text-white placeholder-gray-500 focus:border-primary focus:outline-none"
                   placeholder="••••••••"
                   required
                 />
@@ -162,7 +162,7 @@ export function AuthModal({ isOpen, onClose, initialMode = 'login' }: AuthModalP
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full bg-[#B8956A] hover:bg-[#c9a67a] text-[#0A0A0A] font-semibold py-3 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full bg-primary hover:bg-primary-dark text-background font-semibold py-3 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isLoading 
               ? (mode === 'login' ? 'Entrando...' : 'Cadastrando...')
@@ -176,7 +176,7 @@ export function AuthModal({ isOpen, onClose, initialMode = 'login' }: AuthModalP
               Não tem conta?{' '}
               <button 
                 onClick={switchMode} 
-                className="text-[#B8956A] hover:text-[#c9a67a]"
+                className="text-primary hover:text-primary-dark"
               >
                 Cadastrar
               </button>
@@ -186,7 +186,7 @@ export function AuthModal({ isOpen, onClose, initialMode = 'login' }: AuthModalP
               Já tem conta?{' '}
               <button 
                 onClick={switchMode} 
-                className="text-[#B8956A] hover:text-[#c9a67a]"
+                className="text-primary hover:text-primary-dark"
               >
                 Entrar
               </button>

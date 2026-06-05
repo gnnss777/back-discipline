@@ -66,7 +66,7 @@ export function ConcluirButton({ slug }: ConcluirButtonProps) {
       <button
         onClick={handleConcluir}
         disabled={loading}
-        className="flex items-center gap-2 px-6 py-4 min-h-[52px] bg-[#B8956A] text-[#0A0A0A] font-bold tracking-wider rounded-sm hover:bg-[#9A7A50] transition-colors text-base disabled:opacity-50"
+        className="flex items-center gap-2 px-6 py-4 min-h-[52px] bg-primary text-background font-bold tracking-wider rounded hover:bg-primary-dark transition-colors text-base disabled:opacity-50"
       >
         <CheckCircle className="w-5 h-5" />
         {loading ? 'SALVANDO...' : 'CONCLUIR E SEGUIR'}
@@ -79,7 +79,7 @@ export function ConcluirButton({ slug }: ConcluirButtonProps) {
     <button
       onClick={handleConcluir}
       disabled={loading}
-      className="flex items-center gap-2 px-6 py-4 min-h-[52px] bg-[#B8956A] text-[#0A0A0A] font-bold tracking-wider rounded-sm hover:bg-[#9A7A50] transition-colors text-base disabled:opacity-50"
+      className="flex items-center gap-2 px-6 py-4 min-h-[52px] bg-primary text-background font-bold tracking-wider rounded hover:bg-primary-dark transition-colors text-base disabled:opacity-50"
     >
       <BookOpen className="w-5 h-5" />
       {loading ? 'SALVANDO...' : 'VOLTAR AO MENU'}

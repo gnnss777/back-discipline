@@ -46,10 +46,10 @@ export function VolumeTrendsChart({ planilha }: VolumeTrendsChartProps) {
 
   if (!chartData || chartData.weeks.length < 2) {
     return (
-      <div className="p-4 bg-[#111] border border-[#333] rounded-lg">
-        <h3 className="text-sm font-bold tracking-wider mb-4 text-[#B8956A]">TENDÊNCIA DE VOLUME</h3>
+      <div className="p-4 bg-card border border-border rounded-lg">
+        <h3 className="text-sm font-bold tracking-wider mb-4 text-primary">TENDÊNCIA DE VOLUME</h3>
         <div className="flex items-center justify-center h-24">
-          <p className="text-xs text-[#555] text-center">
+          <p className="text-xs text-muted text-center">
             Registre mais semanas para<br />ver a tendência de volume
           </p>
         </div>
@@ -61,9 +61,9 @@ export function VolumeTrendsChart({ planilha }: VolumeTrendsChartProps) {
   const pathD = points.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x} ${p.y}`).join(' ');
 
   return (
-    <div className="p-4 bg-[#111] border border-[#333] rounded-lg">
+    <div className="p-4 bg-card border border-border rounded-lg">
       <div className="flex items-center justify-between mb-3">
-        <h3 className="text-sm font-bold tracking-wider text-[#B8956A]">TENDÊNCIA DE VOLUME</h3>
+        <h3 className="text-sm font-bold tracking-wider text-primary">TENDÊNCIA DE VOLUME</h3>
         <span className={`text-[10px] px-2 py-0.5 rounded font-bold ${
           trend === 'up' ? 'bg-green-900/50 text-green-400' :
           trend === 'down' ? 'bg-red-900/50 text-red-400' :
@@ -77,15 +77,15 @@ export function VolumeTrendsChart({ planilha }: VolumeTrendsChartProps) {
       <div className="relative h-28 mb-2">
         <svg viewBox="0 0 100 100" className="w-full h-full" preserveAspectRatio="none">
           {/* Grid lines */}
-          <line x1="0" y1="25" x2="100" y2="25" stroke="#222" strokeWidth="0.5" />
-          <line x1="0" y1="50" x2="100" y2="50" stroke="#222" strokeWidth="0.5" />
-          <line x1="0" y1="75" x2="100" y2="75" stroke="#222" strokeWidth="0.5" />
+<line x1="0" y1="25" x2="100" y2="25" stroke="#1E1E1E" strokeWidth="0.5" />
+<line x1="0" y1="50" x2="100" y2="50" stroke="#1E1E1E" strokeWidth="0.5" />
+<line x1="0" y1="75" x2="100" y2="75" stroke="#1E1E1E" strokeWidth="0.5" />
           
           {/* Line */}
           <path
             d={pathD}
             fill="none"
-            stroke="#B8956A"
+            stroke="#C9A86C"
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -98,8 +98,8 @@ export function VolumeTrendsChart({ planilha }: VolumeTrendsChartProps) {
               cx={p.x}
               cy={p.y}
               r="2.5"
-              fill="#B8956A"
-              stroke="#0A0A0A"
+              fill="#C9A86C"
+              stroke="#080808"
               strokeWidth="0.5"
             />
           ))}
@@ -107,15 +107,15 @@ export function VolumeTrendsChart({ planilha }: VolumeTrendsChartProps) {
       </div>
       
       {/* X-axis labels */}
-      <div className="flex justify-between text-[10px] text-[#555]">
+      <div className="flex justify-between text-[10px] text-muted">
         <span>Sem {chartData.weeks[0]?.weekNumber}</span>
         <span>Sem {chartData.weeks[chartData.weeks.length - 1]?.weekNumber}</span>
       </div>
       
       {/* Current value */}
-      <div className="mt-2 pt-2 border-t border-[#2A2A2A] flex justify-between text-[10px]">
-        <span className="text-[#555]">Volume atual</span>
-        <span className="text-[#B8956A] font-bold">
+      <div className="mt-2 pt-2 border-t border-border flex justify-between text-[10px]">
+        <span className="text-muted">Volume atual</span>
+        <span className="text-primary font-bold">
           {formatVolume(chartData.weeks[chartData.weeks.length - 1]?.totalVolume || 0)}
         </span>
       </div>

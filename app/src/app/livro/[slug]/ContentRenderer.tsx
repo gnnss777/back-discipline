@@ -183,9 +183,9 @@ function renderInline(text: string): React.ReactNode[] {
       parts.push(text.slice(last, match.index));
     }
     if (match[2]) {
-      parts.push(<strong key={key++} className="text-[#E8E0D0] font-bold">{match[2]}</strong>);
+      parts.push(<strong key={key++} className="text-foreground font-bold">{match[2]}</strong>);
     } else if (match[3]) {
-      parts.push(<em key={key++} className="italic text-[#E8E0D0]">{match[3]}</em>);
+      parts.push(<em key={key++} className="italic text-foreground">{match[3]}</em>);
     }
     last = regex.lastIndex;
   }
@@ -225,11 +225,11 @@ function ExerciseCard({ raw }: { raw: string }) {
   const subBlocks = rest.split('\n\n');
 
   return (
-    <div className="p-5 bg-[#0F0F0F] border-l-4 border-l-[#B8956A] border border-[#3A2E22] rounded-sm my-6">
-      <h4 className="text-lg font-bold text-[#E8E0D0] tracking-wider">{headingName}</h4>
+    <div className="p-5 bg-surface border-l-4 border-l-primary border border-secondary rounded my-6">
+      <h4 className="text-lg font-bold text-foreground tracking-wider">{headingName}</h4>
 
       {statsLine && (
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#B8956A]/10 text-[#B8956A] text-sm font-bold rounded-sm mt-3 mb-4">
+        <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-primary/10 text-primary text-sm font-bold rounded mt-3 mb-4">
           <Dumbbell className="w-3.5 h-3.5" />
           <span>{statsLine}</span>
         </div>
@@ -259,8 +259,8 @@ function ExerciseCard({ raw }: { raw: string }) {
             const content = t.replace(/^\*\*.*?:\*\*/, '').trim();
             return (
               <div key={i} className="pt-2">
-                <span className="font-bold text-[#B8956A] text-sm tracking-wider">{label}:</span>
-                <div className="mt-1 text-[#bbb] leading-relaxed">{renderInline(content)}</div>
+                <span className="font-bold text-primary text-sm tracking-wider">{label}:</span>
+                <div className="mt-1 text-muted leading-relaxed">{renderInline(content)}</div>
               </div>
             );
           }
@@ -268,7 +268,7 @@ function ExerciseCard({ raw }: { raw: string }) {
           // Bold stats that weren't the main stats line
           if (isStatsBlock(t)) {
             return (
-              <div key={i} className="text-[#B8956A] text-sm font-bold">
+              <div key={i} className="text-primary text-sm font-bold">
                 {t.replace(/\*\*/g, '')}
               </div>
             );
@@ -280,7 +280,7 @@ function ExerciseCard({ raw }: { raw: string }) {
             return (
               <ul key={i} className="space-y-1.5 ml-5">
                 {items.map((item, idx) => (
-                  <li key={idx} className="text-[#bbb] leading-relaxed list-disc">{renderInline(item.replace(/^[-*]\s*/, ''))}</li>
+                  <li key={idx} className="text-muted leading-relaxed list-disc">{renderInline(item.replace(/^[-*]\s*/, ''))}</li>
                 ))}
               </ul>
             );
@@ -298,7 +298,7 @@ function ExerciseCard({ raw }: { raw: string }) {
           }
 
           // Plain paragraph
-          return <p key={i} className="text-[#bbb] leading-relaxed">{renderInline(t)}</p>;
+          return <p key={i} className="text-muted leading-relaxed">{renderInline(t)}</p>;
         })}
       </div>
 
@@ -309,7 +309,7 @@ function ExerciseCard({ raw }: { raw: string }) {
         return (
           <Link
             href={href}
-            className="mt-4 pt-4 border-t border-[#3A2E22] flex items-center gap-2 text-xs text-[#555] hover:text-[#B8956A] transition-colors tracking-wider"
+            className="mt-4 pt-4 border-t border-secondary flex items-center gap-2 text-xs text-muted hover:text-primary transition-colors tracking-wider"
           >
             <ExternalLink className="w-3 h-3" />
             VER NA BIBLIOTECA
@@ -338,11 +338,11 @@ function QuoteBox({ text }: { text: string }) {
   }
 
   return (
-    <div className="p-6 bg-[#B8956A]/5 border-l-4 border-l-[#B8956A] rounded-sm my-6">
-      <Quote className="w-6 h-6 text-[#B8956A]/40 mb-2" />
-      <p className="text-lg italic text-[#E8E0D0] font-light leading-relaxed">&ldquo;{quoteText}&rdquo;</p>
+    <div className="p-6 bg-primary/5 border-l-4 border-l-primary rounded my-6">
+      <Quote className="w-6 h-6 text-primary/40 mb-2" />
+      <p className="text-lg italic text-foreground font-light leading-relaxed">&ldquo;{quoteText}&rdquo;</p>
       {attribution && (
-        <p className="text-sm text-[#B8956A] mt-3 font-medium tracking-wider">&mdash; {attribution}</p>
+        <p className="text-sm text-primary mt-3 font-medium tracking-wider">&mdash; {attribution}</p>
       )}
     </div>
   );
@@ -351,9 +351,9 @@ function QuoteBox({ text }: { text: string }) {
 function TipBox({ text }: { text: string }) {
   const content = text.replace(/^\*\*(Dica|Dica técnica|Dica avançada|Dica de Meadows):\*\*/, '').trim();
   return (
-    <div className="flex gap-3 p-4 bg-[#0F0F0F] border border-[#B8956A]/20 rounded-sm my-4">
-      <Lightbulb className="w-5 h-5 text-[#B8956A] flex-shrink-0 mt-0.5" />
-      <div className="text-[#bbb] text-sm leading-relaxed">{renderInline(content)}</div>
+    <div className="flex gap-3 p-4 bg-surface border border-primary/20 rounded my-4">
+      <Lightbulb className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+      <div className="text-muted text-sm leading-relaxed">{renderInline(content)}</div>
     </div>
   );
 }
@@ -361,9 +361,9 @@ function TipBox({ text }: { text: string }) {
 function WarningBox({ text }: { text: string }) {
   const content = text.replace(/^\*\*(Cuidado|Aviso):\*\*/, '').trim();
   return (
-    <div className="flex gap-3 p-4 bg-[#0F0F0F] border border-[#D4A574]/30 rounded-sm my-4">
-      <AlertTriangle className="w-5 h-5 text-[#D4A574] flex-shrink-0 mt-0.5" />
-      <div className="text-[#bbb] text-sm leading-relaxed">{renderInline(content)}</div>
+    <div className="flex gap-3 p-4 bg-surface border border-primary/30 rounded my-4">
+      <AlertTriangle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+      <div className="text-muted text-sm leading-relaxed">{renderInline(content)}</div>
     </div>
   );
 }
@@ -373,10 +373,10 @@ function ProtocolList({ steps }: { steps: string[] }) {
     <ol className="space-y-3 my-6">
       {steps.map((step, i) => (
         <li key={i} className="flex gap-4 items-start">
-          <span className="flex-shrink-0 w-8 h-8 rounded-full bg-[#B8956A]/10 text-[#B8956A] flex items-center justify-center text-sm font-bold mt-0.5">
+          <span className="flex-shrink-0 w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm font-bold mt-0.5">
             {i + 1}
           </span>
-          <span className="text-[#bbb] leading-relaxed pt-0.5">{renderInline(step.replace(/^\d+\.\s*/, ''))}</span>
+          <span className="text-muted leading-relaxed pt-0.5">{renderInline(step.replace(/^\d+\.\s*/, ''))}</span>
         </li>
       ))}
     </ol>
@@ -389,15 +389,15 @@ function OverviewCard({ raw }: { raw: string }) {
   const items = lines.slice(1).filter(l => l.trim().startsWith('- ') || l.trim().startsWith('* '));
 
   return (
-    <div className="p-5 bg-[#0F0F0F] border border-[#3A2E22] rounded-sm my-6">
-      <h4 className="font-bold text-[#B8956A] mb-3 tracking-wider flex items-center gap-2 text-sm">
+    <div className="p-5 bg-surface border border-secondary rounded my-6">
+      <h4 className="font-bold text-primary mb-3 tracking-wider flex items-center gap-2 text-sm">
         <Info className="w-4 h-4" />
         {title}
       </h4>
       <ul className="space-y-2">
         {items.map((item, i) => (
-          <li key={i} className="flex gap-2 text-[#bbb] leading-relaxed">
-            <span className="text-[#B8956A] mt-1 flex-shrink-0">•</span>
+          <li key={i} className="flex gap-2 text-muted leading-relaxed">
+            <span className="text-primary mt-1 flex-shrink-0">•</span>
             <span>{renderInline(item.replace(/^[-*]\s*/, ''))}</span>
           </li>
         ))}
@@ -412,9 +412,9 @@ function LabelGroup({ raw }: { raw: string }) {
   const content = raw.replace(/^\*\*.*?:\*\*/, '').trim();
 
   return (
-    <div className="p-4 bg-[#0F0F0F] border border-[#3A2E22] rounded-sm my-4">
-      <span className="font-bold text-[#B8956A] text-sm tracking-wider">{label}:</span>
-      <div className="mt-1 text-[#bbb] leading-relaxed">{renderInline(content)}</div>
+    <div className="p-4 bg-surface border border-secondary rounded my-4">
+      <span className="font-bold text-primary text-sm tracking-wider">{label}:</span>
+      <div className="mt-1 text-muted leading-relaxed">{renderInline(content)}</div>
     </div>
   );
 }
@@ -424,10 +424,10 @@ function AnatomyCard({ raw }: { raw: string }) {
   const heading = lines[0].replace(/^###\s+/, '');
 
   return (
-    <div className="p-5 bg-[#0F0F0F] border-l-4 border-l-[#8B6914] border border-[#3A2E22] rounded-sm my-6">
+    <div className="p-5 bg-surface border-l-4 border-l-primary border border-secondary rounded my-6">
       <div className="flex items-center gap-2 mb-3">
-        <BookOpen className="w-4 h-4 text-[#8B6914]" />
-        <h4 className="text-base font-bold text-[#E8E0D0] tracking-wider">{heading}</h4>
+        <BookOpen className="w-4 h-4 text-primary" />
+        <h4 className="text-base font-bold text-foreground tracking-wider">{heading}</h4>
       </div>
       {lines.slice(1).map((block, i) => {
         const t = block.trim();
@@ -438,7 +438,7 @@ function AnatomyCard({ raw }: { raw: string }) {
           return (
             <ul key={i} className="space-y-1.5 ml-5 my-2">
               {items.map((item, idx) => (
-                <li key={idx} className="text-[#bbb] leading-relaxed list-disc">{renderInline(item.replace(/^[-*]\s*/, ''))}</li>
+                <li key={idx} className="text-muted leading-relaxed list-disc">{renderInline(item.replace(/^[-*]\s*/, ''))}</li>
               ))}
             </ul>
           );
@@ -448,12 +448,12 @@ function AnatomyCard({ raw }: { raw: string }) {
           const c = t.replace(/^\*\*.*?:\*\*/, '').trim();
           return (
             <div key={i} className="mt-2">
-              <span className="font-bold text-[#8B6914] text-sm tracking-wider">{l}:</span>
-              <span className="text-[#bbb] ml-1">{renderInline(c)}</span>
+              <span className="font-bold text-primary text-sm tracking-wider">{l}:</span>
+              <span className="text-muted ml-1">{renderInline(c)}</span>
             </div>
           );
         }
-        return <p key={i} className="text-[#bbb] leading-relaxed my-2">{renderInline(t)}</p>;
+        return <p key={i} className="text-muted leading-relaxed my-2">{renderInline(t)}</p>;
       })}
     </div>
   );
@@ -470,11 +470,11 @@ function ContentTable({ raw }: { raw: string }) {
 
   return (
     <div className="overflow-x-auto my-6">
-      <table className="min-w-full border border-[#3A2E22]">
+      <table className="min-w-full border border-secondary">
         <thead>
-          <tr className="bg-[#B8956A]/10">
+          <tr className="bg-primary/10">
             {headers.map((h, i) => (
-              <th key={i} className="px-4 py-3 border border-[#3A2E22] text-[#B8956A] text-sm font-bold tracking-wider text-left">{h.trim()}</th>
+              <th key={i} className="px-4 py-3 border border-secondary text-primary text-sm font-bold tracking-wider text-left">{h.trim()}</th>
             ))}
           </tr>
         </thead>
@@ -482,9 +482,9 @@ function ContentTable({ raw }: { raw: string }) {
           {bodyRows.map((row, ri) => {
             const cells = row.split('|').filter(c => c.trim());
             return (
-              <tr key={ri} className={ri % 2 === 0 ? 'bg-[#0F0F0F]' : ''}>
+              <tr key={ri} className={ri % 2 === 0 ? 'bg-surface' : ''}>
                 {cells.map((cell, ci) => (
-                  <td key={ci} className="px-4 py-2.5 border border-[#3A2E22] text-[#bbb] text-sm">{cell.trim()}</td>
+                  <td key={ci} className="px-4 py-2.5 border border-secondary text-muted text-sm">{cell.trim()}</td>
                 ))}
               </tr>
             );
@@ -500,7 +500,7 @@ function BulletListBlock({ raw }: { raw: string }) {
   return (
     <ul className="space-y-2 ml-6 my-4">
       {items.map((item, i) => (
-        <li key={i} className="text-[#bbb] leading-relaxed list-disc">{renderInline(item.replace(/^[-*]\s*/, ''))}</li>
+        <li key={i} className="text-muted leading-relaxed list-disc">{renderInline(item.replace(/^[-*]\s*/, ''))}</li>
       ))}
     </ul>
   );
@@ -511,17 +511,17 @@ function BulletListBlock({ raw }: { raw: string }) {
 type BlockRenderer = React.FC<{ raw: string }>;
 
 const blockRenderers: Record<Block['type'], BlockRenderer> = {
-  'h1': ({ raw }) => <h1 className="text-3xl font-medium text-[#E8E0D0] mt-10 mb-6 tracking-wider">{raw.replace('# ', '')}</h1>,
+  'h1': ({ raw }) => <h1 className="text-3xl font-medium text-foreground mt-10 mb-6 tracking-wider">{raw.replace('# ', '')}</h1>,
   'h2': ({ raw }) => {
     const headingText = raw.replace('## ', '');
     const exRef = findExerciseByHeadingName(headingText);
     return (
-      <h2 className="text-2xl font-medium text-[#E8E0D0] mt-8 mb-5 tracking-wider border-b border-[#3A2E22] pb-2 flex items-center gap-3 flex-wrap">
+      <h2 className="text-2xl font-medium text-foreground mt-8 mb-5 tracking-wider border-b border-secondary pb-2 flex items-center gap-3 flex-wrap">
         <span>{headingText}</span>
         {exRef && (
           <Link
             href={`/biblioteca/${exRef.id}`}
-            className="inline-flex items-center gap-1 text-xs text-[#555] hover:text-[#B8956A] transition-colors font-normal tracking-wider no-underline"
+            className="inline-flex items-center gap-1 text-xs text-muted hover:text-primary transition-colors font-normal tracking-wider no-underline"
           >
             <ExternalLink className="w-3 h-3" />
             VER NA BIBLIOTECA
@@ -534,12 +534,12 @@ const blockRenderers: Record<Block['type'], BlockRenderer> = {
     const headingText = raw.replace('### ', '');
     const exRef = findExerciseByHeadingName(headingText);
     return (
-      <h3 className="text-lg font-bold text-[#B8956A] mt-6 mb-4 tracking-wider flex items-center gap-3 flex-wrap">
+      <h3 className="text-lg font-bold text-primary mt-6 mb-4 tracking-wider flex items-center gap-3 flex-wrap">
         <span>{headingText}</span>
         {exRef && (
           <Link
             href={`/biblioteca/${exRef.id}`}
-            className="inline-flex items-center gap-1 text-xs text-[#555] hover:text-[#B8956A] transition-colors font-normal tracking-wider no-underline"
+            className="inline-flex items-center gap-1 text-xs text-muted hover:text-primary transition-colors font-normal tracking-wider no-underline"
           >
             <ExternalLink className="w-3 h-3" />
             VER NA BIBLIOTECA
@@ -548,9 +548,9 @@ const blockRenderers: Record<Block['type'], BlockRenderer> = {
       </h3>
     );
   },
-  'h4': ({ raw }) => <h4 className="font-bold text-[#E8E0D0] mt-6 mb-3 tracking-wider uppercase text-sm">{raw.replace(/\*\*/g, '')}</h4>,
-  'hr': () => <hr className="border-[#3A2E22] my-8" />,
-  'paragraph': ({ raw }) => <p className="text-[#bbb] leading-[2.0] text-lg font-light">{renderInline(raw.trim())}</p>,
+  'h4': ({ raw }) => <h4 className="font-bold text-foreground mt-6 mb-3 tracking-wider uppercase text-sm">{raw.replace(/\*\*/g, '')}</h4>,
+  'hr': () => <hr className="border-secondary my-8" />,
+  'paragraph': ({ raw }) => <p className="text-muted leading-[2.0] text-lg font-light">{renderInline(raw.trim())}</p>,
   'exercise': ExerciseCard,
   'quote': ({ raw }) => {
     const text = raw.replace(/^>\s*/, '');
@@ -579,7 +579,7 @@ export function ContentRenderer({ content }: ContentRendererProps) {
   const blocks = buildBlocks(content);
 
   return (
-    <div className="space-y-6 text-[#bbb] text-lg leading-[2.0] font-light">
+    <div className="space-y-6 text-muted text-lg leading-[2.0] font-light">
       {blocks.map((block, i) => {
         const Renderer = blockRenderers[block.type];
         return <Renderer key={i} raw={block.raw} />;

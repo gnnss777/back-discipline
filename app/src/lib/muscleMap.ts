@@ -116,10 +116,10 @@ export function getWeeklyMuscles(planilha: PlanilhaData): Map<MuscleGroup, Muscl
 }
 
 export function getMuscleIntensityColor(intensity: number): string {
-  if (intensity === 0) return '#333333';
-  if (intensity < 0.33) return '#B8956A';
-  if (intensity < 0.66) return '#8B7355';
-  return '#B8956A';
+  if (intensity === 0) return '#1E1E1E';
+  if (intensity < 0.33) return '#C9A86C';
+  if (intensity < 0.66) return '#B0884A';
+  return '#C9A86C';
 }
 
 export function getMuscleIntensityLabel(intensity: number): string {

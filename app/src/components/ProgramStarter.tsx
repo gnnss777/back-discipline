@@ -33,10 +33,10 @@ export function ProgramStarter({ userId, onStart }: ProgramStarterProps) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm">
-      <div className="bg-[#111] border border-[#2A2A2A] rounded-xl max-w-md w-full mx-4 overflow-hidden">
+      <div className="bg-card border border-border rounded-xl max-w-md w-full mx-4 overflow-hidden">
         <div className="p-6">
-          <div className="w-12 h-12 rounded-full bg-[#B8956A]/20 flex items-center justify-center mx-auto mb-4">
-            <Play className="w-6 h-6 text-[#B8956A]" />
+          <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-4">
+            <Play className="w-6 h-6 text-primary" />
           </div>
 
           <h2 className="text-lg font-bold text-center mb-2">Iniciar Programa</h2>
@@ -59,8 +59,8 @@ export function ProgramStarter({ userId, onStart }: ProgramStarterProps) {
                     onClick={() => toggleDay(day)}
                     className={`py-3 rounded-lg text-sm font-medium transition-all ${
                       isSelected
-                        ? 'bg-[#B8956A] text-black shadow-lg shadow-[#B8956A]/20'
-                        : 'bg-[#1A1A1A] text-gray-500 hover:bg-[#2A2A2A] hover:text-white'
+                        ? 'bg-primary text-black shadow-lg shadow-primary/20'
+                        : 'bg-card text-gray-500 hover:bg-border hover:text-white'
                     }`}
                   >
                     {label[0]}
@@ -74,11 +74,11 @@ export function ProgramStarter({ userId, onStart }: ProgramStarterProps) {
           </div>
         </div>
 
-        <div className="border-t border-[#2A2A2A] p-4 flex gap-3">
+        <div className="border-t border-border p-4 flex gap-3">
           <button
             type="button"
             disabled
-            className="flex-1 py-2.5 border border-[#2A2A2A] rounded-lg text-gray-500 text-sm cursor-not-allowed"
+            className="flex-1 py-2.5 border border-border rounded-lg text-gray-500 text-sm cursor-not-allowed"
           >
             Cancelar
           </button>
@@ -86,7 +86,7 @@ export function ProgramStarter({ userId, onStart }: ProgramStarterProps) {
             type="button"
             onClick={handleStart}
             disabled={selectedDays.length === 0 || starting}
-            className="flex-1 py-2.5 bg-[#B8956A] hover:bg-[#c9a67a] text-black font-semibold rounded-lg text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+            className="flex-1 py-2.5 bg-primary hover:bg-primary-dark text-black font-semibold rounded-lg text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
           >
             {starting ? 'Iniciando...' : (
               <>

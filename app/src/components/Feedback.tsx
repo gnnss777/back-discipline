@@ -2,8 +2,8 @@
 
 export function LoadingState({ message = 'Carregando...' }: { message?: string }) {
   return (
-    <div className="min-h-screen bg-[#0A0A0A] flex flex-col items-center justify-center">
-      <div className="w-12 h-12 border-4 border-[#B8956A] border-t-transparent rounded-full animate-spin mb-4" />
+    <div className="min-h-screen bg-background flex flex-col items-center justify-center">
+      <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin mb-4" />
       <p className="text-gray-400">{message}</p>
     </div>
   );
@@ -17,13 +17,13 @@ export function ErrorState({
   onRetry?: () => void;
 }) {
   return (
-    <div className="min-h-screen bg-[#0A0A0A] flex flex-col items-center justify-center p-4">
+    <div className="min-h-screen bg-background flex flex-col items-center justify-center p-4">
       <div className="text-red-500 text-4xl mb-4">⚠</div>
       <p className="text-white text-lg mb-4">{message}</p>
       {onRetry && (
         <button
           onClick={onRetry}
-          className="px-6 py-3 bg-[#B8956A] text-[#0A0A0A] font-bold rounded-lg"
+          className="px-6 py-3 bg-primary text-background font-bold rounded-lg"
         >
           Tentar novamente
         </button>
@@ -53,7 +53,7 @@ export function EmptyState({
       {action && actionLabel && (
         <button
           onClick={action}
-          className="px-6 py-3 bg-[#B8956A] text-[#0A0A0A] font-bold rounded-lg"
+          className="px-6 py-3 bg-primary text-background font-bold rounded-lg"
         >
           {actionLabel}
         </button>

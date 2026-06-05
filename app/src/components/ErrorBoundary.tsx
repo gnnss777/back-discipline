@@ -30,7 +30,7 @@ export class ErrorBoundary extends Component<Props, State> {
     if (this.state.hasError) {
       if (this.props.fallback) return this.props.fallback;
       return (
-        <div className="min-h-screen bg-[#0A0A0A] flex flex-col items-center justify-center p-4">
+        <div className="min-h-screen bg-background flex flex-col items-center justify-center p-4">
           <div className="text-red-500 text-4xl mb-4">⚠</div>
           <p className="text-white text-lg mb-2">Algo deu errado</p>
           <p className="text-gray-500 text-sm mb-6 max-w-md text-center">
@@ -38,7 +38,7 @@ export class ErrorBoundary extends Component<Props, State> {
           </p>
           <button
             onClick={this.handleRetry}
-            className="px-6 py-3 bg-[#B8956A] text-[#0A0A0A] font-bold rounded-lg uppercase tracking-wider"
+            className="px-6 py-3 bg-primary text-background font-bold rounded-lg uppercase tracking-wider"
           >
             Tentar novamente
           </button>

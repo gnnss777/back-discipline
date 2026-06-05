@@ -21,8 +21,8 @@ export function VideoPlayer({ videoUrl, title, autoplay = false }: VideoPlayerPr
       )}
       <div className="relative w-full" style={{ paddingTop: '56.25%' }}>
         {isLoading && (
-          <div className="absolute inset-0 bg-[#1A1A1A] flex items-center justify-center">
-            <div className="w-12 h-12 border-4 border-[#B8956A] border-t-transparent rounded-full animate-spin" />
+          <div className="absolute inset-0 bg-card flex items-center justify-center">
+            <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin" />
           </div>
         )}
         <iframe

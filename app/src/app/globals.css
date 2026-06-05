@@ -1,33 +1,54 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0A0A0A;
-  --foreground: #E8E0D0;
-  --primary: #B8956A;
-  --primary-dark: #9A7A50;
-  --secondary: #3A2E22;
-  --muted: #666666;
-  --border: #3A2E22;
+  --background: #080808;
+  --foreground: #F5F0E8;
+  --primary: #C9A86C;
+  --primary-dark: #B0884A;
+  --secondary: #2A2018;
+  --surface: #0D0D0D;
+  --card: #111111;
+  --border: #1E1E1E;
+  --muted: #888888;
   --max-effort: #7A1A1A;
+  --color-danger: #ef4444;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-primary: var(--primary);
+  --color-primary-dark: var(--primary-dark);
   --color-secondary: var(--secondary);
+  --color-surface: var(--surface);
+  --color-card: var(--card);
   --color-muted: var(--muted);
   --color-border: var(--border);
   --color-max-effort: var(--max-effort);
+  --color-danger: #ef4444;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-oswald), sans-serif;
+  font-family: var(--font-body), sans-serif;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   padding-bottom: env(safe-area-inset-bottom);
+}
+
+.font-display {
+  font-family: var(--font-display), sans-serif;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+}
+
+.gold-glow {
+  box-shadow: 0 0 20px rgba(201, 168, 108, 0.15);
 }
 
 ::selection {

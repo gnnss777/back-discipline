@@ -65,7 +65,7 @@ export function DayHero({ currentDate, weekInfo, progInfo, onPrevDay, onNextDay,
           <ChevronLeft className="w-5 h-5" />
         </button>
         <div className="text-center flex-1">
-          <h2 className="text-xl font-bold text-[#E8E0D0] tracking-wider">{dayName}</h2>
+          <h2 className="text-xl font-bold text-foreground tracking-wider">{dayName}</h2>
           <p className="text-sm text-gray-500">{dateFormatted}</p>
         </div>
         <button onClick={onNextDay} className="p-2 text-gray-500 hover:text-white transition-colors">
@@ -75,7 +75,7 @@ export function DayHero({ currentDate, weekInfo, progInfo, onPrevDay, onNextDay,
 
       {!isToday && (
         <div className="text-center mb-3">
-          <button onClick={onGoToday} className="text-xs text-[#B8956A] hover:text-[#c9a67a] underline">
+          <button onClick={onGoToday} className="text-xs text-primary hover:text-primary-dark underline">
             Voltar para hoje
           </button>
         </div>
@@ -88,8 +88,8 @@ export function DayHero({ currentDate, weekInfo, progInfo, onPrevDay, onNextDay,
             <span>Semana {weekInfo.weekNumber} de {progInfo.totalWeeks}</span>
             <span>{weekPct}%</span>
           </div>
-          <div className="h-1.5 bg-[#1a1a1a] rounded-full overflow-hidden">
-            <div className="h-full bg-[#B8956A] transition-all duration-500 rounded-full" style={{ width: `${weekPct}%` }} />
+          <div className="h-1.5 bg-card rounded-full overflow-hidden">
+            <div className="h-full bg-primary transition-all duration-500 rounded-full" style={{ width: `${weekPct}%` }} />
           </div>
         </div>
         <div className="flex items-center gap-1.5 shrink-0">
@@ -100,8 +100,8 @@ export function DayHero({ currentDate, weekInfo, progInfo, onPrevDay, onNextDay,
 
       {/* Day focus */}
       {dayInfo?.isTrainingDay && (
-        <div className="p-3 bg-[#B8956A]/10 border border-[#B8956A]/20 rounded-sm">
-          <p className="text-sm font-medium text-[#B8956A] tracking-wider">
+        <div className="p-3 bg-primary/10 border border-primary/20 rounded">
+          <p className="text-sm font-medium text-primary tracking-wider">
             {dayInfo.isCompleted ? '✅ Treino concluído' : dayInfo.exercisesCompleted > 0 ? '📝 Treino em andamento' : '🎯 Dia de treino'}
           </p>
         </div>
@@ -109,7 +109,7 @@ export function DayHero({ currentDate, weekInfo, progInfo, onPrevDay, onNextDay,
 
       {/* Next training preview */}
       {nextTraining && !dayInfo?.isCompleted && (
-        <div className="mt-3 p-3 bg-[#0F0F0F] border border-[#2A2A2A] rounded-sm">
+        <div className="mt-3 p-3 bg-surface border border-border rounded">
           <p className="text-xs text-gray-500">
             🎯 Próximo treino: <span className="text-gray-300 font-medium">{getDayName(new Date(nextTraining.date + 'T12:00:00').getDay(), true)}</span>
             {daysUntilNext !== null && ` (${daysUntilNext === 0 ? 'amanhã' : daysUntilNext === 1 ? 'depois de amanhã' : `em ${daysUntilNext} dias`})`}

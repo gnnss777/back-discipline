@@ -12,18 +12,18 @@ export function DashboardStats({ title, value, subtitle, icon: Icon, accent }: D
   return (
     <div className={`p-4 rounded-lg ${
       accent 
-        ? 'bg-[#B8956A]/10 border border-[#B8956A]/30' 
-        : 'bg-[#111] border border-[#333]'
+        ? 'bg-primary/10 border border-primary/30' 
+        : 'bg-card border border-border'
     }`}>
       <div className="flex items-center gap-3">
         <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
-          accent ? 'bg-[#B8956A]/20' : 'bg-[#222]'
+          accent ? 'bg-primary/20' : 'bg-card'
         }`}>
-          <Icon className={`w-5 h-5 ${accent ? 'text-[#B8956A]' : 'text-gray-400'}`} />
+          <Icon className={`w-5 h-5 ${accent ? 'text-primary' : 'text-gray-400'}`} />
         </div>
         <div>
           <div className="text-gray-400 text-sm">{title}</div>
-          <div className={`text-xl font-bold ${accent ? 'text-[#B8956A]' : 'text-white'}`}>
+          <div className={`text-xl font-bold ${accent ? 'text-primary' : 'text-white'}`}>
             {value}
           </div>
           {subtitle && <div className="text-gray-500 text-xs">{subtitle}</div>}

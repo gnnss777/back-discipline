@@ -19,7 +19,7 @@ export function ExerciseStatsCard({ stats }: ExerciseStatsCardProps) {
   };
 
   return (
-    <div className="p-4 bg-[#111] border border-[#333] rounded-lg">
+    <div className="p-4 bg-card border border-border rounded-lg">
       <div className="flex items-center justify-between mb-3">
         <h3 className="font-bold tracking-wider text-white">{stats.exerciseName}</h3>
         {stats.personalRecord > 0 && <PRBadge weight={stats.personalRecord} />}
@@ -30,29 +30,29 @@ export function ExerciseStatsCard({ stats }: ExerciseStatsCardProps) {
           <div className="text-lg font-bold text-white">
             {stats.personalRecord > 0 ? `${stats.personalRecord}kg` : '-'}
           </div>
-          <div className="text-xs text-[#555]">PR</div>
+          <div className="text-xs text-muted">PR</div>
         </div>
         <div>
           <div className="text-lg font-bold text-white">
             {stats.totalVolume > 0 ? formatVolume(stats.totalVolume) : '-'}
           </div>
-          <div className="text-xs text-[#555]">Volume</div>
+          <div className="text-xs text-muted">Volume</div>
         </div>
         <div>
           <div className="text-lg font-bold text-white">
             {stats.bestSet.weight > 0 ? `${stats.bestSet.weight}x${stats.bestSet.reps}` : '-'}
           </div>
-          <div className="text-xs text-[#555]">Melhor</div>
+          <div className="text-xs text-muted">Melhor</div>
         </div>
         <div>
           <div className="text-lg font-bold text-white">{stats.totalWorkouts}</div>
-          <div className="text-xs text-[#555]">Treinos</div>
+          <div className="text-xs text-muted">Treinos</div>
         </div>
       </div>
       
       {stats.lastPerformed && (
-        <div className="mt-3 pt-3 border-t border-[#2A2A2A]">
-          <span className="text-xs text-[#555]">
+        <div className="mt-3 pt-3 border-t border-border">
+          <span className="text-xs text-muted">
             Último treino: {formatDate(stats.lastPerformed)}
           </span>
         </div>

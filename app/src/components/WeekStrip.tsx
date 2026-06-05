@@ -22,14 +22,14 @@ export function WeekStrip({ weeks, currentDate, onDayClick }: WeekStripProps) {
         {days.map((day) => {
           const isSelected = day.date === currentDate;
 
-          let bgColor = 'bg-[#1A1A1A]';
-          let borderColor = 'border-[#2A2A2A]';
+          let bgColor = 'bg-card';
+          let borderColor = 'border-border';
           let textColor = 'text-gray-600';
 
           if (isSelected) {
-            bgColor = 'bg-[#B8956A]/20';
-            borderColor = 'border-[#B8956A]';
-            textColor = 'text-[#B8956A]';
+            bgColor = 'bg-primary/20';
+            borderColor = 'border-primary';
+            textColor = 'text-primary';
           } else if (day.isCompleted) {
             bgColor = 'bg-green-900/20';
             borderColor = 'border-green-900/40';
@@ -39,9 +39,9 @@ export function WeekStrip({ weeks, currentDate, onDayClick }: WeekStripProps) {
             borderColor = 'border-red-900/30';
             textColor = 'text-red-400';
           } else if (day.isToday) {
-            bgColor = 'bg-[#B8956A]/10';
-            borderColor = 'border-[#B8956A]/30';
-            textColor = 'text-[#B8956A]';
+            bgColor = 'bg-primary/10';
+            borderColor = 'border-primary/30';
+            textColor = 'text-primary';
           } else if (day.isTrainingDay) {
             textColor = 'text-gray-400';
           }
@@ -61,9 +61,9 @@ export function WeekStrip({ weeks, currentDate, onDayClick }: WeekStripProps) {
                 ) : day.isPast && day.isTrainingDay ? (
                   <AlertCircle className="w-3 h-3 text-red-400" />
                 ) : isSelected ? (
-                  <span className="text-[10px] font-bold text-[#B8956A]">◉</span>
+                  <span className="text-[10px] font-bold text-primary">◉</span>
                 ) : day.isToday ? (
-                  <span className="text-[10px] font-bold text-[#B8956A]">●</span>
+                  <span className="text-[10px] font-bold text-primary">●</span>
                 ) : day.isTrainingDay ? (
                   <span className="text-[8px] text-gray-600">○</span>
                 ) : (
