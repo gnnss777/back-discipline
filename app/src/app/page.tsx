@@ -95,11 +95,11 @@ export default function Home() {
        DISCIPLINA NÃO É MOTIVAÇÃO. É MÉTODO.
       </div>
       
-       <h1 className="font-display text-3xl sm:text-5xl md:text-7xl font-medium mb-6 tracking-tight sm:tracking-wide leading-tight">
-       CONSTRUA AS COSTAS
-       <br />
-       <span className="text-primary">QUE VOCÊ MERECE</span>
-      </h1>
+       <h1 className="font-display text-3xl sm:text-5xl md:text-7xl font-bold mb-6 tracking-tight sm:tracking-wide leading-tight">
+        CONSTRUA AS COSTAS
+        <br />
+        <span className="text-primary text-glow">QUE VOCÊ MERECE</span>
+       </h1>
       
       <p className="text-base sm:text-xl text-muted-foreground mb-4 max-w-2xl mx-auto font-light tracking-wide">
        6 semanas de treinamento estruturado por João Monteiro, com base acadêmica em Educação Física e Nutrição e anos de experiência prática.
@@ -109,13 +109,13 @@ export default function Home() {
       </p>
 
       <div className="flex flex-col sm:flex-row gap-4 justify-center">
-       <button 
-        onClick={openRegister}
-        className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-primary text-background font-bold tracking-wider rounded hover:bg-primary-dark transition-colors"
-       >
-        COMEÇAR AGORA
-        <ArrowRight className="w-5 h-5" />
-       </button>
+        <button 
+         onClick={openRegister}
+         className="btn-glow inline-flex items-center justify-center gap-2 px-8 py-4 bg-primary text-background font-bold tracking-wider rounded hover:bg-primary-dark transition-colors"
+        >
+         COMEÇAR AGORA
+         <ArrowRight className="w-5 h-5" />
+        </button>
        <button 
         onClick={openLogin}
         className="inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-secondary text-foreground font-bold tracking-wider rounded hover:border-primary hover:text-primary transition-colors"

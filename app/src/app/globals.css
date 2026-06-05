@@ -52,8 +52,20 @@ body {
   border-radius: 0.5rem;
 }
 
+.text-glow {
+  text-shadow: 0 0 24px oklch(76% .14 230 / 0.6);
+}
+
 .cyan-glow {
   box-shadow: 0 0 20px oklch(76% .14 230 / 0.35);
+}
+
+.btn-glow {
+  box-shadow: 0 0 32px oklch(76% .14 230 / 0.4);
+}
+
+.btn-glow:hover {
+  box-shadow: 0 0 48px oklch(76% .14 230 / 0.6);
 }
 
 ::selection {
