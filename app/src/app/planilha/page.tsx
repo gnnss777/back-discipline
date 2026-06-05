@@ -8,6 +8,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { loadPlanilha, savePlanilha, ensureSeed } from '@/utils/planilhaStorage';
 import { syncPlanilhaDay, syncAllPlanilhaDays } from '@/utils/planilhaSync';
 import { getProgramInfo, localDateStr } from '@/utils/programTracker';
+import { getPlanilha as getCloudPlanilha, savePlanilha as saveCloudPlanilha } from '@/lib/planilha-sync';
 import { ProgramStarter } from '@/components/ProgramStarter';
 import { DayHero } from '@/components/DayHero';
 import { WeekStrip } from '@/components/WeekStrip';
@@ -32,12 +33,19 @@ export default function PlanilhaUnificadaPage() {
  const todayStr = localDateStr(new Date());
  const [currentDate, setCurrentDate] = useState(todayStr);
 
- useEffect(() => {
-  if (!user) return;
-  const loaded = loadPlanilha(user.userId);
-  setData(loaded ? loaded : ensureSeed(user.userId));
-  if (loaded) syncAllPlanilhaDays(user.userId);
- }, [user]);
+  useEffect(() => {
+    if (!user) return;
+    (async () => {
+      const cloud = await getCloudPlanilha(user.userId);
+      const local = loadPlanilha(user.userId);
+      const loaded = cloud || local;
+      setData(loaded || ensureSeed(user.userId));
+      if (cloud && !local) {
+        savePlanilha(user.userId, cloud);
+      }
+      if (loaded) syncAllPlanilhaDays(user.userId);
+    })();
+  }, [user]);
 
  // Deep-link from ?day=YYYY-MM-DD
  useEffect(() => {
@@ -61,27 +69,28 @@ export default function PlanilhaUnificadaPage() {
   return undefined;
  }, [user]);
 
- const updateActual = (weekIdx: number, dayIdx: number, exIdx: number, setIdx: number, field: string, value: number | string) => {
-  if (!user) return;
-  const planilha = loadPlanilha(user.userId);
-  if (!planilha) return;
-  const ex = planilha[weekIdx]?.days[dayIdx]?.exercises[exIdx];
-  if (!ex) return;
-  if (!ex.actual) {
-   ex.actual = ex.planned.map((p): ActualSet => ({
-    reps: p.reps,
-    weight: p.weight || 0,
-    rpe: undefined,
-    date: new Date().toISOString(),
-   }));
-  }
-  while (ex.actual.length <= setIdx) {
-   ex.actual.push({ reps: undefined, weight: undefined, rpe: undefined, date: new Date().toISOString() });
-  }
-  (ex.actual[setIdx] as Record<string, unknown>)[field] = value === '' ? undefined : value;
-  savePlanilha(user.userId, planilha);
-  setData(planilha);
- };
+  const updateActual = (weekIdx: number, dayIdx: number, exIdx: number, setIdx: number, field: string, value: number | string) => {
+    if (!user) return;
+    const planilha = loadPlanilha(user.userId);
+    if (!planilha) return;
+    const ex = planilha[weekIdx]?.days[dayIdx]?.exercises[exIdx];
+    if (!ex) return;
+    if (!ex.actual) {
+      ex.actual = ex.planned.map((p): ActualSet => ({
+        reps: p.reps,
+        weight: p.weight || 0,
+        rpe: undefined,
+        date: new Date().toISOString(),
+      }));
+    }
+    while (ex.actual.length <= setIdx) {
+      ex.actual.push({ reps: undefined, weight: undefined, rpe: undefined, date: new Date().toISOString() });
+    }
+    (ex.actual[setIdx] as Record<string, unknown>)[field] = value === '' ? undefined : value;
+    savePlanilha(user.userId, planilha);
+    saveCloudPlanilha(user.userId, planilha);
+    setData(planilha);
+  };
 
  const progInfo = useMemo(() => user ? getProgramInfo(user.userId) : null, [user, data]);
  const progStarted = progInfo?.started ?? false;
@@ -165,12 +174,13 @@ export default function PlanilhaUnificadaPage() {
    day.notes = dayNotes;
   }
 
-  savePlanilha(user.userId, planilha);
-  setData(planilha);
-  syncPlanilhaDay(user.userId, weekIdx, dayIdx);
-  setProgVersion(v => v + 1);
-  refreshProgress();
-  toast.success('Treino salvo com sucesso!');
+    savePlanilha(user.userId, planilha);
+    setData(planilha);
+    saveCloudPlanilha(user.userId, planilha);
+    syncPlanilhaDay(user.userId, weekIdx, dayIdx);
+    setProgVersion(v => v + 1);
+    refreshProgress();
+    toast.success('Treino salvo com sucesso!');
   setTimeout(() => setDaySaving(false), 800);
  }, [user, dayInfo, dayNotes, refreshProgress]);
 

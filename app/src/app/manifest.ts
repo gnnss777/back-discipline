@@ -7,8 +7,8 @@ export default function manifest(): MetadataRoute.Manifest {
   description: 'Um guia prático de 6 semanas para construir costas épicas usando o método John Meadows',
   start_url: '/',
   display: 'standalone',
-  background_color: '#080808',
-  theme_color: '#C9A86C',
+  background_color: '#0B0B0D',
+  theme_color: '#46BDEB',
   icons: [
    {
     src: '/icon-192x192.png',

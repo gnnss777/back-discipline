@@ -1,5 +1,6 @@
 import { loadPlanilha } from './planilhaStorage';
 import { upsertWorkout } from '@/lib/storage';
+import { upsertWorkout as upsertCloudWorkout } from '@/lib/workout-sync';
 import { exercises } from '@/data/exercises';
 import type { PlanilhaData, ExerciseSaved, ActualSet } from '@/types/planilha';
 import type { Workout, WorkoutExercise, WorkoutSet } from '@/types';
@@ -70,7 +71,10 @@ export function syncPlanilhaDay(userId: string, weekIdx: number, dayIdx: number)
   if (!day) return;
 
   const workout = buildWorkoutForDay(userId, weekIdx, dayIdx, week, day);
-  if (workout) upsertWorkout(workout);
+  if (workout) {
+    upsertWorkout(workout);
+    upsertCloudWorkout(userId, workout);
+  }
 }
 
 export function syncAllPlanilhaDays(userId: string): void {

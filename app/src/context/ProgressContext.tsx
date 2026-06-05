@@ -1,8 +1,9 @@
 'use client';
 
-import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, useCallback, ReactNode } from 'react';
 import { useAuth } from './AuthContext';
 import { getUserProgress, saveUserProgress, getProgressStats, getWorkoutsByUser, updateChapterProgress as updateChapterStorage } from '../lib/storage';
+import { getProgress as getCloudProgress, saveProgress as saveCloudProgress } from '../lib/user-progress-sync';
 import type { UserProgress, ChapterProgress } from '../types';
 
 interface ProgressStats {
@@ -37,13 +38,14 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
   });
   const [isLoading, setIsLoading] = useState(true);
 
-  const loadProgress = () => {
+  const loadProgress = useCallback(async () => {
     if (!user) return;
-    
-    const data = getUserProgress(user.userId);
+
+    const cloud = await getCloudProgress(user.userId);
+    const data = cloud || getUserProgress(user.userId);
     const workoutStats = getProgressStats(user.userId);
     const workouts = getWorkoutsByUser(user.userId);
-    
+
     let totalVolume = 0;
     workouts.forEach(w => {
       w.exercises.forEach(ex => {
@@ -57,7 +59,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
       ...workoutStats,
       totalVolume,
     });
-    
+
     if (data) {
       setProgress(data);
     } else {
@@ -79,10 +81,11 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
         totalVolume,
       };
       saveUserProgress(newProgress);
+      await saveCloudProgress(user.userId, newProgress);
       setProgress(newProgress);
     }
     setIsLoading(false);
-  };
+  }, [user]);
 
   useEffect(() => {
     if (!authLoading && user) {
@@ -90,7 +93,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     } else if (!authLoading && !user) {
       setIsLoading(false);
     }
-  }, [user, authLoading]);
+  }, [authLoading, user, loadProgress]);
 
   const handleUpdateChapter = (slug: string, completed: boolean) => {
     if (!user) return;

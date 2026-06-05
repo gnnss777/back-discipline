@@ -1,17 +1,19 @@
 @import "tailwindcss";
 
 :root {
-  --background: #080808;
-  --foreground: #F5F0E8;
-  --primary: #C9A86C;
-  --primary-dark: #B0884A;
-  --secondary: #2A2018;
-  --surface: #0D0D0D;
-  --card: #111111;
-  --border: #1E1E1E;
-  --muted: #888888;
-  --max-effort: #7A1A1A;
-  --color-danger: #ef4444;
+  --background: oklch(12% .01 270);
+  --foreground: oklch(97% .005 240);
+  --primary: oklch(76% .14 230);
+  --primary-dark: oklch(60% .14 230);
+  --card: oklch(16% .02 265);
+  --secondary: oklch(22% .04 265);
+  --muted: oklch(20% .03 265);
+  --muted-foreground: oklch(66% .04 250);
+  --border: oklch(76% .14 230 / 0.2);
+  --danger: oklch(65% .24 25);
+  --accent: oklch(76% .14 230);
+  --success: oklch(70% .18 145);
+  --warning: oklch(78% .16 85);
 }
 
 @theme inline {
@@ -19,13 +21,16 @@
   --color-foreground: var(--foreground);
   --color-primary: var(--primary);
   --color-primary-dark: var(--primary-dark);
-  --color-secondary: var(--secondary);
-  --color-surface: var(--surface);
   --color-card: var(--card);
+  --color-surface: var(--card);
+  --color-secondary: var(--secondary);
   --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
   --color-border: var(--border);
-  --color-max-effort: var(--max-effort);
-  --color-danger: #ef4444;
+  --color-danger: var(--danger);
+  --color-accent: var(--accent);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
 }
 
 body {
@@ -42,18 +47,18 @@ body {
 }
 
 .card {
-  background: var(--surface);
+  background: var(--card);
   border: 1px solid var(--border);
   border-radius: 0.5rem;
 }
 
-.gold-glow {
-  box-shadow: 0 0 20px rgba(201, 168, 108, 0.15);
+.cyan-glow {
+  box-shadow: 0 0 20px oklch(76% .14 230 / 0.35);
 }
 
 ::selection {
   background: var(--primary);
-  color: white;
+  color: var(--background);
 }
 
 @media (max-width: 768px) {

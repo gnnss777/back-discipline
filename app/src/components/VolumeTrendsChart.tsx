@@ -85,7 +85,7 @@ export function VolumeTrendsChart({ planilha }: VolumeTrendsChartProps) {
      <path
       d={pathD}
       fill="none"
-      stroke="#C9A86C"
+      stroke="#46BDEB"
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -98,7 +98,7 @@ export function VolumeTrendsChart({ planilha }: VolumeTrendsChartProps) {
        cx={p.x}
        cy={p.y}
        r="2.5"
-       fill="#C9A86C"
+        fill="#46BDEB"
        stroke="#080808"
        strokeWidth="0.5"
       />

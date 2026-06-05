@@ -2,8 +2,9 @@
 
 import { useState } from 'react';
 import { Play, Check, X } from 'lucide-react';
-import { startProgram } from '@/utils/programTracker';
-import { getDayName } from '@/utils/programTracker';
+import { startProgram, getDayName } from '@/utils/programTracker';
+import { getUserProgress } from '@/lib/storage';
+import { saveProgress } from '@/lib/user-progress-sync';
 
 interface ProgramStarterProps {
  userId: string;
@@ -22,14 +23,18 @@ export function ProgramStarter({ userId, onStart }: ProgramStarterProps) {
   );
  };
 
- const handleStart = async () => {
-  if (selectedDays.length === 0) return;
-  setStarting(true);
-  startProgram(userId, selectedDays);
-  await new Promise(r => setTimeout(r, 300));
-  setStarting(false);
-  onStart();
- };
+  const handleStart = async () => {
+   if (selectedDays.length === 0) return;
+   setStarting(true);
+   startProgram(userId, selectedDays);
+   const saved = getUserProgress(userId);
+   if (saved) {
+     await saveProgress(userId, saved);
+   }
+   await new Promise(r => setTimeout(r, 300));
+   setStarting(false);
+   onStart();
+  };
 
  return (
   <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm">
