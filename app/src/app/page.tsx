@@ -107,7 +107,7 @@ export default function Home() {
          <p className="text-primary">NUNCA APARECEM.</p>
         </div>
         <p className="text-sm sm:text-base text-muted-foreground mb-6 max-w-xl mx-auto font-light leading-relaxed normal-case">
-         6 semanas de treinamento estruturado por João Monteiro, com base acadêmica em Educação Física e Nutrição e anos de experiência prática.
+         6 semanas de treinamento estruturado por João Monteiro — Campeão Brasileiro de Fisiculturismo, profissional de Educação Física e Nutrição.
         </p>
         <p className="text-xs sm:text-sm text-muted-foreground/70 mb-6 max-w-lg mx-auto font-light leading-relaxed normal-case">
          Cada série, cada técnica e cada nível de esforço com propósito definido por quem estuda e aplica.
