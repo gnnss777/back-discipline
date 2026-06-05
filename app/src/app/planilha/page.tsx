@@ -92,7 +92,7 @@ export default function PlanilhaUnificadaPage() {
     setData(planilha);
   };
 
- const progInfo = useMemo(() => user ? getProgramInfo(user.userId) : null, [user, data]);
+  const progInfo = useMemo(() => user ? getProgramInfo(user.userId) : null, [user, data, progress]);
  const progStarted = progInfo?.started ?? false;
 
  // Find which week currentDate belongs to
@@ -230,12 +230,15 @@ export default function PlanilhaUnificadaPage() {
 
  return (
   <div className="min-h-screen bg-background text-white pb-24">
-   {showStarter && (
-    <ProgramStarter
-     userId={user.userId}
-     onStart={() => { setShowStarter(false); }}
-    />
-   )}
+    {showStarter && (
+     <ProgramStarter
+      userId={user.userId}
+      onStart={() => {
+       setShowStarter(false);
+       refreshProgress();
+      }}
+     />
+    )}
 
    <header className="border-b border-border sticky top-0 bg-background/95 backdrop-blur-sm z-50">
     <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
