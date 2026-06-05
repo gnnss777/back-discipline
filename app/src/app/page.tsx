@@ -280,6 +280,16 @@ export default function Home() {
      </div>
     </section>
 
+    {/* Missão */}
+    <section className="py-16 border-t border-secondary">
+     <div className="max-w-4xl mx-auto px-6 text-center">
+      <h2 className="font-display text-2xl sm:text-3xl font-bold mb-6 tracking-wider">O PROPÓSITO</h2>
+      <p className="text-muted-foreground font-light text-lg leading-relaxed max-w-3xl mx-auto normal-case">
+        Back Discipline não é uma rotina de treino. É a síntese de tudo que João Monteiro desenvolveu sobre treinamento de costas — traduzida em um programa que qualquer pessoa comprometida pode executar. Cada capítulo, cada série e cada RPE foi pensado para quem quer resultado real, não apenas motivação.
+      </p>
+     </div>
+    </section>
+
     {/* Program Preview - Locked */}
     <section className="max-w-6xl mx-auto px-6 py-16">
      <div className="text-center mb-8">
@@ -327,23 +337,38 @@ export default function Home() {
     {/* About Section */}
     <section className="py-16 border-t border-secondary bg-surface">
      <div className="max-w-6xl mx-auto px-6 text-center">
-      <h2 className="font-display text-2xl sm:text-3xl font-bold mb-4 tracking-wider">CIÊNCIA, PERFORMANCE E RESULTADO</h2>
-      <p className="text-muted-foreground font-light text-lg leading-relaxed mb-6 max-w-3xl mx-auto">
-        Back Discipline não é uma rotina de treino. É a síntese de tudo que João Monteiro desenvolveu sobre treinamento de costas — traduzida em um programa que qualquer pessoa comprometida pode executar. Cada capítulo, cada série e cada RPE foi pensado para quem quer resultado real, não apenas motivação.
+      <h2 className="font-display text-2xl sm:text-3xl font-bold mb-2 tracking-wider">CIÊNCIA, PERFORMANCE E RESULTADO</h2>
+      <p className="text-muted-foreground/80 text-sm font-medium tracking-wider mb-6">TREINO · NUTRIÇÃO · ESTRATÉGIA</p>
+      <p className="text-muted-foreground font-light text-base leading-relaxed mb-8 max-w-3xl mx-auto normal-case">
+        Formado em Nutrição e Educação Física, com formação internacional em Kinesiologia e pós-graduação em Nutrição Comportamental. Atua há anos na preparação de atletas de alta performance, com experiência nacional e internacional no fisiculturismo e futebol americano.
       </p>
-      <div className="flex items-center justify-center gap-3 mb-10 text-primary">
-       <GraduationCap className="w-5 h-5" />
-        <span className="text-sm tracking-wider font-bold">JOÃO MONTEIRO — EDUCADOR FÍSICO E NUTRICIONISTA</span>
+
+      {/* Stats */}
+      <div className="flex items-center justify-center gap-8 sm:gap-12 mb-10">
+       <div>
+        <div className="text-2xl font-bold text-primary">+500</div>
+        <div className="text-[10px] text-muted-foreground tracking-wider mt-1">ALUNOS ATENDIDOS</div>
+       </div>
+       <div className="w-px h-10 bg-border" />
+       <div>
+        <div className="text-2xl font-bold text-primary">90%</div>
+        <div className="text-[10px] text-muted-foreground tracking-wider mt-1">SATISFAÇÃO</div>
+       </div>
       </div>
+
+      {/* Credentials */}
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 max-w-3xl mx-auto">
        {[
         'EDUCAÇÃO FÍSICA',
         'NUTRIÇÃO',
         'PÓS EM NUTRIÇÃO COMPORTAMENTAL',
+        'EMBAIXADOR IFBB',
+        '+20 TÍTULOS BODYBUILDER',
+        'KINESIOLOGIA',
        ].map((credential, i) => (
         <div key={i} className="p-4 bg-background border border-border rounded-lg">
          <GraduationCap className="w-5 h-5 text-primary mx-auto mb-2" />
-         <span className="text-xs font-bold tracking-wider text-muted-foreground">{credential}</span>
+         <span className="text-[10px] sm:text-xs font-bold tracking-wider text-muted-foreground">{credential}</span>
         </div>
        ))}
       </div>
