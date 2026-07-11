@@ -198,7 +198,7 @@ function mdToHtml(markdown: string): string {
 const PDF_CSS = `
   @page {
     size: A4;
-    margin: 15mm 20mm;
+    margin: 0;
   }
 
   * {
@@ -207,12 +207,18 @@ const PDF_CSS = `
     box-sizing: border-box;
   }
 
+  html {
+    background: #111;
+  }
+
   body {
     background: #111;
     color: #e8e8e8;
     font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
     font-size: 10pt;
     line-height: 1.6;
+    padding: 5mm 20mm 15mm;
+    min-height: 100vh;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
@@ -353,7 +359,8 @@ const PDF_CSS = `
     justify-content: center;
     align-items: center;
     text-align: center;
-    height: 100vh;
+    min-height: 100vh;
+    padding-top: 0;
     background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
     position: relative;
   }
@@ -397,6 +404,7 @@ const PDF_CSS = `
   /* TOC */
   .toc {
     page-break-after: always;
+    padding-top: 20mm;
   }
 
   .toc h2 {
@@ -443,15 +451,17 @@ const PDF_CSS = `
   /* Chapter content */
   .chapter {
     page-break-before: always;
+    padding-top: 20mm;
   }
 
   .chapter:first-of-type {
     page-break-before: auto;
+    padding-top: 10mm;
   }
 
   .chapter-header {
     text-align: center;
-    padding: 15mm 0 8mm;
+    padding: 0 0 8mm;
     margin-bottom: 8mm;
     border-bottom: 1px solid #B8956A;
   }
@@ -466,6 +476,11 @@ const PDF_CSS = `
   .exercise-card {
     page-break-inside: avoid;
     page-break-after: always;
+    padding-top: 10mm;
+  }
+
+  .exercise-card:first-of-type {
+    padding-top: 0;
   }
 
   .exercise-header {
@@ -518,7 +533,7 @@ const PDF_CSS = `
   .section-break {
     page-break-before: always;
     text-align: center;
-    padding: 30mm 0;
+    padding: 30mm 0 20mm;
   }
 
   .section-break h2 {
@@ -741,7 +756,7 @@ async function generatePdf(html: string, outputPath: string): Promise<void> {
   await page.pdf({
     path: outputPath,
     format: 'A4',
-    margin: { top: '15mm', bottom: '15mm', left: '20mm', right: '20mm' },
+    margin: { top: '0', bottom: '0', left: '0', right: '0' },
     printBackground: true,
     displayHeaderFooter: true,
     headerTemplate: '<div style="font-size:7pt;color:#666;text-align:center;width:100%;padding:2mm 20mm;font-family:Montserrat,sans-serif;">BACK DISCIPLINE</div>',
