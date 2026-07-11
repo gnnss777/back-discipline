@@ -198,7 +198,7 @@ function mdToHtml(markdown: string): string {
 const PDF_CSS = `
   @page {
     size: A4;
-    margin: 30mm 20mm 20mm;
+    margin: 0;
   }
 
   * {
@@ -745,8 +745,11 @@ async function generatePdf(html: string, outputPath: string): Promise<void> {
   await page.pdf({
     path: outputPath,
     format: 'A4',
-    margin: { top: '0', bottom: '0', left: '0', right: '0' },
+    margin: { top: '25mm', bottom: '20mm', left: '20mm', right: '20mm' },
     printBackground: true,
+    displayHeaderFooter: true,
+    headerTemplate: '<div style="height:25mm;background:#111;width:100%;margin:0;padding:0;border:none;"></div>',
+    footerTemplate: '<div style="height:20mm;background:#111;width:100%;margin:0;padding:0;border:none;"></div>',
   });
 
   await browser.close();
