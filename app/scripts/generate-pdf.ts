@@ -217,7 +217,7 @@ const PDF_CSS = `
     font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
     font-size: 10pt;
     line-height: 1.6;
-    padding: 5mm 20mm 15mm;
+    padding: 0 20mm 15mm;
     min-height: 100vh;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
@@ -404,7 +404,7 @@ const PDF_CSS = `
   /* TOC */
   .toc {
     page-break-after: always;
-    padding-top: 20mm;
+    padding-top: 30mm;
   }
 
   .toc h2 {
@@ -451,12 +451,12 @@ const PDF_CSS = `
   /* Chapter content */
   .chapter {
     page-break-before: always;
-    padding-top: 20mm;
+    padding-top: 30mm;
   }
 
   .chapter:first-of-type {
     page-break-before: auto;
-    padding-top: 10mm;
+    padding-top: 15mm;
   }
 
   .chapter-header {
@@ -476,7 +476,7 @@ const PDF_CSS = `
   .exercise-card {
     page-break-inside: avoid;
     page-break-after: always;
-    padding-top: 10mm;
+    padding-top: 20mm;
   }
 
   .exercise-card:first-of-type {
@@ -533,7 +533,7 @@ const PDF_CSS = `
   .section-break {
     page-break-before: always;
     text-align: center;
-    padding: 30mm 0 20mm;
+    padding: 40mm 0 20mm;
   }
 
   .section-break h2 {
@@ -758,9 +758,6 @@ async function generatePdf(html: string, outputPath: string): Promise<void> {
     format: 'A4',
     margin: { top: '0', bottom: '0', left: '0', right: '0' },
     printBackground: true,
-    displayHeaderFooter: true,
-    headerTemplate: '<div style="font-size:7pt;color:#666;text-align:center;width:100%;padding:2mm 20mm;font-family:Montserrat,sans-serif;">BACK DISCIPLINE</div>',
-    footerTemplate: '<div style="font-size:7pt;color:#666;text-align:center;width:100%;padding:2mm 20mm;font-family:Montserrat,sans-serif;"><span class="pageNumber"></span> / <span class="totalPages"></span></div>',
   });
 
   await browser.close();
