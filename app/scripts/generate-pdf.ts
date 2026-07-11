@@ -65,132 +65,404 @@ function renderList(lines: string[], ordered: boolean): string {
   return html;
 }
 
-function mdToHtml(markdown: string): string {
-  const blocks = markdown.split('\n\n');
-  const html: string[] = [];
-  let inTable = false;
-  let tableRows: string[] = [];
-  let inList: string[] | null = null;
-  let listOrdered = false;
-  let inCodeBlock = false;
-  let codeContent = '';
-  let codeLang = '';
+interface Block {
+  type: 'h1' | 'h2' | 'h3' | 'h4' | 'hr' | 'paragraph'
+    | 'exercise' | 'quote' | 'tip' | 'warning'
+    | 'protocol' | 'overview' | 'table' | 'bullet-list' | 'label-group' | 'anatomy';
+  raw: string;
+}
 
-  function flushList() {
-    if (inList) {
-      html.push(renderList(inList, listOrdered));
-      inList = null;
+const EXERCISE_RE = /^###\s+(Exercício\s+\d+|(\d+\.))[\s:]/i;
+const STATS_RE = /^\*\*.*[\d×x]|^\*\*.*RPE|^\*\*.*série|^\*\*.*reps/i;
+const LABEL_RE = /^\*\*(Técnica|Setup|Por que funciona|Benefício|Meta|Quando usar|Execução|Função|Melhor|Recomendação|Progressão|Prevenção|Fatores|Estudo)\b/i;
+const DICA_RE = /^\*\*(Dica|Dica técnica|Dica avançada|Dica de Meadows):/i;
+const WARNING_RE = /^\*\*(Cuidado|Aviso):/i;
+const OVERVIEW_RE = /^\*\*O que/i;
+const PROTOCOL_STEP_RE = /^\d+\.\s/;
+const QUOTE_RE = /^\*"/;
+const ANATOMY_RE = /^###\s+(Trapézio|Latíssimo|Romboides|Eretores|Deltoide|Supraespinhal|Infraespinhal|Teres|Subescapular|Manguito)/i;
+
+function isExerciseHeading(line: string): boolean {
+  return EXERCISE_RE.test(line);
+}
+
+function isStatsBlock(line: string): boolean {
+  return STATS_RE.test(line.trim());
+}
+
+function isMajorHeading(line: string): boolean {
+  return /^#{1,3}\s/.test(line.trim());
+}
+
+function buildBlocks(content: string): Block[] {
+  const rawBlocks = content.split('\n\n');
+  const blocks: Block[] = [];
+
+  for (let i = 0; i < rawBlocks.length; i++) {
+    const raw = rawBlocks[i];
+    const trimmed = raw.trim();
+    if (!trimmed) continue;
+
+    // ── Exercise card (merge heading + stats + body + labels) ──
+    if (isExerciseHeading(trimmed)) {
+      let merged = raw;
+      let j = i + 1;
+      // merge stats line
+      if (j < rawBlocks.length && isStatsBlock(rawBlocks[j])) {
+        merged += '\n\n' + rawBlocks[j];
+        j++;
+      }
+      // merge everything until next major heading or another exercise
+      while (j < rawBlocks.length) {
+        const next = rawBlocks[j].trim();
+        if (isExerciseHeading(next) || isMajorHeading(next) || /^##+\s/.test(next)) break;
+        if (next === '---') break;
+        merged += '\n\n' + rawBlocks[j];
+        j++;
+      }
+      blocks.push({ type: 'exercise', raw: merged });
+      i = j - 1;
+      continue;
     }
+
+    // ── Anatomy heading ──
+    if (ANATOMY_RE.test(trimmed)) {
+      let merged = raw;
+      let j = i + 1;
+      while (j < rawBlocks.length) {
+        const next = rawBlocks[j].trim();
+        if (isMajorHeading(next) || ANATOMY_RE.test(next)) break;
+        if (next === '---') break;
+        merged += '\n\n' + rawBlocks[j];
+        j++;
+      }
+      blocks.push({ type: 'anatomy', raw: merged });
+      i = j - 1;
+      continue;
+    }
+
+    // ── Table ──
+    if (trimmed.startsWith('|')) {
+      blocks.push({ type: 'table', raw });
+      continue;
+    }
+
+    // ── Headings ──
+    if (trimmed.startsWith('# ')) {
+      blocks.push({ type: 'h1', raw });
+      continue;
+    }
+    if (trimmed.startsWith('## ')) {
+      blocks.push({ type: 'h2', raw });
+      continue;
+    }
+    if (trimmed.startsWith('### ')) {
+      blocks.push({ type: 'h3', raw });
+      continue;
+    }
+    if (trimmed.startsWith('**') && trimmed.endsWith('**')) {
+      blocks.push({ type: 'h4', raw });
+      continue;
+    }
+
+    // ── HR ──
+    if (trimmed === '---') {
+      blocks.push({ type: 'hr', raw });
+      continue;
+    }
+
+    // ── Blockquote (> pattern) ──
+    if (trimmed.startsWith('>')) {
+      blocks.push({ type: 'quote', raw });
+      continue;
+    }
+
+    // ── Quote (*"pattern) ──
+    if (QUOTE_RE.test(trimmed)) {
+      blocks.push({ type: 'quote', raw });
+      continue;
+    }
+
+    // ── Warning ──
+    if (WARNING_RE.test(trimmed)) {
+      blocks.push({ type: 'warning', raw });
+      continue;
+    }
+
+    // ── Tip ──
+    if (DICA_RE.test(trimmed)) {
+      blocks.push({ type: 'tip', raw });
+      continue;
+    }
+
+    // ── Overview ──
+    if (OVERVIEW_RE.test(trimmed)) {
+      blocks.push({ type: 'overview', raw });
+      continue;
+    }
+
+    // ── Label group ──
+    if (LABEL_RE.test(trimmed)) {
+      blocks.push({ type: 'label-group', raw });
+      continue;
+    }
+
+    // ── Protocol list ──
+    if (PROTOCOL_STEP_RE.test(trimmed)) {
+      blocks.push({ type: 'protocol', raw });
+      continue;
+    }
+
+    // ── Bullet list ──
+    if (trimmed.startsWith('- ') || trimmed.startsWith('* ')) {
+      blocks.push({ type: 'bullet-list', raw });
+      continue;
+    }
+
+    // ── Default: paragraph ──
+    blocks.push({ type: 'paragraph', raw });
   }
 
-  function flushTable() {
-    if (tableRows.length > 0) {
-      html.push(renderTable(tableRows));
-      tableRows = [];
-      inTable = false;
-    }
-  }
+  return blocks;
+}
 
-  for (const block of blocks) {
-    if (!block.trim()) continue;
+function renderBlockToHtml(block: Block): string {
+  const t = block.raw.trim();
+  if (!t) return '';
 
-    // Code block
-    if (block.startsWith('```')) {
-      if (!inCodeBlock) {
-        inCodeBlock = true;
-        codeLang = block.replace('```', '').trim();
-        codeContent = '';
-        continue;
-      } else {
-        inCodeBlock = false;
-        html.push(`<pre><code>${escapeHtml(codeContent.trim())}</code></pre>\n`);
-        continue;
-      }
-    }
-    if (inCodeBlock) {
-      codeContent += block + '\n\n';
-      continue;
-    }
-
-    const lines = block.split('\n');
-
-    // Table
-    if (lines[0].trim().startsWith('|')) {
-      inTable = true;
-      tableRows.push(...lines);
-      continue;
-    }
-
-    flushTable();
-    if (inTable) flushTable();
-
-    // List (unordered)
-    if (lines[0].match(/^[-*]\s/)) {
-      if (inList && listOrdered) flushList();
-      if (!inList) {
-        inList = [];
-        listOrdered = false;
-      }
-      inList.push(...lines);
-      continue;
-    }
-
-    // List (ordered)
-    if (lines[0].match(/^\d+\.\s/)) {
-      if (inList && !listOrdered) flushList();
-      if (!inList) {
-        inList = [];
-        listOrdered = true;
-      }
-      inList.push(...lines);
-      continue;
-    }
-
-    flushList();
-
-    // Horizontal rule
-    if (block.trim() === '---') {
-      html.push('<hr />\n');
-      continue;
-    }
-
-    // Headings
-    const hMatch = block.match(/^(#{1,4})\s+(.+)$/m);
-    if (hMatch) {
-      const level = hMatch[1].length;
-      const text = renderInline(hMatch[2].trim());
-      html.push(`<h${level}>${text}</h${level}>\n`);
-      // If there's more content after the heading on same block
-      const rest = block.replace(/^#{1,4}\s+.+$/, '').trim();
-      if (rest) {
-        for (const line of rest.split('\n').filter(l => l.trim())) {
-          html.push(`<p>${renderInline(line.trim())}</p>\n`);
+  switch (block.type) {
+    case 'h1':
+      return `<h1>${renderInline(t.replace(/^#\s+/, ''))}</h1>\n`;
+    case 'h2':
+      return `<h2>${renderInline(t.replace(/^##\s+/, ''))}</h2>\n`;
+    case 'h3':
+      return `<h3>${renderInline(t.replace(/^###\s+/, ''))}</h3>\n`;
+    case 'h4':
+      return `<h4>${renderInline(t.replace(/\*\*/g, ''))}</h4>\n`;
+    case 'hr':
+      return `<hr />\n`;
+    case 'paragraph':
+      return `<p>${renderInline(t)}</p>\n`;
+    case 'quote': {
+      let quoteText = t.replace(/^>\s*/, '').replace(/^\*"(.+?)"\*/, '$1').replace(/^\*"(.+?)"/, '$1');
+      let attribution = '';
+      const dashIdx = quoteText.indexOf(' — ');
+      if (dashIdx > 0) {
+        const after = quoteText.slice(dashIdx + 3).trim();
+        if (after.startsWith('John') || after.startsWith('Meadows') || after.startsWith('Não') || after.includes(',')) {
+          // not attribution
+        } else {
+          attribution = after;
+          quoteText = quoteText.slice(0, dashIdx);
         }
       }
-      continue;
+      return `
+        <div class="quote-box">
+          <div class="quote-text">&ldquo;${renderInline(quoteText)}&rdquo;</div>
+          ${attribution ? `<div class="quote-attribution">&mdash; ${renderInline(attribution)}</div>` : ''}
+        </div>
+      `;
     }
-
-    // Blockquote
-    if (lines[0].startsWith('>')) {
-      const quoteText = lines.map(l => l.replace(/^>\s?/, '')).join(' ').trim();
-      html.push(`<blockquote>${renderInline(quoteText)}</blockquote>\n`);
-      continue;
+    case 'tip': {
+      const content = t.replace(/^\*\*(Dica|Dica técnica|Dica avançada|Dica de Meadows):\*\*/i, '').trim();
+      const label = t.match(/^\*\*(Dica|Dica técnica|Dica avançada|Dica de Meadows):\*\*/i)?.[1] || 'Dica';
+      return `
+        <div class="tip-box">
+          <div class="tip-icon">💡</div>
+          <div class="tip-content"><strong>${label}:</strong> ${renderInline(content)}</div>
+        </div>
+      `;
     }
+    case 'warning': {
+      const content = t.replace(/^\*\*(Cuidado|Aviso):\*\*/i, '').trim();
+      const label = t.match(/^\*\*(Cuidado|Aviso):\*\*/i)?.[1] || 'Aviso';
+      return `
+        <div class="warning-box">
+          <div class="warning-icon">⚠️</div>
+          <div class="warning-content"><strong>${label}:</strong> ${renderInline(content)}</div>
+        </div>
+      `;
+    }
+    case 'protocol': {
+      const steps = t.split('\n').filter(s => s.trim());
+      let html = '<div class="protocol-list">\n';
+      steps.forEach((step, idx) => {
+        html += `
+          <div class="protocol-item">
+            <div class="protocol-number">${idx + 1}</div>
+            <div class="protocol-content">${renderInline(step.replace(/^\d+\.\s*/, ''))}</div>
+          </div>\n`;
+      });
+      html += '</div>\n';
+      return html;
+    }
+    case 'overview': {
+      const lines = t.split('\n');
+      const title = lines[0].replace(/\*\*/g, '').replace(/:$/, '');
+      const items = lines.slice(1).filter(l => l.trim().startsWith('- ') || l.trim().startsWith('* '));
+      let html = `
+        <div class="overview-card">
+          <div class="overview-title">ℹ️ ${renderInline(title)}</div>
+          <ul class="overview-list">
+      `;
+      items.forEach(item => {
+        html += `<li class="overview-item"><span class="overview-bullet">•</span><span>${renderInline(item.replace(/^[-*]\s*/, ''))}</span></li>\n`;
+      });
+      html += `
+          </ul>
+        </div>
+      `;
+      return html;
+    }
+    case 'table':
+      return renderTable(t.split('\n'));
+    case 'bullet-list': {
+      const items = t.split('\n').filter(l => l.trim());
+      let html = '<ul>\n';
+      items.forEach(item => {
+        html += `<li>${renderInline(item.replace(/^[-*]\s*/, ''))}</li>\n`;
+      });
+      html += '</ul>\n';
+      return html;
+    }
+    case 'label-group': {
+      const m = t.match(LABEL_RE);
+      const label = m ? m[1] : '';
+      const content = t.replace(/^\*\*.*?:\*\*/, '').trim();
+      return `
+        <div class="label-group">
+          <span class="label-title">${label}</span>
+          <div class="label-content">${renderInline(content)}</div>
+        </div>
+      `;
+    }
+    case 'anatomy': {
+      const lines = t.split('\n\n');
+      const heading = lines[0].replace(/^###\s+/, '');
+      let html = `
+        <div class="anatomy-card">
+          <div class="anatomy-title">📖 ${renderInline(heading)}</div>
+      `;
+      lines.slice(1).forEach(block => {
+        const bt = block.trim();
+        if (!bt) return;
 
-    // Paragraph
-    const paragraph = lines.map(l => renderInline(l.trim())).join(' ');
-    if (paragraph.trim()) {
-      html.push(`<p>${paragraph}</p>\n`);
+        if (bt.startsWith('- ') || bt.startsWith('* ')) {
+          const items = bt.split('\n').filter(s => s.trim());
+          html += '<ul>\n';
+          items.forEach(item => {
+            html += `<li>${renderInline(item.replace(/^[-*]\s*/, ''))}</li>\n`;
+          });
+          html += '</ul>\n';
+        } else if (LABEL_RE.test(bt)) {
+          const l = bt.match(LABEL_RE)![1];
+          const c = bt.replace(/^\*\*.*?:\*\*/, '').trim();
+          html += `
+            <div style="margin-top: 2mm;">
+              <span class="label-title" style="display:inline-block; margin-bottom:0;">${l}:</span>
+              <span style="color:#ccc; font-size:9.5pt;">${renderInline(c)}</span>
+            </div>
+          `;
+        } else {
+          html += `<p style="margin: 2mm 0 0;">${renderInline(bt)}</p>\n`;
+        }
+      });
+      html += '</div>\n';
+      return html;
+    }
+    case 'exercise': {
+      const lines = t.split('\n\n');
+      const heading = lines[0].replace(/^###\s+/, '');
+      let restStart = 1;
+      let statsLine = '';
+      if (lines.length > 1 && isStatsBlock(lines[1])) {
+        statsLine = lines[1].replace(/\*\*/g, '');
+        restStart = 2;
+      }
+      const rest = lines.slice(restStart).join('\n\n');
+      const subBlocks = rest.split('\n\n');
+
+      let html = `
+        <div class="exercise-box">
+          <h4>${renderInline(heading)}</h4>
+          ${statsLine ? `<div class="exercise-stats">🏋️‍♂️ ${renderInline(statsLine)}</div>` : ''}
+          <div class="exercise-box-content">
+      `;
+
+      subBlocks.forEach(sb => {
+        const sbt = sb.trim();
+        if (!sbt) return;
+
+        if (DICA_RE.test(sbt)) {
+          const content = sbt.replace(DICA_RE, '').trim();
+          html += `
+            <div class="tip-box">
+              <div class="tip-icon">💡</div>
+              <div class="tip-content"><strong>Dica:</strong> ${renderInline(content)}</div>
+            </div>
+          `;
+        } else if (WARNING_RE.test(sbt)) {
+          const content = sbt.replace(WARNING_RE, '').trim();
+          const label = sbt.match(WARNING_RE)![1];
+          html += `
+            <div class="warning-box">
+              <div class="warning-icon">⚠️</div>
+              <div class="warning-content"><strong>${label}:</strong> ${renderInline(content)}</div>
+            </div>
+          `;
+        } else if (LABEL_RE.test(sbt)) {
+          const m = sbt.match(LABEL_RE);
+          const label = m ? m[1] : '';
+          const content = sbt.replace(/^\*\*.*?:\*\*/, '').trim();
+          html += `
+            <div style="margin-top: 2mm;">
+              <span class="label-title" style="display:inline-block; margin-bottom:0;">${label}:</span>
+              <span style="color:#ccc; font-size:9.5pt;">${renderInline(content)}</span>
+            </div>
+          `;
+        } else if (isStatsBlock(sbt)) {
+          html += `<div class="exercise-stats" style="margin: 2mm 0;">${renderInline(sbt.replace(/\*\*/g, ''))}</div>\n`;
+        } else if (sbt.startsWith('- ') || sbt.startsWith('* ')) {
+          const items = sbt.split('\n').filter(s => s.trim());
+          html += '<ul>\n';
+          items.forEach(item => {
+            html += `<li>${renderInline(item.replace(/^[-*]\s*/, ''))}</li>\n`;
+          });
+          html += '</ul>\n';
+        } else if (PROTOCOL_STEP_RE.test(sbt)) {
+          const steps = sbt.split('\n').filter(s => s.trim());
+          html += '<div class="protocol-list">\n';
+          steps.forEach((step, idx) => {
+            html += `
+              <div class="protocol-item">
+                <div class="protocol-number">${idx + 1}</div>
+                <div class="protocol-content">${renderInline(step.replace(/^\d+\.\s*/, ''))}</div>
+              </div>\n`;
+          });
+          html += '</div>\n';
+        } else if (sbt.startsWith('>')) {
+          const qt = sbt.replace(/^>\s*/, '');
+          html += `
+            <div class="quote-box" style="padding:3mm; margin:3mm 0;">
+              <div class="quote-text" style="font-size:10pt;">&ldquo;${renderInline(qt)}&rdquo;</div>
+            </div>
+          `;
+        } else {
+          html += `<p style="margin-bottom: 2mm;">${renderInline(sbt)}</p>\n`;
+        }
+      });
+
+      html += '</div>\n</div>\n';
+      return html;
     }
   }
 
-  flushList();
-  flushTable();
-  if (inCodeBlock) {
-    html.push(`<pre><code>${escapeHtml(codeContent.trim())}</code></pre>\n`);
-  }
+  return '';
+}
 
-  return html.join('\n');
+function mdToHtml(markdown: string): string {
+  const blocks = buildBlocks(markdown);
+  return blocks.map(renderBlockToHtml).join('\n');
 }
 
 // ─── PDF STYLES ───
@@ -198,7 +470,8 @@ function mdToHtml(markdown: string): string {
 const PDF_CSS = `
   @page {
     size: A4;
-    margin: 0;
+    margin: 18mm 16mm 12mm;
+    background-color: #111111;
   }
 
   * {
@@ -214,9 +487,9 @@ const PDF_CSS = `
   body {
     color: #e8e8e8;
     font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
-    font-size: 9.5pt;
-    line-height: 1.55;
-    padding: 0 18mm 10mm;
+    font-size: 10.5pt;
+    line-height: 1.6;
+    padding: 0;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
@@ -227,47 +500,44 @@ const PDF_CSS = `
     letter-spacing: 0.08em;
     color: #fff;
     page-break-after: avoid;
+    page-break-inside: avoid;
   }
 
   h1 {
-    font-size: 18pt;
+    font-size: 20pt;
     font-weight: 900;
-    margin: 8mm 0 6mm;
+    margin: 6mm 0 5mm;
     color: #B8956A;
   }
 
   h2 {
-    font-size: 14pt;
+    font-size: 13pt;
     font-weight: 700;
-    margin: 15mm 0 6mm;
-    border-bottom: 2px solid #B8956A;
-    padding-bottom: 4pt;
+    margin: 5mm 0 3mm;
+    border-bottom: 1px solid #B8956A;
+    padding-bottom: 2pt;
     color: #B8956A;
   }
 
   h3 {
     font-size: 11pt;
     font-weight: 700;
-    margin: 10mm 0 4mm;
+    margin: 4mm 0 2mm;
     color: #d4a86a;
   }
 
   h4 {
     font-size: 10pt;
     font-weight: 700;
-    margin: 6mm 0 3mm;
+    margin: 3mm 0 2mm;
     color: #c89a5a;
   }
 
   p {
-    margin: 0 0 3mm;
+    margin: 0 0 2mm;
     text-align: justify;
-    orphans: 4;
-    widows: 4;
-  }
-
-  h2, h3, h4 {
-    page-break-after: avoid;
+    orphans: 3;
+    widows: 3;
   }
 
   strong {
@@ -282,17 +552,18 @@ const PDF_CSS = `
   hr {
     border: none;
     border-top: 1px solid #B8956A;
-    margin: 8mm 0;
+    margin: 5mm 0;
     opacity: 0.4;
   }
 
   blockquote {
-    margin: 4mm 0;
-    padding: 3mm 5mm;
+    margin: 2mm 0;
+    padding: 2mm 4mm;
     border-left: 3px solid #B8956A;
     background: #1a1a1a;
     font-style: italic;
     color: #c0c0c0;
+    page-break-inside: avoid;
   }
 
   blockquote strong {
@@ -300,24 +571,26 @@ const PDF_CSS = `
   }
 
   ul, ol {
-    margin: 2mm 0 3mm 5mm;
+    margin: 1mm 0 2mm 4mm;
   }
 
   li {
     margin-bottom: 1mm;
+    page-break-inside: avoid;
   }
 
   table {
     width: 100%;
     border-collapse: collapse;
-    margin: 4mm 0;
+    margin: 3mm 0;
     font-size: 9pt;
+    page-break-inside: avoid;
   }
 
   th {
     background: #B8956A;
     color: #111;
-    padding: 2mm 3mm;
+    padding: 1.5mm 3mm;
     text-align: left;
     font-weight: 700;
     text-transform: uppercase;
@@ -326,7 +599,7 @@ const PDF_CSS = `
   }
 
   td {
-    padding: 2mm 3mm;
+    padding: 1.5mm 3mm;
     border: 1px solid #333;
   }
 
@@ -336,16 +609,17 @@ const PDF_CSS = `
 
   pre, code {
     font-family: 'Courier New', monospace;
-    font-size: 9pt;
+    font-size: 8pt;
     background: #1a1a1a;
     color: #B8956A;
   }
 
   pre {
-    padding: 3mm;
-    margin: 4mm 0;
+    padding: 2mm;
+    margin: 2mm 0;
     white-space: pre-wrap;
     border: 1px solid #333;
+    page-break-inside: avoid;
   }
 
   code {
@@ -355,14 +629,17 @@ const PDF_CSS = `
   /* Cover page */
   .cover {
     page-break-after: always;
+    page-break-before: avoid;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    min-height: 90vh;
+    min-height: 80vh;
     background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
     position: relative;
+    margin: -18mm -16mm -12mm;
+    padding: 18mm 16mm 12mm;
   }
 
   .cover::before {
@@ -377,6 +654,7 @@ const PDF_CSS = `
     margin: 0 0 5mm;
     letter-spacing: 0.15em;
     font-weight: 900;
+    page-break-before: avoid;
   }
 
   .cover .subtitle {
@@ -404,19 +682,21 @@ const PDF_CSS = `
   /* TOC */
   .toc {
     page-break-after: always;
+    page-break-before: avoid;
   }
 
   .toc h2 {
     text-align: center;
     border: none;
     font-size: 16pt;
-    margin-bottom: 10mm;
+    margin-bottom: 8mm;
+    page-break-before: avoid;
   }
 
   .toc-entry {
     display: flex;
     justify-content: space-between;
-    padding: 1.5mm 0;
+    padding: 1mm 0;
     border-bottom: 1px dotted #333;
     font-size: 10pt;
   }
@@ -437,8 +717,8 @@ const PDF_CSS = `
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    margin-top: 5mm;
-    padding-top: 3mm;
+    margin-top: 4mm;
+    padding-top: 2mm;
     border-top: 1px solid #B8956A;
   }
 
@@ -448,44 +728,48 @@ const PDF_CSS = `
   }
 
   /* Chapter content */
-  .chapter {
+  .chapter-group {
     page-break-before: always;
   }
 
-  .chapter:first-of-type {
+  .chapter-group:first-of-type {
     page-break-before: auto;
   }
 
-  .chapter-header {
+  .chapter-group-header {
     text-align: center;
-    padding: 15mm 0 6mm;
+    padding: 0 0 4mm;
     margin-bottom: 6mm;
-    border-bottom: 1px solid #B8956A;
+    border-bottom: 2px solid #B8956A;
   }
 
-  .chapter-header h2 {
+  .chapter-group-header h2 {
     border: none;
     margin: 0;
-    font-size: 16pt;
+    font-size: 18pt;
+    font-weight: 900;
+    color: #B8956A;
+    page-break-before: avoid;
+  }
+
+  .sub-chapter {
+    margin-bottom: 10mm;
   }
 
   /* Exercise card */
   .exercise-card {
-    page-break-inside: avoid;
-    page-break-after: always;
-  }
-
-  .exercise-card:first-of-type {
-    padding-top: 0;
+    margin-bottom: 12mm;
   }
 
   .exercise-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: 6mm;
-    padding-bottom: 3mm;
+    margin-bottom: 4mm;
+    padding-bottom: 2mm;
     border-bottom: 2px solid #B8956A;
+    page-break-inside: avoid;
+    page-break-after: avoid;
   }
 
   .exercise-header h2 {
@@ -499,6 +783,7 @@ const PDF_CSS = `
     gap: 3mm;
     flex-wrap: wrap;
     margin-bottom: 4mm;
+    page-break-inside: avoid;
   }
 
   .exercise-meta span {
@@ -529,20 +814,237 @@ const PDF_CSS = `
   .section-break {
     page-break-before: always;
     text-align: center;
-    padding: 30mm 0 20mm;
+    padding: 8mm 0 4mm;
+  }
+
+  .section-break + .chapter-group {
+    page-break-before: avoid !important;
   }
 
   .section-break h2 {
     border: none;
     font-size: 20pt;
     color: #B8956A;
-    margin-bottom: 5mm;
+    margin-bottom: 3mm;
+    page-break-before: avoid;
   }
 
   .section-break p {
     text-align: center;
     color: #888;
     font-size: 10pt;
+  }
+
+  /* ── Custom Boxes and Cards (Design System matching the web app) ── */
+  
+  .exercise-box {
+    background: #161616;
+    border: 1px solid #2a2a2a;
+    border-left: 4px solid #B8956A;
+    padding: 4mm 5mm;
+    margin: 5mm 0;
+    border-radius: 4px;
+    page-break-inside: avoid;
+  }
+
+  .exercise-box h4 {
+    font-family: 'Orbitron', 'Segoe UI', Arial, sans-serif;
+    font-size: 12pt;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 2mm;
+    border: none;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .exercise-stats {
+    display: inline-block;
+    background: rgba(184, 149, 106, 0.12);
+    color: #B8956A;
+    font-size: 8.5pt;
+    font-weight: 700;
+    padding: 1mm 2.5mm;
+    border-radius: 4px;
+    margin-top: 1mm;
+    margin-bottom: 3.5mm;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .quote-box {
+    background: rgba(184, 149, 106, 0.04);
+    border-left: 4px solid #B8956A;
+    padding: 4mm 5mm;
+    margin: 5mm 0;
+    border-radius: 4px;
+    page-break-inside: avoid;
+  }
+
+  .quote-text {
+    font-size: 11pt;
+    font-style: italic;
+    font-weight: 300;
+    color: #e0e0e0;
+    line-height: 1.5;
+  }
+
+  .quote-attribution {
+    font-size: 8.5pt;
+    color: #B8956A;
+    font-weight: 600;
+    margin-top: 2mm;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .tip-box, .warning-box {
+    background: #161616;
+    border: 1px solid rgba(184, 149, 106, 0.15);
+    padding: 3.5mm 4mm;
+    margin: 4mm 0;
+    border-radius: 4px;
+    display: flex;
+    gap: 3mm;
+    align-items: flex-start;
+    page-break-inside: avoid;
+  }
+
+  .warning-box {
+    border-color: rgba(184, 149, 106, 0.25);
+  }
+
+  .tip-icon, .warning-icon {
+    font-size: 12pt;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+
+  .tip-content, .warning-content {
+    color: #ccc;
+    font-size: 9.5pt;
+    line-height: 1.5;
+    flex: 1;
+  }
+
+  .protocol-list {
+    margin: 5mm 0;
+    padding: 0;
+  }
+
+  .protocol-item {
+    display: flex;
+    gap: 4mm;
+    align-items: flex-start;
+    margin-bottom: 3mm;
+    page-break-inside: avoid;
+  }
+
+  .protocol-number {
+    flex-shrink: 0;
+    width: 6.5mm;
+    height: 6.5mm;
+    border-radius: 50%;
+    background: rgba(184, 149, 106, 0.15);
+    color: #B8956A;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 8.5pt;
+    font-weight: 700;
+  }
+
+  .protocol-content {
+    color: #e8e8e8;
+    font-size: 9.5pt;
+    line-height: 1.5;
+    flex: 1;
+  }
+
+  .overview-card {
+    background: #161616;
+    border: 1px solid #2a2a2a;
+    padding: 4mm 5mm;
+    margin: 5mm 0;
+    border-radius: 4px;
+    page-break-inside: avoid;
+  }
+
+  .overview-title {
+    font-family: 'Orbitron', 'Segoe UI', Arial, sans-serif;
+    font-size: 9.5pt;
+    font-weight: 700;
+    color: #B8956A;
+    margin-bottom: 2.5mm;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .overview-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .overview-item {
+    display: flex;
+    gap: 2mm;
+    color: #ccc;
+    font-size: 9.5pt;
+    margin-bottom: 1.5mm;
+    align-items: flex-start;
+  }
+
+  .overview-bullet {
+    color: #B8956A;
+    font-weight: bold;
+    line-height: 1;
+  }
+
+  .label-group {
+    background: #161616;
+    border: 1px solid #2a2a2a;
+    padding: 3.5mm 4mm;
+    margin: 4mm 0;
+    border-radius: 4px;
+    page-break-inside: avoid;
+  }
+
+  .label-title {
+    font-family: 'Orbitron', 'Segoe UI', Arial, sans-serif;
+    font-size: 8.5pt;
+    font-weight: 700;
+    color: #B8956A;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    display: block;
+    margin-bottom: 1.5mm;
+  }
+
+  .label-content {
+    color: #ccc;
+    font-size: 9.5pt;
+    line-height: 1.5;
+  }
+
+  .anatomy-card {
+    background: #161616;
+    border: 1px solid #2a2a2a;
+    border-left: 4px solid #B8956A;
+    padding: 4mm 5mm;
+    margin: 5mm 0;
+    border-radius: 4px;
+    page-break-inside: avoid;
+  }
+
+  .anatomy-title {
+    font-family: 'Orbitron', 'Segoe UI', Arial, sans-serif;
+    font-size: 11pt;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 2.5mm;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
   }
 
   @media print {
@@ -638,8 +1140,8 @@ function generateBookHtml(): string {
   const part2Groups = chapterGroups.filter(g => g.part === 'II');
 
   // Intro (before Part I)
-  body += '<div class="chapter" id="chapter-introducao">\n';
-  body += '<div class="chapter-header"><h2>Introdução</h2></div>\n';
+  body += '<div class="chapter-group" id="chapter-introducao">\n';
+  body += '<div class="chapter-group-header"><h2>Introdução</h2></div>\n';
   if (introChapter) {
     body += buildChapterContent(introChapter.slug);
   }
@@ -649,28 +1151,34 @@ function generateBookHtml(): string {
   body += '<div class="section-break"><h2>Parte I</h2><p>O Programa</p></div>\n';
 
   for (const group of part1Groups) {
+    body += `<div class="chapter-group" id="group-${group.id}">\n`;
+    body += `<div class="chapter-group-header"><h2>${group.title}</h2></div>\n`;
     for (const slug of group.children) {
       const ch = chapters.find(c => c.slug === slug);
       if (!ch) continue;
-      body += `<div class="chapter" id="chapter-${slug}">\n`;
-      body += `<div class="chapter-header"><h2>${ch.title}</h2></div>\n`;
+      body += `<div class="sub-chapter" id="chapter-${slug}">\n`;
+      body += `<h2>${ch.title}</h2>\n`;
       body += buildChapterContent(slug);
       body += '</div>\n';
     }
+    body += '</div>\n';
   }
 
   // Part II
   body += '<div class="section-break"><h2>Parte II</h2><p>Fundamentos</p></div>\n';
 
   for (const group of part2Groups) {
+    body += `<div class="chapter-group" id="group-${group.id}">\n`;
+    body += `<div class="chapter-group-header"><h2>${group.title}</h2></div>\n`;
     for (const slug of group.children) {
       const ch = chapters.find(c => c.slug === slug);
       if (!ch) continue;
-      body += `<div class="chapter" id="chapter-${slug}">\n`;
-      body += `<div class="chapter-header"><h2>${ch.title}</h2></div>\n`;
+      body += `<div class="sub-chapter" id="chapter-${slug}">\n`;
+      body += `<h2>${ch.title}</h2>\n`;
       body += buildChapterContent(slug);
       body += '</div>\n';
     }
+    body += '</div>\n';
   }
 
   return wrapHtml('Back Discipline — Livro', body);
