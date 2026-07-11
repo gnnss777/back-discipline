@@ -1071,7 +1071,7 @@ ${bodyHtml}
 </html>`;
 }
 
-function buildToc(chapterGroups: ChapterGroup[], chapters: Chapter[], isBook: boolean): string {
+function buildBookToc(chapterGroups: ChapterGroup[], chapters: Chapter[]): string {
   let html = '<div class="toc">\n';
   html += '<h2>Sumário</h2>\n';
 
@@ -1080,8 +1080,13 @@ function buildToc(chapterGroups: ChapterGroup[], chapters: Chapter[], isBook: bo
     return `<div class="${cls}"><a href="#${id}">${label}</a></div>\n`;
   };
 
-  // Part I
-  html += '<div class="toc-part">Parte I — O Programa</div>\n';
+  html += '<div class="toc-part">Introdução</div>\n';
+  const introChapter = chapters.find(c => c.slug === 'introducao');
+  if (introChapter) {
+    html += renderEntry(introChapter.title, 'chapter-introducao');
+  }
+
+  html += '<div class="toc-part">Parte I — O Programa de Treino</div>\n';
   const part1Groups = chapterGroups.filter(g => g.part === 'I');
   for (const group of part1Groups) {
     html += renderEntry(group.title, `group-${group.id}`);
@@ -1093,8 +1098,20 @@ function buildToc(chapterGroups: ChapterGroup[], chapters: Chapter[], isBook: bo
     }
   }
 
-  // Part II
-  html += '<div class="toc-part">Parte II — Fundamentos</div>\n';
+  html += '</div>\n';
+  return html;
+}
+
+function buildFundamentosToc(chapterGroups: ChapterGroup[], chapters: Chapter[]): string {
+  let html = '<div class="toc">\n';
+  html += '<h2>Sumário</h2>\n';
+
+  const renderEntry = (label: string, id: string, indent = false) => {
+    const cls = indent ? 'toc-entry toc-sub' : 'toc-entry';
+    return `<div class="${cls}"><a href="#${id}">${label}</a></div>\n`;
+  };
+
+  html += '<div class="toc-part">Parte II — Fundamentos Técnicos</div>\n';
   const part2Groups = chapterGroups.filter(g => g.part === 'II');
   for (const group of part2Groups) {
     html += renderEntry(group.title, `group-${group.id}`);
@@ -1127,17 +1144,16 @@ function generateBookHtml(): string {
   body += `<div class="cover">
     <h1>BACK DISCIPLINE</h1>
     <div class="divider"></div>
-    <div class="subtitle">Método Mountain Dog</div>
-    <div class="subtitle" style="font-size:9pt;color:#888">Programa de 6 Semanas para Costas</div>
+    <div class="subtitle">O Programa de Treino</div>
+    <div class="subtitle" style="font-size:9pt;color:#888">Método Mountain Dog — 6 Semanas</div>
     <div class="meta">João Monteiro • Educador Físico e Nutricionista</div>
   </div>\n`;
 
   // ── TOC ──
-  body += buildToc(chapterGroups, chapters, true);
+  body += buildBookToc(chapterGroups, chapters);
 
   // ── Content ──
   const part1Groups = chapterGroups.filter(g => g.part === 'I');
-  const part2Groups = chapterGroups.filter(g => g.part === 'II');
 
   // Intro (before Part I)
   body += '<div class="chapter-group" id="chapter-introducao">\n';
@@ -1148,7 +1164,7 @@ function generateBookHtml(): string {
   body += '</div>\n';
 
   // Part I
-  body += '<div class="section-break"><h2>Parte I</h2><p>O Programa</p></div>\n';
+  body += '<div class="section-break"><h2>Parte I</h2><p>O Programa de Treino</p></div>\n';
 
   for (const group of part1Groups) {
     body += `<div class="chapter-group" id="group-${group.id}">\n`;
@@ -1164,8 +1180,29 @@ function generateBookHtml(): string {
     body += '</div>\n';
   }
 
+  return wrapHtml('Back Discipline — O Programa de Treino', body);
+}
+
+function generateFundamentosHtml(): string {
+  let body = '';
+
+  // ── Cover ──
+  body += `<div class="cover">
+    <h1>BACK DISCIPLINE</h1>
+    <div class="divider"></div>
+    <div class="subtitle">Fundamentos Técnicos</div>
+    <div class="subtitle" style="font-size:9pt;color:#888">Anatomia, Biomecânica e Saúde do Ombro</div>
+    <div class="meta">João Monteiro • Educador Físico e Nutricionista</div>
+  </div>\n`;
+
+  // ── TOC ──
+  body += buildFundamentosToc(chapterGroups, chapters);
+
+  // ── Content ──
+  const part2Groups = chapterGroups.filter(g => g.part === 'II');
+
   // Part II
-  body += '<div class="section-break"><h2>Parte II</h2><p>Fundamentos</p></div>\n';
+  body += '<div class="section-break"><h2>Parte II</h2><p>Fundamentos Técnicos</p></div>\n';
 
   for (const group of part2Groups) {
     body += `<div class="chapter-group" id="group-${group.id}">\n`;
@@ -1181,7 +1218,7 @@ function generateBookHtml(): string {
     body += '</div>\n';
   }
 
-  return wrapHtml('Back Discipline — Livro', body);
+  return wrapHtml('Back Discipline — Fundamentos Técnicos', body);
 }
 
 function generateExercisesHtml(): string {
@@ -1277,7 +1314,7 @@ async function main() {
     mkdirSync(PUBLIC_DIR, { recursive: true });
   }
 
-  // Generate Book PDF
+  // Generate Book 1: O Programa PDF
   console.log('Generating book HTML...');
   const bookHtml = generateBookHtml();
   const bookHtmlPath = join(SCRIPTS_DIR, 'temp-book.html');
@@ -1287,7 +1324,17 @@ async function main() {
   console.log('Generating book PDF...');
   await generatePdf(bookHtml, join(PUBLIC_DIR, 'back-discipline-livro.pdf'));
 
-  // Generate Exercises PDF
+  // Generate Book 2: Fundamentos Técnicos PDF
+  console.log('Generating fundamentos HTML...');
+  const fundHtml = generateFundamentosHtml();
+  const fundHtmlPath = join(SCRIPTS_DIR, 'temp-fundamentos.html');
+  writeFileSync(fundHtmlPath, fundHtml, 'utf-8');
+  console.log(`Fundamentos HTML saved: ${fundHtmlPath}`);
+
+  console.log('Generating fundamentos PDF...');
+  await generatePdf(fundHtml, join(PUBLIC_DIR, 'back-discipline-fundamentos.pdf'));
+
+  // Generate Book 3: Exercises PDF
   console.log('Generating exercises HTML...');
   const exHtml = generateExercisesHtml();
   const exHtmlPath = join(SCRIPTS_DIR, 'temp-exercises.html');
@@ -1299,10 +1346,12 @@ async function main() {
 
   // Clean up temp files
   try { unlinkSync(bookHtmlPath); } catch { }
+  try { unlinkSync(fundHtmlPath); } catch { }
   try { unlinkSync(exHtmlPath); } catch { }
 
   console.log('\nDone! PDFs generated in:');
   console.log(`  ${join(PUBLIC_DIR, 'back-discipline-livro.pdf')}`);
+  console.log(`  ${join(PUBLIC_DIR, 'back-discipline-fundamentos.pdf')}`);
   console.log(`  ${join(PUBLIC_DIR, 'back-discipline-biblioteca.pdf')}`);
 }
 
