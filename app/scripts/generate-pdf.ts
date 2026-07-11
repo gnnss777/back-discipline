@@ -230,10 +230,9 @@ const PDF_CSS = `
   }
 
   h1 {
-    font-size: 20pt;
+    font-size: 18pt;
     font-weight: 900;
-    margin: 30mm 0 10mm;
-    text-align: center;
+    margin: 8mm 0 6mm;
     color: #B8956A;
   }
 
@@ -459,13 +458,9 @@ const PDF_CSS = `
 
   .chapter-header {
     text-align: center;
-    padding: 15mm 0 8mm;
-    margin-bottom: 8mm;
+    padding: 20mm 0 8mm;
+    margin-bottom: 6mm;
     border-bottom: 1px solid #B8956A;
-  }
-
-  .chapter:first-of-type .chapter-header {
-    padding-top: 0;
   }
 
   .chapter-header h2 {
@@ -614,8 +609,10 @@ function buildToc(chapterGroups: ChapterGroup[], chapters: Chapter[], isBook: bo
 }
 
 function buildChapterContent(slug: string): string {
-  const content = getChapterContent(slug);
+  let content = getChapterContent(slug) ?? '';
   if (!content) return '<p>Conteúdo não disponível.</p>';
+  // Remove first # Title (chapter-header provides it in PDF, avoid duplicate)
+  content = content.replace(/^#\s+.+(\n|$)/, '');
   return mdToHtml(content);
 }
 
