@@ -217,8 +217,25 @@ const PDF_CSS = `
     font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
     font-size: 10pt;
     line-height: 1.6;
+    padding: 25mm 20mm 20mm;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
+  }
+
+  .fixed-page-top {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 25mm;
+    background: #111;
+    z-index: 1000;
+  }
+
+  .fixed-page-bottom {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    height: 20mm;
+    background: #111;
+    z-index: 1000;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -401,6 +418,7 @@ const PDF_CSS = `
   /* TOC */
   .toc {
     page-break-after: always;
+    padding-top: 25mm;
   }
 
   .toc h2 {
@@ -447,10 +465,12 @@ const PDF_CSS = `
   /* Chapter content */
   .chapter {
     page-break-before: always;
+    padding-top: 25mm;
   }
 
   .chapter:first-of-type {
     page-break-before: auto;
+    padding-top: 0;
   }
 
   .chapter-header {
@@ -470,6 +490,11 @@ const PDF_CSS = `
   .exercise-card {
     page-break-inside: avoid;
     page-break-after: always;
+    padding-top: 25mm;
+  }
+
+  .exercise-card:first-of-type {
+    padding-top: 0;
   }
 
   .exercise-header {
@@ -557,6 +582,8 @@ function wrapHtml(title: string, bodyHtml: string): string {
 <style>${PDF_CSS}</style>
 </head>
 <body>
+<div class="fixed-page-top"></div>
+<div class="fixed-page-bottom"></div>
 ${bodyHtml}
 </body>
 </html>`;
@@ -745,11 +772,8 @@ async function generatePdf(html: string, outputPath: string): Promise<void> {
   await page.pdf({
     path: outputPath,
     format: 'A4',
-    margin: { top: '25mm', bottom: '20mm', left: '20mm', right: '20mm' },
+    margin: { top: '0', right: '0', bottom: '0', left: '0' },
     printBackground: true,
-    displayHeaderFooter: true,
-    headerTemplate: '<div style="height:25mm;background:#111;width:100%;margin:0;padding:0;border:none;"></div>',
-    footerTemplate: '<div style="height:20mm;background:#111;width:100%;margin:0;padding:0;border:none;"></div>',
   });
 
   await browser.close();
