@@ -198,7 +198,7 @@ function mdToHtml(markdown: string): string {
 const PDF_CSS = `
   @page {
     size: A4;
-    margin: 0;
+    margin: 30mm 20mm 20mm;
   }
 
   * {
@@ -217,8 +217,6 @@ const PDF_CSS = `
     font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
     font-size: 10pt;
     line-height: 1.6;
-    padding: 0 20mm 15mm;
-    min-height: 100vh;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
@@ -359,8 +357,7 @@ const PDF_CSS = `
     justify-content: center;
     align-items: center;
     text-align: center;
-    min-height: 100vh;
-    padding-top: 0;
+    min-height: 80vh;
     background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
     position: relative;
   }
@@ -404,7 +401,6 @@ const PDF_CSS = `
   /* TOC */
   .toc {
     page-break-after: always;
-    padding-top: 30mm;
   }
 
   .toc h2 {
@@ -451,12 +447,10 @@ const PDF_CSS = `
   /* Chapter content */
   .chapter {
     page-break-before: always;
-    padding-top: 30mm;
   }
 
   .chapter:first-of-type {
     page-break-before: auto;
-    padding-top: 15mm;
   }
 
   .chapter-header {
@@ -476,11 +470,6 @@ const PDF_CSS = `
   .exercise-card {
     page-break-inside: avoid;
     page-break-after: always;
-    padding-top: 20mm;
-  }
-
-  .exercise-card:first-of-type {
-    padding-top: 0;
   }
 
   .exercise-header {
@@ -533,7 +522,7 @@ const PDF_CSS = `
   .section-break {
     page-break-before: always;
     text-align: center;
-    padding: 40mm 0 20mm;
+    padding: 20mm 0;
   }
 
   .section-break h2 {
