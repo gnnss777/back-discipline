@@ -216,7 +216,7 @@ const PDF_CSS = `
     font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
     font-size: 9.5pt;
     line-height: 1.55;
-    padding: 15mm 15mm 10mm;
+    padding: 5mm 18mm 10mm;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
@@ -458,7 +458,7 @@ const PDF_CSS = `
 
   .chapter-header {
     text-align: center;
-    padding: 20mm 0 8mm;
+    padding: 8mm 0 6mm;
     margin-bottom: 6mm;
     border-bottom: 1px solid #B8956A;
   }
@@ -754,8 +754,11 @@ async function generatePdf(html: string, outputPath: string): Promise<void> {
   await page.pdf({
     path: outputPath,
     format: 'A4',
-    margin: { top: '0', right: '0', bottom: '0', left: '0' },
+    margin: { top: '20mm', bottom: '15mm', left: '0', right: '0' },
     printBackground: true,
+    displayHeaderFooter: true,
+    headerTemplate: '<div style="width:100%;height:100%;background:#111;position:absolute;top:0;left:0;"></div>',
+    footerTemplate: '<div style="width:100%;height:100%;background:#111;position:absolute;top:0;left:0;"></div>',
   });
 
   await browser.close();
