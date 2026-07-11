@@ -33,11 +33,16 @@
   --color-warning: var(--warning);
 }
 
+html {
+  background: var(--background);
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-body), sans-serif;
   letter-spacing: 0.02em;
+  margin: 0;
   padding-bottom: env(safe-area-inset-bottom);
 }
 
