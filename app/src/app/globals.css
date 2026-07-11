@@ -37,9 +37,18 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-body), sans-serif;
+  letter-spacing: 0.02em;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+h1, h2, h3, h4, h5, h6 {
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  padding-bottom: env(safe-area-inset-bottom);
+}
+
+button, label, legend {
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .font-display {
