@@ -207,35 +207,18 @@ const PDF_CSS = `
     box-sizing: border-box;
   }
 
-  html {
+  html, body {
     background: #111;
   }
 
   body {
-    background: #111;
     color: #e8e8e8;
     font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
-    font-size: 10pt;
-    line-height: 1.6;
-    padding: 25mm 20mm 20mm;
+    font-size: 9.5pt;
+    line-height: 1.55;
+    padding: 15mm 15mm 10mm;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
-  }
-
-  .fixed-page-top {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    height: 25mm;
-    background: #111;
-    z-index: 1000;
-  }
-
-  .fixed-page-bottom {
-    position: fixed;
-    bottom: 0; left: 0; right: 0;
-    height: 20mm;
-    background: #111;
-    z-index: 1000;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -280,8 +263,12 @@ const PDF_CSS = `
   p {
     margin: 0 0 3mm;
     text-align: justify;
-    orphans: 3;
-    widows: 3;
+    orphans: 4;
+    widows: 4;
+  }
+
+  h2, h3, h4 {
+    page-break-after: avoid;
   }
 
   strong {
@@ -374,7 +361,7 @@ const PDF_CSS = `
     justify-content: center;
     align-items: center;
     text-align: center;
-    min-height: 80vh;
+    min-height: 90vh;
     background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
     position: relative;
   }
@@ -418,7 +405,6 @@ const PDF_CSS = `
   /* TOC */
   .toc {
     page-break-after: always;
-    padding-top: 25mm;
   }
 
   .toc h2 {
@@ -465,19 +451,21 @@ const PDF_CSS = `
   /* Chapter content */
   .chapter {
     page-break-before: always;
-    padding-top: 25mm;
   }
 
   .chapter:first-of-type {
     page-break-before: auto;
-    padding-top: 0;
   }
 
   .chapter-header {
     text-align: center;
-    padding: 0 0 8mm;
+    padding: 15mm 0 8mm;
     margin-bottom: 8mm;
     border-bottom: 1px solid #B8956A;
+  }
+
+  .chapter:first-of-type .chapter-header {
+    padding-top: 0;
   }
 
   .chapter-header h2 {
@@ -490,7 +478,6 @@ const PDF_CSS = `
   .exercise-card {
     page-break-inside: avoid;
     page-break-after: always;
-    padding-top: 25mm;
   }
 
   .exercise-card:first-of-type {
@@ -547,7 +534,7 @@ const PDF_CSS = `
   .section-break {
     page-break-before: always;
     text-align: center;
-    padding: 20mm 0;
+    padding: 30mm 0 20mm;
   }
 
   .section-break h2 {
@@ -582,8 +569,6 @@ function wrapHtml(title: string, bodyHtml: string): string {
 <style>${PDF_CSS}</style>
 </head>
 <body>
-<div class="fixed-page-top"></div>
-<div class="fixed-page-bottom"></div>
 ${bodyHtml}
 </body>
 </html>`;
