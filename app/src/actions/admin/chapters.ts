@@ -4,6 +4,7 @@ import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 import type { AdminChapter, ContentVersion } from '@/types/admin'
 import { chapters as chaptersMeta } from '@/lib/chapters'
+import { chapterContents } from '@/lib/content'
 
 async function getAdminClient() {
   const cookieStore = await cookies()
@@ -39,7 +40,7 @@ export async function getChapters(): Promise<AdminChapter[]> {
       part: ch.part || 'I',
       group_id: null,
       order_index: ch.order,
-      content_markdown: '',
+      content_markdown: chapterContents[ch.slug] || '',
       is_published: true,
       created_at: new Date().toISOString(),
       updated_at: new Date().toISOString(),
@@ -68,7 +69,7 @@ export async function getChapter(id: string): Promise<AdminChapter | null> {
       part: ch.part || 'I',
       group_id: null,
       order_index: ch.order,
-      content_markdown: '',
+      content_markdown: chapterContents[ch.slug] || '',
       is_published: true,
       created_at: new Date().toISOString(),
       updated_at: new Date().toISOString(),
