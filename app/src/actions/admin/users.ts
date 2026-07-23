@@ -5,9 +5,11 @@ import { cookies } from 'next/headers'
 
 async function getAdminClient() {
   const cookieStore = await cookies()
+  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY
+    || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
   return createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    supabaseKey!,
     {
       cookies: {
         getAll() { return cookieStore.getAll() },
@@ -21,15 +23,28 @@ async function getAdminClient() {
 
 export async function getProfiles() {
   const supabase = await getAdminClient()
-  const { data } = await supabase
+  const { data, error } = await supabase
     .from('profiles')
     .select('*')
     .order('created_at', { ascending: false })
+  if (error) throw new Error(error.message)
   return data ?? []
 }
 
 export async function updateProfileRole(userId: string, role: 'admin' | 'editor') {
   const supabase = await getAdminClient()
+
+  // Prevent removing the last admin
+  if (role === 'editor') {
+    const { count } = await supabase
+      .from('profiles')
+      .select('*', { count: 'exact', head: true })
+      .eq('role', 'admin')
+    if (count === 1) {
+      throw new Error('Não é possível remover o último administrador')
+    }
+  }
+
   const { error } = await supabase
     .from('profiles')
     .update({ role })

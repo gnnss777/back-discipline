@@ -1,4 +1,3 @@
-import { redirect } from 'next/navigation'
 import { getCurrentProfile } from '@/actions/admin/auth'
 import { AdminSidebar } from '@/components/admin/Sidebar'
 import { AdminHeader } from '@/components/admin/Header'
@@ -9,7 +8,11 @@ export default async function AdminLayout({
   children: React.ReactNode
 }) {
   const profile = await getCurrentProfile()
-  if (!profile) redirect('/admin/login')
+
+  // Without profile → login page (middleware handles auth for other routes)
+  if (!profile) {
+    return <>{children}</>
+  }
 
   return (
     <div className="flex min-h-screen bg-[oklch(12%.01_270)]">

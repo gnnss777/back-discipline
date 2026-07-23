@@ -6,9 +6,11 @@ import type { AdminExercise } from '@/types/admin'
 
 async function getAdminClient() {
   const cookieStore = await cookies()
+  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY
+    || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
   return createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    supabaseKey!,
     {
       cookies: {
         getAll() { return cookieStore.getAll() },
@@ -22,21 +24,23 @@ async function getAdminClient() {
 
 export async function getExercises(): Promise<AdminExercise[]> {
   const supabase = await getAdminClient()
-  const { data } = await supabase
+  const { data, error } = await supabase
     .from('exercises')
     .select('*')
     .order('order_index', { ascending: true, nullsFirst: false })
+  if (error) throw new Error(error.message)
   return (data as AdminExercise[]) ?? []
 }
 
 export async function getExercise(id: string): Promise<AdminExercise | null> {
   const supabase = await getAdminClient()
-  const { data } = await supabase
+  const { data, error } = await supabase
     .from('exercises')
     .select('*')
     .eq('id', id)
     .single()
-  return data as AdminExercise | null
+  if (error) return null
+  return data as AdminExercise
 }
 
 export async function updateExercise(

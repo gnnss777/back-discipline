@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { updateChapter } from '@/actions/admin/chapters'
 import { toast } from 'sonner'
 import type { AdminChapter, ContentVersion } from '@/types/admin'
@@ -19,28 +19,35 @@ export function ChapterEditor({
   const [published, setPublished] = useState(chapter.is_published)
   const [saving, setSaving] = useState(false)
   const [lastSaved, setLastSaved] = useState<Date | null>(null)
+  const lastPersisted = useRef({ title: chapter.title, content: chapter.content_markdown, published: chapter.is_published })
+  const savingRef = useRef(false)
+
+  const hasChanges = title !== lastPersisted.current.title
+    || content !== lastPersisted.current.content
+    || published !== lastPersisted.current.published
 
   const save = useCallback(async () => {
+    if (savingRef.current || !hasChanges) return
+    savingRef.current = true
     setSaving(true)
     try {
       await updateChapter(chapter.id, { title, content_markdown: content, is_published: published })
+      lastPersisted.current = { title, content, published }
       setLastSaved(new Date())
-      toast.success('Salvo')
     } catch {
       toast.error('Erro ao salvar')
     } finally {
       setSaving(false)
+      savingRef.current = false
     }
-  }, [chapter.id, title, content, published])
+  }, [chapter.id, title, content, published, hasChanges])
 
   useEffect(() => {
     const timer = setInterval(() => {
-      if (content !== chapter.content_markdown || title !== chapter.title) {
-        save()
-      }
+      if (hasChanges && !savingRef.current) save()
     }, 30000)
     return () => clearInterval(timer)
-  }, [content, title, save, chapter])
+  }, [save, hasChanges])
 
   return (
     <div className="space-y-6">
@@ -62,9 +69,10 @@ export function ChapterEditor({
         </div>
         <button
           onClick={save}
-          className="px-4 py-2 bg-[oklch(76%.14_230)] text-black rounded-lg text-sm font-semibold hover:brightness-110"
+          disabled={!hasChanges || saving}
+          className="px-4 py-2 bg-[oklch(76%.14_230)] text-black rounded-lg text-sm font-semibold hover:brightness-110 disabled:opacity-30"
         >
-          Salvar agora
+          {saving ? 'Salvando...' : 'Salvar agora'}
         </button>
       </div>
 

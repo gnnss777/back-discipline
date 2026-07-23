@@ -6,9 +6,11 @@ import type { AdminChapter, ContentVersion } from '@/types/admin'
 
 async function getAdminClient() {
   const cookieStore = await cookies()
+  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY
+    || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
   return createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    supabaseKey!,
     {
       cookies: {
         getAll() { return cookieStore.getAll() },
@@ -22,21 +24,23 @@ async function getAdminClient() {
 
 export async function getChapters(): Promise<AdminChapter[]> {
   const supabase = await getAdminClient()
-  const { data } = await supabase
+  const { data, error } = await supabase
     .from('chapters')
     .select('*')
     .order('order_index')
+  if (error) throw new Error(error.message)
   return (data as AdminChapter[]) ?? []
 }
 
 export async function getChapter(id: string): Promise<AdminChapter | null> {
   const supabase = await getAdminClient()
-  const { data } = await supabase
+  const { data, error } = await supabase
     .from('chapters')
     .select('*')
     .eq('id', id)
     .single()
-  return data as AdminChapter | null
+  if (error) return null
+  return data as AdminChapter
 }
 
 export async function updateChapter(
@@ -63,11 +67,12 @@ export async function createChapter(
 
 export async function getChapterVersions(chapterId: string): Promise<ContentVersion[]> {
   const supabase = await getAdminClient()
-  const { data } = await supabase
+  const { data, error } = await supabase
     .from('content_versions')
     .select('*')
     .eq('chapter_id', chapterId)
     .order('created_at', { ascending: false })
     .limit(10)
+  if (error) throw new Error(error.message)
   return (data as ContentVersion[]) ?? []
 }

@@ -1,6 +1,6 @@
 import { getChapters } from '@/actions/admin/chapters'
 import { getExercises } from '@/actions/admin/exercises'
-import { BookOpen, Dumbbell, Users, FileText } from 'lucide-react'
+import { BookOpen, Dumbbell, FileText } from 'lucide-react'
 
 export default async function AdminDashboard() {
   const [chapters, exercises] = await Promise.all([
@@ -14,7 +14,6 @@ export default async function AdminDashboard() {
   const stats = [
     { label: 'Capítulos', value: chapters.length, published: publishedChapters, icon: BookOpen },
     { label: 'Exercícios', value: exercises.length, published: publishedExercises, icon: Dumbbell },
-    { label: 'Usuários', value: '—', icon: Users },
     { label: 'PDFs', value: 3, icon: FileText },
   ]
 

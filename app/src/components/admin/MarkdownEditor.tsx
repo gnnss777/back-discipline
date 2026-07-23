@@ -3,6 +3,14 @@
 import { useState, useMemo } from 'react'
 import { Bold, Italic, List, Heading1, Heading2, Quote, Code, Eye } from 'lucide-react'
 
+function sanitizeHtml(html: string): string {
+  return html
+    .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
+    .replace(/on\w+="[^"]*"/gi, '')
+    .replace(/on\w+='[^']*'/gi, '')
+    .replace(/javascript:/gi, '')
+}
+
 function parseMarkdown(md: string): string {
   let html = md
     .replace(/^### (.+)$/gm, '<h3 class="text-lg font-semibold text-[oklch(97%.005_240)] mt-4 mb-2">$1</h3>')
@@ -14,7 +22,6 @@ function parseMarkdown(md: string): string {
     .replace(/^- (.+)$/gm, '<li class="text-[oklch(90%.01_240)] ml-4 list-disc">$1</li>')
     .replace(/^\d\. (.+)$/gm, '<li class="text-[oklch(90%.01_240)] ml-4 list-decimal">$1</li>')
 
-  // Custom boxes
   html = html.replace(
     /:::tip\n([\s\S]*?):::/g,
     '<div class="bg-emerald-500/10 border border-emerald-500/30 rounded-xl p-4 my-4"><p class="text-sm text-emerald-400 mb-1">\uD83D\uDCA1 Dica</p>$1</div>'
@@ -32,7 +39,7 @@ function parseMarkdown(md: string): string {
     '<blockquote class="border-l-4 border-[oklch(76%.14_230)] pl-4 my-4 italic text-[oklch(70%.01_240)]">$1</blockquote>'
   )
 
-  return html
+  return sanitizeHtml(html)
 }
 
 export function MarkdownEditor({

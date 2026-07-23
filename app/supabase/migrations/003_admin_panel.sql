@@ -22,9 +22,21 @@ create policy "Admins can view all profiles"
     exists (select 1 from public.profiles where id = auth.uid() and role = 'admin')
   );
 
-create policy "Users can update own profile"
+create policy "Users can update own display_name"
   on public.profiles for update
-  using (auth.uid() = id);
+  using (auth.uid() = id)
+  with check (
+    auth.uid() = id
+    and (
+      coalesce(role, 'editor') = (select role from public.profiles where id = auth.uid())
+    )
+  );
+
+create policy "Admins can update all profiles"
+  on public.profiles for update
+  using (
+    exists (select 1 from public.profiles where id = auth.uid() and role = 'admin')
+  );
 
 -- 2. Chapters
 create table if not exists public.chapters (

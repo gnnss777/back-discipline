@@ -6,9 +6,11 @@ import type { AdminProfile } from '@/types/admin'
 
 async function getAdminClient() {
   const cookieStore = await cookies()
+  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY
+    || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
   return createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    supabaseKey!,
     {
       cookies: {
         getAll() { return cookieStore.getAll() },
@@ -25,13 +27,14 @@ export async function getCurrentProfile(): Promise<AdminProfile | null> {
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) return null
 
-  const { data } = await supabase
+  const { data, error } = await supabase
     .from('profiles')
     .select('*')
     .eq('id', user.id)
     .single()
 
-  return data as AdminProfile | null
+  if (error) return null
+  return data as AdminProfile
 }
 
 export async function getCurrentUser() {

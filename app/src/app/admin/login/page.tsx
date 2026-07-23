@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { createSupabaseClient } from '@/app/supabase/client'
 
 export default function AdminLoginPage() {
@@ -10,6 +10,7 @@ export default function AdminLoginPage() {
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   const router = useRouter()
+  const searchParams = useSearchParams()
 
   async function handleLogin(e: React.FormEvent) {
     e.preventDefault()
@@ -24,7 +25,13 @@ export default function AdminLoginPage() {
       }
       const { error: signInError } = await client.auth.signInWithPassword({ email, password })
       if (signInError) throw signInError
-      router.push('/admin')
+
+      const redirect = searchParams.get('redirect')
+      if (redirect && redirect.startsWith('/admin')) {
+        router.push(redirect)
+      } else {
+        router.push('/admin')
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Erro ao fazer login')
     } finally {

@@ -12,6 +12,8 @@ export function ExerciseEditor({ exercise }: { exercise: AdminExercise }) {
   const [difficulty, setDifficulty] = useState(exercise.difficulty)
   const [description, setDescription] = useState(exercise.description)
   const [fullDescription, setFullDescription] = useState(exercise.full_description)
+  const [muscles, setMuscles] = useState(exercise.muscles.join(', '))
+  const [tips, setTips] = useState(exercise.tips.join('\n'))
   const [published, setPublished] = useState(exercise.is_published)
   const [saving, setSaving] = useState(false)
 
@@ -24,6 +26,8 @@ export function ExerciseEditor({ exercise }: { exercise: AdminExercise }) {
         difficulty,
         description,
         full_description: fullDescription,
+        muscles: muscles.split(',').map((m) => m.trim()).filter(Boolean),
+        tips: tips.split('\n').map((t) => t.trim()).filter(Boolean),
         is_published: published,
       })
       toast.success('Exercício salvo')
@@ -87,6 +91,28 @@ export function ExerciseEditor({ exercise }: { exercise: AdminExercise }) {
             ))}
           </select>
         </div>
+      </div>
+
+      <div>
+        <label className="text-xs text-[oklch(50%.01_270)] uppercase tracking-wider">Músculos (separados por vírgula)</label>
+        <input
+          type="text"
+          value={muscles}
+          onChange={(e) => setMuscles(e.target.value)}
+          className="w-full mt-1 px-3 py-2 bg-[oklch(18%.01_270)] border border-[oklch(25%.01_270)] rounded-lg text-sm text-[oklch(97%.005_240)] focus:outline-none focus:border-[oklch(76%.14_230)]"
+          placeholder="Latíssimo, Rombóides, Trapézio"
+        />
+      </div>
+
+      <div>
+        <label className="text-xs text-[oklch(50%.01_270)] uppercase tracking-wider">Dicas (uma por linha)</label>
+        <textarea
+          value={tips}
+          onChange={(e) => setTips(e.target.value)}
+          rows={4}
+          className="w-full mt-1 px-3 py-2 bg-[oklch(18%.01_270)] border border-[oklch(25%.01_270)] rounded-lg text-sm text-[oklch(97%.005_240)] resize-none focus:outline-none focus:border-[oklch(76%.14_230)]"
+          placeholder="Mantenha o abdômen contraído"
+        />
       </div>
 
       <div>

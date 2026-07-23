@@ -29,16 +29,19 @@ export function AdminHeader({ profile }: { profile: AdminProfile }) {
 
   async function handleLogout() {
     const client = createSupabaseClient()
-    if (client) {
-      await client.auth.signOut()
-    }
+    if (!client) return
+    const { error } = await client.auth.signOut()
+    if (error) return
     router.push('/admin/login')
   }
 
   return (
     <header className="h-14 border-b border-[oklch(25%.01_270)] flex items-center justify-between px-4">
       <div className="flex items-center gap-3">
-        <button onClick={toggleSidebar} className="lg:hidden text-[oklch(70%.01_240)] hover:text-[oklch(97%.005_240)]">
+        <button
+          onClick={toggleSidebar}
+          className="lg:hidden text-[oklch(70%.01_240)] hover:text-[oklch(97%.005_240)]"
+        >
           <Menu className="w-5 h-5" />
         </button>
         <h1 className="text-lg font-semibold text-[oklch(97%.005_240)]">{title}</h1>
