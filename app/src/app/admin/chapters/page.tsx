@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Edit } from 'lucide-react'
+import { Edit, ChevronRight } from 'lucide-react'
 import { getChapters } from '@/actions/admin/chapters'
 import { chapters as chaptersMeta } from '@/lib/chapters'
 import { StatusBadge } from '@/components/admin/StatusBadge'
@@ -16,12 +16,17 @@ export default async function ChaptersPage() {
   const part1 = chapters.filter((c) => c.part === 'I' || c.part === 'intro')
   const part2 = chapters.filter((c) => c.part === 'II')
 
+  // Show only first 3 chapters total
+  const top3Chapters = [...part1, ...part2].slice(0, 3)
+
   return (
-    <div className="space-y-6">
-      <p className="text-sm text-[oklch(70%.01_240)]">
-        {chapters.length} capítulos no total
-        {dbChapters.length === 0 && ' (lendo dos arquivos TS — importe para editar no banco)'}
-      </p>
+    <div className="max-w-2xl mx-auto space-y-8">
+      <div className="text-center space-y-2">
+        <h1 className="text-3xl font-bold text-[oklch(97%.005_240)]">Gerenciar Capítulos</h1>
+        <p className="text-sm text-[oklch(70%.01_240)]">
+          {chapters.length} capítulos no total • <Link href="/admin/chapters" className="text-[oklch(76%.14_230)] hover:underline">Ver todos</Link>
+        </p>
+      </div>
 
       {dbChapters.length === 0 && (
         <div className="bg-amber-500/10 border border-amber-500/30 rounded-xl px-4 py-3 text-sm text-amber-400">
@@ -31,9 +36,21 @@ export default async function ChaptersPage() {
       )}
 
       <div className="space-y-6">
-        {part1.length > 0 && <Section title="Parte I — O Programa de Treino" chapters={part1} />}
-        {part2.length > 0 && <Section title="Parte II — Fundamentos Técnicos" chapters={part2} />}
+        {part1.length > 0 && <Section title="Parte I — O Programa de Treino" chapters={part1.slice(0, 2)} />}
+        {part2.length > 0 && <Section title="Parte II — Fundamentos Técnicos" chapters={part2.slice(0, 1)} />}
       </div>
+
+      {chapters.length > 3 && (
+        <div className="pt-4 border-t border-[oklch(25%.01_270)]">
+          <Link
+            href="/admin/chapters"
+            className="flex items-center gap-2 px-4 py-3 rounded-lg bg-[oklch(18%.01_270)] border border-[oklch(25%.01_270)] hover:border-[oklch(76%.14_230/0.3)] transition-colors group text-[oklch(70%.01_240)]"
+          >
+            Ver todos os capítulos
+            <ChevronRight className="w-4 h-4 group-hover:text-[oklch(76%.14_230)]" />
+          </Link>
+        </div>
+      )}
     </div>
   )
 }
@@ -44,7 +61,7 @@ function Section({ title, chapters }: { title: string; chapters: { id: string; t
       <h2 className="text-sm font-semibold uppercase tracking-wider text-[oklch(76%.14_230)] mb-3">
         {title}
       </h2>
-      <div className="space-y-1">
+      <div className="space-y-2">
         {chapters.map((ch) => (
           <Link
             key={ch.id}
