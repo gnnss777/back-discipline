@@ -34,12 +34,21 @@ export async function getProfiles() {
 export async function updateProfileRole(userId: string, role: 'admin' | 'editor') {
   const supabase = await getAdminClient()
 
+  // Fetch current role of target user
+  const { data: target, error: fetchError } = await supabase
+    .from('profiles')
+    .select('role')
+    .eq('id', userId)
+    .single()
+  if (fetchError) throw new Error(fetchError.message)
+
   // Prevent removing the last admin
-  if (role === 'editor') {
-    const { count } = await supabase
+  if (role === 'editor' && target?.role === 'admin') {
+    const { count, error: countError } = await supabase
       .from('profiles')
       .select('*', { count: 'exact', head: true })
       .eq('role', 'admin')
+    if (countError) throw new Error(countError.message)
     if (count === 1) {
       throw new Error('Não é possível remover o último administrador')
     }
