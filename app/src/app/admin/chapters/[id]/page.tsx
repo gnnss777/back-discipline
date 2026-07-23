@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation'
-import { getChapter, getChapterVersions } from '@/actions/admin/chapters'
+import { getChapter, getChapterVersions, getChapters } from '@/actions/admin/chapters'
 import { ChapterEditor } from '@/components/admin/ChapterEditor'
 
 export default async function ChapterEditPage({
@@ -12,6 +12,7 @@ export default async function ChapterEditPage({
   if (!chapter) notFound()
 
   const versions = await getChapterVersions(id).catch(() => [])
+  const allChapters = await getChapters().catch(() => [])
 
-  return <ChapterEditor chapter={chapter} versions={versions} />
+  return <ChapterEditor chapter={chapter} versions={versions} allChapters={allChapters} />
 }
