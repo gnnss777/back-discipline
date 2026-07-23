@@ -3,6 +3,7 @@
 import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 import type { AdminChapter, ContentVersion } from '@/types/admin'
+import { chapters as chaptersMeta } from '@/lib/chapters'
 
 async function getAdminClient() {
   const cookieStore = await cookies()
@@ -28,8 +29,24 @@ export async function getChapters(): Promise<AdminChapter[]> {
     .from('chapters')
     .select('*')
     .order('order_index')
-  if (error) throw new Error(error.message)
-  return (data as AdminChapter[]) ?? []
+  if (error || !data || data.length === 0) {
+    // Fallback to TS files
+    return chaptersMeta.map((ch, i) => ({
+      id: ch.slug,
+      slug: ch.slug,
+      title: ch.title,
+      subtitle: ch.description || null,
+      part: ch.part || 'I',
+      group_id: null,
+      order_index: ch.order,
+      content_markdown: '',
+      is_published: true,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+      updated_by: null,
+    }))
+  }
+  return data as AdminChapter[]
 }
 
 export async function getChapter(id: string): Promise<AdminChapter | null> {
@@ -39,7 +56,25 @@ export async function getChapter(id: string): Promise<AdminChapter | null> {
     .select('*')
     .eq('id', id)
     .single()
-  if (error) return null
+  if (error) {
+    // Fallback: try finding by slug
+    const ch = chaptersMeta.find(c => c.slug === id || c.id === id)
+    if (!ch) return null
+    return {
+      id: ch.slug,
+      slug: ch.slug,
+      title: ch.title,
+      subtitle: ch.description || null,
+      part: ch.part || 'I',
+      group_id: null,
+      order_index: ch.order,
+      content_markdown: '',
+      is_published: true,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+      updated_by: null,
+    } as AdminChapter
+  }
   return data as AdminChapter
 }
 

@@ -1,7 +1,7 @@
 import { getChapters } from '@/actions/admin/chapters'
 import { getExercises } from '@/actions/admin/exercises'
 import { BookOpen, Dumbbell, FileText } from 'lucide-react'
-import { seedChapters, seedExercises } from '@/actions/admin/seed'
+import { SeedButton } from '@/components/admin/SeedButton'
 
 export default async function AdminDashboard() {
   const [chapters, exercises] = await Promise.all([
@@ -13,7 +13,23 @@ export default async function AdminDashboard() {
 
   return (
     <div className="space-y-6">
-      {needsSeed && <SeedSection />}
+      {needsSeed && (
+        <div className="bg-amber-500/10 border border-amber-500/30 rounded-xl p-6 space-y-4">
+          <div className="flex items-start gap-3">
+            <span className="text-xl">📦</span>
+            <div>
+              <h2 className="text-lg font-semibold text-[oklch(97%.005_240)]">
+                Banco de dados vazio
+              </h2>
+              <p className="text-sm text-[oklch(70%.01_240)] mt-1">
+                Os capítulos e exercícios estão nos arquivos TypeScript. Clique abaixo para importá-los
+                para o Supabase e começar a editar pelo painel.
+              </p>
+            </div>
+          </div>
+          <SeedButton />
+        </div>
+      )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <div className="bg-[oklch(18%.01_270)] rounded-xl p-4 border border-[oklch(25%.01_270)]">
@@ -67,29 +83,4 @@ export default async function AdminDashboard() {
       </div>
     </div>
   )
-}
-
-async function SeedSection() {
-  let chapCount = 0
-  let exCount = 0
-  try {
-    const [r1, r2] = await Promise.all([
-      seedChapters().catch(() => ({ success: false, count: 0 })),
-      seedExercises().catch(() => ({ success: false, count: 0 })),
-    ])
-    chapCount = r1.count || 0
-    exCount = r2.count || 0
-  } catch {}
-
-  if (chapCount > 0 || exCount > 0) {
-    return (
-      <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-xl p-4">
-        <p className="text-sm text-emerald-400">
-          Dados importados automaticamente: {chapCount} capítulos e {exCount} exercícios!
-        </p>
-      </div>
-    )
-  }
-
-  return null
 }

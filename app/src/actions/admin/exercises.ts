@@ -3,6 +3,7 @@
 import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 import type { AdminExercise } from '@/types/admin'
+import { exercises as exercisesData } from '@/data/exercises'
 
 async function getAdminClient() {
   const cookieStore = await cookies()
@@ -28,8 +29,25 @@ export async function getExercises(): Promise<AdminExercise[]> {
     .from('exercises')
     .select('*')
     .order('order_index', { ascending: true, nullsFirst: false })
-  if (error) throw new Error(error.message)
-  return (data as AdminExercise[]) ?? []
+  if (error || !data || data.length === 0) {
+    // Fallback to TS files
+    return exercisesData.map((ex, i) => ({
+      id: ex.id,
+      slug: ex.id,
+      name: ex.name,
+      category: ex.category,
+      muscles: ex.muscles || [],
+      difficulty: ex.difficulty || 'Intermediário',
+      description: ex.description || '',
+      full_description: ex.fullDescription || '',
+      tips: ex.tips || [],
+      is_published: true,
+      order_index: i,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+    }))
+  }
+  return data as AdminExercise[]
 }
 
 export async function getExercise(id: string): Promise<AdminExercise | null> {
@@ -39,7 +57,26 @@ export async function getExercise(id: string): Promise<AdminExercise | null> {
     .select('*')
     .eq('id', id)
     .single()
-  if (error) return null
+  if (error) {
+    // Fallback to TS files
+    const ex = exercisesData.find(e => e.id === id)
+    if (!ex) return null
+    return {
+      id: ex.id,
+      slug: ex.id,
+      name: ex.name,
+      category: ex.category,
+      muscles: ex.muscles || [],
+      difficulty: ex.difficulty || 'Intermediário',
+      description: ex.description || '',
+      full_description: ex.fullDescription || '',
+      tips: ex.tips || [],
+      is_published: true,
+      order_index: null,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+    }
+  }
   return data as AdminExercise
 }
 

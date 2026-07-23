@@ -2,7 +2,8 @@
 
 import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
-import { chapters as chaptersMeta } from '@/lib/chapters'
+import { chapters as chaptersMeta, chapterGroups } from '@/lib/chapters'
+import { chapterContents } from '@/lib/content'
 import { exercises as exercisesData } from '@/data/exercises'
 
 async function getAdminClient() {
@@ -23,57 +24,75 @@ async function getAdminClient() {
   )
 }
 
-export async function seedChapters() {
+export async function seedAll() {
   const supabase = await getAdminClient()
+  const results: { chapters?: number; exercises?: number; errors?: string[] } = {}
+  const errors: string[] = []
 
   // Check if already seeded
-  const { count } = await supabase
+  const { count: chapCount, error: chapCheckErr } = await supabase
     .from('chapters')
     .select('*', { count: 'exact', head: true })
-  if (count && count > 0) return { success: true, count }
+  if (chapCheckErr) errors.push(chapCheckErr.message)
 
-  // Seed from chapters.ts
-  const rows = chaptersMeta.map((ch, i) => ({
-    slug: ch.slug,
-    title: ch.title,
-    subtitle: null,
-    part: ch.part || 'I',
-    group_id: null,
-    order_index: i,
-    content_markdown: '',
-    is_published: true,
-  }))
+  if (!chapCount || chapCount === 0) {
+    // Seed chapters
+    const chapterRows = chaptersMeta.map((ch, i) => {
+      // Find which group this chapter belongs to
+      const group = chapterGroups.find(g => g.children.includes(ch.slug))
+      const contentMarkdown = chapterContents[ch.slug] || ''
 
-  const { error } = await supabase.from('chapters').insert(rows)
-  if (error) throw new Error(error.message)
+      return {
+        slug: ch.slug,
+        title: ch.title,
+        subtitle: ch.description || null,
+        part: ch.part || 'I',
+        group_id: group?.id || null,
+        order_index: ch.order,
+        content_markdown: contentMarkdown,
+        is_published: true,
+      }
+    })
 
-  return { success: true, count: rows.length }
-}
+    const { error: insertErr } = await supabase.from('chapters').insert(chapterRows)
+    if (insertErr) {
+      errors.push(`chapters: ${insertErr.message}`)
+    } else {
+      results.chapters = chapterRows.length
+    }
+  } else {
+    results.chapters = chapCount
+  }
 
-export async function seedExercises() {
-  const supabase = await getAdminClient()
-
-  // Check if already seeded
-  const { count } = await supabase
+  // Seed exercises
+  const { count: exCount, error: exCheckErr } = await supabase
     .from('exercises')
     .select('*', { count: 'exact', head: true })
-  if (count && count > 0) return { success: true, count }
+  if (exCheckErr) errors.push(exCheckErr.message)
 
-  const rows = exercisesData.map((ex, i) => ({
-    slug: ex.id,
-    name: ex.name,
-    category: ex.category,
-    muscles: ex.muscles,
-    difficulty: ex.difficulty,
-    description: ex.description,
-    full_description: ex.fullDescription || '',
-    tips: ex.tips || [],
-    is_published: true,
-    order_index: i,
-  }))
+  if (!exCount || exCount === 0) {
+    const exerciseRows = exercisesData.map((ex, i) => ({
+      slug: ex.id,
+      name: ex.name,
+      category: ex.category,
+      muscles: ex.muscles || [],
+      difficulty: ex.difficulty || 'Intermediário',
+      description: ex.description || '',
+      full_description: ex.fullDescription || '',
+      tips: ex.tips || [],
+      is_published: true,
+      order_index: i,
+    }))
 
-  const { error } = await supabase.from('exercises').insert(rows)
-  if (error) throw new Error(error.message)
+    const { error: insertErr } = await supabase.from('exercises').insert(exerciseRows)
+    if (insertErr) {
+      errors.push(`exercises: ${insertErr.message}`)
+    } else {
+      results.exercises = exerciseRows.length
+    }
+  } else {
+    results.exercises = exCount
+  }
 
-  return { success: true, count: rows.length }
+  return { ...results, errors: errors.length > 0 ? errors : undefined }
 }
