@@ -1,16 +1,17 @@
 'use client'
 
 import Link from 'next/link'
-import type { AdminChapter } from '@/types/admin'
+import type { ChapterWithPart } from '@/lib/admin-utils'
+import { filterPart1, filterPart2 } from '@/lib/admin-utils'
 
 interface ChapterSidebarProps {
-  chapters: AdminChapter[]
+  chapters: ChapterWithPart[]
   currentId: string
 }
 
 export function ChapterSidebar({ chapters, currentId }: ChapterSidebarProps) {
-  const part1 = chapters.filter((c) => c.part === 'I' || c.part === 'intro')
-  const part2 = chapters.filter((c) => c.part === 'II')
+  const part1 = filterPart1(chapters)
+  const part2 = filterPart2(chapters)
 
   return (
     <div className="h-full flex flex-col bg-[oklch(15%.01_270)] border-r border-[oklch(25%.01_270)]">
@@ -21,7 +22,7 @@ export function ChapterSidebar({ chapters, currentId }: ChapterSidebarProps) {
       </div>
 
       <div className="flex-1 overflow-y-auto p-2 space-y-2">
-        {part1.map((ch) => (
+        {part1.map((ch: any) => (
           <Link
             key={ch.id}
             href={`/admin/chapters/${ch.id}`}
@@ -35,7 +36,7 @@ export function ChapterSidebar({ chapters, currentId }: ChapterSidebarProps) {
           </Link>
         ))}
 
-        {part2.map((ch) => (
+        {part2.map((ch: any) => (
           <Link
             key={ch.id}
             href={`/admin/chapters/${ch.id}`}

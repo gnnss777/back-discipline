@@ -3,21 +3,19 @@ import { Edit, ChevronRight } from 'lucide-react'
 import { getChapters } from '@/actions/admin/chapters'
 import { chapters as chaptersMeta } from '@/lib/chapters'
 import { StatusBadge } from '@/components/admin/StatusBadge'
+import { getTopChapters } from '@/lib/admin-utils'
+import type { ChapterWithPart } from '@/lib/admin-utils'
 
 export default async function ChaptersPage() {
   const dbChapters = await getChapters().catch(() => [])
-  const chapters = dbChapters.length > 0 ? dbChapters : chaptersMeta.map((ch) => ({
+  const chapters: ChapterWithPart[] = dbChapters.length > 0 ? dbChapters : chaptersMeta.map((ch) => ({
     id: ch.slug,
     title: ch.title,
     is_published: true,
     part: ch.part || 'I',
-  }))
+  } as any))
 
-  const part1 = chapters.filter((c) => c.part === 'I' || c.part === 'intro')
-  const part2 = chapters.filter((c) => c.part === 'II')
-
-  // Show only first 3 chapters total
-  const top3Chapters = [...part1, ...part2].slice(0, 3)
+  const { top3, part1, part2 } = getTopChapters(chapters)
 
   return (
     <div className="max-w-2xl mx-auto space-y-8">
@@ -55,14 +53,14 @@ export default async function ChaptersPage() {
   )
 }
 
-function Section({ title, chapters }: { title: string; chapters: { id: string; title: string; is_published: boolean }[] }) {
+function Section({ title, chapters }: { title: string; chapters: ChapterWithPart[] }) {
   return (
     <div>
       <h2 className="text-sm font-semibold uppercase tracking-wider text-[oklch(76%.14_230)] mb-3">
         {title}
       </h2>
       <div className="space-y-2">
-        {chapters.map((ch) => (
+        {chapters.map((ch: any) => (
           <Link
             key={ch.id}
             href={`/admin/chapters/${ch.id}`}
