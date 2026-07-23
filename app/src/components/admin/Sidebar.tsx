@@ -17,8 +17,7 @@ const navItems = [
 
 export function AdminSidebar({ profile }: { profile: AdminProfile }) {
   const pathname = usePathname()
-  const sidebarCollapsed = useAdminStore((s) => s.sidebarCollapsed)
-  const toggleSidebar = useAdminStore((s) => s.toggleSidebar)
+  const { sidebarCollapsed, toggleSidebar } = useAdminStore()
 
   return (
     <>

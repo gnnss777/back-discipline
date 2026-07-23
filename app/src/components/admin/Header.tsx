@@ -21,7 +21,7 @@ const pageTitles: Record<string, string> = {
 export function AdminHeader({ profile }: { profile: AdminProfile }) {
   const pathname = usePathname()
   const router = useRouter()
-  const toggleSidebar = useAdminStore((s) => s.toggleSidebar)
+  const { toggleSidebar } = useAdminStore()
 
   const title = Object.entries(pageTitles).find(([path]) =>
     pathname === path || pathname.startsWith(path)
