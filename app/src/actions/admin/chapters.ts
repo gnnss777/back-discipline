@@ -83,11 +83,34 @@ export async function updateChapter(
   payload: Partial<Pick<AdminChapter, 'title' | 'subtitle' | 'content_markdown' | 'is_published' | 'part' | 'order_index'>>
 ) {
   const supabase = await getAdminClient()
-  const { error } = await supabase
-    .from('chapters')
-    .update({ ...payload, updated_at: new Date().toISOString() })
-    .eq('id', id)
-  if (error) throw new Error(error.message)
+
+  // Check if this is a UUID (existing DB row) or a slug (TS fallback)
+  const isUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id)
+
+  if (isUuid) {
+    const { error } = await supabase
+      .from('chapters')
+      .update({ ...payload, updated_at: new Date().toISOString() })
+      .eq('id', id)
+    if (error) throw new Error(error.message)
+  } else {
+    // TS fallback chapter: find chapter metadata and create in DB
+    const { chapters: chaptersMeta } = await import('@/lib/chapters')
+    const meta = chaptersMeta.find(c => c.slug === id)
+    const { error } = await supabase
+      .from('chapters')
+      .insert({
+        slug: id,
+        title: payload.title || meta?.title || id,
+        subtitle: payload.subtitle || meta?.description || null,
+        part: payload.part || meta?.part || 'I',
+        order_index: payload.order_index ?? meta?.order ?? 0,
+        content_markdown: payload.content_markdown || '',
+        is_published: payload.is_published ?? true,
+        updated_at: new Date().toISOString(),
+      })
+    if (error) throw new Error(error.message)
+  }
 }
 
 export async function createChapter(
