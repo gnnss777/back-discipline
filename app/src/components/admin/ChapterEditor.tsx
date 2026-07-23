@@ -84,7 +84,7 @@ export function ChapterEditor({
         placeholder="Título do capítulo"
       />
 
-      <div className="min-h-[60vh]">
+      <div className="h-[75vh]">
         <MarkdownEditor value={content} onChange={setContent} />
       </div>
 
