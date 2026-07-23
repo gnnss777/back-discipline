@@ -28,13 +28,10 @@ export async function proxy(request: NextRequest) {
           getAll() {
             return request.cookies.getAll()
           },
-          setAll(cookiesToSet, headers) {
+          setAll(cookiesToSet) {
             cookiesToSet.forEach(({ name, value, options }) => {
               request.cookies.set(name, value)
               supabaseResponse.cookies.set(name, value, options)
-            })
-            Object.entries(headers).forEach(([key, value]) => {
-              supabaseResponse.headers.set(key, value)
             })
           },
         },
@@ -44,24 +41,11 @@ export async function proxy(request: NextRequest) {
     const { data: { user } } = await supabase.auth.getUser()
 
     // Admin route protection
-    if (request.nextUrl.pathname.startsWith('/admin/')) {
+    if (request.nextUrl.pathname.startsWith('/admin/') || request.nextUrl.pathname === '/admin') {
       if (!user) {
         const url = request.nextUrl.clone()
         url.pathname = '/admin/login'
         url.searchParams.set('redirect', request.nextUrl.pathname)
-        return NextResponse.redirect(url)
-      }
-
-      const { data: profile } = await supabase
-        .from('profiles')
-        .select('role')
-        .eq('id', user.id)
-        .single()
-
-      const role = profile?.role
-      if (role !== 'admin' && role !== 'editor') {
-        const url = request.nextUrl.clone()
-        url.pathname = '/dashboard'
         return NextResponse.redirect(url)
       }
     }
