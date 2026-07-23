@@ -1,6 +1,7 @@
 import { getChapters } from '@/actions/admin/chapters'
 import { getExercises } from '@/actions/admin/exercises'
 import { BookOpen, Dumbbell, FileText } from 'lucide-react'
+import { seedChapters, seedExercises } from '@/actions/admin/seed'
 
 export default async function AdminDashboard() {
   const [chapters, exercises] = await Promise.all([
@@ -8,32 +9,34 @@ export default async function AdminDashboard() {
     getExercises().catch(() => []),
   ])
 
-  const publishedChapters = chapters.filter((c) => c.is_published).length
-  const publishedExercises = exercises.filter((e) => e.is_published).length
-
-  const stats = [
-    { label: 'Capítulos', value: chapters.length, published: publishedChapters, icon: BookOpen },
-    { label: 'Exercícios', value: exercises.length, published: publishedExercises, icon: Dumbbell },
-    { label: 'PDFs', value: 3, icon: FileText },
-  ]
+  const needsSeed = chapters.length === 0 || exercises.length === 0
 
   return (
     <div className="space-y-6">
+      {needsSeed && <SeedSection />}
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        {stats.map((stat) => (
-          <div key={stat.label} className="bg-[oklch(18%.01_270)] rounded-xl p-4 border border-[oklch(25%.01_270)]">
-            <div className="flex items-center gap-3 mb-3">
-              <stat.icon className="w-5 h-5 text-[oklch(76%.14_230)]" />
-              <span className="text-sm text-[oklch(70%.01_240)]">{stat.label}</span>
-            </div>
-            <div className="text-2xl font-semibold text-[oklch(97%.005_240)]">{stat.value}</div>
-            {'published' in stat && (
-              <div className="text-xs text-[oklch(50%.01_270)] mt-1">
-                {stat.published} publicados
-              </div>
-            )}
+        <div className="bg-[oklch(18%.01_270)] rounded-xl p-4 border border-[oklch(25%.01_270)]">
+          <div className="flex items-center gap-3 mb-3">
+            <BookOpen className="w-5 h-5 text-[oklch(76%.14_230)]" />
+            <span className="text-sm text-[oklch(70%.01_240)]">Capítulos</span>
           </div>
-        ))}
+          <div className="text-2xl font-semibold text-[oklch(97%.005_240)]">{chapters.length}</div>
+        </div>
+        <div className="bg-[oklch(18%.01_270)] rounded-xl p-4 border border-[oklch(25%.01_270)]">
+          <div className="flex items-center gap-3 mb-3">
+            <Dumbbell className="w-5 h-5 text-[oklch(76%.14_230)]" />
+            <span className="text-sm text-[oklch(70%.01_240)]">Exercícios</span>
+          </div>
+          <div className="text-2xl font-semibold text-[oklch(97%.005_240)]">{exercises.length}</div>
+        </div>
+        <div className="bg-[oklch(18%.01_270)] rounded-xl p-4 border border-[oklch(25%.01_270)]">
+          <div className="flex items-center gap-3 mb-3">
+            <FileText className="w-5 h-5 text-[oklch(76%.14_230)]" />
+            <span className="text-sm text-[oklch(70%.01_240)]">PDFs</span>
+          </div>
+          <div className="text-2xl font-semibold text-[oklch(97%.005_240)]">3</div>
+        </div>
       </div>
 
       <div className="bg-[oklch(18%.01_270)] rounded-xl p-6 border border-[oklch(25%.01_270)]">
@@ -64,4 +67,29 @@ export default async function AdminDashboard() {
       </div>
     </div>
   )
+}
+
+async function SeedSection() {
+  let chapCount = 0
+  let exCount = 0
+  try {
+    const [r1, r2] = await Promise.all([
+      seedChapters().catch(() => ({ success: false, count: 0 })),
+      seedExercises().catch(() => ({ success: false, count: 0 })),
+    ])
+    chapCount = r1.count || 0
+    exCount = r2.count || 0
+  } catch {}
+
+  if (chapCount > 0 || exCount > 0) {
+    return (
+      <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-xl p-4">
+        <p className="text-sm text-emerald-400">
+          Dados importados automaticamente: {chapCount} capítulos e {exCount} exercícios!
+        </p>
+      </div>
+    )
+  }
+
+  return null
 }
