@@ -41,13 +41,14 @@ export async function getChapters(): Promise<AdminChapter[]> {
       group_id: null,
       order_index: ch.order,
       content_markdown: chapterContents[ch.slug] || '',
+      content_blocks: [],
       is_published: true,
       created_at: new Date().toISOString(),
       updated_at: new Date().toISOString(),
       updated_by: null,
     }))
   }
-  return data as AdminChapter[]
+  return (data as AdminChapter[]).map((c) => ({ ...c, content_blocks: c.content_blocks ?? [] }))
 }
 
 export async function getChapter(id: string): Promise<AdminChapter | null> {
@@ -70,28 +71,31 @@ export async function getChapter(id: string): Promise<AdminChapter | null> {
       group_id: null,
       order_index: ch.order,
       content_markdown: chapterContents[ch.slug] || '',
+      content_blocks: [],
       is_published: true,
       created_at: new Date().toISOString(),
       updated_at: new Date().toISOString(),
       updated_by: null,
     } as AdminChapter
   }
-  return data as AdminChapter
+  return { ...(data as AdminChapter), content_blocks: (data as AdminChapter).content_blocks ?? [] }
 }
 
 export async function updateChapter(
   id: string,
-  payload: Partial<Pick<AdminChapter, 'title' | 'subtitle' | 'content_markdown' | 'is_published' | 'part' | 'order_index'>>
+  payload: Partial<Pick<AdminChapter, 'title' | 'subtitle' | 'content_markdown' | 'content_blocks' | 'is_published' | 'part' | 'order_index'>>
 ) {
   const supabase = await getAdminClient()
 
   // Check if this is a UUID (existing DB row) or a slug (TS fallback)
   const isUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id)
 
+  const updatePayload: Record<string, unknown> = { ...payload, updated_at: new Date().toISOString() }
+
   if (isUuid) {
     const { error } = await supabase
       .from('chapters')
-      .update({ ...payload, updated_at: new Date().toISOString() })
+      .update(updatePayload)
       .eq('id', id)
     if (error) throw new Error(error.message)
   } else {
@@ -107,6 +111,7 @@ export async function updateChapter(
         part: payload.part || meta?.part || 'I',
         order_index: payload.order_index ?? meta?.order ?? 0,
         content_markdown: payload.content_markdown || '',
+        content_blocks: payload.content_blocks || [],
         is_published: payload.is_published ?? true,
         updated_at: new Date().toISOString(),
       })

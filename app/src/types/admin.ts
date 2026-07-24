@@ -1,3 +1,5 @@
+import type { Block } from './blocks'
+
 export interface AdminProfile {
   id: string
   display_name: string | null
@@ -14,6 +16,7 @@ export interface AdminChapter {
   group_id: string | null
   order_index: number
   content_markdown: string
+  content_blocks: Block[]
   is_published: boolean
   created_at: string
   updated_at: string
