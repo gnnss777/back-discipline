@@ -35,7 +35,39 @@ const DICA_RE = /^\*\*(Dica|Dica técnica|Dica avançada|Dica de Meadows):/i
 const WARNING_RE = /^\*\*(Cuidado|Aviso):/i
 
 export function parseMarkdownToBlocks(md: string): Block[] {
-  const rawBlocks = md.split(/\n{2,}/)
+  // First extract :::tip :::warning :::exercise :::quote blocks because they
+  // may contain blank lines inside their body (which would otherwise be split)
+  const BLOCK_OPEN_RE = /^:::(tip|warning|exercise|quote)\n([\s\S]*?)\n:::$/gm
+  const placeholders: Block[] = []
+  let working = md
+  working = working.replace(BLOCK_OPEN_RE, (_match, type: string, body: string) => {
+    const idx = placeholders.length
+    if (type === 'exercise') {
+      const titleMatch = /^##\s+(.+)$/m.exec(body)
+      const musclesMatch = /^\*\*M\u00fasculos:\*\*\s*(.+)$/m.exec(body)
+      // Remove ONLY the matched title/muscles lines; preserve any other ## or **M** lines
+      const lines = body.split('\n')
+      const titleLine = titleMatch ? lines.indexOf(titleMatch[0]) : -1
+      const musclesLine = musclesMatch ? lines.indexOf(musclesMatch[0]) : -1
+      const contentAfter = lines
+        .filter((_, idx) => idx !== titleLine && idx !== musclesLine)
+        .join('\n')
+        .replace(/\n{3,}/g, '\n\n')
+        .trim()
+      placeholders.push(
+        makeBlock('exercise', {
+          title: titleMatch ? titleMatch[1].trim() : '',
+          muscles: musclesMatch ? musclesMatch[1].trim() : undefined,
+          content: contentAfter,
+        }),
+      )
+      return `\u0001EXERCISE\u0001${idx}\u0001`
+    }
+    placeholders.push(makeBlock(type as 'tip' | 'warning' | 'quote', { content: body.trim() }))
+    return `\u0001${type.toUpperCase()}\u0001${idx}\u0001`
+  })
+
+  const rawBlocks = working.split(/\n{2,}/)
   const blocks: Block[] = []
 
   for (let i = 0; i < rawBlocks.length; i++) {
@@ -43,39 +75,25 @@ export function parseMarkdownToBlocks(md: string): Block[] {
     const trimmed = raw.trim()
     if (!trimmed) continue
 
-    // :::tip\n...\n:::
-    const tipMatch = /^:::tip\n([\s\S]*?)\n:::$/.exec(trimmed)
-    if (tipMatch) {
-      blocks.push(makeBlock('tip', { content: tipMatch[1].trim() }))
+    // Reset placeholders (recognized as synthetic single blocks above)
+    const tipPh = /^\u0001TIP\u0001(\d+)\u0001$/.exec(trimmed)
+    const warningPh = /^\u0001WARNING\u0001(\d+)\u0001$/.exec(trimmed)
+    const quotePh = /^\u0001QUOTE\u0001(\d+)\u0001$/.exec(trimmed)
+    const exercisePh = /^\u0001EXERCISE\u0001(\d+)\u0001$/.exec(trimmed)
+    if (tipPh) {
+      blocks.push(placeholders[Number(tipPh[1])])
       continue
     }
-    const warningMatch = /^:::warning\n([\s\S]*?)\n:::$/.exec(trimmed)
-    if (warningMatch) {
-      blocks.push(makeBlock('warning', { content: warningMatch[1].trim() }))
+    if (warningPh) {
+      blocks.push(placeholders[Number(warningPh[1])])
       continue
     }
-    const exerciseBlockMatch = /^:::exercise\n([\s\S]*?)\n:::$/.exec(trimmed)
-    if (exerciseBlockMatch) {
-      const inner = exerciseBlockMatch[1].trim()
-      const titleMatch = /^##\s+(.+)$/m.exec(inner)
-      const musclesMatch = /^\*\*M\u00fasculos:\*\*\s*(.+)$/m.exec(inner)
-      const contentAfter = inner
-        .split(/\n+/)
-        .filter((l) => !/^##\s/.test(l) && !/^\*\*M/.test(l))
-        .join('\n')
-        .trim()
-      blocks.push(
-        makeBlock('exercise', {
-          title: titleMatch ? titleMatch[1].trim() : '',
-          muscles: musclesMatch ? musclesMatch[1].trim() : undefined,
-          content: contentAfter,
-        }),
-      )
+    if (quotePh) {
+      blocks.push(placeholders[Number(quotePh[1])])
       continue
     }
-    const quoteMatch = /^:::quote\n([\s\S]*?)\n:::$/.exec(trimmed)
-    if (quoteMatch) {
-      blocks.push(makeBlock('quote', { content: quoteMatch[1].trim() }))
+    if (exercisePh) {
+      blocks.push(placeholders[Number(exercisePh[1])])
       continue
     }
 
@@ -118,7 +136,7 @@ export function parseMarkdownToBlocks(md: string): Block[] {
       const lines = trimmed.split(/\n/).filter((l) => l.trim().length > 0)
       const isAllBullets = lines.length >= 1 && lines.every((l) => /^(- |\* )/.test(l))
       if (isAllBullets) {
-        const items = lines.map((l) => l.replace(/^(- |\* )/, '').trim())
+        const items = lines.map((l) => l.replace(/^(- |\* )/, '').trim()).filter(Boolean)
         blocks.push(makeBlock('list', { items, ordered: false }))
         continue
       }
@@ -128,7 +146,7 @@ export function parseMarkdownToBlocks(md: string): Block[] {
       const lines = trimmed.split(/\n/).filter((l) => l.trim().length > 0)
       const isAllOrdered = lines.length >= 1 && lines.every((l) => /^\d+\.\s/.test(l))
       if (isAllOrdered) {
-        const items = lines.map((l) => l.replace(/^\d+\.\s*/, '').trim())
+        const items = lines.map((l) => l.replace(/^\d+\.\s*/, '').trim()).filter(Boolean)
         blocks.push(makeBlock('list', { items, ordered: true }))
         continue
       }

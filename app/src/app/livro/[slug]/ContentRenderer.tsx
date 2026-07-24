@@ -44,7 +44,40 @@ function isMajorHeading(line: string): boolean {
 }
 
 function buildBlocks(content: string): Block[] {
- const rawBlocks = content.split('\n\n');
+ // First extract :::tip :::warning :::exercise :::quote blocks because their
+ // bodies can contain blank lines that would otherwise be split on \n\n
+ const BLOCK_RE = /^:::(tip|warning|exercise|quote)\n([\s\S]*?)\n:::$/gm
+ const placeholders: Block[] = []
+ let working = content
+ working = working.replace(BLOCK_RE, (_match, type: string, body: string) => {
+   let reconstructed = ''
+   if (type === 'exercise') {
+    const inner = body.trim()
+    const titleMatch = /^##\s+(.+)$/m.exec(inner)
+    const musclesMatch = /^\*\*Músculos:\*\*\s*(.+)$/m.exec(inner)
+    // Remove ONLY the matched title/muscles lines; preserve any other ## or **M** lines
+    const lines = inner.split('\n')
+    const titleLine = titleMatch ? lines.indexOf(titleMatch[0]) : -1
+    const musclesLine = musclesMatch ? lines.indexOf(musclesMatch[0]) : -1
+    const contentAfter = lines
+     .filter((_, idx) => idx !== titleLine && idx !== musclesLine)
+     .join('\n')
+     .replace(/\n{3,}/g, '\n\n')
+     .trim()
+    reconstructed = `:::exercise\n## ${titleMatch ? titleMatch[1].trim() : ''}\n**Músculos:** ${musclesMatch ? musclesMatch[1].trim() : ''}\n${contentAfter}\n:::`
+   } else if (type === 'tip') {
+    reconstructed = `:::tip\n${body.trim()}\n:::`
+  } else if (type === 'warning') {
+   reconstructed = `:::warning\n${body.trim()}\n:::`
+  } else if (type === 'quote') {
+   reconstructed = `:::quote\n${body.trim()}\n:::`
+  }
+  const idx = placeholders.length
+  placeholders.push({ type: type as Block['type'], raw: reconstructed } as Block)
+  return `\u0001BLOCK\u0001(${type})\u0001${idx}\u0001`
+ })
+
+ const rawBlocks = working.split('\n\n');
  const blocks: Block[] = [];
 
  for (let i = 0; i < rawBlocks.length; i++) {
@@ -127,25 +160,11 @@ function buildBlocks(content: string): Block[] {
   }
 
   // ── Block syntax (admin editor output: :::tip / :::warning / :::exercise / :::quote) ──
-  const blockTip = BLOCK_TIP_RE.exec(trimmed);
-  if (blockTip) {
-   blocks.push({ type: 'tip', raw: `:::tip\n${blockTip[1]}\n:::` });
-   continue;
-  }
-  const blockWarn = BLOCK_WARNING_RE.exec(trimmed);
-  if (blockWarn) {
-   blocks.push({ type: 'warning', raw: `:::warning\n${blockWarn[1]}\n:::` });
-   continue;
-  }
-  const blockExer = BLOCK_EXERCISE_RE.exec(trimmed);
-  if (blockExer) {
-   blocks.push({ type: 'exercise', raw: `:::exercise\n${blockExer[1]}\n:::` });
-   continue;
-  }
-  const blockQuote = BLOCK_QUOTE_RE.exec(trimmed);
-  if (blockQuote) {
-   blocks.push({ type: 'quote', raw: `:::quote\n${blockQuote[1]}\n:::` });
-   continue;
+  // Placeholders were emitted before the split to preserve blank lines inside blocks
+  const blockPh = /^\u0001BLOCK\u0001\((tip|warning|exercise|quote)\)\u0001(\d+)\u0001$/.exec(trimmed)
+  if (blockPh) {
+   blocks.push(placeholders[Number(blockPh[2])])
+   continue
   }
 
   // ── Quote (*"pattern) ──
@@ -228,41 +247,48 @@ function renderInline(text: string): React.ReactNode[] {
 function ExerciseCard({ raw }: { raw: string }) {
  // Strip :::exercise wrapper if present (admin editor output)
  let inner = raw
- if (inner.startsWith(':::exercise\n')) {
-  inner = inner.replace(/^:::exercise\n/, '').replace(/\n:::$/, '')
+  if (inner.startsWith(':::exercise\n')) {
+   inner = inner.replace(/^:::exercise\n/, '').replace(/\n:::$/, '')
+  }
+
+ // Split intelligently: the :::exercise format is:
+ //   ## Title
+ //   **Músculos:** X  (optional)
+ //   <body>
+ // Body can contain blank lines and sub-blocks. We extract the heading/muscles
+ // line by line, then the rest is the body.
+ const allLines = inner.split('\n')
+
+ // Extract heading (first ## or ### line)
+ let heading: string | null = null
+ let i = 0
+ for (; i < allLines.length; i++) {
+  if (/^(##|###)\s+/.test(allLines[i])) {
+   heading = allLines[i].replace(/^(##|###)\s+/, '')
+   i++
+   break
+  }
+ }
+ if (heading === null && allLines.length > 0) {
+  // Fallback: treat first line as heading
+  heading = allLines[0]
+  i = 1
  }
 
- const lines = inner.split('\n\n');
-
- // First line contains heading: "### Exercício 1: Name — stats"
- let heading = lines[0].replace(/^###\s+/, '');
- // If heading comes from :::exercise as `## <title>`, normalize to bare title
- heading = heading.replace(/^##\s+/, '')
- // Extract stats from heading if present (after em-dash)
- let headingName = heading;
- let headingStats = '';
- const dashIdx = heading.indexOf(' — ');
- if (dashIdx > 0 && lines.length >= 2 && !isStatsBlock(lines[1])) {
-  // Stats might be inline in heading after em-dash
+ // Extract muscles line if present
+ let statsLine = ''
+ if (i < allLines.length && /^\*\*Músculos:\*\*/.test(allLines[i])) {
+  statsLine = allLines[i].replace(/\*\*/g, '')
+  i++
  }
 
- // Find stats line (the first **bold** block)
- let restStart = 1;
- let statsLine = '';
- if (lines.length > 1 && isStatsBlock(lines[1])) {
-  statsLine = lines[1].replace(/\*\*/g, '');
-  restStart = 2;
- }
-
- // Rest of content
- const rest = lines.slice(restStart).join('\n\n');
-
- // Split: description, labels/blocks, tip
- const subBlocks = rest.split('\n\n');
+ // Rest is body — split into subBlocks by blank lines
+ const rest = allLines.slice(i).join('\n')
+ const subBlocks = rest.split(/\n{2,}/)
 
  return (
   <div className="p-5 bg-surface border-l-4 border-l-primary border border-secondary rounded my-6">
-   <h4 className="text-lg font-bold text-foreground tracking-wider">{headingName}</h4>
+   <h4 className="text-lg font-bold text-foreground tracking-wider">{heading ?? ''}</h4>
 
    {statsLine && (
     <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-primary/10 text-primary text-sm font-bold rounded mt-3 mb-4">
@@ -338,9 +364,9 @@ function ExerciseCard({ raw }: { raw: string }) {
     })}
    </div>
 
-   {(() => {
-    const searchName = headingName.replace(/^(\d+\.?\s*|Exercício\s+\d+:\s*)/, '').split(' — ')[0];
-    const exRef = findExerciseByHeadingName(searchName);
+    {(() => {
+     const searchName = (heading ?? '').replace(/^(\d+\.?\s*|Exercício\s+\d+:\s*)/, '').split(' — ')[0];
+     const exRef = findExerciseByHeadingName(searchName);
     const href = exRef ? `/biblioteca/${exRef.id}` : `/biblioteca?search=${encodeURIComponent(searchName)}`;
     return (
      <Link
