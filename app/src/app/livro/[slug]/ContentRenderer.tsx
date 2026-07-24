@@ -166,26 +166,6 @@ function buildBlocks(content: string): Block[] {
    blocks.push(placeholders[Number(blockPh[2])])
    continue
   }
-  const blockTip = BLOCK_TIP_RE.exec(trimmed);
-  if (blockTip) {
-   blocks.push({ type: 'tip', raw: `:::tip\n${blockTip[1]}\n:::` });
-   continue;
-  }
-  const blockWarn = BLOCK_WARNING_RE.exec(trimmed);
-  if (blockWarn) {
-   blocks.push({ type: 'warning', raw: `:::warning\n${blockWarn[1]}\n:::` });
-   continue;
-  }
-  const blockExer = BLOCK_EXERCISE_RE.exec(trimmed);
-  if (blockExer) {
-   blocks.push({ type: 'exercise', raw: `:::exercise\n${blockExer[1]}\n:::` });
-   continue;
-  }
-  const blockQuote = BLOCK_QUOTE_RE.exec(trimmed);
-  if (blockQuote) {
-   blocks.push({ type: 'quote', raw: `:::quote\n${blockQuote[1]}\n:::` });
-   continue;
-  }
 
   // ── Quote (*"pattern) ──
   if (QUOTE_RE.test(trimmed)) {
@@ -267,9 +247,9 @@ function renderInline(text: string): React.ReactNode[] {
 function ExerciseCard({ raw }: { raw: string }) {
  // Strip :::exercise wrapper if present (admin editor output)
  let inner = raw
- if (inner.startsWith(':::exercise\n')) {
-  inner = inner.replace(/^:::exercise\n/, '').replace(/\n:::$/, '')
- }
+  if (inner.startsWith(':::exercise\n')) {
+   inner = inner.replace(/^:::exercise\n/, '').replace(/\n:::$/, '')
+  }
 
  // Split intelligently: the :::exercise format is:
  //   ## Title
