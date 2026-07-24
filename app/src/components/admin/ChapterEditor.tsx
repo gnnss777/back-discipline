@@ -34,13 +34,19 @@ export function ChapterEditor({
   const [lastSaved, setLastSaved] = useState<Date | null>(null)
   const lastPersisted = useRef({
     title: chapter.title,
+    blocks: initialBlocks,
     markdown: chapter.content_markdown,
     published: chapter.is_published,
   })
   const savingRef = useRef(false)
 
+  // Stable canonical JSON so referentially-different but value-equal block arrays compare equal
+  const blocksKey = JSON.stringify(blocks)
+  const lastBlocksKey = JSON.stringify(lastPersisted.current.blocks)
+
   const hasChanges =
     title !== lastPersisted.current.title ||
+    blocksKey !== lastBlocksKey ||
     markdown !== lastPersisted.current.markdown ||
     published !== lastPersisted.current.published
 
@@ -55,7 +61,7 @@ export function ChapterEditor({
         content_blocks: blocks,
         is_published: published,
       })
-      lastPersisted.current = { title, markdown, published }
+      lastPersisted.current = { title, blocks, markdown, published }
       setLastSaved(new Date())
     } catch {
       toast.error('Erro ao salvar')
@@ -63,7 +69,7 @@ export function ChapterEditor({
       setSaving(false)
       savingRef.current = false
     }
-  }, [chapter.id, title, markdown, blocks, published, hasChanges])
+  }, [chapter.id, title, blocks, markdown, published, hasChanges])
 
   function handleBlocksChange(nextBlocks: Block[], nextMarkdown: string) {
     setBlocks(nextBlocks)
