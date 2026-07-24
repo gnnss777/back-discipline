@@ -54,13 +54,15 @@ function buildBlocks(content: string): Block[] {
   if (type === 'exercise') {
    const inner = body.trim()
    const titleMatch = /^##\s+(.+)$/m.exec(inner)
-   const musclesMatch = /^\*\*M\u00fasculos:\*\*\s*(.+)$/m.exec(inner)
+   const musclesMatch = /^\*\*Mú00fasculos:\*\*\s*(.+)$/m.exec(inner)
+   // Remove title and muscles lines only; preserve blank lines in body
    const contentAfter = inner
-    .split(/\n+/)
+    .split('\n')
     .filter((l) => !/^##\s/.test(l) && !/^\*\*M/.test(l))
     .join('\n')
+    .replace(/\n{3,}/g, '\n\n')
     .trim()
-   reconstructed = `:::exercise\n## ${titleMatch ? titleMatch[1].trim() : ''}\n**M\u00fasculos:** ${musclesMatch ? musclesMatch[1].trim() : ''}\n${contentAfter}\n:::`
+   reconstructed = `:::exercise\n## ${titleMatch ? titleMatch[1].trim() : ''}\n**Mú00fasculos:** ${musclesMatch ? musclesMatch[1].trim() : ''}\n${contentAfter}\n:::`
   } else if (type === 'tip') {
    reconstructed = `:::tip\n${body.trim()}\n:::`
   } else if (type === 'warning') {
