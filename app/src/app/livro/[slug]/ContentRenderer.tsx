@@ -271,37 +271,44 @@ function ExerciseCard({ raw }: { raw: string }) {
   inner = inner.replace(/^:::exercise\n/, '').replace(/\n:::$/, '')
  }
 
- const lines = inner.split('\n\n');
+ // Split intelligently: the :::exercise format is:
+ //   ## Title
+ //   **Músculos:** X  (optional)
+ //   <body>
+ // Body can contain blank lines and sub-blocks. We extract the heading/muscles
+ // line by line, then the rest is the body.
+ const allLines = inner.split('\n')
 
- // First line contains heading: "### Exercício 1: Name — stats"
- let heading = lines[0].replace(/^###\s+/, '');
- // If heading comes from :::exercise as `## <title>`, normalize to bare title
- heading = heading.replace(/^##\s+/, '')
- // Extract stats from heading if present (after em-dash)
- let headingName = heading;
- let headingStats = '';
- const dashIdx = heading.indexOf(' — ');
- if (dashIdx > 0 && lines.length >= 2 && !isStatsBlock(lines[1])) {
-  // Stats might be inline in heading after em-dash
+ // Extract heading (first ## or ### line)
+ let heading: string | null = null
+ let i = 0
+ for (; i < allLines.length; i++) {
+  if (/^(##|###)\s+/.test(allLines[i])) {
+   heading = allLines[i].replace(/^(##|###)\s+/, '')
+   i++
+   break
+  }
+ }
+ if (heading === null && allLines.length > 0) {
+  // Fallback: treat first line as heading
+  heading = allLines[0]
+  i = 1
  }
 
- // Find stats line (the first **bold** block)
- let restStart = 1;
- let statsLine = '';
- if (lines.length > 1 && isStatsBlock(lines[1])) {
-  statsLine = lines[1].replace(/\*\*/g, '');
-  restStart = 2;
+ // Extract muscles line if present
+ let statsLine = ''
+ if (i < allLines.length && /^\*\*Músculos:\*\*/.test(allLines[i])) {
+  statsLine = allLines[i].replace(/\*\*/g, '')
+  i++
  }
 
- // Rest of content
- const rest = lines.slice(restStart).join('\n\n');
-
- // Split: description, labels/blocks, tip
- const subBlocks = rest.split('\n\n');
+ // Rest is body — split into subBlocks by blank lines
+ const rest = allLines.slice(i).join('\n')
+ const subBlocks = rest.split(/\n{2,}/)
 
  return (
   <div className="p-5 bg-surface border-l-4 border-l-primary border border-secondary rounded my-6">
-   <h4 className="text-lg font-bold text-foreground tracking-wider">{headingName}</h4>
+   <h4 className="text-lg font-bold text-foreground tracking-wider">{heading ?? ''}</h4>
 
    {statsLine && (
     <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-primary/10 text-primary text-sm font-bold rounded mt-3 mb-4">
@@ -377,9 +384,9 @@ function ExerciseCard({ raw }: { raw: string }) {
     })}
    </div>
 
-   {(() => {
-    const searchName = headingName.replace(/^(\d+\.?\s*|Exercício\s+\d+:\s*)/, '').split(' — ')[0];
-    const exRef = findExerciseByHeadingName(searchName);
+    {(() => {
+     const searchName = (heading ?? '').replace(/^(\d+\.?\s*|Exercício\s+\d+:\s*)/, '').split(' — ')[0];
+     const exRef = findExerciseByHeadingName(searchName);
     const href = exRef ? `/biblioteca/${exRef.id}` : `/biblioteca?search=${encodeURIComponent(searchName)}`;
     return (
      <Link
