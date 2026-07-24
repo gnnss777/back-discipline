@@ -44,7 +44,36 @@ function isMajorHeading(line: string): boolean {
 }
 
 function buildBlocks(content: string): Block[] {
- const rawBlocks = content.split('\n\n');
+ // First extract :::tip :::warning :::exercise :::quote blocks because their
+ // bodies can contain blank lines that would otherwise be split on \n\n
+ const BLOCK_RE = /^:::(tip|warning|exercise|quote)\n([\s\S]*?)\n:::$/gm
+ const placeholders: Block[] = []
+ let working = content
+ working = working.replace(BLOCK_RE, (_match, type: string, body: string) => {
+  let reconstructed = ''
+  if (type === 'exercise') {
+   const inner = body.trim()
+   const titleMatch = /^##\s+(.+)$/m.exec(inner)
+   const musclesMatch = /^\*\*M\u00fasculos:\*\*\s*(.+)$/m.exec(inner)
+   const contentAfter = inner
+    .split(/\n+/)
+    .filter((l) => !/^##\s/.test(l) && !/^\*\*M/.test(l))
+    .join('\n')
+    .trim()
+   reconstructed = `:::exercise\n## ${titleMatch ? titleMatch[1].trim() : ''}\n**M\u00fasculos:** ${musclesMatch ? musclesMatch[1].trim() : ''}\n${contentAfter}\n:::`
+  } else if (type === 'tip') {
+   reconstructed = `:::tip\n${body.trim()}\n:::`
+  } else if (type === 'warning') {
+   reconstructed = `:::warning\n${body.trim()}\n:::`
+  } else if (type === 'quote') {
+   reconstructed = `:::quote\n${body.trim()}\n:::`
+  }
+  const idx = placeholders.length
+  placeholders.push({ type: type as Block['type'], raw: reconstructed } as Block)
+  return `\u0001BLOCK\u0001(${type})\u0001${idx}\u0001`
+ })
+
+ const rawBlocks = working.split('\n\n');
  const blocks: Block[] = [];
 
  for (let i = 0; i < rawBlocks.length; i++) {
@@ -127,6 +156,12 @@ function buildBlocks(content: string): Block[] {
   }
 
   // ── Block syntax (admin editor output: :::tip / :::warning / :::exercise / :::quote) ──
+  // Placeholders were emitted before the split to preserve blank lines inside blocks
+  const blockPh = /^\u0001BLOCK\u0001\((tip|warning|exercise|quote)\)\u0001(\d+)\u0001$/.exec(trimmed)
+  if (blockPh) {
+   blocks.push(placeholders[Number(blockPh[2])])
+   continue
+  }
   const blockTip = BLOCK_TIP_RE.exec(trimmed);
   if (blockTip) {
    blocks.push({ type: 'tip', raw: `:::tip\n${blockTip[1]}\n:::` });
