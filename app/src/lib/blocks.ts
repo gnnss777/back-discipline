@@ -45,12 +45,14 @@ export function parseMarkdownToBlocks(md: string): Block[] {
     if (type === 'exercise') {
       const titleMatch = /^##\s+(.+)$/m.exec(body)
       const musclesMatch = /^\*\*M\u00fasculos:\*\*\s*(.+)$/m.exec(body)
-      // Remove title and muscles lines only; preserve blank lines in body
-      const contentAfter = body
-        .split('\n')
-        .filter((l) => !/^##\s/.test(l) && !/^\*\*M/.test(l))
+      // Remove ONLY the matched title/muscles lines; preserve any other ## or **M** lines
+      const lines = body.split('\n')
+      const titleLine = titleMatch ? lines.indexOf(titleMatch[0]) : -1
+      const musclesLine = musclesMatch ? lines.indexOf(musclesMatch[0]) : -1
+      const contentAfter = lines
+        .filter((_, idx) => idx !== titleLine && idx !== musclesLine)
         .join('\n')
-        .replace(/\n{3,}/g, '\n\n') // collapse excessive blank lines to max 2
+        .replace(/\n{3,}/g, '\n\n')
         .trim()
       placeholders.push(
         makeBlock('exercise', {

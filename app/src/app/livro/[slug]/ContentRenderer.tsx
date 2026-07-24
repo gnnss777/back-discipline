@@ -50,21 +50,23 @@ function buildBlocks(content: string): Block[] {
  const placeholders: Block[] = []
  let working = content
  working = working.replace(BLOCK_RE, (_match, type: string, body: string) => {
-  let reconstructed = ''
-  if (type === 'exercise') {
-   const inner = body.trim()
-   const titleMatch = /^##\s+(.+)$/m.exec(inner)
+   let reconstructed = ''
+   if (type === 'exercise') {
+    const inner = body.trim()
+    const titleMatch = /^##\s+(.+)$/m.exec(inner)
     const musclesMatch = /^\*\*Músculos:\*\*\s*(.+)$/m.exec(inner)
-   // Remove title and muscles lines only; preserve blank lines in body
-   const contentAfter = inner
-    .split('\n')
-    .filter((l) => !/^##\s/.test(l) && !/^\*\*M/.test(l))
-    .join('\n')
-    .replace(/\n{3,}/g, '\n\n')
-    .trim()
+    // Remove ONLY the matched title/muscles lines; preserve any other ## or **M** lines
+    const lines = inner.split('\n')
+    const titleLine = titleMatch ? lines.indexOf(titleMatch[0]) : -1
+    const musclesLine = musclesMatch ? lines.indexOf(musclesMatch[0]) : -1
+    const contentAfter = lines
+     .filter((_, idx) => idx !== titleLine && idx !== musclesLine)
+     .join('\n')
+     .replace(/\n{3,}/g, '\n\n')
+     .trim()
     reconstructed = `:::exercise\n## ${titleMatch ? titleMatch[1].trim() : ''}\n**Músculos:** ${musclesMatch ? musclesMatch[1].trim() : ''}\n${contentAfter}\n:::`
-  } else if (type === 'tip') {
-   reconstructed = `:::tip\n${body.trim()}\n:::`
+   } else if (type === 'tip') {
+    reconstructed = `:::tip\n${body.trim()}\n:::`
   } else if (type === 'warning') {
    reconstructed = `:::warning\n${body.trim()}\n:::`
   } else if (type === 'quote') {
