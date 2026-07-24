@@ -25,6 +25,12 @@ const PROTOCOL_STEP_RE = /^\d+\.\s/;
 const QUOTE_RE = /^\*"/;
 const ANATOMY_RE = /^###\s+(Trapézio|Latíssimo|Romboides|Eretores|Deltoide|Supraespinhal|Infraespinhal|Teres|Subescapular|Manguito)/i;
 
+// Block syntax (:::tip / :::warning / :::exercise / :::quote)
+const BLOCK_TIP_RE = /^:::tip\n([\s\S]*?)\n:::$/;
+const BLOCK_WARNING_RE = /^:::warning\n([\s\S]*?)\n:::$/;
+const BLOCK_EXERCISE_RE = /^:::exercise\n([\s\S]*?)\n:::$/;
+const BLOCK_QUOTE_RE = /^:::quote\n([\s\S]*?)\n:::$/;
+
 function isExerciseHeading(line: string): boolean {
  return EXERCISE_RE.test(line);
 }
@@ -120,6 +126,28 @@ function buildBlocks(content: string): Block[] {
    continue;
   }
 
+  // ── Block syntax (admin editor output: :::tip / :::warning / :::exercise / :::quote) ──
+  const blockTip = BLOCK_TIP_RE.exec(trimmed);
+  if (blockTip) {
+   blocks.push({ type: 'tip', raw: `:::tip\n${blockTip[1]}\n:::` });
+   continue;
+  }
+  const blockWarn = BLOCK_WARNING_RE.exec(trimmed);
+  if (blockWarn) {
+   blocks.push({ type: 'warning', raw: `:::warning\n${blockWarn[1]}\n:::` });
+   continue;
+  }
+  const blockExer = BLOCK_EXERCISE_RE.exec(trimmed);
+  if (blockExer) {
+   blocks.push({ type: 'exercise', raw: `:::exercise\n${blockExer[1]}\n:::` });
+   continue;
+  }
+  const blockQuote = BLOCK_QUOTE_RE.exec(trimmed);
+  if (blockQuote) {
+   blocks.push({ type: 'quote', raw: `:::quote\n${blockQuote[1]}\n:::` });
+   continue;
+  }
+
   // ── Quote (*"pattern) ──
   if (QUOTE_RE.test(trimmed)) {
    blocks.push({ type: 'quote', raw });
@@ -198,10 +226,18 @@ function renderInline(text: string): React.ReactNode[] {
 // ─── BLOCK RENDERERS ─────────────────────────────
 
 function ExerciseCard({ raw }: { raw: string }) {
- const lines = raw.split('\n\n');
+ // Strip :::exercise wrapper if present (admin editor output)
+ let inner = raw
+ if (inner.startsWith(':::exercise\n')) {
+  inner = inner.replace(/^:::exercise\n/, '').replace(/\n:::$/, '')
+ }
+
+ const lines = inner.split('\n\n');
 
  // First line contains heading: "### Exercício 1: Name — stats"
- const heading = lines[0].replace(/^###\s+/, '');
+ let heading = lines[0].replace(/^###\s+/, '');
+ // If heading comes from :::exercise as `## <title>`, normalize to bare title
+ heading = heading.replace(/^##\s+/, '')
  // Extract stats from heading if present (after em-dash)
  let headingName = heading;
  let headingStats = '';
@@ -321,8 +357,12 @@ function ExerciseCard({ raw }: { raw: string }) {
 }
 
 function QuoteBox({ text }: { text: string }) {
+ let cleanText = text
+ // Strip :::quote wrapper if present
+ const blockMatch = /^:::quote\n([\s\S]*?)\n:::$/.exec(cleanText)
+ if (blockMatch) cleanText = blockMatch[1]
  // Extract quote text (between *"...") and optional attribution (after em-dash)
- let quoteText = text.replace(/^>\s*/, '').replace(/^\*"(.+?)"\*/, '$1').replace(/^\*"(.+?)"/, '$1');
+ let quoteText = cleanText.replace(/^>\s*/, '').replace(/^\*"(.+?)"\*/, '$1').replace(/^\*"(.+?)"/, '$1');
  let attribution = '';
 
  const dashIdx = quoteText.indexOf(' — ');
@@ -349,7 +389,12 @@ function QuoteBox({ text }: { text: string }) {
 }
 
 function TipBox({ text }: { text: string }) {
- const content = text.replace(/^\*\*(Dica|Dica técnica|Dica avançada|Dica de Meadows):\*\*/, '').trim();
+ let content = text.trim()
+ // Strip :::tip wrapper if present
+ const blockMatch = /^:::tip\n([\s\S]*?)\n:::$/.exec(content)
+ if (blockMatch) content = blockMatch[1]
+ // Strip legacy **Dica:** prefix if present
+ content = content.replace(/^\*\*(Dica|Dica técnica|Dica avançada|Dica de Meadows):\*\*/, '').trim()
  return (
   <div className="flex gap-3 p-4 bg-surface border border-primary/20 rounded my-4">
    <Lightbulb className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
@@ -359,7 +404,12 @@ function TipBox({ text }: { text: string }) {
 }
 
 function WarningBox({ text }: { text: string }) {
- const content = text.replace(/^\*\*(Cuidado|Aviso):\*\*/, '').trim();
+ let content = text.trim()
+ // Strip :::warning wrapper if present
+ const blockMatch = /^:::warning\n([\s\S]*?)\n:::$/.exec(content)
+ if (blockMatch) content = blockMatch[1]
+ // Strip legacy **Cuidado/Aviso:** prefix if present
+ content = content.replace(/^\*\*(Cuidado|Aviso):\*\*/, '').trim()
  return (
   <div className="flex gap-3 p-4 bg-surface border border-primary/30 rounded my-4">
    <AlertTriangle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
